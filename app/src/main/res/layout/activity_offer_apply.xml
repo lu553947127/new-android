@@ -1,0 +1,195 @@
+<com.ktw.fly.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/set_list_up_bg"
+                android:minHeight="50dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="9dp">
+
+                <TextView
+                    android:id="@+id/tv_bank_name"
+                    style="@style/IMTbleLine_TextKey"
+                    android:drawablePadding="5dp"
+                    android:text="开户行：" />
+
+                <com.ktw.fly.view.ClearEditText
+                    android:id="@+id/edt_bank_name"
+                    style="@style/IMTbleLine_TextValue"
+                    android:layout_toRightOf="@+id/tv_bank_name"
+                    android:background="@null"
+                    android:hint="请输入开户行"
+                    android:inputType="text"
+                    android:maxLength="24"
+                    android:singleLine="true"
+                    android:paddingRight="@dimen/dp15" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/set_list_up_bg"
+                android:minHeight="50dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="9dp">
+
+                <TextView
+                    android:id="@+id/tv_bank_card_number"
+                    style="@style/IMTbleLine_TextKey"
+                    android:drawablePadding="5dp"
+                    android:text="银行卡号：" />
+
+                <com.ktw.fly.view.ClearEditText
+                    android:id="@+id/edt_bank_card_number"
+                    style="@style/IMTbleLine_TextValue"
+                    android:layout_toRightOf="@+id/tv_bank_card_number"
+                    android:background="@null"
+                    android:hint="请输入银行卡号"
+                    android:inputType="number"
+                    android:maxLength="24"
+                    android:paddingRight="@dimen/dp15" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/set_list_up_bg"
+                android:minHeight="50dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="9dp">
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    style="@style/IMTbleLine_TextKey"
+                    android:drawablePadding="5dp"
+                    android:text="姓名：" />
+
+                <com.ktw.fly.view.ClearEditText
+                    android:id="@+id/edt_user_name"
+                    style="@style/IMTbleLine_TextValue"
+                    android:layout_toRightOf="@+id/tv_user_name"
+                    android:background="@null"
+                    android:hint="请输入姓名"
+                    android:inputType="text"
+                    android:maxLength="16"
+                    android:paddingRight="@dimen/dp15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/set_list_up_bg"
+                android:minHeight="50dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="9dp">
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    style="@style/IMTbleLine_TextKey"
+                    android:drawablePadding="5dp"
+                    android:text="提现金额：" />
+
+                <com.ktw.fly.view.ClearEditText
+                    android:id="@+id/etAmount"
+                    style="@style/IMTbleLine_TextValue"
+                    android:layout_toRightOf="@+id/tvAmount"
+                    android:background="@null"
+                    android:hint="请输入提现金额"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:maxLength="16"
+                    android:paddingRight="@dimen/dp15" />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/set_list_up_bg"
+                android:minHeight="50dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="9dp">
+
+                <TextView
+                    android:id="@+id/tvDesc"
+                    style="@style/IMTbleLine_TextKey"
+                    android:drawablePadding="5dp"
+                    android:text="描述：" />
+
+                <com.ktw.fly.view.ClearEditText
+                    android:id="@+id/etDesc"
+                    style="@style/IMTbleLine_TextValue"
+                    android:layout_toRightOf="@+id/tvDesc"
+                    android:background="@null"
+                    android:hint="请输入描述"
+                    android:inputType="text"
+                    android:maxLength="16"
+                    android:paddingRight="@dimen/dp15" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/set_list_up_bg"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="9dp">
+
+                <TextView
+                    android:id="@+id/tvVerifyCode"
+                    style="@style/IMTbleLine_TextKey"
+                    android:drawablePadding="5dp"
+                    android:text="验证码：" />
+
+                <com.ktw.fly.view.ClearEditText
+                    android:id="@+id/etVerifyCode"
+                    style="@style/IMTbleLine_TextValue"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入验证码"
+                    android:inputType="text"
+                    android:maxLength="4"
+                    android:paddingRight="@dimen/dp15" />
+
+                <ImageView
+                    android:id="@+id/ivVerifyCode"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:gravity="right" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnApply"
+                style="@style/BossGreenBtn"
+                android:text="提  交" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.ktw.fly.view.MyLinearLayout>

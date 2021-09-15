@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/normal_bg">
+
+    <include
+        android:id="@+id/il_bar"
+        layout="@layout/a_view_actionbar" />
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:id="@+id/rl_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="15dp"
+        android:background="@drawable/a_bg_for_code"
+        android:orientation="vertical"
+        android:weightSum="8">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/iv_app_logo"
+                android:layout_width="60dp"
+                app:riv_corner_radius="4dp"
+
+                android:layout_height="60dp"
+
+                tools:src="@drawable/splash_bg"
+                tools:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+
+                android:textSize="@dimen/sp_18_text_size"
+                tools:text="App" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_qr_code"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_toast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp20"
+            android:text="扫一扫上面的二维码图案,进入APP" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp20"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btn_save_qr"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_weight="1"
+            android:background="@drawable/a_bg_for_chat_location4"
+            android:onClick="saveImageToGallery"
+            android:text="@string/save_gallery"
+            android:textSize="@dimen/sp_16_text_size" />
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_weight="1"
+            android:background="@drawable/a_bg_for_chat_location3"
+            android:text="@string/trill_share"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16_text_size" />
+
+    </LinearLayout>
+
+</LinearLayout>

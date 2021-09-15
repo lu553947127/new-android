@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.ktw.fly.view.CircleImageView
+            android:id="@+id/invite_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/avatar_normal"/>
+
+        <TextView
+            android:id="@+id/invite_name"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Koltin"
+            android:textSize="@dimen/BigTextSize"/>
+
+        <TextView
+            android:id="@+id/invite_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/invite_friends"
+            android:textSize="@dimen/BigTextSize"/>
+
+        <TextView
+            android:id="@+id/invite_reasonr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:padding="6dp"
+            android:text="@string/reason_invite_friends"
+            android:textSize="@dimen/BigTextSize"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/Grey_400"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/verify_gd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="4"/>
+
+        <TextView
+            android:id="@+id/sure_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_verify_sure"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/pass_invite"
+            android:textColor="@color/white"
+            android:textSize="@dimen/BigTextSize"/>
+
+    </LinearLayout>
+
+</LinearLayout>

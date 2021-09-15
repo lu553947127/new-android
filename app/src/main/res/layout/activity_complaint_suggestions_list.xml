@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+
+
+    <RelativeLayout
+        android:id="@+id/rlt_complaints"
+        style="@style/MeLayoutStyle">
+
+        <TextView
+            android:textSize="@dimen/sp_14_text_size"
+
+            android:layout_marginStart="0dp"
+            style="@style/IMTbleLine_TextName"
+            android:layout_centerVertical="true"
+            android:text="违规投诉(骚扰他人、诈骗行为)" />
+
+        <ImageView
+            style="@style/IMTbleLine_ArrowImg.Me"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/me_chevron_right"
+            android:contentDescription="@string/app_name" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlt_suggestion"
+        style="@style/MeLayoutStyle">
+
+
+
+        <TextView
+
+            android:textSize="@dimen/sp_14_text_size"
+            android:layout_marginStart="0dp"
+            style="@style/IMTbleLine_TextName"
+            android:layout_centerVertical="true"
+            android:text="功能与体验与其他意见反馈" />
+
+        <ImageView
+            style="@style/IMTbleLine_ArrowImg.Me"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/me_chevron_right"
+            android:contentDescription="@string/app_name" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

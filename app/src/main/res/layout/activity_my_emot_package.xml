@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+
+            <RelativeLayout
+                android:id="@+id/rlSingleEmot"
+                style="@style/IMTbleLine_UP">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="单个表情"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/one_level_title" />
+
+                <ImageView
+                    android:id="@+id/iv_setting_describe"
+                    style="@style/IMTbleLine_ArrowImg"
+                    android:contentDescription="@string/app_name" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginBottom="@dimen/dp5"
+                android:layout_marginTop="@dimen/dp15"
+                android:paddingRight="@dimen/dp20"
+                android:paddingLeft="@dimen/dp20"
+                android:text="聊天面板中的整套表情"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/lg_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="NestedScrolling" />
+
+</LinearLayout>

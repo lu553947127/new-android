@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/Grey_300" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="手机号码:"
+                android:textColor="#111111"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <EditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="24dp"
+                android:background="@null"
+
+
+                android:hint="请输入手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+
+                android:padding="2dp"
+                android:textSize="@dimen/one_level_title" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/Grey_300" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="真实姓名:"
+                android:textColor="#111111"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <EditText
+                android:id="@+id/edt_real_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="24dp"
+                android:background="@null"
+                android:hint="请输入本人姓名"
+                android:inputType="text"
+                android:padding="2dp"
+                android:textSize="@dimen/one_level_title" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/Grey_300" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="身份证号:"
+                android:textColor="#111111"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <EditText
+                android:id="@+id/edt_id_card"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:layout_marginStart="24dp"
+                android:background="@null"
+                android:digits="1234567890xX"
+                android:hint="请输入身份证号码"
+                android:inputType="text"
+                android:padding="2dp"
+                android:textSize="@dimen/one_level_title" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/Grey_300" />
+
+    </LinearLayout>
+
+    <!--   <TextView
+           android:id="@+id/tv_next"
+           android:layout_width="match_parent"
+           android:layout_height="42dp"
+           android:layout_marginLeft="20dp"
+           android:layout_marginTop="50dp"
+           android:layout_marginRight="20dp"
+           android:background="@drawable/selector_submit"
+           android:gravity="center"
+           android:text="下一步"
+           android:textColor="@color/white"
+           android:textSize="@dimen/one_level_title" />-->
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/BossGreenBtn"
+        android:text="下一步" />
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Grey_300" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20">
+
+        <TextView
+            android:id="@+id/tv_meituan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_logo_meituan"
+            android:drawablePadding="@dimen/dp10"
+            android:gravity="center_horizontal"
+            android:text="美团"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16_text_size" />
+
+        <TextView
+            android:id="@+id/tv_pinduoduo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_logo_pinduoduo"
+            android:drawablePadding="@dimen/dp10"
+            android:gravity="center_horizontal"
+            android:text="拼多多"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16_text_size" />
+
+        <TextView
+            android:id="@+id/tv_jd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_logo_jd"
+            android:drawablePadding="@dimen/dp10"
+            android:gravity="center_horizontal"
+            android:text="京东"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16_text_size" />
+
+    </LinearLayout>
+</LinearLayout>

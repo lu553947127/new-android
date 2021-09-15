@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@drawable/a_bg_mse_save"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp10">
+
+        <TextView
+            android:id="@+id/tvPlatform"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="平台：和平精英"
+            android:textColor="@color/black_2"
+            android:textSize="@dimen/BigTextSize" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvPlatform"
+            android:layout_marginTop="@dimen/dp10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="金额：¥ 100"
+            android:textColor="@color/black_2"
+            android:textSize="@dimen/BigTextSize" />
+
+        <TextView
+            android:id="@+id/tvFailedReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvAmount"
+            android:layout_marginTop="@dimen/dp5"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="失败原因：这是一个提现失败的原因"
+            android:textColor="@color/color_role5"
+            android:textSize="@dimen/NormalTextSize"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvFailedReason"
+            android:layout_marginBottom="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="2019-08-08 12:10"
+            android:textSize="@dimen/NormalTextSize" />
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/sp_18_text_size" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

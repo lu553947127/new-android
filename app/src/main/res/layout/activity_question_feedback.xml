@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/set_list_up_bg"
+        android:minHeight="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="9dp">
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/IMTbleLine_TextKey"
+            android:drawablePadding="5dp"
+            android:text="联系电话(必填)：" />
+
+        <com.ktw.fly.view.ClearEditText
+            android:id="@+id/edt_phone"
+            style="@style/IMTbleLine_TextValue"
+            android:layout_toRightOf="@+id/tv_phone"
+            android:background="@null"
+            android:hint="便于我们与您联系"
+            android:inputType="text"
+            android:paddingRight="@dimen/dp15"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/set_list_up_bg"
+        android:minHeight="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="9dp">
+
+        <TextView
+            android:id="@+id/tv_screenshot"
+            style="@style/IMTbleLine_TextKey"
+            android:drawablePadding="5dp"
+            android:text="相关截图(必填)：" />
+
+        <TextView
+            android:id="@+id/tv_screenshot_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_screenshot"
+            android:drawablePadding="5dp"
+            android:gravity="right"
+            android:paddingRight="@dimen/dp15"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/sp_16_text_size" />
+
+    </RelativeLayout>
+
+    <com.ktw.fly.view.MyGridView
+        android:id="@+id/gv_screenshot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp5"
+        android:layout_marginBottom="@dimen/dp10"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
+
+    <com.ktw.fly.view.ClearEditText
+        android:id="@+id/edt_remark"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/white"
+        android:gravity="top"
+        android:hint="请输入描述"
+        android:maxLength="200"
+        android:paddingLeft="20dp"
+        android:paddingTop="@dimen/dp10"
+        android:paddingRight="@dimen/dp20"
+        android:paddingBottom="@dimen/dp10"
+        android:textSize="@dimen/sp_16_text_size" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/BossGreenBtn"
+        android:text="提  交" />
+
+</LinearLayout>

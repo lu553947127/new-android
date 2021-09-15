@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ktw.fly">
+    <!-- for Samsung -->
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" /> <!-- for apex -->
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" /> <!-- for huawei -->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" /> <!-- for ZUK -->
+    <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- for OPPO -->
+    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" /> <!-- for EvMe -->
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.microphone" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- 这个权限必须是applicationId开头， -->
+    <permission
+        android:name="${APP_ID}.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="${APP_ID}.permission.MIPUSH_RECEIVE" /> <!-- 魅族推送， -->
+    <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
+
+    <permission
+        android:name="${APP_ID}.push.permission.MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="${APP_ID}.push.permission.MESSAGE" />
+    <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="${APP_ID}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="${APP_ID}.permission.C2D_MESSAGE" /> <!-- OPPO 推送 -->
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+
+    <permission
+        android:name="${applicationId}.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <application
+
+        android:testOnly="false"
+        android:name="com.ktw.fly.FLYApplication"
+        android:allowBackup="true"
+        android:fitsSystemWindows="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@null"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:name, android:icon, android:roundIcon">
+        <activity android:name=".ui.me.AccountFreezeActivity"/>
+        <activity android:name=".ui.me.FreezeMessageActivity"/>
+        <activity android:name="com.ktw.fly.ui.me.DiscoverActivity"/>
+        <activity android:name=".ui.me.ComplaintSuggestionsListActivity"/>
+        <activity android:name=".ui.me.ComplaintAndSuggestionsSubmitActivity"/>
+        <activity
+            android:name="com.ktw.fly.pay.new_ui.PaymentOrReceiptActivity"
+            android:label="@string/title_activity_payment_new_ui"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.ktw.fly.ui.contacts.label.LabelActivityNewUI" />
+        <activity android:name="com.ktw.fly.ui.me.DescriptionActivity" />
+        <activity android:name="com.ktw.fly.ui.backup.ReceiveChatHistoryActivity" />
+        <activity android:name="com.ktw.fly.ui.circle.range.SelectCoverActivity" />
+        <activity android:name="com.ktw.fly.ui.search.SearchSingleTypeActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.search.SearchAllActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name="com.ktw.fly.ui.other.LifeCircleSettingsActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.backup.SendChatHistoryActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name="com.ktw.fly.ui.backup.SelectChatActivity" />
+        <activity android:name="com.ktw.fly.ui.backup.BackupHistoryActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.other.PrivacyAgreeActivity"
+            android:launchMode="singleTop" />
+        <activity android:name="com.ktw.fly.ui.login.AuthLoginActivity" />
+        <activity android:name="com.ktw.fly.ui.login.H5LoginActivity" />
+        <activity android:name=".ui.me.AccountOperateActivity"/>
+        <activity
+            android:name="com.ktw.fly.ui.login.H5LoginProxyActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${APP_ID}"
+                    android:path="/H5login"
+                    android:scheme="sk" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ktw.fly.ui.notification.NotificationProxyActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${APP_ID}"
+                    android:path="/notification"
+                    android:scheme="sk" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ktw.fly.ui.account.ChangePasswordActivity" />
+        <activity android:name="com.ktw.fly.ui.me.PrivacyWhitelistActivity" />
+        <activity android:name="com.ktw.fly.ui.groupchat.FaceToFaceGroup" />
+        <activity android:name="com.ktw.fly.ui.groupchat.RoomSearchResultActivity" />
+        <activity android:name="com.ktw.fly.ui.groupchat.RoomSearchActivity" /> <!-- 启动页面 -->
+        <activity
+            android:name="com.ktw.fly.ui.FLYSplashActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ktw.im.audio.VoiceRecordActivity" />
+        <activity android:name="com.ktw.im.audio.VoiceRecordActivity2" /> <!-- Jitsi -->
+        <activity
+            android:name="com.ktw.fly.call.JitsiTalk"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.ktw.fly.call.Jitsi_connecting_second"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.ktw.fly.call.Jitsi_pre"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.ktw.fly.call.JitsiIncomingcall"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.ktw.fly.call.JitsiInviteActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name="com.ktw.fly.course.CourseDateilsActivity" />
+        <activity android:name="com.ktw.fly.course.LocalCourseActivity" />
+        <activity android:name="com.ktw.fly.course.SelectFriendsActivity" />
+        <activity android:name="com.ktw.fly.course.SelectNewContactsActivity" />
+        <activity android:name="com.ktw.fly.course.SelectNewGroupActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.account.RegisterActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.ktw.fly.ui.account.RegisterPasswordActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.ktw.fly.ui.account.RegisterUserBasicInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.ktw.fly.ui.account.LoginActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.ktw.fly.ui.account.LoginHistoryActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.ktw.fly.ui.account.DataDownloadActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.account.SelectPrefixActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.ktw.fly.ui.account.SwitchLoginActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.account.FindPwdActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.ktw.fly.ui.circle.range.AtSeeCircleActivity" />
+        <activity android:name="com.ktw.fly.ui.circle.range.NewZanActivity" />
+        <activity android:name="com.ktw.fly.ui.circle.range.SeeCircleActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.circle.range.SendShuoshuoActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name="com.ktw.fly.ui.circle.range.SendAudioActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name="com.ktw.fly.ui.circle.range.SendVideoActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name="com.ktw.fly.ui.circle.range.SendFileActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name="com.ktw.fly.ui.circle.BusinessCircleActivity" />
+        <activity android:name="com.ktw.fly.ui.circle.LongTextShowActivity" />
+        <activity android:name="com.ktw.fly.ui.company.AddEmployee" />
+        <activity android:name="com.ktw.fly.ui.company.ChangeEmployeeDepartment" />
+        <activity android:name="com.ktw.fly.ui.company.CreateCompany" />
+        <activity android:name="com.ktw.fly.ui.company.CreateDepartment" />
+        <activity android:name="com.ktw.fly.ui.company.CreateGroup" />
+        <activity android:name="com.ktw.fly.ui.company.ManagerCompany" />
+        <activity android:name="com.ktw.fly.ui.company.ModifyCompanyName" />
+        <activity android:name="com.ktw.fly.ui.company.ModifyDepartmentName" />
+        <activity
+            android:name="com.ktw.fly.ui.contacts.label.CreateLabelActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.ktw.fly.ui.contacts.label.LabelActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.ktw.fly.ui.contacts.label.SelectLabelFriendActivity" />
+        <activity android:name="com.ktw.fly.ui.contacts.BlackActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.contacts.ContactInviteActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.ktw.fly.ui.contacts.ContactsActivity" />
+        <activity android:name="com.ktw.fly.ui.contacts.ContactsMsgInviteActivity" />
+        <activity android:name="com.ktw.fly.ui.contacts.DeviceActivity" />
+        <activity android:name="com.ktw.fly.ui.contacts.NewFriendActivity" />
+        <activity android:name="com.ktw.fly.ui.contacts.PublishNumberActivity" />
+        <activity android:name="com.ktw.fly.ui.contacts.RoomActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.contacts.SearchFriendActivity"
+            android:windowSoftInputMode="stateVisible" />
+        <activity android:name="com.ktw.fly.ui.contacts.TalkHistoryActivity" />
+        <activity android:name="com.ktw.fly.ui.groupchat.SelectContactsActivity" /> <!-- 直播 -->
+<!--        <activity android:name=".ui.live.CreateLiveActivity" />-->
+<!--        <activity android:name=".ui.live.LiveActivity" /> &lt;!&ndash; 抖音 &ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name=".ui.trill.TrillActivity"-->
+<!--            android:theme="@style/AppTheme_Sliding" />-->
+<!--        <activity-->
+<!--            android:name=".ui.trill.TriListActivity"-->
+<!--            android:theme="@style/AppTheme_Sliding" />-->
+<!--        <activity-->
+<!--            android:name=".ui.trill.TrillMoreActivity"-->
+<!--            android:theme="@style/RecxTheme" />-->
+<!--        <activity-->
+<!--            android:name=".ui.xrce.RecordxActivity"-->
+<!--            android:theme="@style/RecxTheme" />-->
+<!--        <activity-->
+<!--            android:name=".ui.xrce.PreviewxActivity"-->
+<!--            android:theme="@style/RecxTheme" /> &lt;!&ndash; 发布短视频 &ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name=".ui.trill.ReleasexActivity"-->
+<!--            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" /> &lt;!&ndash; 短视频选择标签 &ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name=".ui.trill.TagPickerActivity"-->
+<!--            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />-->
+<!--        <activity-->
+<!--            android:name=".ui.live.LivePlayingActivity"-->
+<!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
+<!--            android:windowSoftInputMode="adjustPan" />-->
+<!--        <activity-->
+<!--            android:name=".ui.live.PushFlowActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
+<!--            android:windowSoftInputMode="adjustPan" />-->
+        <activity android:name="com.ktw.fly.ui.map.MapActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.map.MapPickerActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" /> <!-- 红包 -->
+        <activity android:name="com.ktw.fly.ui.me.redpacket.MucSendRedPacketActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.MyConsumeRecord" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.QuXianActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.RedDetailsActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.RedListActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.SendRedPacketActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.WxPayAdd" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.WxPayBlance" />
+        <activity android:name="com.ktw.fly.ui.me.sendgroupmessage.ChatActivityForSendGroup" /> <!-- 收付款、转账 -->
+        <activity
+            android:name="com.ktw.fly.pay.sk.SKPayActivity"
+            android:launchMode="singleTask" />
+        <activity android:name="com.ktw.fly.pay.TransferMoneyActivity" />
+        <activity android:name="com.ktw.fly.pay.TransferMoneyDetailActivity" />
+        <activity android:name="com.ktw.fly.pay.TransferRecordActivity" />
+        <activity android:name="com.ktw.fly.pay.PaymentActivity" />
+        <activity android:name="com.ktw.fly.pay.PaymentReceiptMoneyActivity" />
+        <activity android:name="com.ktw.fly.pay.ReceiptActivity" />
+        <activity android:name="com.ktw.fly.pay.ReceiptPayMoneyActivity" />
+        <activity android:name="com.ktw.fly.pay.ReceiptSetMoneyActivity" /> <!-- Me模块 -->
+        <activity android:name="com.ktw.fly.ui.me.AboutActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.me.BasicInfoEditActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name="com.ktw.fly.ui.me.FontSizeActivity" />
+        <activity android:name="com.ktw.fly.ui.me.LocalVideoActivity" />
+        <activity android:name="com.ktw.fly.ui.me.MyCollection" />
+        <activity android:name="com.ktw.fly.ui.me.NearPersonActivity" />
+        <activity android:name="com.ktw.fly.ui.me.PrivacySettingActivity" />
+        <activity android:name="com.ktw.fly.ui.me.BandAccountActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.me.SelectFriendsActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity android:name="com.ktw.fly.ui.me.select.SelectLabelActivity" />
+        <activity android:name="com.ktw.fly.ui.me.SetAccountActivity" />
+        <activity android:name="com.ktw.fly.ui.me.SetConfigActivity" />
+        <activity android:name="com.ktw.fly.ui.me.SettingActivity" />
+        <activity android:name="com.ktw.fly.ui.me.SkinStore" />
+        <activity android:name="com.ktw.fly.ui.me.SwitchLanguage" /> <!-- 消息模块 -->
+        <activity
+            android:name="com.ktw.fly.ui.message.assistant.GroupAssistantAddKeywordActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name="com.ktw.fly.ui.message.assistant.GroupAssistantDetailActivity" />
+        <activity android:name="com.ktw.fly.ui.message.assistant.SelectGroupAssistantActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.message.ChatActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.ktw.fly.ui.message.ChatHistoryActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.message.ChatOverviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" />
+        <activity android:name="com.ktw.fly.ui.message.single.PersonSettingActivity" />
+        <activity android:name="com.ktw.fly.ui.message.single.SelectSetTypeActivity" />
+        <activity android:name="com.ktw.fly.ui.message.single.SetChatBackActivity" />
+        <activity android:name="com.ktw.fly.ui.message.single.SetLabelActivity" />
+        <activity android:name="com.ktw.fly.ui.message.single.SetRemarkActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.message.MucChatActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.ktw.fly.ui.message.multi.AddContactsActivity" />
+        <activity android:name="com.ktw.fly.ui.message.multi.GroupManager" />
+        <activity
+            android:name="com.ktw.fly.ui.message.multi.GroupMoreFeaturesActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name="com.ktw.fly.ui.message.multi.GroupTransferActivity" />
+        <activity android:name="com.ktw.fly.ui.message.multi.InviteVerifyActivity" />
+        <activity android:name="com.ktw.fly.ui.message.multi.NoticeListActivity" />
+        <activity android:name="com.ktw.fly.ui.message.multi.ProclamationActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.message.multi.RoomInfoActivity"
+            android:launchMode="singleTop" />
+        <activity android:name="com.ktw.fly.ui.message.multi.RoomReadListActivity" />
+        <activity android:name="com.ktw.fly.ui.message.multi.SetManagerActivity" />
+        <activity android:name="com.ktw.fly.ui.message.ManagerEmojiActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.message.MessageRemindActivity"
+            android:theme="@style/Anim_fade" />
+        <activity android:name="com.ktw.fly.ui.message.search.SearchChatHistoryActivity" />
+        <activity android:name="com.ktw.fly.ui.message.search.SearchDesignationContent" />
+        <activity android:name="com.ktw.fly.ui.message.search.SearchImageVideoContent" />
+        <activity
+            android:name="com.ktw.fly.ui.message.InstantMessageActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.ktw.fly.ui.message.QuickSendPreviewActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.message.SelectNewContactsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ktw.fly.ui.message.SelectNewGroupInstantActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" /> <!-- 群文件 -->
+        <activity android:name="com.ktw.fly.ui.mucfile.AddMucFileActivity" />
+        <activity android:name="com.ktw.fly.ui.mucfile.MucFileDetails" />
+        <activity android:name="com.ktw.fly.ui.mucfile.MucFileListActivity" />
+        <activity android:name="com.ktw.fly.ui.mucfile.MucFilePreviewActivity" /> <!-- 附近模块 -->
+        <activity android:name="com.ktw.fly.ui.nearby.UserSearchActivity" />
+        <activity android:name="com.ktw.fly.ui.nearby.UserListActivity" />
+        <activity android:name="com.ktw.fly.ui.nearby.UserListGatherActivity" />
+        <activity android:name="com.ktw.fly.ui.other.BasicInfoActivity" />
+        <activity android:name="com.ktw.fly.ui.other.QRcodeActivity" /> <!-- 分享模块 -->
+        <activity
+            android:name="com.ktw.fly.ui.share.ShareLoginActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.ktw.fly.ui.share.AuthorizationActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.ktw.fly.ui.share.ShareNearChatFriend"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${APP_ID}"
+                    android:path="/share"
+                    android:scheme="sk" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ktw.fly.ui.share.ShareLifeCircleActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.ktw.fly.ui.share.ShareNewFriend"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.ktw.fly.ui.share.ShareNewGroup"
+            android:launchMode="singleTop" /> <!-- Tool Activity -->
+        <activity
+            android:name="com.ktw.fly.ui.tool.MultiImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" />
+        <activity
+            android:name="com.ktw.fly.ui.tool.SelectAreaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ktw.fly.ui.tool.SelectConstantActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ktw.fly.ui.tool.SelectConstantSectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ktw.fly.ui.tool.SingleImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" />
+        <activity
+            android:name="com.ktw.fly.video.ChatVideoPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ktw.fly.ui.tool.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ktw.fly.ui.FLYMainActivity"
+            android:fitsSystemWindows="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- Android 8.0 报错 Only fullscreen opaque activities can request orientation -->
+        <!--
+            <activity
+            android:name="com.ktw.fly.ui.UserCheckedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IMTheme.DialogStyle"/>
+        -->
+        <activity
+            android:name="com.ktw.fly.ui.FLYUserCheckedActivity"
+            android:theme="@style/IMTheme.DialogStyle" />
+        <activity
+            android:name="com.ktw.fly.video.EasyCameraActivity"
+            android:screenOrientation="portrait" /> <!-- android:screenOrientation="portrait" 强制竖屏 -->
+        <!-- CameraWithFilterActivity -->
+        <activity
+            android:name="com.ktw.fly.luo.activity.CameraWithFilterActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.ktw.fly.video.VideoRecorderActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/RecxTheme" />
+        <activity android:name="com.ktw.fly.ui.other.AppQrCodeActivity"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.me.SecureSettingActivity"/>
+        <activity android:name=".ui.me.AccountAndSafeActivity"/>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent${QQ_APP_ID}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ktw.fly.ui.me.redpacket.ChangePayPasswordActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" /> <!-- 图片多选框架 -->
+        <!--
+                <activity
+                    android:name="com.foamtrace.photopicker.PhotoPickerActivity"
+                    android:configChanges="orientation|screenSize"
+                    android:theme="@style/PhotoPickerTheme"/>
+                <activity
+                    android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
+                    android:theme="@style/PhotoPickerTheme"/>
+        -->
+        <activity
+            android:name="com.ktw.fly.view.photopicker.PhotoPickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity
+            android:name="com.ktw.fly.view.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" />
+
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:exported="false"
+            android:process=":mult"
+            tools:replace="android:process">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service> <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+
+                <category android:name="com.jixin.im" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="com.ktw.fly.broadcast.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.jixin.im" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.ktw.fly.xmpp.CoreService"
+            android:enabled="true"
+            android:exported="true" />
+        <service android:name="com.ktw.fly.call.JitsiFloatService" />
+        <service android:name="com.ktw.fly.call.RecordService" />
+        <service android:name="com.ktw.fly.view.window.WindowShowService" />
+        <service android:name="com.ktw.fly.FLYRestartService" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${APP_ID}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <receiver
+            android:name="com.ktw.fly.FLYBroadcastReceiver"
+            android:process=":restart">
+            <intent-filter>
+                <action android:name="${APP_ID}.action.broadcasttest.startActivity" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="${BAIDU_API_KEY}" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GOOGLE_API_KEY}" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" /> <!-- 推送服务绑定进程 -->
+        <service
+            android:name="com.xiaomi.push.service.XMPushService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service> <!-- 注：此service必须在3.0.1版本以后（包括3.0.1版本）加入 -->
+        <service
+            android:name="com.xiaomi.push.service.XMJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":pushservice" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.PingReceiver"
+            android:exported="false"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.ktw.fly.xmpp.helloDemon.MiMessageReceiver"
+            android:exported="true">
+
+            <!-- 这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名 -->
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver> <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true" />
+        <service android:name="com.ktw.fly.xmpp.helloDemon.FirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- VIVO 推送 -->
+        <service
+            android:name="com.vivo.push.sdk.service.CommandClientService"
+            android:exported="true" />
+
+        <activity
+            android:name="com.vivo.push.sdk.LinkProxyClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- push应用定义消息receiver声明 -->
+        <receiver android:name="com.ktw.fly.xmpp.helloDemon.VivoPushMessageReceiver">
+            <intent-filter>
+
+                <!-- 接收push消息 -->
+                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="${VIVO_APP_KEY}" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="${VIVO_APP_ID}" /> <!-- OPPO 推送 -->
+        <service
+            android:name="com.ktw.fly.xmpp.helloDemon.OppoPushMessageService"
+            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
+            <intent-filter>
+                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service> <!-- 华为推送 -->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="${HUAWEI_APP_ID}" /> <!-- 2.BridgeActivity定义了HMS-SDK中一些跳转所需要的透明页面 -->
+        <activity
+            android:name="com.huawei.hms.activity.BridgeActivity"
+            android:configChanges="orientation|locale|screenSize|layoutDirection|fontScale"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent">
+            <meta-data
+                android:name="hwc-theme"
+                android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity> <!-- 3.UpdateProvider用于HMS-SDK引导升级HMS，提供给系统安装器读取升级文件。 -->
+        <!-- 不同应用的authorities必须不同，所以用applicationId开头， -->
+        <provider
+            android:name="com.huawei.hms.update.provider.UpdateProvider"
+            android:authorities="${APP_ID}.hms.update.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" /> <!-- 4.用来接收PUSH消息的receiver： -->
+        <receiver android:name="com.ktw.fly.xmpp.helloDemon.HuaweiPushRevicer">
+            <intent-filter>
+
+                <!-- 必须,用于接收TOKEN -->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须，用于接收消息 -->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 可选，用于点击通知栏或通知栏上的按钮后触发onEvent回调 -->
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <!-- 可选，查看PUSH通道是否连接，不查看则不需要 -->
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+        </receiver> <!-- 5. 接收通道发来的通知栏消息： -->
+        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver">
+            <intent-filter>
+
+                <!-- 接收通道发来的通知栏消息，兼容老版本PUSH -->
+                <action android:name="com.huawei.intent.action.PUSH" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.ktw.fly.ui.life.LifeCircleActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.ktw.fly.ui.nearby.PublicNumberSearchActivity" />
+        <activity android:name="com.ktw.fly.ui.nearby.PublicNumberListActivity" />
+        <activity android:name="com.ktw.fly.ui.circle.range.PraiseListActivity" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icon_notification" /> <!-- 魅族推送， -->
+        <!-- 绑定进程保活 -->
+        <service
+            android:name="com.ktw.fly.xmpp.helloDemon.MeizuForegroundService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.ktw.fly.xmpp.helloDemon.MeizuPushMsgReceiver"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+
+                <!-- 接收push消息 -->
+                <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
+                <!-- 接收register消息 -->
+                <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
+                <!-- 接收unregister消息 -->
+                <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
+                <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
+                <action android:name="com.meizu.c2dm.intent.RECEIVE" />
+
+                <category android:name="${APP_ID}" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.ktw.fly.ui.systemshare.ShareNearChatFriend"
+            android:label="@string/send_to_friend">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ktw.fly.ui.systemshare.ShareNewFriend" />
+        <activity android:name="com.ktw.fly.ui.systemshare.ShareNewGroup" />
+        <activity
+            android:name="com.ktw.fly.ui.systemshare.ShareLifeCircleProxyActivity"
+            android:label="@string/send_to_life_circle">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ktw.fly.ui.systemshare.ShareShuoshuoActivity" />
+        <activity android:name="com.ktw.fly.ui.systemshare.ShareVideoActivity" />
+        <activity android:name="com.ktw.fly.ui.systemshare.ShareFileActivity" />
+        <activity android:name="com.ktw.fly.ui.account.QuickLoginAuthority">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- shikuimapp://www.shikuAndroid.com:80?apiKey= & appSecret = -->
+
+                <data
+                    android:host="www.shikuandroid.com"
+                    android:port="80"
+                    android:scheme="shikuimapp" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ktw.fly.ui.account.QuickPay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- shikuimapp://www.shikuandroid.com:80/skPay?appId="+obj.appId+"&prepayId="+obj.prepayId+"&sign="+obj.signt = -->
+
+                <data
+                    android:host="www.shikuandroid.pay.com"
+                    android:port="80"
+                    android:scheme="shikuimapp" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ktw.fly.ui.lock.DeviceLockActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name="com.ktw.fly.ui.me.DeviceMangerActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.lock.ChangeDeviceLockPasswordActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name="com.ktw.fly.ui.contacts.SendContactsActivity" />
+        <activity android:name="com.ktw.fly.ui.login.WebLoginActivity" />
+        <activity android:name="com.ktw.fly.ui.message.multi.RoomCopyActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.PaymentCenterActivity" />
+        <activity android:name="com.ktw.fly.ui.me.select.SelectRoomActivity" />
+        <activity android:name="com.ktw.fly.ui.me.select.SelectColleagueActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.ResetPayPasswordActivity" />
+
+        <receiver android:name="com.fanjun.keeplive.receiver.NotificationClickReceiver" />
+
+        <activity
+            android:name="com.fanjun.keeplive.activity.OnePixelActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/onePixelActivity" />
+        <activity android:name="com.ktw.fly.ui.me.emot.EmotPackageActivity" />
+        <activity android:name="com.ktw.fly.ui.me.emot.NewEmotPackageActivity" />
+        <activity android:name="com.ktw.fly.ui.me.emot.MyEmotPackageActivity" />
+        <activity android:name="com.ktw.fly.ui.me.emot.AddSingleEmotPackageActivity" />
+        <activity android:name="com.ktw.fly.ui.me.emot.AddEmotPackageActivity" />
+        <activity
+            android:name="com.ktw.fly.ui.me.emot.SingleEmotPreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" />
+        <activity android:name="com.ktw.fly.ui.me.emot.EditSingleEmotPackageActivity" />
+        <activity android:name="com.ktw.fly.ui.me.OfferApplyActivity" />
+        <activity android:name="com.ktw.fly.ui.me.WithdrawalsRecordActivity" />
+        <activity android:name="com.ktw.fly.ui.tool.WebView2Activity" />
+        <activity android:name=".ui.me.question.ViewQuestionActivity" />
+        <activity android:name=".ui.me.question.ViewQuestionChildActivity" />
+        <activity android:name=".ui.me.question.ViewQuestionContentActivity" />
+        <activity android:name=".ui.me.question.QuestionFeedbackActivity" />
+        <activity android:name=".ui.me.ThirdServiceActivity" />
+
+        <service android:name="com.fanjun.keeplive.service.LocalService" />
+        <service android:name="com.fanjun.keeplive.service.HideForegroundService" />
+        <service
+            android:name="com.fanjun.keeplive.service.JobHandlerService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.fanjun.keeplive.service.RemoteService"
+            android:process=":remote" />
+
+        <provider
+            android:name="com.ktw.fly.util.GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

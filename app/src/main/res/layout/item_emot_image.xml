@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.makeramen.roundedimageview.RoundedImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivEmot"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/default_error"
+        app:riv_border_color="@color/pop_line_for_black_bg"
+        app:riv_border_width="1px"
+        app:riv_corner_radius="5dp"
+        app:riv_oval="false" />
+
+    <TextView
+        android:id="@+id/tvEmotName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp5"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="表情包名称" />
+
+</LinearLayout>
+
+
