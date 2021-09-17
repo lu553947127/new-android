@@ -95,18 +95,18 @@ public class UsernameHelper {
                 tip = ctx.getString(R.string.tip_phone_number_empty);
             }
         }
-        if (!registerUsername) {
-            if (text.length() != 11) {
-                ret = false;
-                tip = "请输入正确格式的手机号码";
-            }
-        } else {
-            if (text.length() > 11) {
-                ret = false;
-                tip = ctx.getString(R.string.tip_username_too_long);
-            }
-            // 没检测是否字母数字，因为EditText就限定死了，
-        }
+//        if (!registerUsername) {
+//            if (text.length() != 11) {
+//                ret = false;
+//                tip = "请输入正确格式的手机号码";
+//            }
+//        } else {
+//            if (text.length() > 11) {
+//                ret = false;
+//                tip = ctx.getString(R.string.tip_username_too_long);
+//            }
+//            // 没检测是否字母数字，因为EditText就限定死了，
+//        }
         if (!ret) {
             DialogHelper.tip(ctx, tip);
         }
