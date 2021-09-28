@@ -105,7 +105,6 @@ public class UtilWeixin {
             httpPost.setEntity(new StringEntity(entity));
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-type", "application/json");
-
             HttpResponse resp = httpClient.execute(httpPost);
             if (resp.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                 Log.e(TAG, "httpGet fail, status code = " + resp.getStatusLine().getStatusCode());

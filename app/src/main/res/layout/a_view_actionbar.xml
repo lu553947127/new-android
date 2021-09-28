@@ -50,6 +50,7 @@
             android:layout_centerInParent="true"
             android:ellipsize="middle"
             android:maxWidth="200dp"
+            android:textStyle="bold"
             android:padding="@dimen/dp10"
             android:singleLine="true"
             android:text=""

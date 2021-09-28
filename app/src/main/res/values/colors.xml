@@ -184,4 +184,11 @@
     <color name="rl_bg_one">#5FCEC7</color>
     <color name="rl_bg_two">#F8C042</color>
 
+    <color name="home_blue">#0F6EFF</color>
+
+    <color name="wallet_type_success">#999999</color>
+    <color name="wallet_type_reading">#03C087</color>
+    <color name="wallet_type_fail">#F55758</color>
+    <color name="line_color">#DEDEDE</color>
+
 </resources>

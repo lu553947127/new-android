@@ -105,7 +105,6 @@ public class CoreManager {
                 }
             }
         }
-        Log.d(TAG, "requireConfig() returned: " + staticConfig);
         return staticConfig;
     }
 

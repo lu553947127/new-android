@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="14dp"
+    android:layout_marginEnd="14dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/white_6dp">
+
+    <ImageView
+        android:id="@+id/item_img_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:id="@+id/item_currency_tv"
+        tools:text="USDT"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/sp_15_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/item_img_iv"
+        app:layout_constraintStart_toEndOf="@id/item_img_iv"
+        app:layout_constraintTop_toTopOf="@id/item_img_iv" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/right_arrow_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="14dp"
+        android:id="@+id/item_right_iv"
+        app:layout_constraintTop_toTopOf="@id/item_img_iv"
+        app:layout_constraintBottom_toBottomOf="@id/item_img_iv"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="horizontal"
+        android:id="@+id/guide_line"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/item_right_iv"
+        app:layout_constraintBottom_toTopOf="@id/guide_line"
+        android:layout_marginEnd="14dp"
+        android:textSize="@dimen/sp_18_text_size"
+        android:textColor="@color/text_black"
+        android:id="@+id/item_number_tv"
+        android:textStyle="bold"
+        tools:text="1000"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/sp_12_text_size"
+        tools:text="¥ 7120.00"
+        app:layout_constraintEnd_toEndOf="@id/item_number_tv"
+        app:layout_constraintTop_toBottomOf="@id/guide_line"
+        android:id="@+id/item_price_tv"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

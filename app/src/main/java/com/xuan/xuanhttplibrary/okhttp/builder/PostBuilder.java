@@ -36,12 +36,10 @@ public class PostBuilder extends BaseBuilder {
     @Override
     public BaseCall abstractBuild() {
         FormBody.Builder builder = appenParams(new FormBody.Builder());
-
         build = new Request.Builder()
                 .header("User-Agent", getUserAgent())
                 .url(url).post(builder.build())
                 .build();
-
         return new BaseCall();
     }
 
@@ -68,7 +66,6 @@ public class PostBuilder extends BaseBuilder {
             }
             sb = sb.deleteCharAt(sb.length() - 1); // 去掉后面的&
         }
-
         Log.i(HttpUtils.TAG, "网络请求参数：" + sb.toString());
         return builder;
     }

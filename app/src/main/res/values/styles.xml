@@ -718,4 +718,9 @@
         <item name="android:paddingRight">15dp</item>
     </style>
 
+    <style name="dialog_scale_anim_style">
+        <item name="android:windowEnterAnimation">@anim/scale_dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/scale_dialog_out_anim</item>
+    </style>
+
 </resources>

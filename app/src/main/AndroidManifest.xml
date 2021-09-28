@@ -905,6 +905,11 @@
         <activity android:name=".ui.me.question.ViewQuestionContentActivity" />
         <activity android:name=".ui.me.question.QuestionFeedbackActivity" />
         <activity android:name=".ui.me.ThirdServiceActivity" />
+        <activity android:name=".wallet.CoinActivity" />
+        <activity android:name=".wallet.WithdrawActivity" />
+        <activity android:name=".wallet.CaptureActivity" />
+        <activity android:name=".wallet.RecordActivity" />
+        <activity android:name=".wallet.RecordDetailActivity" />
 
         <service android:name="com.fanjun.keeplive.service.LocalService" />
         <service android:name="com.fanjun.keeplive.service.HideForegroundService" />

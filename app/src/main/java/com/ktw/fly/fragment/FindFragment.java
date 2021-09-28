@@ -30,10 +30,9 @@ public class FindFragment extends EasyFragment {
     protected void onActivityCreated(Bundle savedInstanceState, boolean createView) {
         if (createView){
             initView();
-
         }
-
     }
+
     private void  initView(){
         findViewById(R.id.iv_title_left).setVisibility(View.GONE);
         TextView titleTv = findViewById(R.id.tv_title_center);

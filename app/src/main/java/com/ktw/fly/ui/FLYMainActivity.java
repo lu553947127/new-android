@@ -94,6 +94,7 @@ import com.ktw.fly.fragment.MeFragment;
 import com.ktw.fly.fragment.MessageFragment;
 import com.ktw.fly.fragment.Nav1Fragment;
 import com.ktw.fly.fragment.Nav2Fragment;
+import com.ktw.fly.wallet.WalletFragment;
 import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.helper.LoginSecureHelper;
@@ -147,7 +148,6 @@ import com.xuan.xuanhttplibrary.okhttp.result.Result;
 
 import org.jsoup.helper.StringUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -161,8 +161,6 @@ import de.greenrobot.event.ThreadMode;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * 主界面
@@ -187,6 +185,7 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
     private int mLastFragmentId;// 当前界面
     private RadioGroup mRadioGroup;
     private RadioButton mRbTab1 //消息
+            , mWalletTab //钱包
             , mRbTab2 //好友
             , mRbFindTab//发现
             , mRbTab4 //我的
@@ -442,6 +441,7 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         getSupportActionBar().hide();
         mRadioGroup = (RadioGroup) findViewById(R.id.main_rg);
         mRbTab1 = (RadioButton) findViewById(R.id.rb_tab_1);
+        mWalletTab = (RadioButton) findViewById(R.id.rb_tab_wallet);
         mRbTab2 = (RadioButton) findViewById(R.id.rb_tab_2);
         mRbFindTab = (RadioButton) findViewById(R.id.rb_tab_3);
         mRbTab4 = (RadioButton) findViewById(R.id.rb_tab_4);
@@ -477,12 +477,13 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
 
         isCreate = false;
         //  修改白屏bug
-        mRbTab1.toggle();
+//        mRbTab1.toggle();
+        mWalletTab.toggle();
         // initFragment();
 
         // 改皮肤，
         ColorStateList tabColor = SkinUtils.getSkin(this).getMainTabColorState();
-        for (RadioButton radioButton : Arrays.asList(mRbTab1, mRbTab2, mRbNav1Tab, mRbNav2Tab, mRbFindTab, mRbTab4)) {
+        for (RadioButton radioButton : Arrays.asList(mRbTab1, mRbTab2,mWalletTab, mRbNav1Tab, mRbNav2Tab, mRbFindTab, mRbTab4)) {
             // 图标着色，兼容性解决方案，
             Drawable drawable = radioButton.getCompoundDrawables()[1];
             drawable = DrawableCompat.wrap(drawable);
@@ -784,6 +785,9 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(String.valueOf(checkedId));
         if (fragment == null) {
             switch (checkedId) {
+                case R.id.rb_tab_wallet:
+                    fragment = new WalletFragment();
+                    break;
                 case R.id.rb_tab_1:
                     fragment = new MessageFragment();
                     break;
@@ -1028,7 +1032,8 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         numCircle = MyZanDao.getInstance().getZanSize(coreManager.getSelf().getUserId());
         updateNumData();
         if (isCreate) {
-            mRbTab1.toggle();
+//            mRbTab1.toggle();
+            mWalletTab.toggle();
         }
     }
 
@@ -1803,7 +1808,9 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
                 notifyCollectionList();
             } else if (action.equals(OtherBroadcast.SEND_MULTI_NOTIFY)) {
                 mRbTab4.setChecked(false);
-                mRbTab1.setChecked(true);
+//                mRbTab1.setChecked(true);
+                mRbTab1.setChecked(false);
+                mWalletTab.setChecked(true);
             }
         }
     }

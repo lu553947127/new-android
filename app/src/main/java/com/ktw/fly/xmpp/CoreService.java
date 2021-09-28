@@ -20,9 +20,9 @@ import android.util.Log;
 import androidx.annotation.WorkerThread;
 import androidx.core.app.NotificationCompat;
 
+import com.ktw.fly.BuildConfig;
 import com.ktw.fly.FLYAppConfig;
 import com.ktw.fly.FLYAppConstant;
-import com.ktw.fly.BuildConfig;
 import com.ktw.fly.FLYApplication;
 import com.ktw.fly.R;
 import com.ktw.fly.audio.NoticeVoicePlayer;

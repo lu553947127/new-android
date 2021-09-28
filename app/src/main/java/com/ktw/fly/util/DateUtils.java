@@ -291,6 +291,17 @@ public class DateUtils {
         return time;
     }
 
+    public static String getDate(long str, String type) {
+
+        Date date = new Date(str);
+
+        SimpleDateFormat format = new SimpleDateFormat(type);
+
+        String time = format.format(date);
+
+        return time;
+    }
+
     /**
      * 分割符把时间分成时间数组
      *

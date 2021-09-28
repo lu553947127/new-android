@@ -23,8 +23,9 @@ public class FLYAppConfig {
 
     public static final String apiKey = "a891a7a6-03af-475c-8ae1-7fb4b230e958";
 
-    public static String HOST = "http://aachat.aachain.org";// Socket IM 服务器入口
-//    public static String HOST = "http://116.213.40.220:8092";// Socket IM 服务器入口
+//    public static String HOST = "http://aachat.aachain.org";// Socket IM 服务器入口
+    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
+
     public static String CONFIG_URL = HOST + "/config";
     //客服列表
     public static String API_CUSTOMER_LIST = HOST + "/customerLink/list";
@@ -531,7 +532,7 @@ public class FLYAppConfig {
     }
 
     private static void initApiUrls(FLYAppConfig config) {
-        String apiUrl = config.apiUrl;
+        String apiUrl = TextUtils.isEmpty(config.apiUrl) ? HOST : config.apiUrl;
         /* 登陆注册 */
         config.USER_REGISTER = apiUrl + "user/register/v1";// 注册
         config.USER_THIRD_REGISTER = apiUrl + "user/registerSDK/v1";// 第三方注册
@@ -836,8 +837,6 @@ public class FLYAppConfig {
     private static void initOthersUrls(FLYAppConfig config) {
         String uploadUrl = config.uploadUrl;
         String dowmLoadUrl = config.downloadAvatarUrl;
-        Log.e("dowmLoadUrl", "initOthersUrls: " + dowmLoadUrl);
-
         config.UPLOAD_URL = uploadUrl + "upload/UploadServlet";// 上传图片接口
         config.UPLOAD_AUDIO_URL = uploadUrl + "upload/UploadServlet";// 上传语音接口
         config.AVATAR_UPLOAD_URL = uploadUrl + "upload/UploadAvatarServlet";// 上传头像接口

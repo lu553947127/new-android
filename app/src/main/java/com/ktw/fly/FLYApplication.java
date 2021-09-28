@@ -12,6 +12,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.util.LruCache;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;

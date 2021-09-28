@@ -380,7 +380,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
 
         LoginSecureHelper.secureLogin(
-                        this, coreManager, String.valueOf(mobilePrefix), phoneNumber, password, thirdToken, thirdTokenType, third,
+                        this, coreManager,
+                String.valueOf(mobilePrefix),
+                phoneNumber, password,
+                thirdToken, thirdTokenType,
+                third,
                         params,
                 t -> {
                     DialogHelper.dismissProgressDialog();

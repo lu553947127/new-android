@@ -139,6 +139,35 @@ public class SkinUtils {
             return new ColorStateList(states, colors);
         }
 
+        public ColorStateList getWalletColorState() {
+            int[][] states = new int[][]{
+                    new int[]{-android.R.attr.state_checked},
+                    new int[]{android.R.attr.state_checked}
+            };
+
+            int[] colors = new int[]{
+                    getAccentColor(),
+                    getAccentColor()
+            };
+
+            return new ColorStateList(states, colors);
+        }
+
+        public ColorStateList getWalletTabColorState() {
+            int[][] states = new int[][]{
+                    new int[]{-android.R.attr.state_checked},
+                    new int[]{android.R.attr.state_checked}
+            };
+
+            int[] colors = new int[]{
+                    0xff333333,
+                    getAccentColor()
+            };
+
+            return new ColorStateList(states, colors);
+        }
+
+
         public ColorStateList getButtonColorState() {
             int[][] states = new int[][]{
                     new int[]{-android.R.attr.state_enabled},
