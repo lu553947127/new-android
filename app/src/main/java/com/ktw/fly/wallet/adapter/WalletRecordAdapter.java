@@ -30,6 +30,6 @@ public class WalletRecordAdapter extends BaseQuickAdapter<CoinBean, BaseViewHold
             baseViewHolder.setText(R.id.item_status_tv, R.string.fail);
             baseViewHolder.setTextColor(R.id.item_status_tv, ContextCompat.getColor(getContext(), R.color.wallet_type_fail));
         }
-        baseViewHolder.setText(R.id.item_number_tv, coinBean.getType() == 1 ? ("+" + coinBean.getAmount()) : ("-" + coinBean.getAmount()) + " " + coinBean.getCoinName());
+        baseViewHolder.setText(R.id.item_number_tv, coinBean.getType() == 1 ? ("+" + coinBean.getAmount()) : ("-" + coinBean.getSum()) + " " + coinBean.getCoinName());
     }
 }

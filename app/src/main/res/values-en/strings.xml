@@ -2273,4 +2273,5 @@
     <string name="coinding">Depositing</string>
     <string name="withdrawding">Withdrawal</string>
     <string name="over">Completed</string>
+    <string name="verify_code_resend">重新发送</string>
 </resources>

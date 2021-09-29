@@ -57,7 +57,7 @@ public class RecordDetailActivity extends BaseActivity {
         //图标
         Glide.with(this).load(coinBean.getPath()).into(mImgIv);
         //数量
-        mNumberTv.setText(coinBean.getType() == 1 ? ("+" + coinBean.getAmount()) : ("-" + coinBean.getAmount()) + " " + coinBean.getCoinName());
+        mNumberTv.setText(coinBean.getType() == 1 ? ("+" + coinBean.getAmount()) : ("-" + coinBean.getSum()) + " " + coinBean.getCoinName());
         //类型
         mTypeTv.setText(coinBean.getTypeName());
         //状态

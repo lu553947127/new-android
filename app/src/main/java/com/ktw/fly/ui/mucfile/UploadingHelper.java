@@ -46,6 +46,7 @@ public class UploadingHelper {
             params.put("file1", file);
             params.put("validTime", "-1");// 文件有效期
 
+            Log.e("TAG", "upfile: "+CoreManager.requireConfig(FLYApplication.getInstance()).UPLOAD_URL );
             client.post(CoreManager.requireConfig(FLYApplication.getInstance()).UPLOAD_URL, params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {//数据发送成功，并且有返回值<不是上传成功。。。>

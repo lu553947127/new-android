@@ -2109,4 +2109,5 @@
     <string name="coinding">Ký gửi</string>
     <string name="withdrawding">Rút tiền</string>
     <string name="over">hoàn thành</string>
+    <string name="verify_code_resend">重新发送</string>
 </resources>

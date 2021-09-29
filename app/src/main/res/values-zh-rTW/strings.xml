@@ -2302,4 +2302,5 @@
     <string name="coinding">充幣中</string>
     <string name="withdrawding">提幣中</string>
     <string name="over">已完成</string>
+    <string name="verify_code_resend">重新发送</string>
 </resources>

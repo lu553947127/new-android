@@ -39,7 +39,7 @@ public class VerifyCenterDialog extends BaseDialogFragment {
                 .setOnClickListener(v -> {
                     //邮箱验证
                     if (mCallBack!=null) {
-                        mCallBack.onCodeSendClicked(1);
+                        mCallBack.onCodeSendClicked(2);
                         dismiss();
                     }
                 });
@@ -47,7 +47,7 @@ public class VerifyCenterDialog extends BaseDialogFragment {
                 .setOnClickListener(v -> {
                     //手机验证
                     if (mCallBack!=null) {
-                        mCallBack.onCodeSendClicked(2);
+                        mCallBack.onCodeSendClicked(1);
                         dismiss();
                     }
                 });

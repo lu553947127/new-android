@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
@@ -152,15 +153,16 @@ public class WithdrawActivity extends BaseActivity {
                                 @Override
                                 public void onVerifyCallBackClicked(String pwd, String code) {
                                     //开始提币
-                                    requestData();
+                                    verifyCode(type,code,pwd);
                                 }
 
                                 @Override
                                 public void onSendMsgClicked(VerifyBottomDialog dialog) {
                                     //发送验证码
-
+                                    sendCode(type,dialog);
                                 }
                             }).show(getSupportFragmentManager(), "Verify");
+
                 }
             }).show(getSupportFragmentManager(), "Verify");
         });
@@ -273,7 +275,6 @@ public class WithdrawActivity extends BaseActivity {
         mEtcTv.setBackgroundResource(R.drawable.bg_btn_gay);
     }
 
-
     private void initTitle() {
         getSupportActionBar().hide();
         findViewById(R.id.iv_title_left).setOnClickListener(new View.OnClickListener() {
@@ -291,7 +292,6 @@ public class WithdrawActivity extends BaseActivity {
             startActivity(new Intent(this, RecordActivity.class));
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -322,6 +322,9 @@ public class WithdrawActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 提币
+     */
     private void requestData() {
         String number = mNumberEt.getText().toString();
         String address = mAddressEt.getText().toString();
@@ -363,6 +366,9 @@ public class WithdrawActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * 获取币种信息
+     */
     private void requestWalletListData() {
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserSp.getInstance(this).getUserId(""));
@@ -402,6 +408,81 @@ public class WithdrawActivity extends BaseActivity {
                                 return;
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        ToastUtil.showNetError(WithdrawActivity.this);
+                    }
+                });
+    }
+
+    /**
+     * 提币
+     * @param type
+     * @param dialog
+     */
+    public void sendCode(int type, VerifyBottomDialog dialog) {
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", UserSp.getInstance(this).getUserId(""));
+        params.put("type", type+"");
+        HttpUtils.post().url(Apis.SEND_CODE)
+                .params(params)
+                .build()
+                .execute(new BaseCallback<Object>(Object.class) {
+
+                    @Override
+                    public void onResponse(ObjectResult<Object> result) {
+                        if (result == null) {
+                            return;
+                        }
+                        if (result.getResultCode()!=1) {
+                            ToastUtil.showToast(WithdrawActivity.this, result.getResultMsg());
+                            return;
+                        }
+                        dialog.onSuccessSend();
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        ToastUtil.showNetError(WithdrawActivity.this);
+                    }
+                });
+    }
+
+    /**
+     * 提币
+     */
+    private void verifyCode(int type,String code,String pwd) {
+        String number = mNumberEt.getText().toString();
+        String address = mAddressEt.getText().toString();
+        if (TextUtils.isEmpty(chainName)) {
+            return;
+        }
+        if (TextUtils.isEmpty(number) || TextUtils.isEmpty(address)) {
+            return;
+        }
+
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", UserSp.getInstance(this).getUserId(""));
+        params.put("type", type+"");
+        params.put("code", code);
+        params.put("password", pwd);
+        HttpUtils.post().url(Apis.VERIFY_CODE)
+                .params(params)
+                .build()
+                .execute(new BaseCallback<Object>(Object.class) {
+
+                    @Override
+                    public void onResponse(ObjectResult<Object> result) {
+                        if (result == null) {
+                            return;
+                        }
+                        if (result.getResultCode()!=1) {
+                            ToastUtil.showToast(WithdrawActivity.this, result.getResultMsg());
+                            return;
+                        }
+                        requestData();
                     }
 
                     @Override

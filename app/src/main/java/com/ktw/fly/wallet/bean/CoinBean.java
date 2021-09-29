@@ -50,7 +50,13 @@ public class CoinBean implements Serializable {
     private String userId;
     private String transferNo;//	订单号
 
+    public double getSum() {
+        return sum;
+    }
 
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
 
     public int getId() {
         return id;

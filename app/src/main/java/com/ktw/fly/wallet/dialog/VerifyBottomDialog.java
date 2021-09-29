@@ -1,11 +1,15 @@
 package com.ktw.fly.wallet.dialog;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ktw.fly.R;
+import com.ktw.fly.wallet.WithdrawActivity;
+
+import java.util.Objects;
 
 public class VerifyBottomDialog extends BaseDialogFragment {
 
@@ -74,6 +78,7 @@ public class VerifyBottomDialog extends BaseDialogFragment {
 
     public void onSuccessSend() {
         //发送验证码成功,初始化验证码按钮
+        countDownTimer.start();
     }
 
     @Override
@@ -85,11 +90,37 @@ public class VerifyBottomDialog extends BaseDialogFragment {
         } else {
             mCodeEt.setHint(R.string.tv_input_text_2);
         }
-
+        ((WithdrawActivity) Objects.requireNonNull(getActivity())).sendCode(mType, this);
     }
 
     @Override
     protected void initLayout() {
 
+    }
+
+    /**
+     * 2019/9/13/ 10:50 验证码倒计时
+     */
+    private CountDownTimer countDownTimer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            long time = millisUntilFinished / 1000;
+            mSendTv.setText(getResources().getString(R.string.verify_code_resend) + "(" + time + "s" + ")");
+            mSendTv.setEnabled(false);
+        }
+
+        @Override
+        public void onFinish() {
+            mSendTv.setText(getResources().getString(R.string.send));
+            mSendTv.setEnabled(true);
+        }
+    };
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 }

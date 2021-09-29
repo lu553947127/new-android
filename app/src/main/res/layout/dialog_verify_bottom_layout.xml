@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="14dp"
-            android:background="@drawable/bg_btn_blue"
+            android:background="@drawable/bg_btn_blue_to_gray"
             android:id="@+id/tv_send_code"
             android:paddingStart="15dp"
             android:paddingTop="10dp"
