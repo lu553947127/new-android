@@ -134,6 +134,7 @@ public class WalletFragment extends EasyFragment {
         mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         mWalletAdapter = new WalletAdapter(new ArrayList<>());
         mRv.setAdapter(mWalletAdapter);
+
     }
 
     private void requestData() {

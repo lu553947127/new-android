@@ -1,6 +1,9 @@
 package com.ktw.fly.wallet;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,16 +18,12 @@ import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.wallet.adapter.WalletRecordAdapter;
 import com.ktw.fly.wallet.bean.CoinBean;
-import com.ktw.fly.wallet.bean.CurrencyBean;
-import com.ktw.fly.wallet.bean.WalletListBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
-import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.callback.ListCallback;
 import com.xuan.xuanhttplibrary.okhttp.result.ArrayResult;
-import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,6 +43,14 @@ public class RecordActivity extends BaseActivity {
 
     private WalletRecordAdapter mAdapter;
 
+    private String mCoinKey;
+
+    public static void actionStart(Context context, String key) {
+        Intent intent = new Intent(context, RecordActivity.class);
+        intent.putExtra("key", key);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,7 @@ public class RecordActivity extends BaseActivity {
                 .setOnClickListener(v -> finish());
         mRefreshLayout = findViewById(R.id.refresh_layout);
         mRv = findViewById(R.id.recycler_view);
+        mCoinKey = getIntent().getStringExtra("key");
         initListView();
         requestData();
     }
@@ -80,6 +88,9 @@ public class RecordActivity extends BaseActivity {
     private void requestData() {
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserSp.getInstance(this).getUserId(""));
+        if (!TextUtils.isEmpty(mCoinKey)) {
+            params.put("cionkey",  mCoinKey);
+        }
         HttpUtils.post().url(Apis.COIN_WITHDRAW)
                 .params(params)
                 .build()

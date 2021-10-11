@@ -84,7 +84,7 @@ public class VerifyBottomDialog extends BaseDialogFragment {
     @Override
     protected void initBundle() {
         mType = getArguments().getInt("type");
-        if (mType == 1) {
+        if (mType == 2) {
             //邮箱
             mCodeEt.setHint(R.string.tv_input_text_1);
         } else {

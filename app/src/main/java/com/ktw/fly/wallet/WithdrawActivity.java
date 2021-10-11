@@ -34,6 +34,7 @@ import com.ktw.fly.R;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.util.DisplayUtil;
+import com.ktw.fly.util.Md5Util;
 import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.wallet.adapter.SelectItemAdapter;
 import com.ktw.fly.wallet.bean.CoinBean;
@@ -153,13 +154,13 @@ public class WithdrawActivity extends BaseActivity {
                                 @Override
                                 public void onVerifyCallBackClicked(String pwd, String code) {
                                     //开始提币
-                                    verifyCode(type,code,pwd);
+                                    verifyCode(type, code, pwd);
                                 }
 
                                 @Override
                                 public void onSendMsgClicked(VerifyBottomDialog dialog) {
                                     //发送验证码
-                                    sendCode(type,dialog);
+                                    sendCode(type, dialog);
                                 }
                             }).show(getSupportFragmentManager(), "Verify");
 
@@ -419,13 +420,14 @@ public class WithdrawActivity extends BaseActivity {
 
     /**
      * 提币
+     *
      * @param type
      * @param dialog
      */
     public void sendCode(int type, VerifyBottomDialog dialog) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserSp.getInstance(this).getUserId(""));
-        params.put("type", type+"");
+        params.put("type", type + "");
         HttpUtils.post().url(Apis.SEND_CODE)
                 .params(params)
                 .build()
@@ -436,7 +438,7 @@ public class WithdrawActivity extends BaseActivity {
                         if (result == null) {
                             return;
                         }
-                        if (result.getResultCode()!=1) {
+                        if (result.getResultCode() != 1) {
                             ToastUtil.showToast(WithdrawActivity.this, result.getResultMsg());
                             return;
                         }
@@ -453,7 +455,7 @@ public class WithdrawActivity extends BaseActivity {
     /**
      * 提币
      */
-    private void verifyCode(int type,String code,String pwd) {
+    private void verifyCode(int type, String code, String pwd) {
         String number = mNumberEt.getText().toString();
         String address = mAddressEt.getText().toString();
         if (TextUtils.isEmpty(chainName)) {
@@ -465,9 +467,9 @@ public class WithdrawActivity extends BaseActivity {
 
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserSp.getInstance(this).getUserId(""));
-        params.put("type", type+"");
+        params.put("type", type + "");
         params.put("code", code);
-        params.put("password", pwd);
+        params.put("password", Md5Util.toMD5(pwd));
         HttpUtils.post().url(Apis.VERIFY_CODE)
                 .params(params)
                 .build()
@@ -478,7 +480,7 @@ public class WithdrawActivity extends BaseActivity {
                         if (result == null) {
                             return;
                         }
-                        if (result.getResultCode()!=1) {
+                        if (result.getResultCode() != 1) {
                             ToastUtil.showToast(WithdrawActivity.this, result.getResultMsg());
                             return;
                         }
