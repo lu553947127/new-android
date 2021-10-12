@@ -71,9 +71,9 @@ public class FLYSplashActivity extends BaseActivity implements PermissionUtil.On
     // 复用请求权限的说明对话框，
     private PermissionExplainDialog permissionExplainDialog;
 
-    private ImageView ivAd;
-    private TextView tvSkip;
-    private CustomVideoView videoAd;
+//    private ImageView ivAd;
+//    private TextView tvSkip;
+//    private CustomVideoView videoAd;
     //广告地址
     private String adSourceUrl;
     //广告类型
@@ -123,41 +123,42 @@ public class FLYSplashActivity extends BaseActivity implements PermissionUtil.On
         }
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setContentView(R.layout.activity_splash);
+//        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.acitivty_new_splash);
 
         adSourceUrl = PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_PATH);
         adSourceType = PreferenceUtils.getInt(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_TYPE);
 
         LogUtil.d("获取本地缓存视频路径 = " + adSourceUrl);
 
-        ivAd = findViewById(R.id.ivAd);
-        tvSkip = findViewById(R.id.tvSkip);
-        videoAd = findViewById(R.id.videoAd);
-        videoAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                videoAd.pause();
-                countDownTimert.cancel();
-                isFinishAd = true;
-                WebView2Activity.start(FLYSplashActivity.this
-                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_WEBSITE)
-                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_TITLE)
-                , FLYSplashActivity.REQUEST_CODE);
-            }
-        });
-        ivAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                videoAd.pause();
-                countDownTimert.cancel();
-                isFinishAd = true;
-                WebView2Activity.start(FLYSplashActivity.this
-                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_WEBSITE)
-                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_TITLE)
-                        , FLYSplashActivity.REQUEST_CODE);
-
-            }
-        });
+//        ivAd = findViewById(R.id.ivAd);
+//        tvSkip = findViewById(R.id.tvSkip);
+//        videoAd = findViewById(R.id.videoAd);
+//        videoAd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                videoAd.pause();
+//                countDownTimert.cancel();
+//                isFinishAd = true;
+//                WebView2Activity.start(FLYSplashActivity.this
+//                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_WEBSITE)
+//                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_TITLE)
+//                , FLYSplashActivity.REQUEST_CODE);
+//            }
+//        });
+//        ivAd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                videoAd.pause();
+//                countDownTimert.cancel();
+//                isFinishAd = true;
+//                WebView2Activity.start(FLYSplashActivity.this
+//                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_WEBSITE)
+//                        , PreferenceUtils.getString(FLYSplashActivity.this, Constants.KEY_SPLASH_AD_TITLE)
+//                        , FLYSplashActivity.REQUEST_CODE);
+//
+//            }
+//        });
         if (TextUtils.isEmpty(adSourceUrl)) {
             isFinishAd = true;
         }
@@ -170,52 +171,52 @@ public class FLYSplashActivity extends BaseActivity implements PermissionUtil.On
 
     }
 
-    private void processAd() {
-        if (!TextUtils.isEmpty(adSourceUrl)) {
-            setTimer();
-            if (adSourceType == FLYMainActivity.AD_TYPE_IMAGE) {
-                ivAd.setVisibility(View.VISIBLE);
-                ivAd.requestFocus();
-                Glide.with(FLYSplashActivity.this)
-                        .load(Uri.fromFile(new File(adSourceUrl)))
-                        .into(ivAd);
-            } else if (adSourceType == FLYMainActivity.AD_TYPE_VIDEO) {
-                videoAd.setVisibility(View.VISIBLE);
-                videoAd.requestFocus();
-                videoAd.setVideoURI(Uri.fromFile(new File(adSourceUrl)));
-                videoAd.start();
-            }
-        }
-    }
+//    private void processAd() {
+//        if (!TextUtils.isEmpty(adSourceUrl)) {
+//            setTimer();
+//            if (adSourceType == FLYMainActivity.AD_TYPE_IMAGE) {
+//                ivAd.setVisibility(View.VISIBLE);
+//                ivAd.requestFocus();
+//                Glide.with(FLYSplashActivity.this)
+//                        .load(Uri.fromFile(new File(adSourceUrl)))
+//                        .into(ivAd);
+//            } else if (adSourceType == FLYMainActivity.AD_TYPE_VIDEO) {
+//                videoAd.setVisibility(View.VISIBLE);
+//                videoAd.requestFocus();
+//                videoAd.setVideoURI(Uri.fromFile(new File(adSourceUrl)));
+//                videoAd.start();
+//            }
+//        }
+//    }
 
-    private void setTimer() {
-        tvSkip.setText(getString(R.string.skip_second, second + ""));
-        tvSkip.setVisibility(View.VISIBLE);
-        tvSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isFinishAd = true;
-                videoAd.pause();
-                countDownTimert.cancel();
-                ready();
-            }
-        });
-        countDownTimert = new CountDownTimer(second * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                tvSkip.setText(getString(R.string.skip_second, (millisUntilFinished / 1000) + 1 + ""));
-            }
-
-            @Override
-            public void onFinish() {
-                isFinishAd = true;
-                videoAd.pause();
-                countDownTimert.cancel();
-                ready();
-            }
-        };
-        countDownTimert.start();
-    }
+//    private void setTimer() {
+//        tvSkip.setText(getString(R.string.skip_second, second + ""));
+//        tvSkip.setVisibility(View.VISIBLE);
+//        tvSkip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                isFinishAd = true;
+//                videoAd.pause();
+//                countDownTimert.cancel();
+//                ready();
+//            }
+//        });
+//        countDownTimert = new CountDownTimer(second * 1000, 1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                tvSkip.setText(getString(R.string.skip_second, (millisUntilFinished / 1000) + 1 + ""));
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                isFinishAd = true;
+//                videoAd.pause();
+//                countDownTimert.cancel();
+//                ready();
+//            }
+//        };
+//        countDownTimert.start();
+//    }
 
 
     @Override
@@ -358,7 +359,7 @@ public class FLYSplashActivity extends BaseActivity implements PermissionUtil.On
                 jump();
             } else {
                 //获取所有权限后，显示广告
-                processAd();
+//                processAd();
             }
 
         }
@@ -487,18 +488,18 @@ public class FLYSplashActivity extends BaseActivity implements PermissionUtil.On
 
     @Override
     protected void onDestroy() {
-        if (adSourceType > 0) {
-            if (adSourceType == FLYMainActivity.AD_TYPE_VIDEO && videoAd != null) {
-                videoAd.pause();
-                videoAd.suspend();
-                videoAd.setOnErrorListener(null);
-                videoAd.setOnPreparedListener(null);
-                videoAd.setOnCompletionListener(null);
-            }
-            if (countDownTimert != null) {
-                countDownTimert.onFinish();
-            }
-        }
+//        if (adSourceType > 0) {
+//            if (adSourceType == FLYMainActivity.AD_TYPE_VIDEO && videoAd != null) {
+//                videoAd.pause();
+//                videoAd.suspend();
+//                videoAd.setOnErrorListener(null);
+//                videoAd.setOnPreparedListener(null);
+//                videoAd.setOnCompletionListener(null);
+//            }
+//            if (countDownTimert != null) {
+//                countDownTimert.onFinish();
+//            }
+//        }
         super.onDestroy();
     }
 }

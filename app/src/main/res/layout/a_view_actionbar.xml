@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="@dimen/dp50">
 
         <com.ktw.fly.view.SkinImageView
             android:id="@+id/iv_title_left"

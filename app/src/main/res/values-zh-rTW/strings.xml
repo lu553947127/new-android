@@ -93,7 +93,7 @@
     <string name="logout_des">您的賬號在另外壹臺設備上登錄，是否立即重新登陸？</string>
     <string name="you_are_offline">您已經離線，是否重新連接</string>
     <!-- MainActivity -->
-    <string name="message">消息</string>
+    <string name="message">社交</string>
     <string name="find">發現</string>
     <string name="nearby">附近</string>
     <string name="group_chat">群聊</string>
@@ -2302,5 +2302,12 @@
     <string name="coinding">充幣中</string>
     <string name="withdrawding">提幣中</string>
     <string name="over">已完成</string>
-    <string name="verify_code_resend">重新发送</string>
+    <string name="verify_code_resend">重新發送</string>
+    <string name="search_txt">搜索</string>
+    <string name="dapps">我的DApps</string>
+    <string name="dapps_hot">熱門Dapps</string>
+    <string name="new_string">新品</string>
+    <string name="new_version">發現新版本</string>
+    <string name="my_code">我的二维码</string>
+    <string name="read_bg">红包</string>
 </resources>

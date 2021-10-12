@@ -39,7 +39,6 @@ public class FindFragment extends EasyFragment {
         titleTv.setText("发现" );
         findViewById(R.id.rlt_discover).setOnClickListener(this);
         findViewById(R.id.rlt_money).setOnClickListener(this);
-
         findViewById(R.id.rlt_scan_qr_code).setOnClickListener(this);
         findViewById(R.id.rlt_tag).setOnClickListener(this);
         findViewById(R.id.rlt_official_accounts).setOnClickListener(this);

@@ -23,7 +23,7 @@ import java.util.List;
  */
 public final class KeepLive {
     // 定义前台服务的默认样式。即标题、描述和图标
-    public static final ForegroundNotification foregroundNotification = new ForegroundNotification(FLYApplication.getContext().getString(R.string.keep_live_title), FLYApplication.getContext().getString(R.string.keep_live_description), R.mipmap.icon,
+    public static final ForegroundNotification foregroundNotification = new ForegroundNotification(FLYApplication.getContext().getString(R.string.keep_live_title), FLYApplication.getContext().getString(R.string.keep_live_description), R.mipmap.ic_aa_logo,
             //定义前台服务的通知点击事件
             null);
     public static KeepLiveService keepLiveService = null;

@@ -2088,6 +2088,13 @@ Ang kasalukuyang katayuan ay sumunog pagkatapos basahin, at ang iba pang partido
     <string name="coinding">Depositing</string>
     <string name="withdrawding">Withdrawal</string>
     <string name="over">Completed</string>
-    <string name="verify_code_resend">重新发送</string>
+    <string name="verify_code_resend">Resend</string>
+    <string name="search_txt">Search</string>
+    <string name="dapps">My DApps</string>
+    <string name="dapps_hot">Hot Dapps</string>
+    <string name="new_string">新品</string>
+    <string name="new_version">New version found</string>
+    <string name="my_code">我的二维码</string>
+    <string name="read_bg">红包</string>
 </resources>
 

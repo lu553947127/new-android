@@ -190,5 +190,6 @@
     <color name="wallet_type_reading">#03C087</color>
     <color name="wallet_type_fail">#F55758</color>
     <color name="line_color">#DEDEDE</color>
+    <color name="text_color_normal">#808080</color>
 
 </resources>

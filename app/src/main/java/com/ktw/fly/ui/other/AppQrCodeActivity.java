@@ -74,7 +74,7 @@ public class AppQrCodeActivity extends BaseActivity {
 
 
         mAppNameTv.setText(R.string.app_name);
-        Glide.with(this).load(R.mipmap.icon).into(mAppLogoIv);
+        Glide.with(this).load(R.mipmap.ic_aa_logo).into(mAppLogoIv);
 
 
         String str = coreManager.getConfig().website + "?action=switchApp&domain=" + FLYAppConfig.HOST;
@@ -86,7 +86,7 @@ public class AppQrCodeActivity extends BaseActivity {
         // 此bitmap只为无头像的二维码
         mAppQrCodeIv.setImageBitmap(bitmap);
         // 将二维码和头像拼成一张bitmap
-        drawQrCode(R.mipmap.icon);
+        drawQrCode(R.mipmap.ic_aa_logo);
     }
 
 
@@ -99,7 +99,7 @@ public class AppQrCodeActivity extends BaseActivity {
             } catch (Exception e) {// 抛出Exception，基本为url无效导致的，自己生成bitmap
                 final BitmapFactory.Options options = new BitmapFactory.Options();
 
-                bitmapAva = BitmapFactory.decodeResource(getResources(),R.mipmap.icon);
+                bitmapAva = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_aa_logo);
             }
             // 将bitmapAva裁剪为圆形
             Bitmap bitmap = BitmapUtil.getCircleBitmap(bitmapAva);

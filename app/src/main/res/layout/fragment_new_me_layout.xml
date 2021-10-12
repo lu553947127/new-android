@@ -1,0 +1,673 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDEDED"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.ktw.fly.view.MergerStatus
+                android:id="@+id/tool_bar"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/iv_title_add"
+                        android:layout_width="@dimen/menu_item_size"
+                        android:layout_height="@dimen/menu_item_size"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/menu_item_padding"
+                        android:src="@mipmap/more_icon"
+                        android:tint="#000000" />
+
+                </RelativeLayout>
+
+            </com.ktw.fly.view.MergerStatus>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/info_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="32dp">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginEnd="34dp"
+                    android:layout_weight="1"
+                    android:tint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/phone_number_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/phone_number_tv"
+                    app:srcCompat="@mipmap/me_qrcode_gray" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    style="@style/IMTbleLine_ArrowImg.Me"
+                    android:layout_height="13dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="14dp"
+                    android:background="@null"
+                    android:contentDescription="@string/app_name"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/imageView3"
+                    app:srcCompat="@drawable/me_chevron_right" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/avatar_img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar_normal"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_border_color="#fff"
+                    app:riv_border_width="2dip"
+                    app:riv_oval="true" />
+
+                <TextView
+                    android:id="@+id/nick_name_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#070908"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                    app:layout_constraintTop_toTopOf="@+id/avatar_img"
+                    tools:text="@string/example_name" />
+
+                <TextView
+                    android:id="@+id/phone_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginBottom="11dp"
+                    android:textColor="@color/text_color_normal"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_img"
+                    app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                    tools:text="17724494001" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--朋友圈-->
+                <RelativeLayout
+                    android:id="@+id/rlt_discover"
+                    style="@style/IMTble_MarginTop10"
+                    android:visibility="visible">
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_pengyq"
+                        app:srcLight="@mipmap/icon_pengyq" />
+
+                    <TextView
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="朋友圈" />
+
+                </RelativeLayout>
+
+                <!--扫一扫-->
+                <RelativeLayout
+                    android:id="@+id/rlt_scan_qr_code"
+                    style="@style/IMTble_MarginTop10"
+                    android:visibility="visible">
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_saoys"
+                        app:srcLight="@mipmap/icon_saoys" />
+
+                    <TextView
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="扫一扫" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_qr_code"
+                    style="@style/IMTble_MarginTop0">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_qrcode_share"
+                        app:srcLight="@mipmap/icon_qrcode_share" />
+
+                    <TextView
+                        android:id="@+id/tv_qr_code"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_code" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_tag"
+                    style="@style/IMTble_MarginTop10"
+                    android:visibility="visible">
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_biaoq"
+                        app:srcLight="@mipmap/icon_biaoq" />
+
+                    <TextView
+
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="标签" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_official_accounts"
+                    style="@style/IMTble_MarginTop0"
+                    android:visibility="visible">
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_gongzh"
+                        app:srcLight="@mipmap/icon_gongzh" />
+
+                    <TextView
+
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="公众号" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_neary"
+                    style="@style/IMTble_MarginTop5"
+                    android:visibility="gone">
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_near"
+                        app:srcLight="@mipmap/icon_near" />
+
+                    <TextView
+
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="附近的人" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/my_monry"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_set_yuer"
+                        app:srcLight="@drawable/my_set_yuer_light" />
+
+                    <TextView
+                        style="@style/IMTbleLine_TextName"
+                        android:text="@string/my_purse" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/my_space_rl"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_set_speace"
+                        app:srcLight="@drawable/my_set_speace_light" />
+
+                    <TextView
+                        android:id="@+id/MySky"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_album" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/my_collection_rl"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_collection"
+                        app:srcLight="@drawable/my_collection_light" />
+
+                    <TextView
+                        android:id="@+id/my_collection_tv"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_collection" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/local_course_rl"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_course"
+                        app:srcLight="@drawable/my_course_light" />
+
+                    <TextView
+                        android:id="@+id/my_course_tv"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_course" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/local_activity_rl"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_course"
+                        app:srcLight="@drawable/my_course_light" />
+
+                    <TextView
+                        android:id="@+id/my_activity_tv"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/local_withdrawal_rl"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_set_yuer"
+                        app:srcLight="@drawable/my_set_yuer_light" />
+
+                    <TextView
+                        android:id="@+id/my_withdrawal_tv"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
+
+                    <RelativeLayout
+
+
+                        android:id="@+id/meeting_rl"
+                        style="@style/MeStyle"
+                        android:visibility="gone">
+
+                        <com.ktw.fly.view.LightImageView
+                            android:layout_width="@dimen/dp20"
+                            android:layout_height="@dimen/dp20"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/my_meeting"
+                            app:srcLight="@drawable/my_meeting_light" />
+
+                        <TextView
+                            style="@style/IMTbleLine_TextName"
+                            android:layout_centerVertical="true"
+                            android:text="@string/chat_video_conference" />
+
+                        <ImageView
+                            style="@style/IMTbleLine_ArrowImg.Me"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/me_chevron_right"
+                            android:contentDescription="@string/app_name" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_read_envelope"
+                    style="@style/IMTble_MarginTop10">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_read_bg"
+                        app:srcLight="@mipmap/ic_read_bg" />
+
+                    <TextView
+                        android:id="@+id/tv_read_envelope"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/read_bg" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_safe_settings"
+                    style="@style/IMTble_MarginTop10">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_account_safe"
+                        app:srcLight="@mipmap/icon_account_safe" />
+
+                    <TextView
+                        android:id="@+id/tv_safe_settings"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="账号与安全" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_customer_service"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_account_safe"
+                        app:srcLight="@drawable/icon_account_safe" />
+
+                    <TextView
+                        android:id="@+id/tv_customer_service"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="AAChat团队" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_third_service"
+                    style="@style/MeStyle"
+                    android:visibility="gone">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/my_collection_light"
+                        app:srcLight="@drawable/my_collection_light" />
+
+                    <TextView
+                        android:id="@+id/tv_third_service"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="第三方服务" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/setting_rl"
+                    style="@style/IMTble_MarginTop0">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        app:srcLight="@mipmap/my_set_title_light" />
+
+                    <TextView
+                        android:id="@+id/SettingTv"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/settings" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_about_us"
+                    style="@style/IMTble_MarginTop0"
+                    android:layout_marginBottom="@dimen/dp10">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/my_course_light"
+                        app:srcLight="@mipmap/my_course_light" />
+
+                    <TextView
+                        android:id="@+id/tv_about_us"
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/about_us" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

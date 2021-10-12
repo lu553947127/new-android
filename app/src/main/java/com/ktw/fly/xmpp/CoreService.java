@@ -796,7 +796,7 @@ public class CoreService extends Service {
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setDefaults(Notification.DEFAULT_LIGHTS)
-                .setSmallIcon(R.mipmap.icon); // 通知icon
+                .setSmallIcon(R.mipmap.ic_aa_logo); // 通知icon
         Notification n = mBuilder.build();
         int numMessage = FriendDao.getInstance().getMsgUnReadNumTotal(mLoginUserId);
         // 先通知后保存的数据库，所以数据库里读出来的未读消息数要加1，

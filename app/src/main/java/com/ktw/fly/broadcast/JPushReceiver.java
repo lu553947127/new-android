@@ -94,7 +94,7 @@ public class JPushReceiver extends BroadcastReceiver {
             PendingIntent localPendingIntent = PendingIntent.getActivity(context, 0, localIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             NotificationCompat.Builder localBuilder = new NotificationCompat.Builder(context, CHANNEL_ONE_ID);
 
-            localBuilder.setSmallIcon(R.mipmap.icon)  //小图标
+            localBuilder.setSmallIcon(R.mipmap.ic_aa_logo)  //小图标
                     .setContentTitle(context.getString(R.string.app_name))
                     .setContentText(params.get("msg")) //内容
                     .setChannelId(CHANNEL_ONE_ID)

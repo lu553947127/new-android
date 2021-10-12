@@ -47,7 +47,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             if (!StringUtil.isBlank(customerBean.getPath())) {
                 AvatarHelper.getInstance().displayUrl(customerBean.getPath(), holder.ivAvatar);
             } else {
-                holder.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.iv_customer));
+                holder.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_noticy));
             }
             if (!StringUtil.isBlank(customerBean.getName())) {
                 holder.tvName.setText(customerBean.getName());

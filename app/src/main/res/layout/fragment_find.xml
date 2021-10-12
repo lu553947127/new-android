@@ -142,7 +142,6 @@
             android:text="收付款" />
 
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/rlt_neary"
         style="@style/IMTble_MarginTop5"

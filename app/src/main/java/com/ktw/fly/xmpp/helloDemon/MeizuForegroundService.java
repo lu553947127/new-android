@@ -41,8 +41,8 @@ public class MeizuForegroundService extends Service {
 
             // Set the info for the views that show in the notification panel.
             Notification notification = new Notification.Builder(this)
-                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.icon))
-                    .setSmallIcon(R.mipmap.icon)  // the status icon
+                    .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_aa_logo))
+                    .setSmallIcon(R.mipmap.ic_aa_logo)  // the status icon
                     .setTicker(text)  // the status text
                     .setWhen(System.currentTimeMillis())  // the time stamp
                     .setContentTitle("PushSevice foreground")  // the label of the entry

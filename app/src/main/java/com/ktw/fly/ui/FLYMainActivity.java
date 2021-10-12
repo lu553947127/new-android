@@ -38,6 +38,7 @@ import com.bumptech.glide.Glide;
 import com.example.qrcode.Constant;
 import com.example.qrcode.ScannerActivity;
 import com.example.qrcode.utils.NetUtil;
+import com.facebook.react.shell.MainPackageConfig;
 import com.fanjun.keeplive.KeepLive;
 import com.fanjun.keeplive.config.KeepLiveService;
 import com.google.android.gms.common.ConnectionResult;
@@ -88,12 +89,15 @@ import com.ktw.fly.db.dao.OnCompleteListener2;
 import com.ktw.fly.db.dao.UploadingFileDao;
 import com.ktw.fly.db.dao.UserDao;
 import com.ktw.fly.db.dao.login.MachineDao;
+import com.ktw.fly.downloader.UpdateManger;
 import com.ktw.fly.fragment.FindFragment;
 import com.ktw.fly.fragment.FriendFragment;
 import com.ktw.fly.fragment.MeFragment;
 import com.ktw.fly.fragment.MessageFragment;
 import com.ktw.fly.fragment.Nav1Fragment;
 import com.ktw.fly.fragment.Nav2Fragment;
+import com.ktw.fly.sp.UserSp;
+import com.ktw.fly.wallet.Apis;
 import com.ktw.fly.wallet.WalletFragment;
 import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.LoginHelper;
@@ -136,6 +140,10 @@ import com.ktw.fly.view.PermissionExplainDialog;
 import com.ktw.fly.view.SelectionFrame;
 import com.ktw.fly.view.VerifyDialog;
 import com.ktw.fly.view.cjt2325.cameralibrary.util.LogUtil;
+import com.ktw.fly.wallet.bean.ApkUpdateBean;
+import com.ktw.fly.wallet.bean.CurrencyBean;
+import com.ktw.fly.wallet.bean.WalletListBean;
+import com.ktw.fly.wallet.dapp.DappsFragment;
 import com.ktw.fly.xmpp.CoreService;
 import com.ktw.fly.xmpp.ListenerManager;
 import com.ktw.fly.xmpp.listener.ChatMessageListener;
@@ -184,11 +192,13 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
     // ╚═══════════════════════════════界面组件══════════════════════════════╝
     private int mLastFragmentId;// 当前界面
     private RadioGroup mRadioGroup;
-    private RadioButton mRbTab1 //消息
+    private RadioButton
+            mRbTab1 //社交
             , mWalletTab //钱包
             , mRbTab2 //好友
             , mRbFindTab//发现
             , mRbTab4 //我的
+
             , mRbNav1Tab //第一个导航
             , mRbNav2Tab; //第二个导航
     private FrameLayout flNav1Point //第一个导航的容器
@@ -288,7 +298,8 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         getConfig();
 
         //检查版本
-        if (!StringUtil.isBlank(coreManager.getConfig().androidAppUrl) && !StringUtil.isBlank(coreManager.getConfig().androidVersion)) {
+        if (!StringUtil.isBlank(coreManager.getConfig().androidAppUrl) &&
+                !StringUtil.isBlank(coreManager.getConfig().androidVersion)) {
             checkVersion(coreManager.getConfig().androidAppUrl, coreManager.getConfig().androidVersion);
         }
 
@@ -341,7 +352,7 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         FLYMainActivity.isInitView = false;
     }
 
-//    @Override
+    //    @Override
 //    protected void onRestart() {
 //        super.onRestart();
 //        // 主要针对侧滑返回，刷新消息会话列表，
@@ -477,13 +488,13 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
 
         isCreate = false;
         //  修改白屏bug
-//        mRbTab1.toggle();
-        mWalletTab.toggle();
+        mRbTab1.toggle();
+//        mWalletTab.toggle();
         // initFragment();
 
         // 改皮肤，
         ColorStateList tabColor = SkinUtils.getSkin(this).getMainTabColorState();
-        for (RadioButton radioButton : Arrays.asList(mRbTab1, mRbTab2,mWalletTab, mRbNav1Tab, mRbNav2Tab, mRbFindTab, mRbTab4)) {
+        for (RadioButton radioButton : Arrays.asList(mRbTab1, mRbTab2, mWalletTab, mRbNav1Tab, mRbNav2Tab, mRbFindTab, mRbTab4)) {
             // 图标着色，兼容性解决方案，
             Drawable drawable = radioButton.getCompoundDrawables()[1];
             drawable = DrawableCompat.wrap(drawable);
@@ -786,21 +797,26 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         if (fragment == null) {
             switch (checkedId) {
                 case R.id.rb_tab_wallet:
+                    //钱包
                     fragment = new WalletFragment();
                     break;
                 case R.id.rb_tab_1:
+                    //社交
                     fragment = new MessageFragment();
                     break;
                 case R.id.rb_tab_2:
+                    //通讯录
                     fragment = new FriendFragment();
                     break;
                 case R.id.rb_tab_3:
+                    //发现页 替换为dapp
 //                    if (coreManager.getConfig().newUi) { // 切换新旧两种ui对应不同的发现页面，
 //                        fragment = new SquareFragment();
 //                    } else {
 //                        fragment = new DiscoverFragment();
 //                    }
-                    fragment = new FindFragment();
+//                    fragment = new FindFragment();
+                    fragment = new DappsFragment();
                     break;
                 case R.id.rb_tab_4:
                     fragment = new MeFragment();
@@ -918,27 +934,28 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
 
         });
     }
-   private void updateRegisterRationId(){
-       HttpUtils.post()
-               .url(CoreManager.requireConfig(FLYApplication.getInstance()).configJg)
-               .params("regId", FLYApplication.registrationID)
-               .params("access_token", CoreManager.requireSelfStatus(this).accessToken)
-               // devicesId后端没有用上，但是沿用旧接口的参数列表带上这个，实际没用，
-               .params("deviceId", "4")
-               .build()
-               .execute(new BaseCallback<Void>(Void.class) {
-                   @Override
-                   public void onResponse(ObjectResult<Void> result) {
 
-                   }
+    private void updateRegisterRationId() {
+        HttpUtils.post()
+                .url(CoreManager.requireConfig(FLYApplication.getInstance()).configJg)
+                .params("regId", FLYApplication.registrationID)
+                .params("access_token", CoreManager.requireSelfStatus(this).accessToken)
+                // devicesId后端没有用上，但是沿用旧接口的参数列表带上这个，实际没用，
+                .params("deviceId", "4")
+                .build()
+                .execute(new BaseCallback<Void>(Void.class) {
+                    @Override
+                    public void onResponse(ObjectResult<Void> result) {
 
-                   @Override
-                   public void onError(Call call, Exception e) {
-                       FLYReporter.post("上传JPUSH推送Id失败，", e);
-                   }
+                    }
 
-               });
-   }
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        FLYReporter.post("上传JPUSH推送Id失败，", e);
+                    }
+
+                });
+    }
 
     private boolean googleAvailable() {
         boolean isGoogleAvailability = true;
@@ -1032,13 +1049,12 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         numCircle = MyZanDao.getInstance().getZanSize(coreManager.getSelf().getUserId());
         updateNumData();
         if (isCreate) {
-//            mRbTab1.toggle();
-            mWalletTab.toggle();
+            mRbTab1.toggle();
+//            mWalletTab.toggle();
         }
     }
 
     public void loginOut() {
-        Log.d(TAG, "loginOut() called");
         coreManager.logout();
         removeNeedUserFragment();
         cancelUserCheckIfExist();
@@ -1841,6 +1857,7 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         androidDownloadManager.download();
 
     }
+
     private void getConfig() {
         String mConfigApi = FLYAppConfig.readConfigUrl(mContext);
 
@@ -1922,6 +1939,61 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
                     public void onError(Call call, Exception e) {
                     }
                 });
-
     }
+
+//    private void checkUpdate() {
+//        Map<String, String> params = new HashMap<>();
+//        params.put("type", "android");
+//        HttpUtils.post().url(Apis.USER_ASSET)
+//                .params(params)
+//                .build()
+//                .execute(new BaseCallback<ApkUpdateBean>(ApkUpdateBean.class) {
+//
+//                    @Override
+//                    public void onResponse(ObjectResult<ApkUpdateBean> result) {
+//                        if (result == null) {
+//                            return;
+//                        }
+//                        if (result.getResultCode() != 1) {
+//                            ToastUtil.showToast(FLYMainActivity.this, result.getMsg());
+//                            return;
+//                        }
+//
+//                        ApkUpdateBean updateVersionBean = result.getData();
+//                        if (null == updateVersionBean) {
+//                            return;
+//                        }
+//                        String versionNum = updateVersionBean.getVersionNo();
+//                        if (TextUtils.isEmpty(versionNum)) {
+//                            return;
+//                        }
+//
+//                        try {
+////                            if (versionNum.equals(ModelUtils.getAppVersionName()) ||
+////                                    Integer.valueOf(versionNum.replace(".", "")) <
+////                                            Integer.valueOf(ModelUtils.getAppVersionName().replace(".", ""))) {
+////                                return;
+////                            }
+//                            String isForceUpdate = updateVersionBean.getIsUpdates();
+//                            //S:强更   F
+//                            if ("S".equalsIgnoreCase(isForceUpdate)) {
+//                                UpdateManger.checkUpdate(
+//                                        FLYMainActivity.this,
+//                                        updateVersionBean.getDownloadAddress(),
+//                                        updateVersionBean.getVersionNo(),
+//                                        updateVersionBean.getContent());
+//                            }
+//                        } catch (Exception e) {
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Call call, Exception e) {
+//
+//                    }
+//                });
+//    }
+
 }

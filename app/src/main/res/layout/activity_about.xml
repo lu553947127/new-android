@@ -32,7 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="100dp"
                 android:contentDescription="@string/app_name"
-                android:src="@mipmap/icon" />
+                android:src="@mipmap/ic_aa_logo" />
 
             <TextView
                 android:id="@+id/version_tv"

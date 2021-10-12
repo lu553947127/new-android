@@ -90,10 +90,12 @@ public class AvatarHelper {
         Integer ret = null;
         switch (userId) {
             case Friend.ID_SYSTEM_MESSAGE:
-                ret = R.mipmap.icon;
+//                ret = R.mipmap.icon;
+                ret = R.mipmap.ic_aa_logo;
                 break;
             case Friend.ID_SYSTEM_NOTIFICATION:
-                ret = R.mipmap.iv_customer;
+                ret = R.mipmap.ic_noticy;
+//                ret = R.mipmap.iv_customer;
                 break;
             case Friend.ID_NEW_FRIEND_MESSAGE:
                 ret = R.drawable.im_new_friends;
@@ -165,7 +167,8 @@ public class AvatarHelper {
 
     private boolean handlerSpecialAvatar(String userId, ImageView iv) {
         if (userId.equals(Friend.ID_SYSTEM_MESSAGE)) {
-            iv.setImageResource(R.mipmap.icon);
+//            iv.setImageResource(R.mipmap.icon);
+            iv.setImageResource(R.mipmap.ic_aa_logo);
             return true;
         } else if (userId.equals(Friend.ID_NEW_FRIEND_MESSAGE)) {
             iv.setImageResource(R.drawable.im_new_friends);
@@ -189,7 +192,8 @@ public class AvatarHelper {
             iv.setImageResource(R.mipmap.my_windows_icon);
             return true;
         }else if (userId.equals(Friend.ID_SYSTEM_NOTIFICATION)) {
-            iv.setImageResource(R.mipmap.iv_customer);
+//            iv.setImageResource(R.mipmap.iv_customer);
+            iv.setImageResource(R.mipmap.ic_noticy);
             return true;
         }
         return false;

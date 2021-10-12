@@ -148,7 +148,7 @@ public class MeizuPushMsgReceiver extends MzPushMessageReceiver {
 
     @Override
     public void onUpdateNotificationBuilder(PushNotificationBuilder pushNotificationBuilder) {
-        pushNotificationBuilder.setmStatusbarIcon(R.mipmap.icon);
+        pushNotificationBuilder.setmStatusbarIcon(R.mipmap.ic_aa_logo);
         Log.e(TAG, "current clickpacakge " + pushNotificationBuilder.getClickPackageName());
     }
 

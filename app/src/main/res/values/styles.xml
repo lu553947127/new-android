@@ -195,6 +195,12 @@
     <style name="IMTble_MarginTop5" parent="IMTble_No_Line">
         <item name="android:layout_marginTop">5dp</item>
     </style>
+    <style name="IMTble_MarginTop10" parent="IMTble_No_Line">
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="IMTble_MarginTop0" parent="IMTble_No_Line">
+        <item name="android:layout_marginTop">1dp</item>
+    </style>
     <style name="IMTbleLine_No_bg" parent="IMTbleLine">
         <item name="android:background">@null</item>
     </style>
@@ -714,6 +720,15 @@
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+
+    <style name="MeStyle">
+        <item name="android:background">@drawable/shape_bg_me</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">53dp</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
     </style>

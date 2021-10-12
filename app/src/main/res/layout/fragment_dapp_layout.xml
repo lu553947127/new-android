@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/refresh_layout"
+    android:layout_height="match_parent">
+
+    <com.ktw.fly.view.PullRefreshHeader
+        app:layout_constraintTop_toBottomOf="@id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F7F7F7">
+
+            <com.ktw.fly.view.MergerStatus
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F7F7F7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp50"
+                    android:gravity="center"
+                    android:text="DApps"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/sp_18_text_size"
+                    android:textStyle="bold" />
+
+            </com.ktw.fly.view.MergerStatus>
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="0dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"
+                android:background="@drawable/bg_view_white_8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/search_icon"
+                android:tint="@color/action_bar_tittle_color"
+                app:layout_constraintBottom_toBottomOf="@id/view_1"
+                app:layout_constraintStart_toStartOf="@id/view_1"
+                app:layout_constraintTop_toTopOf="@id/view_1" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:background="@null"
+                android:hint="@string/search_txt"
+                android:inputType="text"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/sp_16_text_size"
+                app:layout_constraintBottom_toBottomOf="@id/view_1"
+                app:layout_constraintEnd_toEndOf="@id/view_1"
+                app:layout_constraintStart_toEndOf="@id/iv_search"
+                app:layout_constraintTop_toTopOf="@id/view_1" />
+
+            <ImageView
+                android:id="@+id/iv_banner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_banner"
+                app:layout_constraintEnd_toEndOf="@id/view_1"
+                app:layout_constraintStart_toStartOf="@id/view_1"
+                app:layout_constraintTop_toBottomOf="@id/view_1" />
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dp25"
+                android:text="@string/dapps"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/sp_15_text_size"
+                app:layout_constraintStart_toStartOf="@id/iv_banner"
+                app:layout_constraintTop_toBottomOf="@id/iv_banner" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_dapp_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_1" />
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp25"
+                android:text="@string/dapps_hot"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_15_text_size"
+                app:layout_constraintStart_toStartOf="@id/iv_banner"
+                app:layout_constraintTop_toBottomOf="@id/my_dapp_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hot_dapps_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/iv_banner_1"
+                android:layout_width="0dp"
+                android:layout_height="78dp"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_banner_1"
+                app:layout_constraintEnd_toStartOf="@id/guide_line"
+                app:layout_constraintStart_toStartOf="@id/view_1"
+                app:layout_constraintTop_toBottomOf="@id/hot_dapps_rv" />
+
+            <ImageView
+                android:id="@+id/iv_banner_2"
+                android:layout_width="0dp"
+                android:layout_height="78dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/dp15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_banner_2"
+                app:layout_constraintEnd_toEndOf="@id/view_1"
+                app:layout_constraintStart_toEndOf="@id/guide_line"
+                app:layout_constraintTop_toBottomOf="@id/hot_dapps_rv" />
+
+            <TextView
+                android:id="@+id/tv_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/new_string"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/sp_14_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/iv_banner_1"
+                app:layout_constraintTop_toBottomOf="@id/iv_banner_1" />
+
+            <TextView
+                android:id="@+id/tv_aa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AA"
+                android:textStyle="bold"
+                android:textColor="@color/text_black"
+                app:layout_constraintStart_toEndOf="@id/tv_new"
+                android:layout_marginStart="@dimen/dp25"
+                app:layout_constraintTop_toTopOf="@id/tv_new"
+                app:layout_constraintBottom_toBottomOf="@id/tv_new"
+                android:textSize="@dimen/sp_14_text_size"  />
+
+            <TextView
+                android:id="@+id/tv_eth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ETH"
+                android:textStyle="bold"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/sp_14_text_size"
+                app:layout_constraintStart_toEndOf="@id/tv_aa"
+                android:layout_marginStart="@dimen/dp25"
+                app:layout_constraintTop_toTopOf="@id/tv_new"
+                app:layout_constraintBottom_toBottomOf="@id/tv_new" />
+
+            <View
+                android:layout_width="16dp"
+                android:background="@color/text_black"
+                android:id="@+id/view_new"
+                app:layout_constraintStart_toStartOf="@id/tv_new"
+                app:layout_constraintEnd_toEndOf="@id/tv_new"
+                app:layout_constraintTop_toBottomOf="@id/tv_new"
+                android:layout_marginTop="3dp"
+                android:layout_height="2dp" />
+
+            <View
+                android:layout_width="16dp"
+                android:background="@color/text_black"
+                android:id="@+id/view_aa"
+                app:layout_constraintStart_toStartOf="@id/tv_aa"
+                android:layout_marginTop="3dp"
+                app:layout_constraintEnd_toEndOf="@id/tv_aa"
+                app:layout_constraintTop_toBottomOf="@id/tv_aa"
+                android:layout_height="2dp" />
+
+            <View
+                android:layout_width="16dp"
+                android:background="@color/text_black"
+                android:id="@+id/view_eth"
+                app:layout_constraintStart_toStartOf="@id/tv_eth"
+                android:layout_marginTop="3dp"
+                app:layout_constraintEnd_toEndOf="@id/tv_eth"
+                app:layout_constraintTop_toBottomOf="@id/tv_eth"
+                android:layout_height="2dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/new_rv"
+                app:layout_constraintTop_toBottomOf="@id/view_new"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+

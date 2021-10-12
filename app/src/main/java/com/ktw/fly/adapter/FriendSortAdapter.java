@@ -95,9 +95,9 @@ public class FriendSortAdapter extends BaseAdapter implements SectionIndexer {
             avatar_img.setVisibility(View.VISIBLE);
             avatar_imgS.setVisibility(View.GONE);
             if (friend.getUserId().equals(Friend.ID_SYSTEM_MESSAGE)) {
-                avatar_img.setImageResource(R.mipmap.icon);
+                avatar_img.setImageResource(R.mipmap.ic_aa_logo);
             } else if (friend.getUserId().equals(Friend.ID_SYSTEM_NOTIFICATION)) {
-                avatar_img.setImageResource(R.mipmap.iv_customer);
+                avatar_img.setImageResource(R.mipmap.ic_noticy);
             } else if (friend.getUserId().equals(Friend.ID_NEW_FRIEND_MESSAGE)) {
                 avatar_img.setImageResource(R.drawable.im_new_friends);
             } else if (friend.getIsDevice() == 1) {

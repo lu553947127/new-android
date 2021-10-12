@@ -3,7 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_splash"
     tools:context=".ui.notification.NotificationProxyActivity">
+
+<!--    <ImageView-->
+<!--        android:layout_width="138dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:id="@+id/iv_1"-->
+<!--        android:scaleType="centerInside"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_marginTop="130dp"-->
+<!--        android:src="@mipmap/ic_splash_logo"-->
+<!--        android:layout_height="138dp" />-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="64dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:src="@mipmap/ic_splash_bottom"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginBottom="@dimen/dp50"-->
+<!--        android:id="@+id/iv_2"-->
+<!--        android:layout_height="wrap_content" />-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="150dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/iv_2"-->
+<!--        android:layout_marginBottom="85dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:src="@mipmap/ic_splash_center"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

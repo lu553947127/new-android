@@ -13,12 +13,6 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rb_tab_wallet"
-            style="@style/SkMainTabStyle"
-            android:drawableTop="@drawable/tab_wallet_normal_bg"
-            android:text="@string/wallet" />
-
-        <RadioButton
             android:id="@+id/rb_tab_1"
             style="@style/SkMainTabStyle"
             android:drawableTop="@drawable/tab_chat_normal_bg"
@@ -44,11 +38,25 @@
             android:text="导航2"
             android:visibility="gone" />
 
+<!--        <RadioButton-->
+<!--            android:id="@+id/rb_tab_3"-->
+<!--            style="@style/SkMainTabStyle"-->
+<!--            android:visibility="gone"-->
+<!--            android:drawableTop="@drawable/tab_find_normal_bg"-->
+<!--            android:text="发现" />-->
+
         <RadioButton
             android:id="@+id/rb_tab_3"
             style="@style/SkMainTabStyle"
-            android:drawableTop="@drawable/tab_find_normal_bg"
-            android:text="发现" />
+            android:drawableTop="@drawable/tab_dapp_normal_bg"
+            android:text="DApps" />
+
+
+        <RadioButton
+            android:id="@+id/rb_tab_wallet"
+            style="@style/SkMainTabStyle"
+            android:drawableTop="@drawable/tab_wallet_normal_bg"
+            android:text="@string/wallet" />
 
         <RadioButton
             android:id="@+id/rb_tab_4"

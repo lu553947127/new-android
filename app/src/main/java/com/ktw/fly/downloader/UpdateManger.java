@@ -134,7 +134,7 @@ public class UpdateManger {
         this.mUpdateListener = updateListener;
     }
 
-    public static void checkUpdate(Activity ctx, String updateUrl, String version) {
+    public static void checkUpdate(Activity ctx, String updateUrl, String version, String remark) {
         if (TextUtils.isEmpty(version) || TextUtils.isEmpty(updateUrl)) {
             // 服务器没有配置新版本，
             return;
@@ -144,7 +144,7 @@ public class UpdateManger {
             UpdateManger manger = new UpdateManger(ctx, () -> {
                 LogUtils.log("取消了更新，");
             });
-            manger.checkUpdateInfo(version, updateUrl);
+            manger.checkUpdateInfo(version, updateUrl,remark);
         } catch (Throwable t) {
             // 无论如何不能因为这个崩溃，
             FLYReporter.post("检查更新失败，", t);
@@ -152,7 +152,7 @@ public class UpdateManger {
     }
 
     // 显示更新程序对话框，供主程序调用
-    public void checkUpdateInfo(String serviceVersionCode, String apkUrls) {//添加检查服务器更新的代码
+    public void checkUpdateInfo(String serviceVersionCode, String apkUrls,String remark ) {//添加检查服务器更新的代码
         PackageManager mPackageManager = mContext.getPackageManager();
         PackageInfo packageInfo = null;
         try {
@@ -169,7 +169,7 @@ public class UpdateManger {
             callNoUpdate();
         } else {
             apkUrl = apkUrls;
-            showNoticeDialog(getStringById(R.string.application_version_update_down), getStringById(R.string.application_update));
+            showNoticeDialog(remark, getStringById(R.string.new_version));
         }
     }
 

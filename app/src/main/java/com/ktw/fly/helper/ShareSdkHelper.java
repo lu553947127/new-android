@@ -59,7 +59,7 @@ public class ShareSdkHelper {
         final WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = title;
         msg.description = text;
-        Bitmap thumb = BitmapFactory.decodeResource(ctx.getResources(), R.mipmap.icon);
+        Bitmap thumb = BitmapFactory.decodeResource(ctx.getResources(), R.mipmap.ic_aa_logo);
         if (thumb != null) {
             Bitmap logo = Bitmap.createScaledBitmap(thumb, 120, 120, true);
             thumb.recycle();
