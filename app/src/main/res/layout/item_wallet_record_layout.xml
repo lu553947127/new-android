@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
         android:src="@mipmap/ic_more"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginBottom="5dp"
+        android:text="2222"
         android:textColor="@color/text_black"
         app:layout_constraintBottom_toTopOf="@id/guide_line"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:text="2222"
         android:textColor="@color/text_color"
         app:layout_constraintStart_toStartOf="@id/item_type_tv"
         app:layout_constraintTop_toBottomOf="@id/guide_line" />
@@ -49,7 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
-        android:textColor="@color/home_blue"
+        android:textColor="@color/text_black"
+        android:text="2222"
         app:layout_constraintBottom_toBottomOf="@id/item_type_tv"
         app:layout_constraintEnd_toStartOf="@id/item_more_iv"
         app:layout_constraintTop_toTopOf="@id/item_type_tv" />
@@ -59,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
+        android:text="2222"
         android:textColor="@color/wallet_type_fail"
         app:layout_constraintBottom_toBottomOf="@id/item_time_tv"
         app:layout_constraintEnd_toStartOf="@id/item_more_iv"

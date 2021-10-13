@@ -2224,7 +2224,7 @@
 
 
     <string name="wallet">Wallet</string>
-    <string name="asdt">My total assets(ASDT)</string>
+    <string name="asdt">ASDT\nMy total assets</string>
     <string name="select_currency">Please select currency</string>
     <string name="z_tv_copy_success">Copy successfully</string>
     <string name="tv_save">Picture has been saved to album</string>
@@ -2273,12 +2273,16 @@
     <string name="coinding">Depositing</string>
     <string name="withdrawding">Withdrawal</string>
     <string name="over">Completed</string>
-    <string name="verify_code_resend">重新发送</string>
+    <string name="verify_code_resend">Resend</string>
     <string name="search_txt">Search</string>
     <string name="dapps">My DApps</string>
     <string name="dapps_hot">Hot Dapps</string>
-    <string name="new_string">新品</string>
+    <string name="new_string">New</string>
     <string name="new_version">New version found</string>
-    <string name="my_code">我的二维码</string>
-    <string name="read_bg">红包</string>
+    <string name="my_code">My QR code</string>
+    <string name="read_bg">Red envelope</string>
+    <string name="string_1">Asset details</string>
+    <string name="string_2">Transaction details</string>
+    <string name="string_3">Friends</string>
+    <string name="string_4">Account and security</string>
 </resources>

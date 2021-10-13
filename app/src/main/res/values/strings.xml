@@ -2312,7 +2312,7 @@
     <string name="feedback_img_num">%1$d张/%2$d</string>
 
     <string name="wallet">钱包</string>
-    <string name="asdt">我的总资产(ASDT)</string>
+    <string name="asdt">ASDT\n我的总资产</string>
     <string name="select_currency">请选择币种</string>
     <string name="z_tv_copy_success">复制成功</string>
     <string name="tv_save">图片已保存至相册</string>
@@ -2369,4 +2369,8 @@
     <string name="new_version">发现新版本</string>
     <string name="my_code">我的二维码</string>
     <string name="read_bg">红包</string>
+    <string name="string_1">资产详情</string>
+    <string name="string_2">交易明细</string>
+    <string name="string_3">朋友圈</string>
+    <string name="string_4">账号与安全</string>
 </resources>

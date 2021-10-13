@@ -1,12 +1,9 @@
 package com.ktw.fly.wallet;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,13 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ktw.fly.R;
-import com.ktw.fly.bean.circle.PublicMessage;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.base.EasyFragment;
 import com.ktw.fly.util.SkinUtils;
 import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.view.MergerStatus;
-import com.ktw.fly.wallet.CoinActivity;
 import com.ktw.fly.wallet.adapter.WalletAdapter;
 import com.ktw.fly.wallet.bean.CurrencyBean;
 import com.ktw.fly.wallet.bean.WalletListBean;
@@ -30,10 +25,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
 import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
-import com.xuan.xuanhttplibrary.okhttp.callback.ListCallback;
-import com.xuan.xuanhttplibrary.okhttp.result.ArrayResult;
 import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
-import com.xuan.xuanhttplibrary.okhttp.result.Result;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +38,7 @@ import okhttp3.Call;
 
 public class WalletFragment extends EasyFragment {
 
-    private TextView mCoinTv, mWithDawTv;
+    private TextView mCoinTv, mWithdrawTv;
     private MergerStatus mToolBar;
     private View mView;
     private SmartRefreshLayout mRefreshLayout;
@@ -72,7 +64,7 @@ public class WalletFragment extends EasyFragment {
     private void initView() {
 
         mCoinTv = findViewById(R.id.tv_coin);
-        mWithDawTv = findViewById(R.id.tv_withdaw);
+        mWithdrawTv = findViewById(R.id.tv_withdaw);
         mToolBar = findViewById(R.id.tool_bar);
         mView = findViewById(R.id.view_1);
         mAllPriceTv = findViewById(R.id.tv_all_price);
@@ -89,16 +81,17 @@ public class WalletFragment extends EasyFragment {
         // 如果是getDrawable拿到的Drawable不能直接调setCompoundDrawables，没有宽高，
         mCoinTv.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
-        Drawable drawable1 = mWithDawTv.getCompoundDrawables()[0];
+        findViewById(R.id.view_1).setBackgroundTintList(tabColor);
+
+        Drawable drawable1 = mWithdrawTv.getCompoundDrawables()[0];
         drawable1 = DrawableCompat.wrap(drawable1);
         DrawableCompat.setTintList(drawable1, tabColor);
         // 如果是getDrawable拿到的Drawable不能直接调setCompoundDrawables，没有宽高，
-        mWithDawTv.setCompoundDrawablesWithIntrinsicBounds(drawable1, null, null, null);
+        mWithdrawTv.setCompoundDrawablesWithIntrinsicBounds(drawable1, null, null, null);
 
-        mView.setBackgroundTintList(tabColor);
-        mToolBar.setBackgroundTintList(tabColor);
-        mWithDawTv.setBackgroundTintList(tabColor);
+        mWithdrawTv.setBackgroundTintList(tabColor);
         mCoinTv.setBackgroundTintList(tabColor);
+        mView.setBackgroundTintList(tabColor);
 
         initRv();
 
@@ -108,7 +101,7 @@ public class WalletFragment extends EasyFragment {
             }
             CoinActivity.actionStart(getActivity(),mWalletAdapter.getData());
         });
-        mWithDawTv.setOnClickListener(v -> {
+        mWithdrawTv.setOnClickListener(v -> {
             if (mWalletAdapter.getData().size()==0) {
                 return;
             }

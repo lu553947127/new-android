@@ -15,6 +15,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.ktw.fly.R;
 import com.ktw.fly.wallet.RecordActivity;
+import com.ktw.fly.wallet.WalletDetailActivity;
 import com.ktw.fly.wallet.bean.CurrencyBean;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +57,7 @@ public class WalletAdapter extends RecyclerView.Adapter {
         viewHolder.mNumberTv.setText(currencyBean.getSumAsstes());
         viewHolder.mPriceTv.setText(currencyBean.getUsdt());
         viewHolder.itemView.setOnClickListener(v -> {
-            RecordActivity.actionStart(v.getContext(), currencyBean.getF01());
+            WalletDetailActivity.actionStart(v.getContext(), currencyBean);
         });
     }
 

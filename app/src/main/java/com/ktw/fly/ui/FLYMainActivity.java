@@ -297,11 +297,11 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
         setSwipeBackEnable(false);
         getConfig();
 
-        //检查版本
-        if (!StringUtil.isBlank(coreManager.getConfig().androidAppUrl) &&
-                !StringUtil.isBlank(coreManager.getConfig().androidVersion)) {
-            checkVersion(coreManager.getConfig().androidAppUrl, coreManager.getConfig().androidVersion);
-        }
+
+//        if (!StringUtil.isBlank(coreManager.getConfig().androidAppUrl) &&
+//                !StringUtil.isBlank(coreManager.getConfig().androidVersion)) {
+//            checkVersion(coreManager.getConfig().androidAppUrl, coreManager.getConfig().androidVersion);
+//        }
 
     }
 
@@ -314,8 +314,9 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
             FLYReporter.unreachable(e);
             return;
         }
-        String mCurrentVersionCode = packageInfo.versionName.replaceAll("\\.", "");
-        if (Integer.parseInt(mCurrentVersionCode) < Integer.parseInt(versionName)) {
+//        String mCurrentVersionCode = packageInfo.versionName.replaceAll("\\.", "");
+        int mCurrentVersionCode = packageInfo.versionCode;
+        if (mCurrentVersionCode < Integer.parseInt(versionName)) {
             //判断是否已经开启通知栏
             SelectionFrame mSF = new SelectionFrame(this);
             mSF.setSomething(null, "发现新的版本，请及时更新！", new SelectionFrame.OnSelectionFrameClickListener() {
@@ -1912,7 +1913,8 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
             configBean = CoreManager.getDefaultConfig(this);
             coreManager.saveConfigBean(configBean);
         }
-
+        //检查版本
+        checkUpdate();
 
     }
 
@@ -1941,59 +1943,57 @@ public class FLYMainActivity extends BaseActivity implements PermissionUtil.OnRe
                 });
     }
 
-//    private void checkUpdate() {
-//        Map<String, String> params = new HashMap<>();
-//        params.put("type", "android");
-//        HttpUtils.post().url(Apis.USER_ASSET)
-//                .params(params)
-//                .build()
-//                .execute(new BaseCallback<ApkUpdateBean>(ApkUpdateBean.class) {
-//
-//                    @Override
-//                    public void onResponse(ObjectResult<ApkUpdateBean> result) {
-//                        if (result == null) {
-//                            return;
-//                        }
-//                        if (result.getResultCode() != 1) {
-//                            ToastUtil.showToast(FLYMainActivity.this, result.getMsg());
-//                            return;
-//                        }
-//
-//                        ApkUpdateBean updateVersionBean = result.getData();
-//                        if (null == updateVersionBean) {
-//                            return;
-//                        }
-//                        String versionNum = updateVersionBean.getVersionNo();
-//                        if (TextUtils.isEmpty(versionNum)) {
-//                            return;
-//                        }
-//
-//                        try {
-////                            if (versionNum.equals(ModelUtils.getAppVersionName()) ||
-////                                    Integer.valueOf(versionNum.replace(".", "")) <
-////                                            Integer.valueOf(ModelUtils.getAppVersionName().replace(".", ""))) {
-////                                return;
-////                            }
-//                            String isForceUpdate = updateVersionBean.getIsUpdates();
-//                            //S:强更   F
-//                            if ("S".equalsIgnoreCase(isForceUpdate)) {
+    private void checkUpdate() {
+        Map<String, String> params = new HashMap<>();
+        params.put("type", "android");
+        HttpUtils.post().url(Apis.DOWNLOAD_URL)
+                .params(params)
+                .build()
+                .execute(new BaseCallback<ApkUpdateBean>(ApkUpdateBean.class) {
+
+                    @Override
+                    public void onResponse(ObjectResult<ApkUpdateBean> result) {
+                        if (result == null) {
+                            return;
+                        }
+                        if (result.getResultCode() != 1) {
+                            ToastUtil.showToast(FLYMainActivity.this, result.getMsg());
+                            return;
+                        }
+
+                        ApkUpdateBean updateVersionBean = result.getData();
+                        if (null == updateVersionBean) {
+                            return;
+                        }
+                        String versionNum = updateVersionBean.getVersionNo();
+                        if (TextUtils.isEmpty(versionNum)) {
+                            return;
+                        }
+
+                        try {
+                            String isForceUpdate = updateVersionBean.getIsUpdates();
+                            //S:强更   F
+                            if ("S".equalsIgnoreCase(isForceUpdate)) {
 //                                UpdateManger.checkUpdate(
 //                                        FLYMainActivity.this,
 //                                        updateVersionBean.getDownloadAddress(),
 //                                        updateVersionBean.getVersionNo(),
 //                                        updateVersionBean.getContent());
-//                            }
-//                        } catch (Exception e) {
-//
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Call call, Exception e) {
-//
-//                    }
-//                });
-//    }
+                                checkVersion(updateVersionBean.getDownloadAddress(), updateVersionBean.getVersionNo());
+                            }
+
+
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+
+                    }
+                });
+    }
 
 }

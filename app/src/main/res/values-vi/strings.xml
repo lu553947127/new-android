@@ -2060,7 +2060,7 @@
     <string name="msg_emot">[表情]</string>
 
     <string name="wallet">ví tiền</string>
-    <string name="asdt">Tổng tài sản của tôi(ASDT)</string>
+    <string name="asdt">ASDT\nTổng tài sản của tôi</string>
     <string name="select_currency">Vui lòng chọn đơn vị tiền tệ</string>
     <string name="z_tv_copy_success">Sao chép thành công</string>
     <string name="tv_save">Ảnh đã được lưu vào album</string>
@@ -2113,8 +2113,12 @@
     <string name="search_txt">Search</string>
     <string name="dapps">My DApps</string>
     <string name="dapps_hot">Hot Dapps</string>
-    <string name="new_string">新品</string>
+    <string name="new_string">New</string>
     <string name="new_version">New version found</string>
-    <string name="my_code">我的二维码</string>
-    <string name="read_bg">红包</string>
+    <string name="my_code">My QR code</string>
+    <string name="read_bg">Red envelope</string>
+    <string name="string_1">Asset details</string>
+    <string name="string_2">Transaction details</string>
+    <string name="string_3">Friends</string>
+    <string name="string_4">Account and security</string>
 </resources>

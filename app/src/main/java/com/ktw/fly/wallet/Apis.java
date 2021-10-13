@@ -12,6 +12,7 @@ public interface Apis {
     String CURRENCY_ADDRESS = BASE_URL + "assets/getformcurrencypath";//充币地址
     String COIN_WITHDRAW = BASE_URL + "assets/gettopupcurrencylog";//充提记录
     String WITHDRAW_OP = BASE_URL + "assets/tocurrency";//提币
+    String DOWNLOAD_URL = BASE_URL + "assets/queryversion";//版本更新
 
     String SEND_CODE = FLYAppConfig.HOST + "user/sendCodeByType";//发送提币验证码
     String VERIFY_CODE = FLYAppConfig.HOST + "user/validationidentity";//校验资金密码，验证码

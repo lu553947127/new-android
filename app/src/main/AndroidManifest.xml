@@ -910,6 +910,7 @@
         <activity android:name=".wallet.CaptureActivity" />
         <activity android:name=".wallet.RecordActivity" />
         <activity android:name=".wallet.RecordDetailActivity" />
+        <activity android:name=".wallet.WalletDetailActivity" />
 
         <service android:name="com.fanjun.keeplive.service.LocalService" />
         <service android:name="com.fanjun.keeplive.service.HideForegroundService" />

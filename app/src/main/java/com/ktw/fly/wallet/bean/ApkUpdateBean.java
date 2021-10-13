@@ -9,9 +9,9 @@ import java.io.Serializable;
 public class ApkUpdateBean implements Serializable{
 
     private String createTime;
-    private String downloadAddress;
-    private String versionNo;
-    private String isUpdates;
+    private String downloadaddress;
+    private String versionno;
+    private String isupdates;
     private String iOS;
     private String type;
     private String content;
@@ -25,27 +25,27 @@ public class ApkUpdateBean implements Serializable{
     }
 
     public String getDownloadAddress() {
-        return downloadAddress;
+        return downloadaddress;
     }
 
     public void setDownloadAddress(String downloadAddress) {
-        this.downloadAddress = downloadAddress;
+        this.downloadaddress = downloadAddress;
     }
 
     public String getVersionNo() {
-        return versionNo;
+        return versionno;
     }
 
     public void setVersionNo(String versionNo) {
-        this.versionNo = versionNo;
+        this.versionno = versionNo;
     }
 
     public String getIsUpdates() {
-        return isUpdates;
+        return isupdates;
     }
 
     public void setIsUpdates(String isUpdates) {
-        this.isUpdates = isUpdates;
+        this.isupdates = isUpdates;
     }
 
     public String getiOS() {

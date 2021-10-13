@@ -157,7 +157,7 @@
                     <TextView
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
-                        android:text="朋友圈" />
+                        android:text="@string/string_3" />
 
                 </RelativeLayout>
 
@@ -185,7 +185,7 @@
                     <TextView
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
-                        android:text="扫一扫" />
+                        android:text="@string/scanning" />
 
                 </RelativeLayout>
 
@@ -240,7 +240,7 @@
 
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
-                        android:text="标签" />
+                        android:text="@string/tag" />
 
                 </RelativeLayout>
 
@@ -268,7 +268,7 @@
 
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
-                        android:text="公众号" />
+                        android:text="@string/service_number" />
 
                 </RelativeLayout>
 
@@ -543,7 +543,7 @@
                         android:id="@+id/tv_safe_settings"
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
-                        android:text="账号与安全" />
+                        android:text="@string/string_4" />
 
                     <ImageView
                         style="@style/IMTbleLine_ArrowImg.Me"
