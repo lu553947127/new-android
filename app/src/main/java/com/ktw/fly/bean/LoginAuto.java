@@ -88,4 +88,17 @@ public class LoginAuto {
 
     }
 
+    @Override
+    public String toString() {
+        return "LoginAuto{" +
+                "accessToken='" + accessToken + '\'' +
+                ", httpKey='" + httpKey + '\'' +
+                ", messageKey='" + messageKey + '\'' +
+                ", payKey='" + payKey + '\'' +
+                ", payPassword=" + payPassword +
+                ", role=" + role +
+                ", myInviteCode='" + myInviteCode + '\'' +
+                ", settings=" + settings +
+                '}';
+    }
 }

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dw_yuanjiao_whit_5"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dp15"
+    android:paddingVertical="@dimen/dp10">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_packet_type"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_packet_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="拼手气红包"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_property_type"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_property_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="AAT"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_number_of_issued_virtual_coins"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_number_of_issued_virtual_coins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="100.0000 AAT"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_property_send_time"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_property_send_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="2021-09-18 20:30:11"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_get_the_number"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_get_the_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="3个"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_get_the_amount"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_get_the_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="800.0000 AAT"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_uncollected_number"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_uncollected_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="1个"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_unclaimed_amount"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_unclaimed_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="200.0000 AAT"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_expan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_get_the_details" />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_expan" />
+    </LinearLayout>
+
+</LinearLayout>

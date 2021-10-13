@@ -98,23 +98,23 @@
 
     <application
 
-        android:testOnly="false"
         android:name="com.ktw.fly.FLYApplication"
         android:allowBackup="true"
         android:fitsSystemWindows="true"
         android:icon="@mipmap/ic_app_logo"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@null"
+        android:testOnly="false"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:name, android:icon, android:roundIcon">
-        <activity android:name=".ui.me.AccountFreezeActivity"/>
-        <activity android:name=".ui.me.FreezeMessageActivity"/>
-        <activity android:name="com.ktw.fly.ui.me.DiscoverActivity"/>
-        <activity android:name=".ui.me.ComplaintSuggestionsListActivity"/>
-        <activity android:name=".ui.me.ComplaintAndSuggestionsSubmitActivity"/>
+        <activity android:name=".ui.me.AccountFreezeActivity" />
+        <activity android:name=".ui.me.FreezeMessageActivity" />
+        <activity android:name="com.ktw.fly.ui.me.DiscoverActivity" />
+        <activity android:name=".ui.me.ComplaintSuggestionsListActivity" />
+        <activity android:name=".ui.me.ComplaintAndSuggestionsSubmitActivity" />
         <activity
             android:name="com.ktw.fly.pay.new_ui.PaymentOrReceiptActivity"
             android:label="@string/title_activity_payment_new_ui"
@@ -138,7 +138,7 @@
             android:launchMode="singleTop" />
         <activity android:name="com.ktw.fly.ui.login.AuthLoginActivity" />
         <activity android:name="com.ktw.fly.ui.login.H5LoginActivity" />
-        <activity android:name=".ui.me.AccountOperateActivity"/>
+        <activity android:name=".ui.me.AccountOperateActivity" />
         <activity
             android:name="com.ktw.fly.ui.login.H5LoginProxyActivity"
             android:theme="@style/SplashTheme">
@@ -285,40 +285,40 @@
             android:windowSoftInputMode="stateVisible" />
         <activity android:name="com.ktw.fly.ui.contacts.TalkHistoryActivity" />
         <activity android:name="com.ktw.fly.ui.groupchat.SelectContactsActivity" /> <!-- 直播 -->
-<!--        <activity android:name=".ui.live.CreateLiveActivity" />-->
-<!--        <activity android:name=".ui.live.LiveActivity" /> &lt;!&ndash; 抖音 &ndash;&gt;-->
-<!--        <activity-->
-<!--            android:name=".ui.trill.TrillActivity"-->
-<!--            android:theme="@style/AppTheme_Sliding" />-->
-<!--        <activity-->
-<!--            android:name=".ui.trill.TriListActivity"-->
-<!--            android:theme="@style/AppTheme_Sliding" />-->
-<!--        <activity-->
-<!--            android:name=".ui.trill.TrillMoreActivity"-->
-<!--            android:theme="@style/RecxTheme" />-->
-<!--        <activity-->
-<!--            android:name=".ui.xrce.RecordxActivity"-->
-<!--            android:theme="@style/RecxTheme" />-->
-<!--        <activity-->
-<!--            android:name=".ui.xrce.PreviewxActivity"-->
-<!--            android:theme="@style/RecxTheme" /> &lt;!&ndash; 发布短视频 &ndash;&gt;-->
-<!--        <activity-->
-<!--            android:name=".ui.trill.ReleasexActivity"-->
-<!--            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" /> &lt;!&ndash; 短视频选择标签 &ndash;&gt;-->
-<!--        <activity-->
-<!--            android:name=".ui.trill.TagPickerActivity"-->
-<!--            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />-->
-<!--        <activity-->
-<!--            android:name=".ui.live.LivePlayingActivity"-->
-<!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
-<!--            android:windowSoftInputMode="adjustPan" />-->
-<!--        <activity-->
-<!--            android:name=".ui.live.PushFlowActivity"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
-<!--            android:windowSoftInputMode="adjustPan" />-->
+        <!--        <activity android:name=".ui.live.CreateLiveActivity" />-->
+        <!--        <activity android:name=".ui.live.LiveActivity" /> &lt;!&ndash; 抖音 &ndash;&gt;-->
+        <!--        <activity-->
+        <!--            android:name=".ui.trill.TrillActivity"-->
+        <!--            android:theme="@style/AppTheme_Sliding" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.trill.TriListActivity"-->
+        <!--            android:theme="@style/AppTheme_Sliding" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.trill.TrillMoreActivity"-->
+        <!--            android:theme="@style/RecxTheme" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.xrce.RecordxActivity"-->
+        <!--            android:theme="@style/RecxTheme" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.xrce.PreviewxActivity"-->
+        <!--            android:theme="@style/RecxTheme" /> &lt;!&ndash; 发布短视频 &ndash;&gt;-->
+        <!--        <activity-->
+        <!--            android:name=".ui.trill.ReleasexActivity"-->
+        <!--            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" /> &lt;!&ndash; 短视频选择标签 &ndash;&gt;-->
+        <!--        <activity-->
+        <!--            android:name=".ui.trill.TagPickerActivity"-->
+        <!--            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.live.LivePlayingActivity"-->
+        <!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
+        <!--            android:windowSoftInputMode="adjustPan" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.live.PushFlowActivity"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
+        <!--            android:windowSoftInputMode="adjustPan" />-->
         <activity android:name="com.ktw.fly.ui.map.MapActivity" />
         <activity
             android:name="com.ktw.fly.ui.map.MapPickerActivity"
@@ -326,6 +326,7 @@
         <activity android:name="com.ktw.fly.ui.me.redpacket.MucSendRedPacketActivity" />
         <activity android:name="com.ktw.fly.ui.me.redpacket.MyConsumeRecord" />
         <activity android:name="com.ktw.fly.ui.me.redpacket.QuXianActivity" />
+        <activity android:name="com.ktw.fly.ui.me.redpacket.RedDetailsAuldActivity" />
         <activity android:name="com.ktw.fly.ui.me.redpacket.RedDetailsActivity" />
         <activity android:name="com.ktw.fly.ui.me.redpacket.RedListActivity" />
         <activity android:name="com.ktw.fly.ui.me.redpacket.SendRedPacketActivity" />
@@ -514,13 +515,13 @@
             android:name="com.ktw.fly.video.VideoRecorderActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/RecxTheme" />
-        <activity android:name="com.ktw.fly.ui.other.AppQrCodeActivity"/>
+        <activity android:name="com.ktw.fly.ui.other.AppQrCodeActivity" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.me.SecureSettingActivity"/>
-        <activity android:name=".ui.me.AccountAndSafeActivity"/>
+        <activity android:name=".ui.me.SecureSettingActivity" />
+        <activity android:name=".ui.me.AccountAndSafeActivity" />
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
@@ -596,6 +597,7 @@
                 <category android:name="com.jixin.im" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.ktw.fly.xmpp.CoreService"
             android:enabled="true"
@@ -894,7 +896,6 @@
         <activity android:name="com.ktw.fly.ui.me.emot.AddEmotPackageActivity" />
         <activity
             android:name="com.ktw.fly.ui.me.emot.SingleEmotPreviewActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Sliding" />
         <activity android:name="com.ktw.fly.ui.me.emot.EditSingleEmotPackageActivity" />
         <activity android:name="com.ktw.fly.ui.me.OfferApplyActivity" />
@@ -905,6 +906,11 @@
         <activity android:name=".ui.me.question.ViewQuestionContentActivity" />
         <activity android:name=".ui.me.question.QuestionFeedbackActivity" />
         <activity android:name=".ui.me.ThirdServiceActivity" />
+        <activity android:name=".ui.me.redpacket.RedPacketListActivity" />
+        <activity android:name=".ui.me.redpacket.PropertyListActivity" />
+        <activity android:name=".ui.account.AccountPasswordActivity" />
+        <activity android:name=".ui.me.capital.CapitalPasswordActivity" />
+
         <activity android:name=".wallet.CoinActivity" />
         <activity android:name=".wallet.WithdrawActivity" />
         <activity android:name=".wallet.CaptureActivity" />

@@ -60,6 +60,7 @@ interface OnItemClickListener<T> {
 
 /**
  * Created by Administrator on 2016/9/8.
+ * 聊天底部工具控件布局
  */
 public class ChatToolsView extends RelativeLayout {
     private Context mContext;
@@ -234,19 +235,23 @@ public class ChatToolsView extends RelativeLayout {
             boolean isGroup,
             boolean disableLocationServer
     ) {
+
+        //TODO  后续需要后台修改红包显示的配置信息
+
         // 关闭红包功能，移除红包
-        if (CoreManager.requireConfig(FLYApplication.getContext()).displayRedPacket) {
-            gridPagerAdapter.removeAll(
-                    R.drawable.im_tool_redpacket_button_bg
-            );
-        }
+//        if (CoreManager.requireConfig(FLYApplication.getContext()).displayRedPacket) {
+//            gridPagerAdapter.removeAll(
+//                    R.drawable.im_tool_redpacket_button_bg
+//            );
+//        }
         // 关闭支付功能，移除红包、转账
         if (!CoreManager.requireConfig(FLYApplication.getContext()).enablePayModule) {
             gridPagerAdapter.removeAll(
-                    R.drawable.im_tool_redpacket_button_bg,
+//                    R.drawable.im_tool_redpacket_button_bg,
                     R.drawable.im_tool_transfer_button_bg
             );
         }
+
         this.roomId = roomId;
         this.roomJid = roomJid;
         this.isGroup = isGroup;

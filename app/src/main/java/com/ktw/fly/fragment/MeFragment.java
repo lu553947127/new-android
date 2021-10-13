@@ -43,6 +43,8 @@ import com.ktw.fly.ui.me.NearPersonActivity;
 import com.ktw.fly.ui.me.OfferApplyActivity;
 import com.ktw.fly.ui.me.SettingActivity;
 import com.ktw.fly.ui.me.ThirdServiceActivity;
+import com.ktw.fly.ui.me.capital.CapitalPasswordActivity;
+import com.ktw.fly.ui.me.redpacket.RedPacketListActivity;
 import com.ktw.fly.ui.me.redpacket.WxPayBlance;
 import com.ktw.fly.ui.message.ChatActivity;
 import com.ktw.fly.ui.other.QRcodeActivity;
@@ -168,6 +170,7 @@ public class MeFragment extends EasyFragment implements View.OnClickListener {
         findViewById(R.id.rlt_customer_service).setOnClickListener(this);
         findViewById(R.id.rlt_third_service).setOnClickListener(this);
         findViewById(R.id.rlt_about_us).setOnClickListener(this);
+        findViewById(R.id.rlt_read_envelope).setOnClickListener(this);
 
         mAvatarImg = (ImageView) findViewById(R.id.avatar_img);
         mNickNameTv = (TextView) findViewById(R.id.nick_name_tv);
@@ -312,6 +315,9 @@ public class MeFragment extends EasyFragment implements View.OnClickListener {
                 break;
             case R.id.rlt_about_us:
                 startActivity(new Intent(getContext(), AboutActivity.class));
+                break;
+            case R.id.rlt_read_envelope:
+                startActivity(new Intent(getContext(), RedPacketListActivity.class));
                 break;
         }
 

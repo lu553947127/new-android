@@ -216,5 +216,40 @@ public class LoginRegisterResult extends LoginAuto {
         public void setLongitude(String longitude) {
             this.longitude = longitude;
         }
+
+        @Override
+        public String toString() {
+            return "Login{" +
+                    "isFirstLogin=" + isFirstLogin +
+                    ", loginTime=" + loginTime +
+                    ", offlineTime=" + offlineTime +
+                    ", model='" + model + '\'' +
+                    ", osVersion='" + osVersion + '\'' +
+                    ", serial='" + serial + '\'' +
+                    ", latitude='" + latitude + '\'' +
+                    ", longitude='" + longitude + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "LoginRegisterResult{" +
+                "accessToken='" + accessToken + '\'' +
+                ", httpKey='" + httpKey + '\'' +
+                ", loginToken='" + loginToken + '\'' +
+                ", loginKey='" + loginKey + '\'' +
+                ", authKey='" + authKey + '\'' +
+                ", userId='" + userId + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", password='" + password + '\'' +
+                ", areaCode='" + areaCode + '\'' +
+                ", friendCount=" + friendCount +
+                ", isupdate=" + isupdate +
+                ", login=" + login +
+                ", account='" + account + '\'' +
+                ", setAccountCount=" + setAccountCount +
+                '}';
     }
 }

@@ -17,12 +17,18 @@ import com.ktw.fly.ui.base.CoreManager;
 import com.ktw.fly.util.Constants;
 import com.ktw.fly.util.LogUtils;
 import com.ktw.fly.util.PreferenceUtils;
+import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
 import com.xuan.xuanhttplibrary.okhttp.result.Result;
 
 /**
  * 当前登陆用户的帮助类
  */
 public class LoginHelper {
+    //手机号登录  mLoginType
+    public static final int LOGIN_PHONE = 0;
+    //邮箱登录  mLoginType
+    public static final int LOGIN_EMAIL = 1;
+
     public static final String ACTION_LOGIN = FLYAppConfig.sPackageName + ".action.login";  // 登陆
     public static final String ACTION_LOGOUT = FLYAppConfig.sPackageName + ".action.logout";// 用户手动注销登出
     public static final String ACTION_CONFLICT = FLYAppConfig.sPackageName + ".action.conflict";          // 登陆冲突（另外一个设备登陆了）
@@ -184,8 +190,9 @@ public class LoginHelper {
         return !TextUtils.isEmpty(UserSp.getInstance(FLYApplication.getContext()).getAccessToken());
     }
 
-    public static boolean setLoginUser(Context context, CoreManager coreManager, String telephone, String password, com.xuan.xuanhttplibrary.okhttp.result.ObjectResult<LoginRegisterResult> result) {
-        Log.d(TAG, "setLoginUser() called with: context = [" + context + "], telephone = [" + telephone + "], password = [" + password + "], result = [" + result + "]");
+    public static boolean setLoginUser(Context context, CoreManager coreManager, String account,
+                                       String password, ObjectResult<LoginRegisterResult> result) {
+        Log.d(TAG, "setLoginUser() called with: context = [" + context + "], telephone = [" + account + "], password = [" + password + "], result = [" + result + "]");
         if (result == null) {
             return false;
         }
@@ -214,9 +221,9 @@ public class LoginHelper {
         try {
             String rTelephone = result.getData().getTelephone();
             if (!TextUtils.isEmpty(rTelephone)) {
-                telephone = rTelephone;
-                if (!TextUtils.isEmpty(sAreaCode) && telephone.startsWith(sAreaCode)) {
-                    telephone = telephone.substring(sAreaCode.length());
+                account = rTelephone;
+                if (!TextUtils.isEmpty(sAreaCode) && account.startsWith(sAreaCode)) {
+                    account = account.substring(sAreaCode.length());
                 }
             }
         } catch (Exception e) {
@@ -228,7 +235,8 @@ public class LoginHelper {
         if (user == null) {
             user = new User();
         }
-        user.setTelephone(telephone);
+
+        user.setTelephone(account);
         user.setPassword(password);
         user.setUserId(result.getData().getUserId());
         user.setNickName(result.getData().getNickName());

@@ -2059,6 +2059,12 @@
     <string name="add_by_address">Thêm vào bạn bè thông qua danh bạ điện thoại</string>
     <string name="msg_emot">[表情]</string>
 
+
+    <!--  red   -->
+    <string name="red_select_property">Chọn tài sản</string>
+    <string name="red_number_of_issued_virtual_coins">Tổng số tiền tệ ảo phân phối</string>
+
+
     <string name="wallet">ví tiền</string>
     <string name="asdt">ASDT\nTổng tài sản của tôi</string>
     <string name="select_currency">Vui lòng chọn đơn vị tiền tệ</string>

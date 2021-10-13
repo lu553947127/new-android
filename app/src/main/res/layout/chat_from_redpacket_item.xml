@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/chat_item_padding_bottom"
+    android:paddingLeft="@dimen/chat_item_padding_left"
+    android:paddingRight="@dimen/chat_item_padding_right"
+    android:paddingTop="@dimen/chat_item_padding_top">
+
+    <TextView
+        android:id="@+id/time_tv"
+        style="@style/ChattingUISystem"
+        android:visibility="gone" />
+
+    <com.ktw.fly.view.HeadView
+        android:id="@+id/chat_head_iv"
+        android:layout_width="@dimen/chat_head_size"
+        android:layout_height="@dimen/chat_head_size"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/time_tv"
+        android:layout_marginEnd="@dimen/chat_head_right"
+        android:layout_marginStart="@dimen/chat_head_left"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/avatar_normal" />
+
+    <TextView
+        android:id="@+id/nick_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_tv"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toLeftOf="@id/chat_head_iv"
+        android:text=""
+        android:textSize="@dimen/SmallerTextSize"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:id="@+id/chat_warp_view"
+        android:layout_width="@dimen/chat_width_red"
+        android:layout_height="81dp"
+        android:layout_below="@id/nick_name"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toLeftOf="@id/chat_head_iv"
+        android:background="@mipmap/red_backet_send">
+
+
+
+        <TextView
+            android:id="@+id/chat_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="20dp"
+            android:maxWidth="140dp"
+            android:maxLines="1"
+            android:text="@string/auspicious"
+            android:textColor="@color/white"
+            android:textSize="@dimen/chat_text_size" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/red_common_packer"
+            android:layout_alignParentBottom="true"
+            android:textColor="#FEE7CE"
+            android:paddingBottom="5dp"
+            android:textSize="11dp" />
+    </RelativeLayout>
+
+    <include layout="@layout/view_holder_state_from" />
+
+    <CheckBox
+        android:id="@+id/chat_msc"
+        style="@style/CustomCheckBoxTheme"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chat_warp_view"
+        android:clickable="false"
+        android:visibility="gone" />
+
+</RelativeLayout>

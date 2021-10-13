@@ -132,8 +132,9 @@ public class LoginHistoryActivity extends BaseActivity implements View.OnClickLi
 
         AvatarHelper.getInstance().displayRoundAvatar(mLastLoginUser.getNickName(), mLastLoginUser.getUserId(), mAvatarImgView, true);
         mNickNameTv.setText(mLastLoginUser.getNickName());
-        if (PreferenceUtils.getBoolean(this,"iSpassword")){
-            mPasswordEdit.setText(PreferenceUtils.getString(this,"password"));}
+        if (PreferenceUtils.getBoolean(this, "iSpassword")) {
+            mPasswordEdit.setText(PreferenceUtils.getString(this, "password"));
+        }
     }
 
     @Override
@@ -166,7 +167,7 @@ public class LoginHistoryActivity extends BaseActivity implements View.OnClickLi
 
         DialogHelper.showDefaulteMessageProgressDialog(this);
         HashMap<String, String> params = new HashMap<>();
-        String phoneNumber = mLastLoginUser.getTelephoneNoAreaCode();
+        String account = mLastLoginUser.getTelephoneNoAreaCode();
         params.put("xmppVersion", "1");
         // 附加信息
         params.put("model", DeviceInfoUtil.getModel());
@@ -187,25 +188,49 @@ public class LoginHistoryActivity extends BaseActivity implements View.OnClickLi
             }
         }
 
-        LoginSecureHelper.secureLogin(
-                this, coreManager, String.valueOf(mobilePrefix), phoneNumber, password,
-                params,
-                t -> {
-                    DialogHelper.dismissProgressDialog();
-                    ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
-                }, result -> {
-                    DialogHelper.dismissProgressDialog();
-                    if (!Result.checkSuccess(getApplicationContext(), result)) {
-                        return;
-                    }
-                    if (!TextUtils.isEmpty(result.getData().getAuthKey())) {
-                        DialogHelper.showMessageProgressDialog(mContext, getString(R.string.tip_need_auth_login));
-                        CheckAuthLoginRunnable authLogin = new CheckAuthLoginRunnable(result.getData().getAuthKey(), phoneNumber, digestPwd);
-                        waitAuth(authLogin);
-                        return;
-                    }
-                    afterLogin(result, phoneNumber, digestPwd);
-                });
+        if (account.contains("@")) {  //邮箱登录
+            LoginSecureHelper.secureLoginEmail(
+                    this, coreManager, String.valueOf(mobilePrefix), account, password,
+                    params,
+                    t -> {
+                        DialogHelper.dismissProgressDialog();
+                        ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
+                    }, result -> {
+                        DialogHelper.dismissProgressDialog();
+                        if (!Result.checkSuccess(getApplicationContext(), result)) {
+                            return;
+                        }
+                        if (!TextUtils.isEmpty(result.getData().getAuthKey())) {
+                            DialogHelper.showMessageProgressDialog(mContext, getString(R.string.tip_need_auth_login));
+                            CheckAuthLoginRunnable authLogin = new CheckAuthLoginRunnable(result.getData().getAuthKey(), account, digestPwd);
+                            waitAuth(authLogin);
+                            return;
+                        }
+                        afterLogin(result, account, digestPwd);
+                    });
+        } else {//手机号登录
+            LoginSecureHelper.secureLogin(
+                    this, coreManager, String.valueOf(mobilePrefix), account, password,
+                    params,
+                    t -> {
+                        DialogHelper.dismissProgressDialog();
+                        ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
+                    }, result -> {
+                        DialogHelper.dismissProgressDialog();
+                        if (!Result.checkSuccess(getApplicationContext(), result)) {
+                            return;
+                        }
+                        if (!TextUtils.isEmpty(result.getData().getAuthKey())) {
+                            DialogHelper.showMessageProgressDialog(mContext, getString(R.string.tip_need_auth_login));
+                            CheckAuthLoginRunnable authLogin = new CheckAuthLoginRunnable(result.getData().getAuthKey(), account, digestPwd);
+                            waitAuth(authLogin);
+                            return;
+                        }
+                        afterLogin(result, account, digestPwd);
+                    });
+        }
+
+
     }
 
     private void afterLogin(ObjectResult<LoginRegisterResult> result, String phoneNumber, String digestPwd) {

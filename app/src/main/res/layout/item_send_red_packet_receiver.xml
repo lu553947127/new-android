@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dw_yuanjiao_whit_5"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/dp10">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/Grey_500" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/dp10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_receiver"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size"
+            tools:text="用户2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_receiver_sum"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_receiver_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size"
+            tools:text="20.0000 AAT" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_receiver_time"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_red_receiver_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/sp_15_text_size"
+            tools:text="2021-09-18 20:35:15" />
+    </RelativeLayout>
+
+</LinearLayout>

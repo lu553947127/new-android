@@ -2252,6 +2252,9 @@
     <string name="keep_live_description">進程守護中</string>
     <string name="msg_emot">[表情]</string>
 
+    <!--  红包   -->
+    <string name="red_select_property">選擇資產</string>
+    <string name="red_number_of_issued_virtual_coins">總幣量</string>
     <string name="wallet">錢包</string>
     <string name="asdt">ASDT\n我的總資產</string>
     <string name="select_currency">請選擇幣種</string>

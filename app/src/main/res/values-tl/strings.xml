@@ -2038,6 +2038,11 @@ Ang kasalukuyang katayuan ay sumunog pagkatapos basahin, at ang iba pang partido
     <string name="add_by_address"> Idagdag bilang isang kaibigan sa pamamagitan ng telepono </string>
     <string name="msg_emot">[表情]</string>
 
+
+
+    <!--  red   -->
+    <string name="red_select_property">Mali seç</string>
+
     <string name="wallet">Wallet</string>
     <string name="asdt">ASDT\nMy total assets</string>
     <string name="select_currency">Please select currency</string>

@@ -16,6 +16,7 @@ public class UsernameHelper {
     private UsernameHelper() {
     }
 
+
     public static void initSearchLabel(TextView view, FLYAppConfig config) {
         if (config.cannotSearchByNickName) {
             if (config.registerUsername) {
@@ -84,7 +85,7 @@ public class UsernameHelper {
      *
      * @return 返回true表示text合法，
      */
-    public static boolean verify(Activity ctx, String text, boolean registerUsername) {
+    public static boolean verify(Activity ctx, String text, boolean registerUsername, int loginType) {
         boolean ret = true;
         String tip = null;
         if (TextUtils.isEmpty(text)) {
@@ -92,21 +93,33 @@ public class UsernameHelper {
             if (registerUsername) {
                 tip = ctx.getString(R.string.tip_username_empty);
             } else {
-                tip = ctx.getString(R.string.tip_phone_number_empty);
+                if (loginType == LoginHelper.LOGIN_PHONE) {
+                    tip = ctx.getString(R.string.tip_phone_number_empty);
+                } else if (loginType == LoginHelper.LOGIN_EMAIL) {
+                    tip = ctx.getString(R.string.tip_email_wrong);
+                }
             }
         }
-//        if (!registerUsername) {
-//            if (text.length() != 11) {
-//                ret = false;
-//                tip = "请输入正确格式的手机号码";
-//            }
-//        } else {
-//            if (text.length() > 11) {
-//                ret = false;
-//                tip = ctx.getString(R.string.tip_username_too_long);
-//            }
-//            // 没检测是否字母数字，因为EditText就限定死了，
-//        }
+        if (!registerUsername) {
+            if (loginType == LoginHelper.LOGIN_PHONE) {
+                if (text.length() != 11) {
+                    ret = false;
+                    tip = "请输入正确格式的手机号码";
+                }
+            } else if (loginType == LoginHelper.LOGIN_EMAIL) {
+                if (!text.contains("@")) {
+                    ret = false;
+                    tip = ctx.getString(R.string.tip_email_wrong);
+                }
+            }
+
+        } else {
+            if (text.length() > 11) {
+                ret = false;
+                tip = ctx.getString(R.string.tip_username_too_long);
+            }
+            // 没检测是否字母数字，因为EditText就限定死了，
+        }
         if (!ret) {
             DialogHelper.tip(ctx, tip);
         }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/wx_grey"
     android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/redpacket_bg_new">
+        android:layout_height="70dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
                 android:layout_marginLeft="15dp"
                 android:gravity="center"
                 android:src="@mipmap/return_icon"
-                android:tint="@color/white" />
+                android:tint="@color/black" />
 
             <TextView
                 android:id="@+id/tv_title_center"
@@ -30,19 +31,178 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:text="@string/send_red_packet"
-                android:textColor="@color/white"
+                android:text="@string/title_red_packet"
+                android:textColor="@color/text_red"
                 android:textSize="18sp" />
 
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_red_detail"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/icon_red_records"
+                android:tint="@color/black" />
 
+        </RelativeLayout>
     </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_property"
+        style="@style/MeLayoutStyle">
+
+        <TextView
+            style="@style/SendRedPackerBoldTextStyle"
+            android:text="@string/red_select_property" />
+
+        <TextView
+            android:id="@+id/tv_capital"
+            style="@style/SendRedPackerTextStyle"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@drawable/me_chevron_right"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:textSize="@dimen/sp_15_text_size"
+            tools:text="USDT" />
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/MeLayoutStyle">
+
+        <TextView
+            android:id="@+id/tv_virtual_coins_number"
+            style="@style/SendRedPackerBoldTextStyle"
+            android:text="@string/red_number_of_issued_virtual_coins" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/et_amount"
+                style="@style/SendRedPackerTextStyle"
+                android:layout_marginRight="5dp"
+                android:background="@color/white"
+                android:inputType="numberDecimal"
+                android:hint="@string/red_available_balance"
+                android:paddingRight="5dp"
+                android:gravity="right|center_vertical"
+                android:textSize="@dimen/sp_15_text_size" />
+
+            <TextView
+                style="@style/SendRedPackerBoldTextStyle"
+                android:text="@string/ge" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/tv_cur_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_cur_type"
+            android:textColor="@color/text_red_light" />
+
+        <TextView
+            android:id="@+id/tv_alter_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_alter_type"
+            android:textColor="@color/red_btn" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_number"
+        style="@style/MeLayoutStyle">
+
+        <TextView
+            style="@style/SendRedPackerBoldTextStyle"
+            android:text="@string/red_number" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/et_red_packet_count"
+                style="@style/SendRedPackerTextStyle"
+                android:layout_marginRight="5dp"
+                android:background="@color/white"
+                android:hint="@string/red_number_hint"
+                android:inputType="number"
+                android:gravity="right|center_vertical"
+                android:paddingRight="5dp"
+                android:textSize="@dimen/sp_15_text_size" />
+
+            <TextView
+                style="@style/SendRedPackerBoldTextStyle"
+                android:text="@string/ge" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout style="@style/MeLayoutStyle"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/et_word"
+            style="@style/SendRedPackerTextStyle"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:hint="@string/red_password_hint" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/MeLayoutStyle">
+
+        <EditText
+            android:id="@+id/et_greeting"
+            style="@style/SendRedPackerTextStyle"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:hint="@string/red_greeting_hint" />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn_sendRed"
+        style="@style/RedPacketBtnStyle"
+        android:layout_below="@+id/ll_scan"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_btn_red"
+        android:text="@string/send_red_packet" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center_horizontal"
+        android:paddingBottom="15dp"
+        android:text="@string/red_restitution_info"
+        android:textColor="@color/text_red_light"
+        android:textSize="@dimen/sp_12_text_size" />
 
     <com.ktw.fly.ui.smarttab.SmartTabLayout
         android:id="@+id/smarttablayout_redpacket"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/redpacket_bg_new"
+        android:background="@color/wx_grey"
+        android:visibility="gone"
         app:stl_customTabTextLayoutId="@layout/a_custom_tab"
         app:stl_defaultTabTextAllCaps="true"
         app:stl_defaultTabTextColor="@color/replay_text_color_normal"
@@ -71,6 +231,7 @@
         android:id="@+id/viewpagert_redpacket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/smarttablayout_redpacket" />
+        android:layout_below="@+id/smarttablayout_redpacket"
+        android:visibility="gone" />
 
 </LinearLayout>

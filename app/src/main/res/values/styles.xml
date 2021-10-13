@@ -192,9 +192,11 @@
     <style name="IMTble_No_Line" parent="IMTbleLine">
         <item name="android:background">@color/white</item>
     </style>
+
     <style name="IMTble_MarginTop5" parent="IMTble_No_Line">
         <item name="android:layout_marginTop">5dp</item>
     </style>
+
     <style name="IMTble_MarginTop10" parent="IMTble_No_Line">
         <item name="android:layout_marginTop">10dp</item>
     </style>
@@ -421,6 +423,8 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 
     <style name="full_dialog_style">
@@ -620,6 +624,8 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/sp_15_text_size</item>
     </style>
+
+
     <!--固定宽高Button Style，背景不跟随app主色改变(一般用于右下角发送、确认...)-->
     <style name="OKBtn">
         <item name="android:background">@drawable/btn_bg_send_loaction</item>
@@ -713,6 +719,7 @@
         <item name="tabTextColor">@color/black_2</item>
         <item name="android:textSize">14sp</item>
     </style>
+
     <style name="MeLayoutStyle">
         <item name="android:background">@drawable/shape_bg_me</item>
         <item name="android:layout_marginLeft">15dp</item>
@@ -733,6 +740,105 @@
         <item name="android:paddingRight">15dp</item>
     </style>
 
+
+    <!-- 红包 -->
+    <style name="SendRedPackerBoldTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/text_red</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/sp_15_text_size</item>
+    </style>
+
+
+    <style name="SendRedPackerTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/text_red_light</item>
+        <item name="android:textSize">@dimen/sp_15_text_size</item>
+    </style>
+
+    <style name="RedPacketBtnStyle">
+        <item name="android:background">@drawable/selector_btn_red</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/sp_16_text_size</item>
+    </style>
+
+
+
+    <!-- 圆角矩形背景色 -->
+    <attr name="rv_backgroundColor" format="color" />
+    <!-- 圆角矩形背景色press -->
+    <attr name="rv_backgroundPressColor" format="color" />
+    <!-- 圆角弧度,单位dp-->
+    <attr name="rv_cornerRadius" format="dimension" />
+    <!-- 圆角弧度,单位dp-->
+    <attr name="rv_strokeWidth" format="dimension" />
+    <!-- 圆角边框颜色-->
+    <attr name="rv_strokeColor" format="color" />
+    <!-- 圆角边框颜色press -->
+    <attr name="rv_strokePressColor" format="color" />
+    <!-- 文字颜色press-->
+    <attr name="rv_textPressColor" format="color" />
+    <!-- 圆角弧度是高度一半-->
+    <attr name="rv_isRadiusHalfHeight" format="boolean" />
+    <!-- 圆角矩形宽高相等,取较宽高中大值-->
+    <attr name="rv_isWidthHeightEqual" format="boolean" />
+    <!-- 圆角弧度,单位dp,TopLeft-->
+    <attr name="rv_cornerRadius_topLeft" format="dimension" />
+    <!-- 圆角弧度,单位dp,TopRight-->
+    <attr name="rv_cornerRadius_topRight" format="dimension" />
+    <!-- 圆角弧度,单位dp,BottomLeft-->
+    <attr name="rv_cornerRadius_bottomLeft" format="dimension" />
+    <!-- 圆角弧度,单位dp,BottomRight-->
+    <attr name="rv_cornerRadius_bottomRight" format="dimension" />
+    <!-- 是否有Ripple效果,api21+有效-->
+    <attr name="rv_isRippleEnable" format="boolean" />
+    <declare-styleable name="RoundTextView">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_textPressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_topLeft" />
+        <attr name="rv_cornerRadius_topRight" />
+        <attr name="rv_cornerRadius_bottomLeft" />
+        <attr name="rv_cornerRadius_bottomRight" />
+        <attr name="rv_isRippleEnable" />
+    </declare-styleable>
+
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/SheetStyle</item>
+    </style>
+
+    <style name="SheetStyle" parent="android:Widget">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="behavior_peekHeight">auto</item>
+        <item name="behavior_hideable">true</item>
+        <item name="behavior_skipCollapsed">false</item>
+    </style>
+
+
+    <style name="AuthCodeDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
     <style name="dialog_scale_anim_style">
         <item name="android:windowEnterAnimation">@anim/scale_dialog_in_anim</item>
         <item name="android:windowExitAnimation">@anim/scale_dialog_out_anim</item>

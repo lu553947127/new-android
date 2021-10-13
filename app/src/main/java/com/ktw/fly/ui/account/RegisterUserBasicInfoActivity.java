@@ -86,7 +86,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
     private Button mNextStepBtn;
     /* 前面页面传递进来的四个参数，都是必填 */
     private String mobilePrefix;
-    private String mPhoneNum;
+    private String mAccount;
     private String mPassword;
     private String mSmsCode;
     // 可能empty但不会null,
@@ -99,6 +99,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
     private File mCurrentFile;
     private boolean isSelectAvatar;
     private Uri mNewPhotoUri;
+    private int mLoginType;
 
     public RegisterUserBasicInfoActivity() {
         noLoginRequired();
@@ -107,20 +108,22 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
     public static void start(
             Context ctx,
             String mobilePrefix,
-            String phoneStr,
+            String account,
             String password,
             String smsCode,
             String inviteCode,
             String thirdToken,
-            String thirdTokenType) {
+            String thirdTokenType,
+            int loginType) {
         Intent intent = new Intent(ctx, RegisterUserBasicInfoActivity.class);
         intent.putExtra(RegisterActivity.EXTRA_AUTH_CODE, mobilePrefix);
-        intent.putExtra(RegisterActivity.EXTRA_PHONE_NUMBER, phoneStr);
+        intent.putExtra(RegisterActivity.EXTRA_PHONE_NUMBER, account);
         intent.putExtra(RegisterActivity.EXTRA_INVITE_CODE, inviteCode);
         intent.putExtra(RegisterActivity.EXTRA_PASSWORD, password);
         intent.putExtra(RegisterActivity.EXTRA_SMS_CODE, smsCode);
         intent.putExtra("thirdToken", thirdToken);
         intent.putExtra("thirdTokenType", thirdTokenType);
+        intent.putExtra("loginType", loginType);
         ctx.startActivity(intent);
     }
 
@@ -130,12 +133,13 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
         setContentView(R.layout.activity_register_user_basic_info);
         if (getIntent() != null) {
             mobilePrefix = getIntent().getStringExtra(RegisterActivity.EXTRA_AUTH_CODE);
-            mPhoneNum = getIntent().getStringExtra(RegisterActivity.EXTRA_PHONE_NUMBER);
+            mAccount = getIntent().getStringExtra(RegisterActivity.EXTRA_PHONE_NUMBER);
             mPassword = getIntent().getStringExtra(RegisterActivity.EXTRA_PASSWORD);
             mSmsCode = getIntent().getStringExtra(RegisterActivity.EXTRA_SMS_CODE);
             mInviteCode = getIntent().getStringExtra(RegisterActivity.EXTRA_INVITE_CODE);
             thirdToken = getIntent().getStringExtra("thirdToken");
             thirdTokenType = getIntent().getStringExtra("thirdTokenType");
+            mLoginType = getIntent().getIntExtra("loginType", -1);
         }
         initActionBar();
         initView();
@@ -283,10 +287,114 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                 break;
             case R.id.next_step_btn:
                 if (UiUtils.isNormalClick(v)) {
-                    register();
+                    if (mLoginType==LoginHelper.LOGIN_PHONE){
+                        register();
+                    }else {
+                        emailRegister();
+                    }
                 }
                 break;
         }
+    }
+
+    //邮箱注册
+    private void emailRegister() {
+        loadPageData();
+
+        if (TextUtils.isEmpty(mTempData.getNickName())) {
+            mNameEdit.requestFocus();
+            mNameEdit.setError(StringUtils.editTextHtmlErrorTip(this, R.string.name_empty_error));
+            return;
+        }
+
+        if (!isSelectAvatar) {
+            DialogHelper.tip(this, getString(R.string.must_select_avatar_can_register));
+            return;
+        }
+
+        Map<String, String> params = new HashMap<>();
+        // 前面页面传递的信息
+        params.put("userType", "0");
+        params.put("mailbox", mAccount);
+        params.put("password", mPassword);
+        params.put("mailboxCode", mSmsCode);
+        params.put("smsCode", mSmsCode);
+        if (!TextUtils.isEmpty(mInviteCode)) {
+            params.put("inviteCode", mInviteCode);
+        }
+        // 本页面信息
+        params.put("nickname", mTempData.getNickName());
+        params.put("sex", String.valueOf(mTempData.getSex()));
+        params.put("birthday", String.valueOf(mTempData.getBirthday()));
+        params.put("xmppVersion", "1");
+        params.put("countryId", String.valueOf(mTempData.getCountryId()));
+        params.put("provinceId", String.valueOf(mTempData.getProvinceId()));
+        params.put("cityId", String.valueOf(mTempData.getCityId()));
+        params.put("areaId", String.valueOf(mTempData.getAreaId()));
+
+        params.put("isSmsRegister", String.valueOf(RegisterActivity.isSmsRegister));
+
+        // 附加信息
+        params.put("apiVersion", DeviceInfoUtil.getVersionCode(mContext) + "");
+        params.put("model", DeviceInfoUtil.getModel());
+        params.put("osVersion", DeviceInfoUtil.getOsVersion());
+        params.put("serial", DeviceInfoUtil.getDeviceId(mContext));
+        // 地址信息
+        double latitude = FLYApplication.getInstance().getBdLocationHelper().getLatitude();
+        double longitude = FLYApplication.getInstance().getBdLocationHelper().getLongitude();
+        String location = FLYApplication.getInstance().getBdLocationHelper().getAddress();
+        if (latitude != 0)
+            params.put("latitude", String.valueOf(latitude));
+        if (longitude != 0)
+            params.put("longitude", String.valueOf(longitude));
+        if (!TextUtils.isEmpty(location))
+            params.put("location", location);
+        DialogHelper.showDefaulteMessageProgressDialog(this);
+
+        LoginSecureHelper.secureEmailRegister(
+                this, coreManager, thirdToken, thirdTokenType,
+                params,
+                t -> {
+                    DialogHelper.dismissProgressDialog();
+                    ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
+                }, result -> {
+                    DialogHelper.dismissProgressDialog();
+                    if (!Result.checkSuccess(getApplicationContext(), result)) {
+                        if (result == null) {
+                            FLYReporter.post("注册失败，result为空");
+                        } else {
+                            FLYReporter.post("注册失败，" + result.toString());
+                        }
+                        return;
+                    }
+                    // 注册成功
+                    boolean success = LoginHelper.setLoginUser(RegisterUserBasicInfoActivity.this, coreManager, mAccount, mPassword, result);
+                    if (success) {
+                        isRegisteredSyncCount = 3;
+                        // 新注册的账号没有支付密码，
+                        FLYApplication.getInstance().initPayPassword(result.getData().getUserId(), 0);
+                        PrivacySettingHelper.setPrivacySettings(RegisterUserBasicInfoActivity.this, result.getData().getSettings());
+                        FLYApplication.getInstance().initMulti();
+                        if (mCurrentFile != null && mCurrentFile.exists()) {
+                            // 选择了头像，那么先上传头像
+                            uploadAvatar(result.getData().getIsupdate(), mCurrentFile);
+                            return;
+                        } else {
+                            // 没有选择头像，直接进入程序主页
+                            // startActivity(new Intent(RegisterUserBasicInfoActivity.this, DataDownloadActivity.class));
+                            DataDownloadActivity.start(mContext, result.getData().getIsupdate());
+                            finish();
+                        }
+                        ToastUtil.showToast(RegisterUserBasicInfoActivity.this, R.string.register_success);
+                    } else {
+                        // 失败
+                        if (TextUtils.isEmpty(result.getResultMsg())) {
+                            ToastUtil.showToast(RegisterUserBasicInfoActivity.this, R.string.register_error);
+                        } else {
+                            ToastUtil.showToast(RegisterUserBasicInfoActivity.this, result.getResultMsg());
+                        }
+                    }
+                });
     }
 
     private void showSelectAvatarDialog() {
@@ -346,9 +454,6 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                     break;
             }
         }
-
-
-
 
 
         if (requestCode == REQUEST_CODE_CAPTURE_CROP_PHOTO) {
@@ -488,7 +593,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
         Map<String, String> params = new HashMap<>();
         // 前面页面传递的信息
         params.put("userType", "0");
-        params.put("telephone", mPhoneNum);
+        params.put("telephone", mAccount);
         params.put("password", mPassword);
         params.put("smsCode", mSmsCode);
         if (!TextUtils.isEmpty(mInviteCode)) {
@@ -541,7 +646,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
                         return;
                     }
                     // 注册成功
-                    boolean success = LoginHelper.setLoginUser(RegisterUserBasicInfoActivity.this, coreManager, mPhoneNum, mPassword, result);
+                    boolean success = LoginHelper.setLoginUser(RegisterUserBasicInfoActivity.this, coreManager, mAccount, mPassword, result);
                     if (success) {
                         isRegisteredSyncCount = 3;
                         // 新注册的账号没有支付密码，

@@ -18,6 +18,10 @@
     <color name="white">#ffffffff</color>
 
     <color name="text_value">#999999</color>
+    <color name="text_red">#191919</color>
+    <color name="text_red_light">#444444</color>
+    <color name="text_red_hint">#999999</color>
+    <color name="red_btn">#E53D2C</color>
     <color name="black">#333333</color>
     <color name="black_2">#000000</color>
     <color name="audio_view">#9E9E9E</color>
@@ -183,6 +187,12 @@
     <color name="voice">#71cdca</color>
     <color name="rl_bg_one">#5FCEC7</color>
     <color name="rl_bg_two">#F8C042</color>
+
+
+
+
+    <color name="set_password_hint_bg">#FCF1DE</color>
+    <color name="set_password_hint_text_color">#F96302</color>
 
     <color name="home_blue">#0F6EFF</color>
 

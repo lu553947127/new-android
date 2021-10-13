@@ -23,7 +23,8 @@ public class SkinUtils {
     // 保存hashCode作本地持久化，所以hashCode必须唯一，并且添加字段也要更新hashCode方法，
     public static List<Skin> defaultSkins = Arrays.asList(
             // 绿色主题，白色标题绿色控件，
-            new Skin(R.string.skin_qian_dou_green, 0xffffff, 0x61D999, true),
+//            new Skin(R.string.skin_qian_dou_green, 0xffffff, 0x61D999, true),
+            new Skin(R.string.skin_qian_dou_green, 0xffffff, 0x16C534, true),
             // 蓝色主题，白色标题蓝色控件，
             new Skin(R.string.skin_Qing_Shui_blue, 0xffffff, 0x80BFFF, true),
             // 红色主题，白色标题红色控件，

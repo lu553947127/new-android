@@ -40,6 +40,9 @@ public class Result {
     public final static int CODE_AUTH_LOGIN_FAILED_1 = 101988;// 无授权
     public final static int CODE_AUTH_LOGIN_FAILED_2 = 101986;// 登入超时
     public final static int CODE_AUTH_LOGIN_FAILED_3 = 101982;// 验证码失效
+    public final static int CODE_AUTH_RED_PACKET_GAIN = 105007;// 红包已抢过
+    public final static int CODE_AUTH_RED_PACKET_PAST= 105001;// 红包已过期
+    public final static int CODE_AUTH_RED_PACKET_ERROR= 105005;// 红包异常
 
     public static final String RESULT_CODE = "resultCode";
     public static final String RESULT_MSG = "resultMsg";

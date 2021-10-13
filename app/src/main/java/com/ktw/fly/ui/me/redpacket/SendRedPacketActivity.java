@@ -3,35 +3,32 @@ package com.ktw.fly.ui.me.redpacket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.viewpager.widget.ViewPager;
+import androidx.annotation.Nullable;
 
 import com.ktw.fly.FLYAppConstant;
 import com.ktw.fly.R;
+import com.ktw.fly.bean.Capital;
 import com.ktw.fly.bean.message.ChatMessage;
 import com.ktw.fly.bean.message.XmppMessage;
 import com.ktw.fly.bean.redpacket.RedPacket;
+import com.ktw.fly.bean.redpacket.RedPacketResult;
 import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.PaySecureHelper;
+import com.ktw.fly.helper.RedPacketHelper;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.ui.message.ChatActivity;
-import com.ktw.fly.ui.smarttab.SmartTabLayout;
-import com.ktw.fly.util.Constants;
 import com.ktw.fly.util.InputChangeListener;
-import com.ktw.fly.util.PreferenceUtils;
 import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.util.secure.Money;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
@@ -39,9 +36,7 @@ import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
 import com.xuan.xuanhttplibrary.okhttp.result.Result;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -50,40 +45,59 @@ import okhttp3.Call;
  * Created by 魏正旺 on 2016/9/9.
  */
 public class SendRedPacketActivity extends BaseActivity implements View.OnClickListener {
-    LayoutInflater inflater;
-    private SmartTabLayout smartTabLayout;
-    private ViewPager viewPager;
-    private List<View> views;
-    private List<String> mTitleList;
-    private EditText editTextPt;  // 普通红包的金额输入框
-    private EditText editTextKl;  // 口令红包的金额输入框
-    private EditText editTextPwd; // 口令输入框
-    private EditText editTextGre; // 祝福语输入框
+
+    public static final int REQUEST_CODE_CAPITAL = 200;     // 资金类型返回
+
 
     private String toUserId;
-    private int mCurrentItem;
+
+    private TextView capitalText;
+
+    //选择发送红包的资产类型ID
+    private String capitalId;
+    private EditText amountEdit;
+    private TextView virtualCoinsNumberText;
+    private boolean isGroupChat;
+
+    private TextView curRedText;
+    private TextView alterRedText;
+
+    private int curRedPackerType;
+    private EditText wordEdit;
+    private EditText greetingEdit;
+    private EditText redPacketCountEdit;
+    private RelativeLayout numberLayout;
+    private Capital capital;
+    //朋友的 用户昵称
+    private String toUserNickName;
+    //当前用户ID
+    private String userId;
+    //当前用户昵称
+    private String nickName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redpacket);
+
         toUserId = getIntent().getStringExtra(FLYAppConstant.EXTRA_USER_ID);
-        inflater = LayoutInflater.from(this);
+        toUserNickName = getIntent().getStringExtra(FLYAppConstant.EXTRA_NICK_NAME);
+        userId = coreManager.getSelf().getUserId();
+        nickName = coreManager.getSelf().getNickName();
+
+        isGroupChat = getIntent().getBooleanExtra(FLYAppConstant.EXTRA_IS_GROUP_CHAT, false);
+
+
+        if (isGroupChat) { //群组默认拼手气类型
+            curRedPackerType = FLYAppConstant.LUCK_RED_PACKER;
+        } else {    //单聊默认普通类型
+            curRedPackerType = FLYAppConstant.COMMON_RED_PACKER;
+        }
+
         initActionBar();
         initView();
-
-        checkHasPayPassword();
     }
 
-    private void checkHasPayPassword() {
-        boolean hasPayPassword = PreferenceUtils.getBoolean(this, Constants.IS_PAY_PASSWORD_SET + coreManager.getSelf().getUserId(), true);
-        if (!hasPayPassword) {
-            ToastUtil.showToast(this, R.string.tip_no_pay_password);
-            Intent intent = new Intent(this, ChangePayPasswordActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
 
     private void initActionBar() {
         getSupportActionBar().hide();
@@ -94,159 +108,176 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
                 finish();
             }
         });
-        TextView tvTitle = (TextView) findViewById(R.id.tv_title_center);
-        tvTitle.setText(getString(R.string.chat_redpacket));
     }
 
     /**
      * 初始化布局
      */
     private void initView() {
-        viewPager = (ViewPager) findViewById(R.id.viewpagert_redpacket);
-        smartTabLayout = (SmartTabLayout) findViewById(R.id.smarttablayout_redpacket);
-        views = new ArrayList<View>();
-        mTitleList = new ArrayList<String>();
-        mTitleList.add(getString(R.string.Usual_Gift));
-        mTitleList.add(getString(R.string.chat_kl_red));
-        View v1, v2;
-        v1 = inflater.inflate(R.layout.redpacket_pager_pt, null);
-        v2 = inflater.inflate(R.layout.redpacket_pager_kl, null);
-        views.add(v1);
-        views.add(v2);
+        findViewById(R.id.rl_property).setOnClickListener(this);
+        capitalText = findViewById(R.id.tv_capital);
+        virtualCoinsNumberText = findViewById(R.id.tv_virtual_coins_number);
+        amountEdit = findViewById(R.id.et_amount);
+        redPacketCountEdit = findViewById(R.id.et_red_packet_count);
 
-        // 获取EditText
-        editTextPt = (EditText) v1.findViewById(R.id.edit_money);
-        editTextGre = (EditText) v1.findViewById(R.id.edit_blessing);
-        editTextKl = (EditText) v2.findViewById(R.id.edit_money);
-        editTextPwd = (EditText) v2.findViewById(R.id.edit_password);
-        editTextPwd.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        ImageView ivRedDetail = findViewById(R.id.iv_red_detail);
+        numberLayout = findViewById(R.id.rl_number);
 
-            }
+        curRedText = findViewById(R.id.tv_cur_red);
+        alterRedText = findViewById(R.id.tv_alter_red);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+        wordEdit = findViewById(R.id.et_word);
+        greetingEdit = findViewById(R.id.et_greeting);
 
-            }
+        Button sendRedBtn = findViewById(R.id.btn_sendRed);
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                String t = s.toString().trim();
-                if (s.length() != t.length()) {
-                    s.replace(0, s.length(), t);
-                }
-            }
-        });
-        TextView tv_scan1 = v1.findViewById(R.id.tv_amount_of_money);
-        TextView tv_scan2 = v2.findViewById(R.id.tv_amount_of_money);
+        ivRedDetail.setOnClickListener(this);
 
-        TextView jineTv, tipTv, sumjineTv, yuan1, yuan2;
-        jineTv = (TextView) v1.findViewById(R.id.JinETv);
-        tipTv = (TextView) v2.findViewById(R.id.textviewtishi);
-        sumjineTv = (TextView) v2.findViewById(R.id.sumMoneyTv);
-        yuan1 = (TextView) v1.findViewById(R.id.yuanTv);
-        yuan2 = (TextView) v2.findViewById(R.id.yuanTv);
-        jineTv.setText(getString(R.string.hint_money));
-        tipTv.setText(getString(R.string.hint_red_packet_key));
-        sumjineTv.setText(getString(R.string.total_money));
-        yuan1.setText(getString(R.string.yuan));
-        yuan2.setText(getString(R.string.yuan));
+        alterRedText.setOnClickListener(this);
+        sendRedBtn.setOnClickListener(this);
 
-        editTextPt.setHint(R.string.input_gift_count);
-        editTextGre.setHint(getString(R.string.auspicious));
-
-        editTextKl.setHint(R.string.input_gift_count);
-        editTextPwd.setHint(getString(R.string.want_open_gift));
-
-        TextView koulinTv;
-        koulinTv = (TextView) v2.findViewById(R.id.setKouLinTv);
-        koulinTv.setText(getString(R.string.message_red_new));
-
-        Button b1 = (Button) v1.findViewById(R.id.btn_sendRed);
-        b1.setAlpha(0.6f);
-        b1.setOnClickListener(this);
-        Button b2 = (Button) v2.findViewById(R.id.btn_sendRed);
-        b2.setAlpha(0.6f);
-        b2.setOnClickListener(this);
-
-        b1.requestFocus();
-        b1.setClickable(true);
-        b2.requestFocus();
-        b2.setClickable(true);
-
-        InputChangeListener inputChangeListenerPt = new InputChangeListener(editTextPt, tv_scan1, b1);
-        InputChangeListener inputChangeListenerKl = new InputChangeListener(editTextKl, tv_scan2, b2);
-
-        editTextPt.addTextChangedListener(inputChangeListenerPt);
-        editTextKl.addTextChangedListener(inputChangeListenerKl);
-
-        //设置值允许输入数字和小数点
-        editTextPt.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        editTextKl.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
-        viewPager.setAdapter(new PagerAdapter());
-        inflater = LayoutInflater.from(this);
-        smartTabLayout.setViewPager(viewPager);
-
-        /**
-         * 为了实现点击Tab栏切换的时候不出现动画
-         * 为每个Tab重新设置点击事件
-         */
-        for (int i = 0; i < mTitleList.size(); i++) {
-            View view = smartTabLayout.getTabAt(i);
-            view.setTag(i + "");
-            view.setOnClickListener(this);
+        String capital = String.format(getResources().getString(R.string.red_available_balance), "0");
+        amountEdit.setHint(capital);
+        if (isGroupChat) {
+            numberLayout.setVisibility(View.VISIBLE);
+            virtualCoinsNumberText.setText(R.string.red_number_of_issued_virtual_coins);
+        } else {
+            numberLayout.setVisibility(View.GONE);
+            virtualCoinsNumberText.setText(R.string.single_red_packer);
         }
+        setCurRedPacketStr(curRedPackerType);
+
+        sendRedBtn.setAlpha(0.6f);
+        InputChangeListener inputChangeListenerPt = new InputChangeListener(amountEdit, sendRedBtn);
+        amountEdit.addTextChangedListener(inputChangeListenerPt);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_sendRed) {
-            final Bundle bundle = new Bundle();
-            final Intent data = new Intent(this, ChatActivity.class);
-            String money = null, words = null;
-
-            //根据Tab的Item来判断当前发送的是那种红包
-            final int item = viewPager.getCurrentItem();
-
-            //获取金额和文字信息(口令或者祝福语)
-            if (item == 0) {
-                money = editTextPt.getText().toString();
-                words = editTextGre.getText().toString();
-                if (TextUtils.isEmpty(words)) {
-                    words = editTextGre.getHint().toString();
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.rl_property://资产选择
+                intent = new Intent(this, PropertyListActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_CAPITAL);
+                break;
+            case R.id.iv_red_detail: //红包记录详情
+                intent = new Intent(this, RedPacketListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_alter_red:
+                if (curRedPackerType == FLYAppConstant.COMMON_RED_PACKER) {
+                    curRedPackerType = FLYAppConstant.LUCK_RED_PACKER;
+                } else {
+                    curRedPackerType = FLYAppConstant.COMMON_RED_PACKER;
                 }
-            } else if (item == 1) {
-                money = editTextKl.getText().toString();
-                words = editTextPwd.getText().toString();
-                if (TextUtils.isEmpty(words)) {
-                    words = editTextPwd.getHint().toString();
-                    words = words.substring(1, words.length());
-                }
-            }
-            if (TextUtils.isEmpty(money)) {
-                ToastUtil.showToast(mContext, getString(R.string.input_gift_count));
-            } else if (Double.parseDouble(money) > 500 || Double.parseDouble(money) <= 0) {
-                ToastUtil.showToast(mContext, getString(R.string.recharge_money_count));
-            } else {
-                money = Money.fromYuan(money);
-                final String finalMoney = money;
-                final String finalWords = words;
-                PaySecureHelper.inputPayPassword(this, getString(R.string.chat_redpacket), money, password -> {
-                    sendRed(item == 0 ? "1" : "3", finalMoney, String.valueOf(1), finalWords, password);
-                });
-            }
-        } else {
-            // 根据Tab按钮传递的Tag来判断是那个页面，设置到相应的界面并且去掉动画
-            int index = Integer.parseInt(v.getTag().toString());
-            if (mCurrentItem != index) {
-                mCurrentItem = index;
-                hideKeyboard();
-            }
-            viewPager.setCurrentItem(index, false);
+                setCurRedPacketStr(curRedPackerType);
+                break;
+            case R.id.btn_sendRed: //发送红包
+                sendRedParam();
+                break;
         }
     }
+
+
+    /**
+     * 发送红包参数
+     */
+    private void sendRedParam() {
+        String money, greeting, redPackerCount;
+
+        if (TextUtils.isEmpty(capitalId)) {
+            Toast.makeText(getApplicationContext(), getString(R.string.choose_capital_type), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //资金
+        money = amountEdit.getText().toString();
+        //祝福语
+        greeting = greetingEdit.getText().toString();
+        //口令
+//        String word = wordEdit.getText().toString();
+
+        if (TextUtils.isEmpty(greeting)) {
+            greeting = greetingEdit.getHint().toString().substring(4);
+        }
+
+
+        if (curRedPackerType == FLYAppConstant.LUCK_RED_PACKER) { //拼手气红包
+            redPackerCount = redPacketCountEdit.getText().toString();
+        } else { //普通红包
+            redPackerCount = String.valueOf(1);
+        }
+
+        if (TextUtils.isEmpty(money)) {
+            ToastUtil.showToast(mContext, getString(R.string.input_gift_count));
+        } else if (Double.parseDouble(money) > 500 || Double.parseDouble(money) <= 0) {
+            ToastUtil.showToast(mContext, getString(R.string.recharge_money_count));
+        } else {
+            money = Money.fromYuan(money);
+            final String finalMoney = money;
+            final String finalGreeting = greeting;
+            final String finalRedPackerCount = redPackerCount;
+//            PaySecureHelper.inputPayPassword(this, getString(R.string.chat_redpacket), money, password -> {
+//                sendRed(String.valueOf(curRedPackerType), finalMoney, finalRedPackerCount, finalGreeting, password);
+//            });
+
+            PaySecureHelper.inputPayPassword(this, getString(R.string.send_red_packet_amount), money, capital.capitalName, password -> {
+
+                RedPacketHelper.checkCapitalPassword(this, coreManager, userId, password,
+                        error -> {
+                            Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        },
+                        success -> {
+                            sendRed(curRedPackerType, finalMoney, finalRedPackerCount, finalGreeting);
+                        });
+            });
+        }
+    }
+
+    private void sendRed(int redPackerType, String pMoney, String redPackerCount, String greeting) {
+
+
+        if (!coreManager.isLogin()) {
+            return;
+        }
+        DialogHelper.showDefaulteMessageProgressDialog(mContext);
+
+        String money = Money.fromYuan(pMoney);
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", userId);
+        params.put("user_name", nickName);
+        params.put("type", isGroupChat ? "2" : "1");
+        params.put("capital_type", capitalId);
+        params.put("red_envelopes_type", String.valueOf(redPackerType));
+        params.put("red_envelope_capital", money);
+        params.put("red_envelope_count", redPackerCount);
+        params.put("red_envelope_pwd", "copyUserRedId_QZ");
+        params.put("red_envelope_name", greeting);
+        params.put("capital_count", money);
+
+
+        RedPacketHelper.sendRedPacket(this, coreManager, params,
+                error -> {
+                    DialogHelper.dismissProgressDialog();
+                },
+                success -> {
+                    DialogHelper.dismissProgressDialog();
+                    RedPacketResult redPacket = success.getData();
+
+                    ChatMessage message = new ChatMessage();
+                    message.setType(XmppMessage.TYPE_RED);
+                    message.setFromUserId(coreManager.getSelf().getUserId());
+                    message.setFromUserName(coreManager.getSelf().getNickName());
+                    message.setContent(greeting); // 祝福语
+                    message.setFilePath(String.valueOf(redPackerType)); // 用FilePath来储存红包类型
+//                    message.setFileSize(redPacket.getStatus()); //用filesize来储存红包状态
+                    message.setObjectId(redPacket.toJson()); // 红包数据
+                    Intent intent = new Intent();
+                    intent.putExtra(FLYAppConstant.EXTRA_CHAT_MESSAGE, message.toJsonString());
+                    setResult(ChatActivity.REQUEST_CODE_SEND_RED_PT, intent);
+                    finish();
+                });
+    }
+
 
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -257,6 +288,15 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    /**
+     * 发送红包
+     *
+     * @param type
+     * @param pMoney
+     * @param count
+     * @param words
+     * @param payPassword
+     */
     public void sendRed(final String type, String pMoney, String count, final String words, String payPassword) {
         if (!coreManager.isLogin()) {
             return;
@@ -298,7 +338,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
                                         message.setObjectId(objectId); // 红包id
                                         Intent intent = new Intent();
                                         intent.putExtra(FLYAppConstant.EXTRA_CHAT_MESSAGE, message.toJsonString());
-                                        setResult(viewPager.getCurrentItem() == 0 ? ChatActivity.REQUEST_CODE_SEND_RED_PT : ChatActivity.REQUEST_CODE_SEND_RED_KL, intent);
+//                                        setResult(viewPager.getCurrentItem() == 0 ? ChatActivity.REQUEST_CODE_SEND_RED_PT : ChatActivity.REQUEST_CODE_SEND_RED_KL, intent);
                                         finish();
                                     }
                                 }
@@ -312,33 +352,77 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
         );
     }
 
-    private class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
 
-        @Override
-        public int getCount() {
-            return views.size();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CAPITAL && resultCode == REQUEST_CODE_CAPITAL && data != null) {  //选择资产返回的资产数据
+            capital = data.getParcelableExtra("capital");
+            capitalText.setText(capital.capitalName);
+            this.capitalId = capital.capitalId;
+            getCapitalByUser();
+        }
+    }
+
+
+    /**
+     * 根据资金类型返回可用金额
+     */
+    private void getCapitalByUser() {
+
+        DialogHelper.showDefaulteMessageProgressDialog(this);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", coreManager.getSelf().getUserId());
+        params.put("capitalId", capitalId);
+        HttpUtils.post().url(coreManager.getConfig().GET_CAPITAL_BY_USER)
+                .params(params)
+                .build()
+                .execute(new BaseCallback<Capital>(Capital.class) {
+                    @Override
+                    public void onResponse(ObjectResult<Capital> result) {
+                        DialogHelper.dismissProgressDialog();
+                        if (Result.checkSuccess(getBaseContext(), result)) {
+                            String capital = String.format(getResources().getString(R.string.red_available_balance),
+                                    result.getData().capital);
+                            amountEdit.setHint(capital);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        DialogHelper.dismissProgressDialog();
+                        Toast.makeText(getApplicationContext(), getString(R.string.error_network), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
+
+
+    private void setCurRedPacketStr(int type) {
+        String commonRedPackerStr;
+        String luckRedPackerStr;
+        if (type == FLYAppConstant.COMMON_RED_PACKER) {
+            commonRedPackerStr = String.format(
+                    getResources().getString(R.string.red_cur_type),
+                    getResources().getString(R.string.red_common_packer));
+            luckRedPackerStr = String.format(
+                    getResources().getString(R.string.red_alter_type),
+                    getResources().getString(R.string.red_luck_packer));
+
+            numberLayout.setVisibility(View.GONE);
+        } else {
+            commonRedPackerStr = String.format(
+                    getResources().getString(R.string.red_cur_type),
+                    getResources().getString(R.string.red_luck_packer));
+            luckRedPackerStr = String.format(
+                    getResources().getString(R.string.red_alter_type),
+                    getResources().getString(R.string.red_common_packer));
+            numberLayout.setVisibility(View.VISIBLE);
         }
 
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(View container, int position) {
-            ((ViewGroup) container).addView(views.get(position));
-            return views.get(position);
-        }
-
-        @Override
-        public Parcelable saveState() {
-            return null;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            return mTitleList.get(position);
-        }
+        curRedText.setText(commonRedPackerStr);
+        alterRedText.setText(luckRedPackerStr);
     }
 }

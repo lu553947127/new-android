@@ -1,5 +1,6 @@
 package com.ktw.fly.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import com.ktw.fly.R;
  *
  * @deprecated 改用靠谱的，{@link com.makeramen.roundedimageview.RoundedImageView}
  */
+@SuppressLint("AppCompatCustomView")
 @Deprecated
 public class CircleImageView extends ImageView {
     //缩放类型

@@ -62,6 +62,8 @@ import com.ktw.fly.bean.message.XmppMessage;
 import com.ktw.fly.bean.redpacket.EventRedReceived;
 import com.ktw.fly.bean.redpacket.OpenRedpacket;
 import com.ktw.fly.bean.redpacket.RedDialogBean;
+import com.ktw.fly.bean.redpacket.RedPacketResult;
+import com.ktw.fly.bean.redpacket.RushRedPacket;
 import com.ktw.fly.broadcast.MsgBroadcast;
 import com.ktw.fly.call.Jitsi_connecting_second;
 import com.ktw.fly.call.Jitsi_pre;
@@ -72,9 +74,11 @@ import com.ktw.fly.db.dao.ChatMessageDao;
 import com.ktw.fly.db.dao.FriendDao;
 import com.ktw.fly.db.dao.VideoFileDao;
 import com.ktw.fly.downloader.Downloader;
+import com.ktw.fly.helper.AvatarHelper;
 import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.ImageLoadHelper;
 import com.ktw.fly.helper.PrivacySettingHelper;
+import com.ktw.fly.helper.RedPacketHelper;
 import com.ktw.fly.helper.TrillStatisticsHelper;
 import com.ktw.fly.helper.UploadEngine;
 import com.ktw.fly.pay.TransferMoneyActivity;
@@ -86,7 +90,9 @@ import com.ktw.fly.ui.contacts.SendContactsActivity;
 import com.ktw.fly.ui.dialog.CreateCourseDialog;
 import com.ktw.fly.ui.map.MapPickerActivity;
 import com.ktw.fly.ui.me.MyCollection;
+import com.ktw.fly.ui.me.capital.CapitalPasswordActivity;
 import com.ktw.fly.ui.me.redpacket.RedDetailsActivity;
+import com.ktw.fly.ui.me.redpacket.RedDetailsAuldActivity;
 import com.ktw.fly.ui.me.redpacket.SendRedPacketActivity;
 import com.ktw.fly.ui.message.single.PersonSettingActivity;
 import com.ktw.fly.ui.mucfile.XfileUtils;
@@ -97,6 +103,7 @@ import com.ktw.fly.util.BitmapUtil;
 import com.ktw.fly.util.Constants;
 import com.ktw.fly.util.HtmlUtils;
 import com.ktw.fly.util.JsonUtils;
+import com.ktw.fly.util.LogUtils;
 import com.ktw.fly.util.PreferenceUtils;
 import com.ktw.fly.util.RecorderUtils;
 import com.ktw.fly.util.SmileyParser;
@@ -116,6 +123,7 @@ import com.ktw.fly.view.SelectCardPopupWindow;
 import com.ktw.fly.view.SelectFileDialog;
 import com.ktw.fly.view.SelectionFrame;
 import com.ktw.fly.view.chatHolder.MessageEventClickFire;
+import com.ktw.fly.view.cjt2325.cameralibrary.util.LogUtil;
 import com.ktw.fly.view.photopicker.PhotoPickerActivity;
 import com.ktw.fly.view.photopicker.SelectModel;
 import com.ktw.fly.view.photopicker.intent.PhotoPickerIntent;
@@ -158,6 +166,8 @@ import okhttp3.Call;
 import pl.droidsonroids.gif.GifDrawable;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
+
+import static com.xuan.xuanhttplibrary.okhttp.result.Result.CODE_AUTH_RED_PACKET_GAIN;
 
 /**
  * 单聊界面
@@ -287,6 +297,11 @@ public class ChatActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
+
+        LogUtil.e("image", AvatarHelper.getAvatarUrl(CoreManager.getSelf(mContext).getUserId(), true));
+
+
+
         SmileyParser.getInstance(FLYApplication.getContext()).notifyUpdate();
         /*AndroidBug5497Workaround.assistActivity(this);*/
         mLoginUserId = coreManager.getSelf().getUserId();
@@ -705,9 +720,24 @@ public class ChatActivity extends BaseActivity implements
     @Override
     public void onTipMessageClick(ChatMessage message) {
         if (message.getFileSize() == XmppMessage.TYPE_83) {
-            showRedReceivedDetail(message.getFilePath());
+            showRedReceivedDetail(message);
         }
     }
+
+
+    // 查看红包领取详情
+    private void showRedReceivedDetail(ChatMessage message) {
+
+        String userId = coreManager.getSelf().getUserId();
+        if (userId.equals(message.getFromUserId())) { //自己的红包
+            rushRedPacket(message, false);
+        } else { //别人发的红包
+            gainRedPacket(mContext, message,userId);
+        }
+    }
+
+
+
 
     // 查看红包领取详情
     private void showRedReceivedDetail(String redId) {
@@ -727,7 +757,7 @@ public class ChatActivity extends BaseActivity implements
                             // 当resultCode==0时，表示红包已过期、红包已退回、红包已领完
                             OpenRedpacket openRedpacket = result.getData();
                             Bundle bundle = new Bundle();
-                            Intent intent = new Intent(mContext, RedDetailsActivity.class);
+                            Intent intent = new Intent(mContext, RedDetailsAuldActivity.class);
                             bundle.putSerializable("openRedpacket", openRedpacket);
                             bundle.putInt("redAction", 0);
                             if (!TextUtils.isEmpty(result.getResultMsg())) //resultMsg不为空表示红包已过期
@@ -1173,7 +1203,8 @@ public class ChatActivity extends BaseActivity implements
     /**
      * 点击红包
      */
-    public void clickRedPacket(ChatMessage msg) {
+    @Deprecated
+    public void clickRedPacketAuld(ChatMessage msg) {
         HashMap<String, String> params = new HashMap<>();
         params.put("access_token", coreManager.getSelfStatus().accessToken);
         params.put("id", msg.getObjectId());
@@ -1182,7 +1213,6 @@ public class ChatActivity extends BaseActivity implements
                 .params(params)
                 .build()
                 .execute(new BaseCallback<OpenRedpacket>(OpenRedpacket.class) {
-
                     @Override
                     public void onResponse(ObjectResult<OpenRedpacket> result) {
                         if (result.getResultCode() == 1) {
@@ -1190,7 +1220,7 @@ public class ChatActivity extends BaseActivity implements
                                     msg.getContent(), null);
                             mRedDialog = new RedDialog(mContext, redDialogBean, () -> {
                                 // 打开红包
-                                openRedPacket(msg);
+                                rushRedPacket(msg,false);
                             });
                             mRedDialog.show();
                         } else {
@@ -1208,10 +1238,17 @@ public class ChatActivity extends BaseActivity implements
                 });
     }
 
+
+
+    public void clickRedPacket(ChatMessage msg) {
+        String userId = CoreManager.getSelf(this).getUserId();
+        gainRedPacket(this,msg,userId);
+    }
+
     /**
      * 打开红包
      */
-    public void openRedPacket(final ChatMessage message) {
+    public void openRedPacketAuld(final ChatMessage message) {
         HashMap<String, String> params = new HashMap<String, String>();
         String redId = message.getObjectId();
         params.put("access_token", coreManager.getSelfStatus().accessToken);
@@ -1235,7 +1272,7 @@ public class ChatActivity extends BaseActivity implements
 
                             OpenRedpacket openRedpacket = result.getData();
                             Bundle bundle = new Bundle();
-                            Intent intent = new Intent(mContext, RedDetailsActivity.class);
+                            Intent intent = new Intent(mContext, RedDetailsAuldActivity.class);
                             bundle.putSerializable("openRedpacket", openRedpacket);
                             bundle.putInt("redAction", 1);
                             bundle.putInt("timeOut", 0);
@@ -1259,6 +1296,148 @@ public class ChatActivity extends BaseActivity implements
                             mRedDialog.dismiss();
                         }
                     }
+                });
+    }
+
+    /*
+     * 抢红包
+    public void rushRedPacket(final ChatMessage message) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        String redId = message.getObjectId();
+        String userId = coreManager.getSelf().getUserId();
+        String receiveName = coreManager.getSelf().getNickName();
+
+        params.put("access_token", coreManager.getSelfStatus().accessToken);
+        params.put("redId", redId);
+        params.put("userId", userId);
+        params.put("receiveName", receiveName);
+        params.put("currencyId", "currencyId");
+        params.put("currencyName", "currencyName");
+
+        HttpUtils.get().url(coreManager.getConfig().RUSH_RED_PACKET)
+                .params(params)
+                .build()
+                .execute(new BaseCallback<OpenRedpacket>(OpenRedpacket.class) {
+
+                    @Override
+                    public void onResponse(ObjectResult<OpenRedpacket> result) {
+                        if (mRedDialog != null) {
+                            mRedDialog.dismiss();
+                        }
+                        if (result.getData() != null) {
+                            // 标记已经领取过了一次,不可再领取
+                            message.setFileSize(2);
+                            ChatMessageDao.getInstance().updateChatMessageReceiptStatus(mLoginUserId, mFriend.getUserId(), message.getPacketId());
+                            mChatContentView.notifyDataSetChanged();
+
+                            OpenRedpacket openRedpacket = result.getData();
+                            Bundle bundle = new Bundle();
+                            Intent intent = new Intent(mContext, RedDetailsAuldActivity.class);
+                            bundle.putSerializable("openRedpacket", openRedpacket);
+                            bundle.putInt("redAction", 1);
+                            bundle.putInt("timeOut", 0);
+
+                            bundle.putBoolean("isGroup", false);
+                            bundle.putString("mToUserId", mFriend.getUserId());
+                            intent.putExtras(bundle);
+                            mContext.startActivity(intent);
+                            // 更新余额
+                            coreManager.updateMyBalance();
+
+                            showReceiverRedLocal(openRedpacket);
+                        } else {
+                            Toast.makeText(ChatActivity.this, result.getResultMsg(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        if (mRedDialog != null) {
+                            mRedDialog.dismiss();
+                        }
+                    }
+                });
+    }
+ */
+
+
+    /**
+     * 验证是否抢过红包
+     *
+     * @param context
+     * @param userId
+     */
+    private void gainRedPacket(Context context,ChatMessage message, String userId) {
+
+        final RedPacketResult redPacket = new Gson().fromJson(message.getObjectId(), RedPacketResult.class);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("redIdS", redPacket.redId);
+        params.put("userId", userId);
+        RedPacketHelper.gainRedPacket(context, params,
+                error -> {
+                },
+                result -> {
+                    if (Result.checkSuccess(context, result, false)) {  //未抢过当前红包
+
+                        RedDialogBean redDialogBean =
+                                new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
+
+                        mRedDialog = new RedDialog(mContext, redDialogBean,
+                                () -> {
+                                    rushRedPacket(message, true);
+                                    mRedDialog.dismiss();
+                                });
+                        mRedDialog.show();
+
+                    } else if (result.getResultCode() == CODE_AUTH_RED_PACKET_GAIN) {
+                        rushRedPacket(message, false);
+                    }
+                });
+    }
+
+    /**
+     * 抢红包
+     */
+    public void rushRedPacket(final ChatMessage message, boolean isGrab) {
+        HashMap<String, String> params = new HashMap<String, String>();
+
+        final RedPacketResult redPacket = new Gson().fromJson(message.getObjectId(), RedPacketResult.class);
+
+        String userId = CoreManager.getSelf(mContext).getUserId();
+        String receiveName = CoreManager.getSelf(mContext).getNickName();
+        params.put("redId", redPacket.redId);
+        params.put("userId", userId);
+        params.put("receiveName", receiveName);
+        params.put("currencyId", redPacket.currencyId);
+        params.put("currencyName", redPacket.currencyName);
+        params.put("type", redPacket.type);
+        RedPacketHelper.rushRedPacket(mContext, params,
+                error -> {
+                },
+                result -> {
+                    if (isGrab) {  //第一次抢红包
+                        message.setFileSize(2);
+                        ChatMessageDao.getInstance().updateChatMessageReceiptStatus(mLoginUserId, mFriend.getUserId(), message.getPacketId());
+                        mChatContentView.notifyDataSetChanged();
+
+                        coreManager.updateMyBalance();
+//                        showReceiverRedLocal(openRedpacket);
+                        // 更新余额
+                        CoreManager.updateMyBalance();
+
+                    }
+
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext, RedDetailsActivity.class);
+                    bundle.putParcelable("openRedpacket", result);
+                    bundle.putInt("redAction", 0);
+                    bundle.putBoolean("isGroup", isGrab);
+                    bundle.putString("mToUserId", message.getToUserId());
+                    bundle.putSerializable("redPacket", redPacket);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+
                 });
     }
 
@@ -1572,9 +1751,29 @@ public class ChatActivity extends BaseActivity implements
 
     @Override
     public void clickRedpacket() {
-        Intent intent = new Intent(this, SendRedPacketActivity.class);
-        intent.putExtra(FLYAppConstant.EXTRA_USER_ID, mFriend.getUserId());
-        startActivityForResult(intent, REQUEST_CODE_SEND_RED);
+
+        boolean hasPayPassword = PreferenceUtils.getBoolean(this,
+                Constants.IS_CAPITAL_PASSWORD_SET + coreManager.getSelf().getUserId());
+
+        if (!hasPayPassword) {
+            String userId = coreManager.getSelf().getUserId();
+            RedPacketHelper.detectionCapitalPassword(getApplication(), coreManager, userId,
+                    error -> {
+                        Intent intent = new Intent(this, CapitalPasswordActivity.class);
+                        startActivity(intent);
+                    },
+                    success -> {
+                        Intent intent = new Intent(this, SendRedPacketActivity.class);
+                        intent.putExtra(FLYAppConstant.EXTRA_USER_ID, mFriend.getUserId());
+                        intent.putExtra(FLYAppConstant.EXTRA_NICK_NAME, mFriend.getNickName());
+                        startActivityForResult(intent, REQUEST_CODE_SEND_RED);
+                    });
+        } else {
+            Intent intent = new Intent(this, SendRedPacketActivity.class);
+            intent.putExtra(FLYAppConstant.EXTRA_USER_ID, mFriend.getUserId());
+            intent.putExtra(FLYAppConstant.EXTRA_NICK_NAME, mFriend.getNickName());
+            startActivityForResult(intent, REQUEST_CODE_SEND_RED);
+        }
     }
 
     @Override
@@ -1918,10 +2117,35 @@ public class ChatActivity extends BaseActivity implements
         compress(message.file);
     }
 
+//    @Subscribe(threadMode = ThreadMode.MainThread)
+//    public void helloEventBus(EventRedReceived message) {
+//        showReceiverRedLocal(message.getOpenRedpacket());
+//    }
+
     @Subscribe(threadMode = ThreadMode.MainThread)
     public void helloEventBus(EventRedReceived message) {
-        showReceiverRedLocal(message.getOpenRedpacket());
+        showReceiverRedLocal(message.getRushRedPacket());
     }
+
+
+    private void showReceiverRedLocal(RushRedPacket openRedpacket) {
+        // 本地显示一条领取通知
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setFileSize(XmppMessage.TYPE_83);
+        chatMessage.setFilePath(openRedpacket.redUser.redId);
+        chatMessage.setFromUserId(mLoginUserId);
+        chatMessage.setFromUserName(mLoginNickName);
+        chatMessage.setToUserId(mFriend.getUserId());
+        chatMessage.setType(XmppMessage.TYPE_TIP);
+        chatMessage.setContent(getString(R.string.red_received_self, openRedpacket.redUser.userName));
+        chatMessage.setPacketId(UUID.randomUUID().toString().replaceAll("-", ""));
+        chatMessage.setTimeSend(TimeUtils.sk_time_current_time());
+        if (ChatMessageDao.getInstance().saveNewSingleChatMessage(mLoginUserId, mFriend.getUserId(), chatMessage)) {
+            mChatMessages.add(chatMessage);
+            mChatContentView.notifyDataSetInvalidated(true);
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

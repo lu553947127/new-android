@@ -1,5 +1,6 @@
 package com.ktw.fly.ui.account;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +69,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public static final String THIRD_TYPE_WECHAT = "2";
     public static final String THIRD_TYPE_QQ = "1";
 
+    //登录方式默认为手机登录
+    public int mLoginType = 0;
+
     private EditText mPhoneNumberEdit;
     private EditText mPasswordEdit;
     private TextView tv_prefix;
@@ -82,6 +87,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     };
     private Button forgetPasswordBtn, registerBtn, loginBtn;
     private boolean third;
+    private EditText mEmailPasswordEdit;
+    private EditText mEmailEdit;
+
 
     public LoginActivity() {
         noLoginRequired();
@@ -150,7 +158,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         getSupportActionBar().hide();
         findViewById(R.id.iv_title_left).setVisibility(View.GONE);
         TextView tvTitle = (TextView) findViewById(R.id.tv_title_center);
-        checkBox=findViewById(R.id.checkbox_password);
+        checkBox = findViewById(R.id.checkbox_password);
         if (TextUtils.isEmpty(thirdToken)) {
             tvTitle.setText(getString(R.string.login));
         } else {
@@ -181,9 +189,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
+
+        loginType();
+
         mPhoneNumberEdit = (EditText) findViewById(R.id.phone_numer_edit);
         mPasswordEdit = (EditText) findViewById(R.id.password_edit);
+        mEmailEdit = (EditText) findViewById(R.id.email_edit);
+        mEmailPasswordEdit = (EditText) findViewById(R.id.email_password_edit);
         PasswordHelper.bindPasswordEye(mPasswordEdit, findViewById(R.id.tbEye));
+        PasswordHelper.bindPasswordEye(mEmailPasswordEdit, findViewById(R.id.tb_email_Eye));
         tv_prefix = (TextView) findViewById(R.id.tv_prefix);
         if (coreManager.getConfig().registerUsername) {
             tv_prefix.setVisibility(View.GONE);
@@ -221,7 +235,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         UsernameHelper.initEditText(mPhoneNumberEdit, coreManager.getConfig().registerUsername);
         // mPasswordEdit.setHint(InternationalizationHelper.getString("JX_InputPassWord"));
         loginBtn.setText(getString(R.string.login));
-        registerBtn.setText(getString(R.string.register));
+        registerBtn.setText(getString(R.string.phone_register));
         forgetPasswordBtn.setText(getString(R.string.forget_password));
 
         findViewById(R.id.sms_login_btn).setOnClickListener(this);
@@ -252,6 +266,29 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
+    /**
+     * 切换登录方式
+     */
+    private void loginType() {
+        RadioGroup rgLogin = findViewById(R.id.rg_login);
+        rgLogin.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.rb_phone:
+                    findViewById(R.id.ll_phone).setVisibility(View.VISIBLE);
+                    findViewById(R.id.ll_email).setVisibility(View.GONE);
+                    registerBtn.setText(getString(R.string.phone_register));
+                    mLoginType = LoginHelper.LOGIN_PHONE;
+                    break;
+                case R.id.rb_email:
+                    findViewById(R.id.ll_phone).setVisibility(View.GONE);
+                    findViewById(R.id.ll_email).setVisibility(View.VISIBLE);
+                    registerBtn.setText(getString(R.string.email_register));
+                    mLoginType = LoginHelper.LOGIN_EMAIL;
+                    break;
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -262,15 +299,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.login_btn:
                 // 登陆
-                if (checkBox.isChecked()){
+                if (checkBox.isChecked()) {
                     String phoneNumber = mPhoneNumberEdit.getText().toString().trim();
-                    String password = mPasswordEdit.getText().toString().trim();
-                    PreferenceUtils.putString(this,"password",password);
-                    PreferenceUtils.putBoolean(this,"iSpassword",true);
-                }else {
 
-                    PreferenceUtils.putBoolean(this,"iSpassword",false);
-
+                    String password = mLoginType == LoginHelper.LOGIN_PHONE ?
+                            mPasswordEdit.getText().toString().trim() :
+                            mEmailPasswordEdit.getText().toString().trim();
+                    PreferenceUtils.putString(this, "password", password);
+                    PreferenceUtils.putBoolean(this, "iSpassword", true);
+                } else {
+                    PreferenceUtils.putBoolean(this, "iSpassword", false);
                 }
                 login(false);
                 break;
@@ -294,7 +332,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.forget_password_btn:
                 // 忘记密码
-                startActivity(new Intent(mContext, FindPwdActivity.class));
+                Intent findIntent = new Intent(mContext, FindPwdActivity.class);
+                findIntent.putExtra("loginType", mLoginType);
+                startActivity(findIntent);
                 break;
             case R.id.sms_login_btn:
                 Intent iS = new Intent(LoginActivity.this, SwitchLoginActivity.class);
@@ -315,10 +355,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         RegisterActivity.registerFromThird(
                 this,
                 mobilePrefix,
-                mPhoneNumberEdit.getText().toString(),
-                mPasswordEdit.getText().toString(),
+                mLoginType == LoginHelper.LOGIN_PHONE ? mPhoneNumberEdit.getText().toString() : mEmailEdit.getText().toString(),
+                mLoginType == LoginHelper.LOGIN_PHONE ? mPasswordEdit.getText().toString() : mEmailPasswordEdit.getText().toString(),
                 thirdToken,
-                thirdTokenType
+                thirdTokenType,
+                mLoginType
         );
     }
 
@@ -332,17 +373,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void login() {
         PreferenceUtils.putInt(this, Constants.AREA_CODE_KEY, mobilePrefix);
-        final String phoneNumber = mPhoneNumberEdit.getText().toString().trim();
-        String password = mPasswordEdit.getText().toString().trim();
+
+        final String account = mLoginType == LoginHelper.LOGIN_PHONE ?
+                mPhoneNumberEdit.getText().toString().trim() :
+                mEmailEdit.getText().toString().trim();
+
+        String password = mLoginType == LoginHelper.LOGIN_PHONE ?
+                mPasswordEdit.getText().toString().trim() :
+                mEmailPasswordEdit.getText().toString().trim();
 
         if (TextUtils.isEmpty(thirdToken)) {
             // 第三方登录的不处理账号密码，
-            if (TextUtils.isEmpty(phoneNumber) && TextUtils.isEmpty(password)) {
+            if (TextUtils.isEmpty(account) && TextUtils.isEmpty(password)) {
                 Toast.makeText(mContext, getString(R.string.please_input_account_and_password), Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if (TextUtils.isEmpty(phoneNumber)) {
+            if (TextUtils.isEmpty(account)) {
                 Toast.makeText(mContext, getString(R.string.please_input_account), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -379,38 +426,73 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }
 
-        LoginSecureHelper.secureLogin(
-                        this, coreManager,
-                String.valueOf(mobilePrefix),
-                phoneNumber, password,
-                thirdToken, thirdTokenType,
-                third,
-                        params,
-                t -> {
-                    DialogHelper.dismissProgressDialog();
-                    ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
-                }, result -> {
-                    DialogHelper.dismissProgressDialog();
-                    if (!Result.checkSuccess(getApplicationContext(), result)) {
-                        if (Result.checkError(result, Result.CODE_THIRD_NO_EXISTS)) {
-                            // 如果返回1040306表示这个IM账号不存在，跳到注册页面让用户走注册IM账号并绑定微信，
-                            register();
-                        } else if (Result.checkError(result, Result.CODE_THIRD_NO_PHONE)) {
-                            // 微信没有绑定IM账号，跳到注册，注册页有回来登录老账号的按钮，
-                            register();
-                            finish();
+        if (mLoginType == LoginHelper.LOGIN_PHONE) {
+            LoginSecureHelper.secureLogin(
+                    this, coreManager,
+                    String.valueOf(mobilePrefix),
+                    account, password,
+                    thirdToken, thirdTokenType,
+                    third,
+                    params,
+                    t -> {
+                        DialogHelper.dismissProgressDialog();
+                        ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
+                    }, result -> {
+                        DialogHelper.dismissProgressDialog();
+                        if (!Result.checkSuccess(getApplicationContext(), result)) {
+                            if (Result.checkError(result, Result.CODE_THIRD_NO_EXISTS)) {
+                                // 如果返回1040306表示这个IM账号不存在，跳到注册页面让用户走注册IM账号并绑定微信，
+                                register();
+                            } else if (Result.checkError(result, Result.CODE_THIRD_NO_PHONE)) {
+                                // 微信没有绑定IM账号，跳到注册，注册页有回来登录老账号的按钮，
+                                register();
+                                finish();
+                            }
+                            return;
                         }
-                        return;
+                        if (!TextUtils.isEmpty(result.getData().getAuthKey())) {
+                            DialogHelper.showMessageProgressDialog(mContext, getString(R.string.tip_need_auth_login));
+                            CheckAuthLoginRunnable authLogin = new CheckAuthLoginRunnable(result.getData().getAuthKey(), account, digestPwd);
+                            waitAuth(authLogin);
+                            return;
+                        }
+                        afterLogin(result, account, digestPwd);
                     }
-                    if (!TextUtils.isEmpty(result.getData().getAuthKey())) {
-                        DialogHelper.showMessageProgressDialog(mContext, getString(R.string.tip_need_auth_login));
-                        CheckAuthLoginRunnable authLogin = new CheckAuthLoginRunnable(result.getData().getAuthKey(), phoneNumber, digestPwd);
-                        waitAuth(authLogin);
-                        return;
+            );
+        } else {
+            LoginSecureHelper.secureEmailLogin(
+                    this, coreManager,
+                    String.valueOf(mobilePrefix),
+                    account, password,
+                    thirdToken, thirdTokenType,
+                    third,
+                    params,
+                    t -> {
+                        DialogHelper.dismissProgressDialog();
+                        ToastUtil.showToast(this, this.getString(R.string.tip_login_secure_place_holder, t.getMessage()));
+                    }, result -> {
+                        DialogHelper.dismissProgressDialog();
+                        if (!Result.checkSuccess(getApplicationContext(), result)) {
+                            if (Result.checkError(result, Result.CODE_THIRD_NO_EXISTS)) {
+                                // 如果返回1040306表示这个IM账号不存在，跳到注册页面让用户走注册IM账号并绑定微信，
+                                register();
+                            } else if (Result.checkError(result, Result.CODE_THIRD_NO_PHONE)) {
+                                // 微信没有绑定IM账号，跳到注册，注册页有回来登录老账号的按钮，
+                                register();
+                                finish();
+                            }
+                            return;
+                        }
+                        if (!TextUtils.isEmpty(result.getData().getAuthKey())) {
+                            DialogHelper.showMessageProgressDialog(mContext, getString(R.string.tip_need_auth_login));
+                            CheckAuthLoginRunnable authLogin = new CheckAuthLoginRunnable(result.getData().getAuthKey(), account, digestPwd);
+                            waitAuth(authLogin);
+                            return;
+                        }
+                        afterLogin(result, account, digestPwd);
                     }
-                    afterLogin(result, phoneNumber, digestPwd);
-                }
-        );
+            );
+        }
     }
 
     private void afterLogin(ObjectResult<LoginRegisterResult> result, String phoneNumber, String digestPwd) {
@@ -434,6 +516,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         authLogin.waitAuthHandler.postDelayed(authLogin, 3000);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

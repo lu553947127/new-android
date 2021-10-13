@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.j256.ormlite.stmt.query.In;
 import com.ktw.fly.R;
 import com.ktw.fly.ui.base.BaseActivity;
+import com.ktw.fly.ui.me.capital.CapitalPasswordActivity;
 import com.ktw.fly.ui.me.question.QuestionFeedbackActivity;
 import com.ktw.fly.ui.me.question.ViewQuestionActivity;
 import com.ktw.fly.ui.me.question.ViewQuestionChildActivity;
@@ -41,6 +43,7 @@ public class SecureSettingActivity extends BaseActivity implements View.OnClickL
         findViewById(R.id.rlt_unfreeze_account).setOnClickListener(this);
         findViewById(R.id.rlt_complaints).setOnClickListener(this);
         findViewById(R.id.rlt_cancellation_account).setOnClickListener(this);
+        findViewById(R.id.rlt_account_capital).setOnClickListener(this);
     }
 
     @Override
@@ -67,7 +70,9 @@ public class SecureSettingActivity extends BaseActivity implements View.OnClickL
             case R.id.rlt_cancellation_account:
                 operateAccount(AccountOperateActivity.OPERATE_UNSUBSCRIBE_ACCOUNT);
                 break;
-
+            case R.id.rlt_account_capital:
+                startActivity(new Intent(SecureSettingActivity.this, CapitalPasswordActivity.class));
+                break;
 
         }
 

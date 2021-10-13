@@ -148,6 +148,31 @@
             </RelativeLayout>
 
 
+            <RelativeLayout
+                android:id="@+id/rlt_account_capital"
+                style="@style/MeLayoutStyle">
+
+                <ImageView
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_account_capital" />
+
+                <TextView
+                    android:id="@+id/tv_account_capital"
+                    style="@style/IMTbleLine_TextName"
+                    android:layout_centerVertical="true"
+                    android:text="@string/capital_password" />
+
+                <ImageView
+                    style="@style/IMTbleLine_ArrowImg.Me"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/me_chevron_right"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
         </LinearLayout>
 
     </ScrollView>

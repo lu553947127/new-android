@@ -25,6 +25,7 @@ import com.ktw.fly.db.dao.FriendDao;
 import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.sp.UserSp;
+import com.ktw.fly.ui.account.AccountPasswordActivity;
 import com.ktw.fly.ui.account.ChangePasswordActivity;
 import com.ktw.fly.ui.account.LoginHistoryActivity;
 import com.ktw.fly.ui.backup.BackupHistoryActivity;
@@ -199,7 +200,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.change_password_rl:
                 // 修改密码
-                startActivity(new Intent(mContext, ChangePasswordActivity.class));
+                startActivity(new Intent(mContext, AccountPasswordActivity.class));
                 break;
             case R.id.switch_language:
                 // 切换语言

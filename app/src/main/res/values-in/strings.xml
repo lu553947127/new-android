@@ -2061,6 +2061,10 @@ _paling satu</string>
     <string name="add_by_address"> Tambahkan_teman_kontak</string>
     <string name="msg_emot">[表情]</string>
 
+
+    <string name="red_select_property">select_property</string>
+    <string name="red_number_of_issued_virtual_coins">red_number_of_issued_virtual_coins</string>
+
     <string name="wallet">Wallet</string>
     <string name="asdt">ASDT\nMy total assets</string>
     <string name="select_currency">Please select currency</string>

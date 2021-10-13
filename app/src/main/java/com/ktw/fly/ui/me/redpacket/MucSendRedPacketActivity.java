@@ -50,6 +50,7 @@ import java.util.Map;
 import okhttp3.Call;
 
 /**
+ * 群组发送红包
  * Created by 魏正旺 on 2016/9/8.
  */
 public class MucSendRedPacketActivity extends BaseActivity implements View.OnClickListener {

@@ -17,6 +17,7 @@ import com.ktw.fly.bean.PayCode;
 import com.ktw.fly.bean.PayPrivateKey;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.base.CoreManager;
+import com.ktw.fly.ui.me.redpacket.CapitalPasswordVerifyDialog;
 import com.ktw.fly.ui.me.redpacket.PayPasswordVerifyDialog;
 import com.ktw.fly.util.AsyncUtils;
 import com.ktw.fly.util.secure.AES;
@@ -64,6 +65,30 @@ public class PaySecureHelper {
         }
         return dialog;
     }
+
+
+    /**
+     * @param money 金额字符串，直接显示，单位元，
+     */
+    @MainThread
+    public static Dialog inputPayPassword(Context ctx, String action, String money, String capitalName, Function<String> onSuccess) {
+        CapitalPasswordVerifyDialog dialog = new CapitalPasswordVerifyDialog(ctx);
+        dialog.setAction(action);
+        dialog.setMoney(money);
+        dialog.setCapitalName(capitalName);
+
+        dialog.setOnInputFinishListener(password -> {
+
+            onSuccess.apply(password);
+        });
+        try {
+            dialog.show();
+        } catch (Exception ignored) {
+            // 线程切换可能导致弹对话框时activity已经关闭，show会抛异常，
+        }
+        return dialog;
+    }
+
 
     /**
      * 配置支付加密的参数，

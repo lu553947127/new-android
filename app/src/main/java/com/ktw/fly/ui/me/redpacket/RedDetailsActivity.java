@@ -1,5 +1,6 @@
 package com.ktw.fly.ui.me.redpacket;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,19 +13,32 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.ktw.fly.R;
+import com.ktw.fly.bean.Capital;
 import com.ktw.fly.bean.Friend;
 import com.ktw.fly.bean.RoomMember;
 import com.ktw.fly.bean.redpacket.OpenRedpacket;
+import com.ktw.fly.bean.redpacket.RedPacketResult;
+import com.ktw.fly.bean.redpacket.RushRedPacket;
 import com.ktw.fly.db.dao.FriendDao;
 import com.ktw.fly.db.dao.RoomMemberDao;
 import com.ktw.fly.helper.AvatarHelper;
 import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.ui.base.CoreManager;
+import com.ktw.fly.ui.me.redpacket.adapter.CapitalAdapter;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
 import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -39,264 +53,140 @@ import okhttp3.Call;
 
 /**
  * modify by zq
- * 单聊 普通红包、口令红包自己都不可领取
- * 群组 手气红包、口令红包自己可领取，普通红包不可领取
+ * <p>
+ * 红包详情
  */
-public class RedDetailsActivity extends BaseActivity implements View.OnClickListener {
-    LayoutInflater inflater;
-    DecimalFormat df = new DecimalFormat("######0.00");
+public class RedDetailsActivity extends BaseActivity {
+
     private ImageView red_head_iv;
     private TextView red_nickname_tv;
-    private TextView red_words_tv;
+
     private TextView red_money_tv;
     private TextView red_money_bit_tv;
-    private TextView red_reply_tv;
-    private TextView red_resultmsg_tv;
-    private ListView red_details_lsv;
-    private RedAdapter mRedAdapter;
-    private OpenRedpacket openRedpacket;
-    private OpenRedpacket.PacketEntity packetEntity;
-    private List<OpenRedpacket.ListEntity> list;
+
+    private RecyclerView red_details_lsv;
+
+    private RushRedPacket openRedpacket;
+
     private int redAction;  // 标记是抢到红包还是查看了红包
     private int timeOut;    // 标记红包是否已过时
-    private boolean isGroup;// 是否为群组
-    private String mToUserId; // userId || 群组jid
+
+
     private Friend mFriend; // 通过该mFriend，获取备注名、获取群成员表显示群内昵称
     private String resultMsg, redMsg;
     private Map<String, String> mGroupNickNameMap = new HashMap<>();
+    private RedPacketResult redPacket;
+    private TextView red_resultmsg_tv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redpacket_details);
         Bundle bundle = getIntent().getExtras();
-        openRedpacket = (OpenRedpacket) bundle.getSerializable("openRedpacket");
+        openRedpacket = bundle.getParcelable("openRedpacket");
         redAction = bundle.getInt("redAction");
         timeOut = bundle.getInt("timeOut");
-        isGroup = bundle.getBoolean("isGroup", false);
-        mToUserId = bundle.getString("mToUserId");
-        list = openRedpacket.getList();
-        packetEntity = openRedpacket.getPacket();
-        inflater = LayoutInflater.from(this);
+        redPacket = (RedPacketResult) bundle.getSerializable("redPacket");
         initView();
-        showData();
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void initView() {
         getSupportActionBar().hide();
 
-        red_head_iv = (ImageView) findViewById(R.id.red_head_iv);
-        red_nickname_tv = (TextView) findViewById(R.id.red_nickname_tv);
-        red_words_tv = (TextView) findViewById(R.id.red_words_tv);
-        red_money_tv = (TextView) findViewById(R.id.get_money_tv);
-        red_money_bit_tv = (TextView) findViewById(R.id.get_money_bit_tv);
-        red_reply_tv = (TextView) findViewById(R.id.reply_red_tv);
-
-        red_resultmsg_tv = (TextView) findViewById(R.id.red_resultmsg_tv);
-        red_details_lsv = (ListView) findViewById(R.id.red_details_lsv);
-
-        mFriend = FriendDao.getInstance().getFriend(coreManager.getSelf().getUserId(), mToUserId);
-        if (isGroup && mFriend != null) {// 群组红包 获取群内昵称 之后显示
-            List<RoomMember> mRoomMemberList = RoomMemberDao.getInstance().getRoomMember(mFriend.getRoomId());
-            if (mRoomMemberList != null && mRoomMemberList.size() > 0) {
-                for (int i = 0; i < mRoomMemberList.size(); i++) {
-                    RoomMember mRoomMember = mRoomMemberList.get(i);
-                    mGroupNickNameMap.put(mRoomMember.getUserId(), mRoomMember.getUserName());
-                }
+        findViewById(R.id.red_back_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RedDetailsActivity.this.finish();
             }
-        }
+        });
 
-        red_reply_tv.setOnClickListener(this);
-        findViewById(R.id.red_back_tv).setOnClickListener(this);
-        findViewById(R.id.get_redlist_tv).setOnClickListener(this);
-    }
 
-    private void showData() {
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        AvatarHelper.getInstance().displayAvatar(packetEntity.getUserName(), packetEntity.getUserId(), red_head_iv, true);
-        red_nickname_tv.setText(getString(R.string.someone_s_red_packet_place_holder, packetEntity.getUserName()));
-        red_words_tv.setText(packetEntity.getGreetings());
+        red_head_iv = findViewById(R.id.red_head_iv);
+        red_nickname_tv = findViewById(R.id.red_nickname_tv);
 
-        boolean isReceivedSelf = false;
-        for (OpenRedpacket.ListEntity entity : list) {
-            if (entity.getUserId().equals(coreManager.getSelf().getUserId())) {
-                isReceivedSelf = true;
-                red_money_tv.setText(df.format(entity.getMoney()));
-                if (!TextUtils.isEmpty(df.format(entity.getMoney()))) {
-                    red_money_bit_tv.setText(R.string.rmb);
-                    red_reply_tv.setText(TextUtils.isEmpty(entity.getReply()) ? getString(R.string.reply_red_thank) : entity.getReply());
-                }
-            }
-        }
+        red_money_tv = findViewById(R.id.get_money_tv);
+        red_money_bit_tv = findViewById(R.id.get_money_bit_tv);
+        red_details_lsv = findViewById(R.id.red_details_lsv);
+        red_resultmsg_tv = findViewById(R.id.red_resultmsg_tv);
 
-        if (!isReceivedSelf) {// 没有领取红包，隐藏回复按钮
-            red_reply_tv.setVisibility(View.GONE);
-        }
 
-        resultMsg = getString(R.string.red_packet_receipt_place_holder, list.size(), packetEntity.getCount(),
-                df.format(packetEntity.getMoney() - packetEntity.getOver()),
-                df.format(packetEntity.getMoney()));
+        AvatarHelper.getInstance().displayAvatar(redPacket.userName, redPacket.userId,
+                red_head_iv, true);
 
-        boolean got = false;
-        for (OpenRedpacket.ListEntity entity : list) {
-            if (TextUtils.equals(entity.getUserId(), coreManager.getSelf().getUserId())) {
-                got = true;
-                break;
-            }
-        }
+        red_nickname_tv.setText(getString(R.string.someone_s_red_packet, redPacket.userName));
 
-        if (list.size() == packetEntity.getCount()) {
-            redMsg = getString(R.string.red_packet_receipt_suffix_all);
-        } else if (got) {
-            redMsg = getString(R.string.red_packet_receipt_suffix_got);
-        } else if (timeOut == 1) {
-            redMsg = getString(R.string.red_packet_receipt_suffix_over);
+        red_money_tv.setText(formatMoney(openRedpacket.redCapital.capitalCount));
+        red_money_bit_tv.setText(openRedpacket.redCapital.capitalName);
+
+        if (openRedpacket.redCount.status == 0) {
+            red_resultmsg_tv.setText(getString(R.string.example_red_packet_remain, openRedpacket.redCount.receivedRedEnvelopeCount,
+                    openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.receivedRedEnvelopeCapital, openRedpacket.redCapital.capitalCount));
         } else {
-            redMsg = getString(R.string.red_packet_receipt_suffix_remain);
+            red_resultmsg_tv.setText(getString(R.string.example_red_packet_loot_all,
+                    openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.time));
         }
 
-        red_resultmsg_tv.setText(resultMsg + redMsg);
-        mRedAdapter = new RedAdapter();
-        mRedAdapter.preload();
-        red_details_lsv.setAdapter(mRedAdapter);
+
+        if (openRedpacket.redList != null && openRedpacket.redList.size() > 0) {
+            RedDetailsAdapter capitalAdapter = new RedDetailsAdapter(R.layout.reditem_layout, openRedpacket.redList);
+            red_details_lsv.setLayoutManager(new LinearLayoutManager(this));
+            red_details_lsv.setAdapter(capitalAdapter);
+        }
+
+//        mFriend = FriendDao.getInstance().getFriend(coreManager.getSelf().getUserId(), mToUserId);
+//        if (isGroup && mFriend != null) {// 群组红包 获取群内昵称 之后显示
+//            List<RoomMember> mRoomMemberList = RoomMemberDao.getInstance().getRoomMember(mFriend.getRoomId());
+//            if (mRoomMemberList != null && mRoomMemberList.size() > 0) {
+//                for (int i = 0; i < mRoomMemberList.size(); i++) {
+//                    RoomMember mRoomMember = mRoomMemberList.get(i);
+//                    mGroupNickNameMap.put(mRoomMember.getUserId(), mRoomMember.getUserName());
+//                }
+//            }
+//        }
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.iv_title_left || v.getId() == R.id.red_back_tv) {
-            finish();
-        } else if (v.getId() == R.id.get_redlist_tv) {
-            Intent intent = new Intent(RedDetailsActivity.this, RedListActivity.class);
-            startActivity(intent);
-        } else if (v.getId() == R.id.reply_red_tv) {
-            DialogHelper.showLimitSingleInputDialog(this, getString(R.string.replay),
-                    getString(R.string.reply_red_thank) + getString(R.string.input_most_length, 10), 1, 1, 10, v1 -> {
-                        final String text = ((EditText) v1).getText().toString().trim();
-                        if (TextUtils.isEmpty(text)) {
-                            return;
-                        }
-                        replyRed(text);
-                    });
-        }
-    }
 
-    // 查看红包领取详情
-    private void replyRed(String reply) {
-        HashMap<String, String> params = new HashMap<>();
-        params.put("access_token", CoreManager.requireSelfStatus(mContext).accessToken);
-        params.put("id", openRedpacket.getPacket().getId());
-        params.put("reply", reply);
-
-        HttpUtils.get().url(CoreManager.requireConfig(mContext).RENDPACKET_REPLY)
-                .params(params)
-                .build()
-                .execute(new BaseCallback<Void>(Void.class) {
-
-                    @Override
-                    public void onResponse(ObjectResult<Void> result) {
-                        if (result.getResultCode() == 1) {
-                            for (int i = 0; i < openRedpacket.getList().size(); i++) {
-                                if (openRedpacket.getList().get(i).getUserId().equals(coreManager.getSelf().getUserId())) {
-                                    red_reply_tv.setText(reply);
-                                    openRedpacket.getList().get(i).setReply(reply);
-                                    mRedAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e) {
-                    }
-                });
-    }
-
-    private class RedAdapter extends BaseAdapter {
-        View view;
-        private String lucklyUserId;
-
-        @Override
-        public int getCount() {
-            return list == null ? 0 : list.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            OpenRedpacket.ListEntity listEntity = list.get(position);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            long lcc_time = Long.valueOf(listEntity.getTime());
-            String StrTime = sdf.format(new Date(lcc_time * 1000L));
-
-            view = inflater.inflate(R.layout.reditem_layout, null);
-            String name;
-            if (isGroup) {
-                if (mGroupNickNameMap.size() > 0 && mGroupNickNameMap.containsKey(listEntity.getUserId())) {
-                    name = mGroupNickNameMap.get(listEntity.getUserId());
-                } else {
-                    name = listEntity.getUserName();
-                }
-            } else {
-                if (listEntity.getUserId().equals(coreManager.getSelf().getUserId())) {// 自己领取了
-                    name = listEntity.getUserName();
-                } else {
-                    if (mFriend != null) {
-                        name = TextUtils.isEmpty(mFriend.getRemarkName()) ? mFriend.getNickName() : mFriend.getRemarkName();
+    private String formatMoney(String money) {
+        try {
+            if (money.contains(".")) {
+                for (int i = 0; i < money.length(); i++) {
+                    int indMinPrice = money.indexOf(".");
+                    String subMinPrice = money.substring(indMinPrice);
+                    if (subMinPrice.length() - 1 == 1) {
+                        return money + "0";
                     } else {
-                        name = listEntity.getUserName();
+                        return money;
                     }
                 }
-            }
-            // 手气红包 && 红包已领完 显示手气最佳
-            if (openRedpacket.getPacket().getType() == 2
-                    && (openRedpacket.getPacket().getCount() == openRedpacket.getList().size())
-                    && TextUtils.equals(lucklyUserId, listEntity.getUserId())) {
-                view.findViewById(R.id.best_lucky_ll).setVisibility(View.VISIBLE);
             } else {
-                view.findViewById(R.id.best_lucky_ll).setVisibility(View.GONE);
+                return money + ".00";
             }
-            AvatarHelper.getInstance().displayAvatar(name, listEntity.getUserId(), (ImageView) view.findViewById(R.id.red_head_iv), true);
-            ((TextView) view.findViewById(R.id.username_tv)).setText(name);
-            ((TextView) view.findViewById(R.id.opentime_tv)).setText(StrTime);
-            ((TextView) view.findViewById(R.id.money_tv)).setText(df.format(listEntity.getMoney()) + getString(R.string.rmb));
-            if (!TextUtils.isEmpty(listEntity.getReply())) {
-                ((TextView) view.findViewById(R.id.reply_tv)).setText(listEntity.getReply());
-            }
-            return view;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "0.00";
+    }
+
+
+    private class RedDetailsAdapter extends BaseQuickAdapter<RushRedPacket.Red, BaseViewHolder> {
+
+        public RedDetailsAdapter(int layoutResId, @Nullable List<RushRedPacket.Red> data) {
+            super(layoutResId, data);
         }
 
-        public void preload() {
-            // 按时间排序，避免手气最佳固定在最上面，
-            Collections.sort(list, (o1, o2) ->
-                    // 时间大的排上面，
-                    -Integer.compare(o1.getTime(), o2.getTime())
-            );
-            if (openRedpacket.getPacket().getCount() == openRedpacket.getList().size()) {
-                // 计算手气最佳，
-                OpenRedpacket.ListEntity max = Collections.max(list, (o1, o2) -> {
-                            // 计算出领取金额最大的用户，
-                            int dMoney = Double.compare(o1.getMoney(), o2.getMoney());
-                            // 如果存在领取金额一样的，取时间小的，
-                            if (dMoney == 0) {
-                                return -Integer.compare(o1.getTime(), o2.getTime());
-                            }
-                            return dMoney;
-                        }
+        @Override
+        protected void convert(@NotNull BaseViewHolder holder, RushRedPacket.Red item) {
+            AvatarHelper.getInstance().displayAvatar(item.receiveName, item.receiveId, holder.getView(R.id.red_head_iv), true);
+            holder.setText(R.id.username_tv, item.receiveName);
+            holder.setText(R.id.opentime_tv, item.receiveTime);
+            holder.setText(R.id.money_tv, formatMoney(item.receiveCapital) + " " + item.currencyId);
+            holder.setVisible(R.id.best_lucky_ll, item.status == 0);
 
-                );
-                lucklyUserId = max.getUserId();
+            if (holder.getLayoutPosition() != 0) {
+                holder.setGone(R.id.line1, true);
             }
+
         }
     }
 }

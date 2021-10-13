@@ -703,9 +703,9 @@
     <string name="close">关闭</string>
     <string name="title_red_packet">红包</string>
     <string name="red_packet_history">红包记录</string>
-    <string name="someone_s_red_packet">...\'s 的红包</string>
+    <string name="someone_s_red_packet">%s的红包</string>
     <string name="best_wishes">恭喜发财，大吉大利!</string>
-    <string name="example_red_packet_remain">红包已领取2/3,剩余0.18/2元</string>
+
     <string name="default_phone_number_prefix" translatable="false">+86</string>
     <string name="hint_password">设置密码</string>
     <string name="graphic_code">图形码</string>
@@ -2310,6 +2310,78 @@
     <string name="question_feedback">意见反馈</string>
     <string name="complaints_suggestions">投诉与建议</string>
     <string name="feedback_img_num">%1$d张/%2$d</string>
+
+
+    <!-- 邮箱登录 修改密码 -->
+    <string name="input">邮箱</string>
+    <string name="hint_input_email">请输入邮箱</string>
+    <string name="phone_login">手机号登录</string>
+    <string name="email_login">邮箱登录</string>
+    <string name="phone_register">手机号注册</string>
+    <string name="email_register">邮箱注册</string>
+    <string name="login_password">登录密码</string>
+    <string name="set_password_hint">仅支持字母、数字和标点符号，最少6位，不能使用空格</string>
+    <string name="phone_security_verification">手机安全验证</string>
+    <string name="email_security_verification">邮箱安全验证</string>
+    <string name="please_input_new_password_hint">请设置新登录密码</string>
+    <string name="please_confirm_new_password_hint">请确认新登录密码</string>
+    <string name="new_password">新密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="security_verification">安全验证</string>
+    <string name="binding_email">绑定邮箱:</string>
+    <string name="binding_phone">绑定手机:</string>
+    <string name="hint_input_email_auth_code">请输入邮箱验证码</string>
+    <string name="hint_input_phone_auth_code">请输入手机验证码</string>
+    <string name="hint_receive_email_code">若未收到邮件，请检查邮件垃圾箱</string>
+    <string name="graphics_auth_code">图形验证码</string>
+    <string name="hint_input_graphics_auth_code">请输入图形验证码</string>
+    <string name="tip_email_wrong">请输入正确的邮箱格式</string>
+    <string name="tip_no_email_get_v_code">请输入邮箱账号在获取图形码</string>
+    <string name="tip_email_empty_request_verification_code">邮箱账号为空，不可刷新图形验证码</string>
+    <string name="tip_email_verification_code_empty">邮箱或图形验证码不能为空</string>
+    <string name="capital_password">资金密码</string>
+    <string name="reset_capital_password">修改资金密码成功</string>
+
+    <!--  红包   -->
+    <string name="red_select_property">选择资产</string>
+    <string name="red_number_of_issued_virtual_coins">总币量</string>
+    <string name="red_available_balance">可用余额%s</string>
+    <string name="ge">个</string>
+    <string name="red_cur_type">当前为%s,</string>
+    <string name="red_alter_type">改为%s,</string>
+    <string name="red_common_packer">普通红包</string>
+    <string name="red_luck_packer">拼手气红包</string>
+    <string name="red_number">红包个数</string>
+    <string name="red_number_hint">填写个数</string>
+    <string name="red_password_hint">输入红包口令，默认无口令</string>
+    <string name="red_greeting_hint">祝福语：恭喜发财，大吉大利</string>
+    <string name="red_restitution_info">未领取的红包，将于24小时后发起退款</string>
+    <string name="red_packet_list">红包明细</string>
+    <string name="red_send">发出红包</string>
+    <string name="red_receive">收到红包</string>
+    <string name="red_send_amount">发出红包累计</string>
+    <string name="red_receive_amount">收到红包累计</string>
+    <string name="red_packet_type">红包类型</string>
+    <string name="red_property_type">资产类型</string>
+    <string name="red_property_send_time">发出红包时间</string>
+    <string name="red_get_the_number">已领取红包个数</string>
+    <string name="red_get_the_amount">已领取红包总额</string>
+    <string name="red_uncollected_number">未领取红包个数</string>
+    <string name="red_unclaimed_amount">未领取红包总额</string>
+    <string name="red_get_the_details">领取详情</string>
+    <string name="red_receiver">领取人</string>
+    <string name="red_receiver_sum">领取金额</string>
+    <string name="red_receiver_time">领取时间</string>
+    <string name="tip_no_capital_password">请先设置资金密码</string>
+    <string name="single_red_packer">单个红包币量</string>
+    <string name="choose_capital_type">请选择资产类型</string>
+    <string name="send_red_packet_amount">发送红包总额</string>
+    <string name="hint_input_capital_password">请输入资金密码</string>
+    <string name="please_input_capital_password_hint">请输入资金密码</string>
+    <string name="please_confirm_capital_password_hint">请确认资金密码</string>
+    <string name="example_red_packet_remain">红包已领取%s/%s,共%s/%s</string>
+    <string name="example_red_packet_loot_all">%s个红包,%s秒被抢光</string>
+
 
     <string name="wallet">钱包</string>
     <string name="asdt">ASDT\n我的总资产</string>

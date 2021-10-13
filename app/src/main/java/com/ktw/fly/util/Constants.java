@@ -91,6 +91,7 @@ public class Constants {
     // 字体大小
     public final static String FONT_SIZE = "font_size";
     public final static String IS_PAY_PASSWORD_SET = "isPayPasswordSet";
+    public final static String IS_CAPITAL_PASSWORD_SET = "isCapitalPasswordSet";
     @SuppressWarnings("WeakerAccess")
     public static final String KEY_SKIN_NAME = "KEY_SKIN_NAME";
     /*

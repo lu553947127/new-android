@@ -102,4 +102,9 @@ public class FLYAppConstant {
 
     public static final int SDKTRANSFR_PAY = 17;// 第三方调取IM支付通知
     public static final int PASS_WORD_LENGTH = 6;
+
+    //普通红包
+    public static final int COMMON_RED_PACKER = 1;
+    //拼手气红包
+    public static final int LUCK_RED_PACKER = 2;
 }

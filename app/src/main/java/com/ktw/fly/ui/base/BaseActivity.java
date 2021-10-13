@@ -1,5 +1,6 @@
 package com.ktw.fly.ui.base;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.ktw.fly.util.LocaleHelper;
 
 public abstract class BaseActivity extends BaseLoginActivity {
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocaleHelper.setLocale(this, LocaleHelper.getLanguage(this));

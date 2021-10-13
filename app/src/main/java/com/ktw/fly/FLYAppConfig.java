@@ -24,18 +24,18 @@ public class FLYAppConfig {
     public static final String apiKey = "a891a7a6-03af-475c-8ae1-7fb4b230e958";
 
 //    public static String HOST = "http://aachat.aachain.org";// Socket IM 服务器入口
-    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
-//    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
+//    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
+    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
 
-    public static String CONFIG_URL = HOST + "/config";
+    public static String CONFIG_URL = HOST + "config";
     //客服列表
-    public static String API_CUSTOMER_LIST = HOST + "/customerLink/list";
+    public static String API_CUSTOMER_LIST = HOST + "customerLink/list";
     //提现记录列表
-    public static String API_WITHDRAWL_LIST = HOST + "/api/withdrawlList";
+    public static String API_WITHDRAWL_LIST = HOST + "api/withdrawlList";
     //上传申请优惠
-    public static String API_ADD_WITHDRAWL = HOST + "/api/addWithdrawl";
+    public static String API_ADD_WITHDRAWL = HOST + "api/addWithdrawl";
     //启动页广告图和视频|导航栏
-    public static String API_APP_SOURCE = HOST + "/api/appResource/queryByCode";
+    public static String API_APP_SOURCE = HOST + "api/appResource/queryByCode";
 
     /* 基本地址 */
     public String apiUrl;// Api的服务器地址
@@ -50,17 +50,26 @@ public class FLYAppConfig {
     /* Api地址--》衍生地址 */
     /* 注册登录 */
     public String USER_REGISTER;// 注册
+    public String USER_EMAIL_REGISTER;// 邮箱注册
     public String USER_THIRD_REGISTER;// 第三方注册
-    public String USER_LOGIN;// 登陆
+    public String USER_LOGIN;// 手机登陆
+    public String USER_LOGIN_EMAIL;// 邮箱登陆
     public String USER_SMS_LOGIN;// 短信登陆
     public String USER_THIRD_LOGIN;// 第三方登陆
     public String USER_THIRD_BIND; // 第三方绑定，
     public String USER_THIRD_BIND_LOGIN; // 第三方绑定登录，
     public String USER_PASSWORD_UPDATE;// 修改登录密码
-    public String USER_PASSWORD_RESET;// 重置登录密码
+    public String USER_PASSWORD_RESET;// 手机号重置登录密码
+    public String USER_PASSWORD_RESET_EMAIL;// 邮箱重置登录密码
     public String USER_LOGIN_AUTO;// 检测Token是否过期 0未更换 1更换过
     public String USER_GETCODE_IMAGE; // 获取图形验证码
+    public String USER_GETCODE_IMAGE_EMAIL; // 获取图形验证码_邮箱
     public String SEND_AUTH_CODE;// 获取手机验证码
+    public String SEND_EMAIL_AUTH_CODE;// 获取邮箱验证码
+    public String SEND_PHONE_AUTH_CODE_CAPITAL;// 获取修改资金密码手机验证码
+    public String VERIFY_CODE_CAPITAL_PHONE;// 修改资金密码--验证手机验证码
+    public String VERIFY_CODE_CAPITAL_EMAIL;// 修改资金密码--验证邮箱验证码
+    public String RESET_CAPITAL_PASSWORD;// 修改资金密码
     public String VERIFY_TELEPHONE;// 验证手机号有没有被注册
     public String QR_CODE_LOGIN;// 扫码登录，
     // 老设备授权登录登录，
@@ -71,6 +80,7 @@ public class FLYAppConfig {
     public String LOGIN_SECURE_GET_PRIVATE_KEY;// 获取加密私钥
     public String LOGIN_SECURE_UPLOAD_KEY;// 上传RSA公私钥
     public String LOGIN_SECURE_GET_CODE;// 获取加固临时密码
+    public String LOGIN_SECURE_GET_CODE_EMAIL;// 获取加固临时密码
     /* 支付加固 */
     public String PAY_SECURE_GET_PRIVATE_KEY;// 获取加密私钥
     public String PAY_SECURE_UPLOAD_KEY;// 上传RSA公私钥
@@ -107,6 +117,8 @@ public class FLYAppConfig {
 
     public String USER_GET_PUBLIC_MENU; // 获取公众号菜单
     public String USER_DEL_CHATMESSAGE; // 删除聊天记录
+    public String USER_ACCOUNT_DATA;//账号数据
+
 
     /* 好友 */
     public String FRIENDS_ATTENTION_LIST;// 获取关注列表
@@ -290,6 +302,16 @@ public class FLYAppConfig {
     public String CANCEL_ACCOUNT;//注销账号
     public String QUESTION_FEEDBACK;//问题反馈
     public String GET_QUESTION_ITEM;//获取单条信息
+
+    //==================================红包start===============================================
+    public String GET_CAPITAL_TYPE;//获取资金类型
+    public String GET_CAPITAL_BY_USER;//根据资金类型获取剩余金额
+    public String CHECK_CAPITAL_PWD;//验证支付密码是否正确
+    public String SELECT_USER_CAPITAL_PWD;//查询是否设置了支付密码
+    public String SEND_RED_PACKET;//发送红包
+    public String RUSH_RED_PACKET;//抢红包
+    public String GAIN_RED_PACKET;//判断红包是否已经抢过
+    //==================================红包end==================================================
 
 
     public String GET_RECHARGE_ORDER;//第三方充值订单
@@ -536,17 +558,26 @@ public class FLYAppConfig {
         String apiUrl = TextUtils.isEmpty(config.apiUrl) ? HOST : config.apiUrl;
         /* 登陆注册 */
         config.USER_REGISTER = apiUrl + "user/register/v1";// 注册
+        config.USER_EMAIL_REGISTER = apiUrl + "user/registerMail";// 邮箱注册
         config.USER_THIRD_REGISTER = apiUrl + "user/registerSDK/v1";// 第三方注册
-        config.USER_LOGIN = apiUrl + "user/login/v1";// 登陆
+        config.USER_LOGIN = apiUrl + "user/login/v1";// 手机号登陆
+        config.USER_LOGIN_EMAIL = apiUrl + "user/loginMailbox";// 邮箱登陆
         config.USER_SMS_LOGIN = apiUrl + "user/smsLogin";// 短信登陆
         config.USER_THIRD_LOGIN = apiUrl + "user/sdkLogin/v1";// 第三方登陆
         config.USER_THIRD_BIND = apiUrl + "user/bindWxAccount";// 第三方绑定
         config.USER_THIRD_BIND_LOGIN = apiUrl + "user/bindingTelephone/v1";// 第三方绑定登录
         config.USER_PASSWORD_UPDATE = apiUrl + "user/password/update";//  修改登录密码
         config.USER_PASSWORD_RESET = apiUrl + "user/password/reset";// 重置登录密码
+        config.USER_PASSWORD_RESET_EMAIL = apiUrl + "user/loginMailboxPassword";// 邮箱重置登录密码
         config.USER_LOGIN_AUTO = apiUrl + "user/login/auto/v1";// 检测Token是否过期
         config.USER_GETCODE_IMAGE = apiUrl + "getImgCode";// 获取图形验证码
+        config.USER_GETCODE_IMAGE_EMAIL = apiUrl + "getImgCodeMailbox"; // 获取图形验证码_邮箱
         config.SEND_AUTH_CODE = apiUrl + "basic/randcode/sendSms";// 获取手机验证码
+        config.SEND_EMAIL_AUTH_CODE = apiUrl + "sendEmail/sendEmailM";// 获取邮箱验证码
+        config.SEND_PHONE_AUTH_CODE_CAPITAL = apiUrl + "sendPhoneCapitalPwd/sendPhone";// 获取修改资金手机验证码
+        config.VERIFY_CODE_CAPITAL_PHONE = apiUrl + "capital/capitalSendPhone";// 验证修改资金手机验证码
+        config.VERIFY_CODE_CAPITAL_EMAIL = apiUrl + "capital/capitalSendMailboxCode";// 验证修改资金邮箱验证码
+        config.RESET_CAPITAL_PASSWORD = apiUrl + "capital/updateOrInsertCapitalPwd";// 修改资金密码
         config.VERIFY_TELEPHONE = apiUrl + "verify/telephone";// 验证手机号有没有被注册
         config.QR_CODE_LOGIN = apiUrl + "user/qrCodeLogin";// 扫码登录
         // 老设备授权登录登录，
@@ -557,6 +588,7 @@ public class FLYAppConfig {
         config.LOGIN_SECURE_GET_PRIVATE_KEY = apiUrl + "authkeys/getLoginPrivateKey";// 获取加密私钥
         config.LOGIN_SECURE_UPLOAD_KEY = apiUrl + "authkeys/uploadLoginKey";// 上传RSA公私钥
         config.LOGIN_SECURE_GET_CODE = apiUrl + "auth/getLoginCode";// 获取加固临时密码
+        config.LOGIN_SECURE_GET_CODE_EMAIL = apiUrl + "auth/getLoginCodeMailbox";// 获取加固临时密码
         /* 支付加固 */
         config.PAY_SECURE_GET_PRIVATE_KEY = apiUrl + "authkeys/getPayPrivateKey";// 获取加密私钥
         config.PAY_SECURE_UPLOAD_KEY = apiUrl + "authkeys/uploadPayKey";// 上传RSA公私钥
@@ -578,6 +610,7 @@ public class FLYAppConfig {
         config.USER_SET_PRIVACY_SETTING = apiUrl + "/user/settings/update";// 设置用户隐私设置
         config.USER_GET_PRIVACY_SETTING = apiUrl + "/user/settings";// 查询用户隐私设置
         config.USER_DESCRIPTION = apiUrl + "user/update";// 查询用户签名
+        config.USER_ACCOUNT_DATA = apiUrl + "user/getLoginUser";// 账号数据
 
         config.USER_GET_BAND_ACCOUNT = apiUrl + "/user/getBindInfo";// 查询用户绑定设置
         config.USER_UN_BAND_ACCOUNT = apiUrl + "/user/unbind";// 设置用户绑定设置
@@ -604,7 +637,7 @@ public class FLYAppConfig {
         /* 群聊 */
         config.ROOM_ADD = apiUrl + "room/add";// 创建群组
         config.ROOM_JOIN = apiUrl + "room/join";// 加入群组
-        config.ROOM_JOIN2 = apiUrl + "/room/joinV1";// 加入群组2
+        config.ROOM_JOIN2 = apiUrl + "room/joinV1";// 加入群组2
         config.ROOM_MEMBER_UPDATE = apiUrl + "room/member/update";// 添加成员
         config.ROOM_MEMBER_UPDATE2 = apiUrl + "room/member/updateV1";// 添加成员2
         config.ROOM_DELETE = apiUrl + "room/delete";// 删除群组
@@ -833,6 +866,17 @@ public class FLYAppConfig {
         //获取单条信息
         config.GET_QUESTION_ITEM = apiUrl + "api/edit/get";
 
+
+        //===============================红包start===============================================================
+        config.GET_CAPITAL_TYPE = apiUrl + "capital/getCapitalType";//获取资产类型
+        config.GET_CAPITAL_BY_USER = apiUrl + "capital/getCapitalByUser";//根据资金类型获取剩余金额
+
+        config.CHECK_CAPITAL_PWD = apiUrl + "capital/capitalPwdCheck";//验证支付密码是否正确
+        config.SELECT_USER_CAPITAL_PWD = apiUrl + "capital/selectUserCapitalPwd";//查询是否设置了支付密码
+        config.SEND_RED_PACKET = apiUrl + "capital/insertRedEnvelopes";//发送红包
+        config.RUSH_RED_PACKET = apiUrl + "capital/rushRedPaper";//抢红包
+        config.GAIN_RED_PACKET = apiUrl + "capital/selectRedEnvelopesInfoU";//判断当前红包是否已经抢过
+        //===============================红包end===============================================================
     }
 
     private static void initOthersUrls(FLYAppConfig config) {

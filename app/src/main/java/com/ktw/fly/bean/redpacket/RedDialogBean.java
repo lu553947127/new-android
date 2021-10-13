@@ -13,6 +13,8 @@ public class RedDialogBean {
         this.redId = redId;
     }
 
+
+
     public String getUserId() {
         return userId;
     }

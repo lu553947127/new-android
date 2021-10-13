@@ -10,6 +10,7 @@ import androidx.annotation.WorkerThread;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.ktw.fly.view.cjt2325.cameralibrary.util.LogUtil;
 import com.ktw.fly.wxapi.WXHelper;
 import com.ktw.fly.FLYAppConfig;
 import com.ktw.fly.FLYAppConstant;
@@ -43,6 +44,9 @@ import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
 import com.xuan.xuanhttplibrary.okhttp.result.Result;
 
+import org.jsoup.helper.StringUtil;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -346,6 +350,168 @@ public class LoginSecureHelper {
         });
     }
 
+
+    public static void secureEmailRegister(
+            Context ctx, CoreManager coreManager,
+            String thirdToken, String thirdTokenType,
+            Map<String, String> params,
+            Function<Throwable> onError,
+            Function<ObjectResult<LoginRegisterResult>> onSuccess) {
+        String tUrl = coreManager.getConfig().USER_EMAIL_REGISTER;
+        if (!TextUtils.isEmpty(thirdToken)) {
+            params.put("type", thirdTokenType);
+            params.put("loginInfo", WXHelper.parseOpenId(thirdToken));
+            tUrl = coreManager.getConfig().USER_THIRD_REGISTER;
+        }
+        final String url = tUrl;
+        AsyncUtils.doAsync(ctx, t -> {
+            FLYReporter.post("第三方登录失败", t);
+            AsyncUtils.runOnUiThread(ctx, c -> {
+                onError.apply(t);
+            });
+        }, executor, c -> {
+            String salt = createSalt();
+
+            params.put("salt", salt);
+            loginEmail(ctx, url, params, t -> {
+                Log.i(TAG, "登录失败", t);
+                c.uiThread(r -> {
+                    onError.apply(t);
+                });
+            }, result -> {
+                c.uiThread(r -> {
+                    onSuccess.apply(result);
+                });
+            });
+        });
+    }
+
+
+
+    public static void secureEmailLogin1(
+            Context ctx, CoreManager coreManager,  String account, String loginPassword,
+            String thirdToken, String thirdTokenType, boolean thirdAutoLogin,
+            Map<String, String> params,
+            Function<Throwable> onError,
+            Function<ObjectResult<LoginRegisterResult>> onSuccess) {
+        String tUrl = coreManager.getConfig().USER_LOGIN_EMAIL;
+        if (!TextUtils.isEmpty(thirdToken)) {
+            params.put("type", thirdTokenType);
+            if (TextUtils.equals(LoginActivity.THIRD_TYPE_WECHAT, thirdTokenType)) {
+                params.put("loginInfo", WXHelper.parseOpenId(thirdToken));
+            } else if (TextUtils.equals(LoginActivity.THIRD_TYPE_QQ, thirdTokenType)) {
+                params.put("loginInfo", QQHelper.parseOpenId(thirdToken));
+            } else {
+                throw new IllegalStateException("unknown type: " + thirdTokenType);
+            }
+            tUrl = coreManager.getConfig().USER_THIRD_BIND_LOGIN;
+        }
+        if (thirdAutoLogin) {
+            thirdLogin(ctx, coreManager,
+                    params, onError, onSuccess);
+            return;
+        }
+        final String url = tUrl;
+        AsyncUtils.doAsync(ctx, t -> {
+            FLYReporter.post("登录失败", t);
+            AsyncUtils.runOnUiThread(ctx, c -> {
+                onError.apply(t);
+            });
+        }, executor, c -> {
+            String salt = createSalt();
+            Map<String, String> p = new HashMap<>();
+            p.put("salt", salt);
+            p.put("email", account);
+            p.put("password", loginPassword);
+            loginEmail(ctx, url, p, t -> {
+                Log.i(TAG, "登录失败", t);
+                c.uiThread(r -> {
+                    onError.apply(t);
+                });
+            }, result -> {
+                c.uiThread(r -> {
+                    onSuccess.apply(result);
+                });
+            });
+        });
+    }
+
+    public static void secureEmailLogin(
+            Context ctx, CoreManager coreManager, String areaCode, String account, String loginPassword,
+            String thirdToken, String thirdTokenType, boolean thirdAutoLogin,
+            Map<String, String> params,
+            Function<Throwable> onError,
+            Function<ObjectResult<LoginRegisterResult>> onSuccess) {
+        String tUrl = coreManager.getConfig().USER_LOGIN_EMAIL;
+        if (!TextUtils.isEmpty(thirdToken)) {
+            params.put("type", thirdTokenType);
+            if (TextUtils.equals(LoginActivity.THIRD_TYPE_WECHAT, thirdTokenType)) {
+                params.put("loginInfo", WXHelper.parseOpenId(thirdToken));
+            } else if (TextUtils.equals(LoginActivity.THIRD_TYPE_QQ, thirdTokenType)) {
+                params.put("loginInfo", QQHelper.parseOpenId(thirdToken));
+            } else {
+                throw new IllegalStateException("unknown type: " + thirdTokenType);
+            }
+            tUrl = coreManager.getConfig().USER_THIRD_BIND_LOGIN;
+        }
+        if (thirdAutoLogin) {
+            thirdLogin(ctx, coreManager,
+                    params, onError, onSuccess);
+            return;
+        }
+        final String url = tUrl;
+        AsyncUtils.doAsync(ctx, t -> {
+            FLYReporter.post("登录失败", t);
+            AsyncUtils.runOnUiThread(ctx, c -> {
+                onError.apply(t);
+            });
+        }, executor, c -> {
+            byte[] key = LoginPassword.encode(loginPassword);
+            getCodeEmail(ctx, coreManager,areaCode,  account, key, t -> {
+                Log.i(TAG, "获取code失败", t);
+                c.uiThread(r -> {
+                    onError.apply(t);
+                });
+            }, (encryptedCode, userId) -> {
+                // 到这里说明登录密码正确，
+                getRsaPrivateKey(ctx, coreManager, userId, key, t -> {
+                    Log.i(TAG, "获取登录私钥失败", t);
+                    c.uiThread(r -> {
+                        onError.apply(t);
+                    });
+                }, new Function<byte[]>() {
+                    @Override
+                    public void apply(byte[] privateKey) {
+                        byte[] code;
+                        try {
+                            code = RSA.decryptFromBase64(encryptedCode, privateKey);
+                        } catch (Exception e) {
+                            Log.i(TAG, "私钥解密code失败", e);
+                            requestPrivateKey(ctx, coreManager, userId, key, onError, this);
+                            return;
+                        }
+
+                        String salt = createSalt();
+                        params.put("salt", salt);
+                        params.put("mailbox", account);
+                        params.put("password", LoginPassword.encodeMd5(loginPassword) );
+                        loginEmail(ctx, url,  params, t -> {
+                            Log.i(TAG, "登录失败", t);
+                            c.uiThread(r -> {
+                                onError.apply(t);
+                            });
+                        }, result -> {
+                            c.uiThread(r -> {
+                                onSuccess.apply(result);
+                            });
+                        });
+                    }
+                });
+            });
+        });
+    }
+
+
     /**
      * 配置登录加密的参数，
      * <p>
@@ -362,6 +528,14 @@ public class LoginSecureHelper {
         secureLogin(ctx, coreManager, areaCode, account, loginPassword, null, null, false, params, onError, onSuccess);
     }
 
+    public static void secureLoginEmail(
+            Context ctx, CoreManager coreManager, String areaCode, String account, String loginPassword,
+            Map<String, String> params,
+            Function<Throwable> onError,
+            Function<ObjectResult<LoginRegisterResult>> onSuccess) {
+        secureEmailLogin(ctx, coreManager, areaCode, account, loginPassword, null, null, false, params, onError, onSuccess);
+//        secureEmailLogin(ctx, coreManager, account, loginPassword, null, null, false, params, onError, onSuccess);
+    }
     /**
      * 配置登录加密的参数，
      * <p>
@@ -435,6 +609,8 @@ public class LoginSecureHelper {
                         p.put("data", data);
                         p.put("userId", userId);
                         p.put("salt", salt);
+
+
                         login(ctx, url, code, p, t -> {
                             Log.i(TAG, "登录失败", t);
                             c.uiThread(r -> {
@@ -490,7 +666,9 @@ public class LoginSecureHelper {
                 });
     }
 
-    private static void login(Context ctx, String url, byte[] code, Map<String, String> p, Function<Throwable> onError, Function<ObjectResult<LoginRegisterResult>> onSuccess) {
+    private static void login(Context ctx, String url, byte[] code, Map<String, String> p,
+                              Function<Throwable> onError,
+                              Function<ObjectResult<LoginRegisterResult>> onSuccess) {
         p.put("deviceId", DEVICE_ID);
         HttpUtils.get().url(url)
                 .params(p)
@@ -505,9 +683,47 @@ public class LoginSecureHelper {
                         if (Result.checkSuccess(ctx, result, false) && result.getData() != null && result.getData().getData() != null) {
                             String realData = LoginSecureHelper.decodeLoginResult(code, result.getData().getData());
                             if (realData != null) {
+                                LogUtil.d("注册返回信息", realData);
                                 LoginRegisterResult realResult = JSON.parseObject(realData, LoginRegisterResult.class);
                                 objectResult.setData(realResult);
                             }
+                        }
+                        onSuccess.apply(objectResult);
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        onError.apply(e);
+                    }
+                });
+    }
+
+
+    /**
+     * 邮箱登录
+     *
+     * @param ctx
+     * @param url
+     * @param p
+     * @param onError
+     * @param onSuccess
+     */
+    private static void loginEmail(Context ctx, String url, Map<String, String> p,
+                                   Function<Throwable> onError,
+                                   Function<ObjectResult<LoginRegisterResult>> onSuccess) {
+        p.put("deviceId", DEVICE_ID);
+        HttpUtils.get().url(url)
+                .params(p)
+                .build(true, true)
+                .executeSync(new BaseCallback<LoginRegisterResult>(LoginRegisterResult.class, false) {
+                    @Override
+                    public void onResponse(ObjectResult<LoginRegisterResult> result) {
+                        ObjectResult<LoginRegisterResult> objectResult = new ObjectResult<>();
+                        objectResult.setCurrentTime(result.getCurrentTime());
+                        objectResult.setResultCode(result.getResultCode());
+                        objectResult.setResultMsg(result.getResultMsg());
+                        if (Result.checkSuccess(ctx, result, false) && result.getData() != null) {
+                            objectResult = result;
                         }
                         onSuccess.apply(objectResult);
                     }
@@ -565,6 +781,50 @@ public class LoginSecureHelper {
                 });
 
     }
+
+
+    @WorkerThread
+    private static void getCodeEmail(Context ctx, CoreManager coreManager, String areaCode,String account,
+                                     byte[] key, Function<Throwable> onError, Function2<String, String> onSuccess) {
+        String loginPasswordMd5 = LoginPassword.md5(key);
+        String salt = createSalt();
+        String mac = MAC.encodeBase64((FLYAppConfig.apiKey +  account + salt).getBytes(), loginPasswordMd5);
+        final Map<String, String> params = new HashMap<>();
+        params.put("mailbox", account);
+        params.put("mac", mac);
+        params.put("salt", salt);
+        params.put("deviceId", DEVICE_ID);
+
+        HttpUtils.post().url(coreManager.getConfig().LOGIN_SECURE_GET_CODE_EMAIL)
+                .params(params)
+                .build(true, true)
+                .executeSync(new BaseCallback<LoginCode>(LoginCode.class, false) {
+
+                    @Override
+                    public void onResponse(ObjectResult<LoginCode> result) {
+                        if (Result.checkSuccess(ctx, result, false) && result.getData() != null) {
+                            String userId = result.getData().getUserId();
+                            if (result.getData() == null || TextUtils.isEmpty(result.getData().getCode())) {
+                                // 服务器没有公钥，创建一对上传后从新调用getCode,
+                                makeRsaKeyPair(ctx, coreManager, userId, key, onError, privateKey -> {
+                                    getCode(ctx, coreManager, areaCode, account, key, onError, onSuccess);
+                                });
+                            } else {
+                                onSuccess.apply(result.getData().getCode(), userId);
+                            }
+                        } else {
+                            onError.apply(new IllegalStateException(Result.getErrorMessage(ctx, result)));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        onError.apply(e);
+                    }
+                });
+
+    }
+
 
     private static void getRsaPrivateKey(Context ctx, CoreManager coreManager, String userId, byte[] key, Function<Throwable> onError, Function<byte[]> onSuccess) {
         // 本地不保存密码登录私钥，每次都通过接口获取，
@@ -675,4 +935,8 @@ public class LoginSecureHelper {
             super(s);
         }
     }
+
+
+
+
 }

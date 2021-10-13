@@ -474,8 +474,7 @@
 
                 <RelativeLayout
                     android:id="@+id/setting_rl"
-                    style="@style/MeLayoutStyle"
-                    android:layout_marginBottom="@dimen/dp10">
+                    style="@style/MeLayoutStyle">
 
                     <com.ktw.fly.view.LightImageView
                         android:layout_width="@dimen/dp20"
@@ -490,6 +489,33 @@
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
                         android:text="@string/settings" />
+
+                    <ImageView
+                        style="@style/IMTbleLine_ArrowImg.Me"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/me_chevron_right"
+                        android:contentDescription="@string/app_name" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlt_red_backet"
+                    style="@style/MeLayoutStyle"
+                    android:layout_marginBottom="@dimen/dp10">
+
+                    <com.ktw.fly.view.LightImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_red"
+                        app:srcLight="@mipmap/icon_red" />
+
+                    <TextView
+                        style="@style/IMTbleLine_TextName"
+                        android:layout_centerVertical="true"
+                        android:text="@string/chat_red" />
 
                     <ImageView
                         style="@style/IMTbleLine_ArrowImg.Me"

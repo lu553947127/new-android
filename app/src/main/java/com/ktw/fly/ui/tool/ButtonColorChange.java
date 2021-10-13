@@ -3,6 +3,7 @@ package com.ktw.fly.ui.tool;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -26,6 +27,19 @@ public class ButtonColorChange {
         Drawable drawable = context.getResources().getDrawable(drawable1);
         drawable = DrawableCompat.wrap(drawable);
         DrawableCompat.setTintList(drawable, skin.getButtonColorState());
+        view.setBackground(drawable);
+    }
+
+    public static void changeDrawable(Context context, View view, int drawable1) {
+        Drawable drawable = context.getResources().getDrawable(drawable1);
+        drawable = DrawableCompat.wrap(drawable);
+        view.setBackground(drawable);
+    }
+
+    public static void colorDrawableStroke(Context context, View view) {
+        SkinUtils.Skin skin = SkinUtils.getSkin(context);
+        GradientDrawable drawable = (GradientDrawable) view.getBackground();
+        drawable.setStroke(2, skin.getButtonColorState());
         view.setBackground(drawable);
     }
 
