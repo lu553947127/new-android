@@ -18,7 +18,7 @@
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_centerInParent="true"
-            android:src="@mipmap/icon" />
+            android:src="@mipmap/ic_login_logo" />
 
     </RelativeLayout>
 

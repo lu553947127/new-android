@@ -17,7 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/icon" />
+            android:src="@mipmap/ic_login_logo" />
 
         <TextView
             android:id="@+id/link_text_tv"

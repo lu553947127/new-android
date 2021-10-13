@@ -10,6 +10,6 @@
         android:id="@+id/view_dialer_button_image_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon" />
+        android:src="@mipmap/ic_app_logo" />
 
 </LinearLayout>

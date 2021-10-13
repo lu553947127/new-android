@@ -78,7 +78,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
-                android:src="@mipmap/icon" />
+                android:src="@mipmap/ic_login_logo" />
 
             <TextView
                 android:id="@+id/link_text_tv"
@@ -104,7 +104,7 @@
                 android:layout_height="12dp"
                 android:layout_centerVertical="true"
                 android:scaleType="fitXY"
-                android:src="@mipmap/icon" />
+                android:src="@mipmap/ic_login_logo" />
 
             <TextView
                 android:id="@+id/link_app_name_tv"

@@ -64,7 +64,7 @@
     </style>
 
     <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow">
-        <item name="android:src">@mipmap/icon</item>
+        <item name="android:src">@mipmap/ic_login_logo</item>
     </style>
 
     <style name="actionBarTitle">

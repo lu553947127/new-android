@@ -102,7 +102,7 @@
         android:name="com.ktw.fly.FLYApplication"
         android:allowBackup="true"
         android:fitsSystemWindows="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/ic_app_logo"
         android:label="@string/app_name"
         android:roundIcon="@null"
         android:theme="@style/AppTheme"
