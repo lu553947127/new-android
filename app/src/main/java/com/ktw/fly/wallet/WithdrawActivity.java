@@ -471,6 +471,7 @@ public class WithdrawActivity extends BaseActivity {
                             ToastUtil.showToast(WithdrawActivity.this, result.getResultMsg());
                             return;
                         }
+                        ToastUtil.showToast(WithdrawActivity.this, getString(R.string.verification_code_send_success));
                         dialog.onSuccessSend();
                     }
 
