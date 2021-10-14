@@ -30,7 +30,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.qrcode.Constant;
 import com.example.qrcode.ScannerActivity;
+import com.ktw.fly.FLYAppConfig;
 import com.ktw.fly.R;
+import com.ktw.fly.bean.User;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.util.DisplayUtil;
@@ -39,6 +41,7 @@ import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.wallet.adapter.SelectItemAdapter;
 import com.ktw.fly.wallet.bean.CoinBean;
 import com.ktw.fly.wallet.bean.CurrencyBean;
+import com.ktw.fly.wallet.bean.VerifyBean;
 import com.ktw.fly.wallet.bean.WalletListBean;
 import com.ktw.fly.wallet.dialog.VerifyBottomDialog;
 import com.ktw.fly.wallet.dialog.VerifyCenterDialog;
@@ -76,6 +79,11 @@ public class WithdrawActivity extends BaseActivity {
     private SelectItemAdapter mAdapter;
     private CurrencyBean item;
 
+    /**
+     * 绑定状态 1：手机 2：邮箱  3：都绑定
+     */
+    private int mBindType = -1;
+
     public static void actionStart(Context context, List<CurrencyBean> data) {
         Intent intent = new Intent(context, WithdrawActivity.class);
         intent.putExtra("data", (Serializable) data);
@@ -91,6 +99,7 @@ public class WithdrawActivity extends BaseActivity {
         initBundle();
         initLayout();
         initRv();
+        getBindType();
     }
 
     private void initLayout() {
@@ -145,29 +154,49 @@ public class WithdrawActivity extends BaseActivity {
         mNumberEt.addTextChangedListener(new BaseTextWatcher());
 
         mConfirmTv.setOnClickListener(v -> {
+            if (mBindType == -1) {
+                getBindType();
+                return;
+            }
             //提币
-            VerifyCenterDialog.newInstance().setCallBack(new VerifyCenterDialog.VerifyCallBack() {
-                @Override
-                public void onCodeSendClicked(int type) {
-                    VerifyBottomDialog.newInstance(type)
-                            .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
-                                @Override
-                                public void onVerifyCallBackClicked(String pwd, String code) {
-                                    //开始提币
-                                    verifyCode(type, code, pwd);
-                                }
+            if (mBindType != 3) {
+                //没有双绑，直接发验证码
+                VerifyBottomDialog.newInstance(mBindType)
+                        .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
+                            @Override
+                            public void onVerifyCallBackClicked(String pwd, String code) {
+                                //开始提币
+                                verifyCode(mBindType, code, pwd);
+                            }
 
-                                @Override
-                                public void onSendMsgClicked(VerifyBottomDialog dialog) {
-                                    //发送验证码
-                                    sendCode(type, dialog);
-                                }
-                            }).show(getSupportFragmentManager(), "Verify");
+                            @Override
+                            public void onSendMsgClicked(VerifyBottomDialog dialog) {
+                                //发送验证码
+                                sendCode(mBindType, dialog);
+                            }
+                        }).show(getSupportFragmentManager(), "Verify");
+            } else {
+                //双绑定 给出选择机会
+                VerifyCenterDialog.newInstance().setCallBack(type -> VerifyBottomDialog.newInstance(type)
+                        .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
+                            @Override
+                            public void onVerifyCallBackClicked(String pwd, String code) {
+                                //开始提币
+                                verifyCode(type, code, pwd);
+                            }
 
-                }
-            }).show(getSupportFragmentManager(), "Verify");
+                            @Override
+                            public void onSendMsgClicked(VerifyBottomDialog dialog) {
+                                //发送验证码
+                                sendCode(type, dialog);
+                            }
+                        }).show(getSupportFragmentManager(), "Verify"));
+
+            }
+
         });
     }
+
 
     private void startSan() {
         Intent intent = new Intent(this, ScannerActivity.class);
@@ -453,7 +482,7 @@ public class WithdrawActivity extends BaseActivity {
     }
 
     /**
-     * 提币
+     * 验证
      */
     private void verifyCode(int type, String code, String pwd) {
         String number = mNumberEt.getText().toString();
@@ -485,6 +514,44 @@ public class WithdrawActivity extends BaseActivity {
                             return;
                         }
                         requestData();
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        ToastUtil.showNetError(WithdrawActivity.this);
+                    }
+                });
+    }
+
+    /**
+     * 获取绑定接口状态
+     */
+    private void getBindType() {
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", UserSp.getInstance(this).getUserId(""));
+        HttpUtils.post().url(FLYAppConfig.HOST + "user/querybindnumber")
+                .params(params)
+                .build()
+                .execute(new BaseCallback<VerifyBean>(VerifyBean.class) {
+
+                    @Override
+                    public void onResponse(ObjectResult<VerifyBean> result) {
+                        if (result == null) {
+                            return;
+                        }
+                        if (result.getResultCode() != 1) {
+                            ToastUtil.showToast(WithdrawActivity.this, result.getResultMsg());
+                            return;
+                        }
+                        VerifyBean data = result.getData();
+                        if (data == null) {
+                            return;
+                        }
+                        if (data.getMailbox() == 1 && data.getPhone() == 1) {
+                            mBindType = 3;
+                        } else {
+                            mBindType = data.getPhone() == 1 ? 1 : 2;
+                        }
                     }
 
                     @Override
