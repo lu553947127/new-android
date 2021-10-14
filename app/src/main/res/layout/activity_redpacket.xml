@@ -63,8 +63,8 @@
             android:drawableRight="@drawable/me_chevron_right"
             android:drawablePadding="10dp"
             android:gravity="center"
-            android:textSize="@dimen/sp_15_text_size"
-            tools:text="USDT" />
+            android:text="ASDT"
+            android:textSize="@dimen/sp_15_text_size" />
     </RelativeLayout>
 
     <RelativeLayout style="@style/MeLayoutStyle">
@@ -85,10 +85,10 @@
                 style="@style/SendRedPackerTextStyle"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
-                android:inputType="numberDecimal"
-                android:hint="@string/red_available_balance"
-                android:paddingRight="5dp"
                 android:gravity="right|center_vertical"
+                android:hint="@string/red_available_balance"
+                android:inputType="numberDecimal"
+                android:paddingRight="5dp"
                 android:textSize="@dimen/sp_15_text_size" />
 
             <TextView
@@ -99,6 +99,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_red_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -139,9 +140,9 @@
                 style="@style/SendRedPackerTextStyle"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
+                android:gravity="right|center_vertical"
                 android:hint="@string/red_number_hint"
                 android:inputType="number"
-                android:gravity="right|center_vertical"
                 android:paddingRight="5dp"
                 android:textSize="@dimen/sp_15_text_size" />
 
@@ -152,7 +153,8 @@
     </RelativeLayout>
 
 
-    <RelativeLayout style="@style/MeLayoutStyle"
+    <RelativeLayout
+        style="@style/MeLayoutStyle"
         android:visibility="gone">
 
         <EditText

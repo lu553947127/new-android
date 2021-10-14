@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="5dp">
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_packet_type"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <TextView
+                android:id="@+id/tv_red_packet_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_16_text_size"
+                tools:text="拼手气红包" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_property_type"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <TextView
+                android:id="@+id/red_property_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_16_text_size"
+                tools:text="AAC" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_number_of_issued_virtual_coins"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <TextView
+                android:id="@+id/number_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_16_text_size"
+                tools:text="100.00AAC" />
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_property_send_time"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_15_text_size" />
+
+
+            <TextView
+                android:id="@+id/red_property_send_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_15_text_size"
+                tools:text="2021-09-18 20:30:11" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_receiver_time"
+            style="@style/RedPacketCountListStyle"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_receiver_time"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_15_text_size" />
+
+
+            <TextView
+                android:id="@+id/red_receiver_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_15_text_size"
+                tools:text="2021-09-18 20:30:11" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_luck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/RedPacketCountListStyle">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/red_get_the_number"
+                    android:textColor="@color/text_red_light"
+                    android:textSize="@dimen/sp_15_text_size" />
+
+
+                <TextView
+                    android:id="@+id/tv_red_get_the_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/sp_15_text_size"
+                    tools:text="3个" />
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/RedPacketCountListStyle">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/red_get_the_amount"
+                    android:textColor="@color/text_red_light"
+                    android:textSize="@dimen/sp_15_text_size" />
+
+
+                <TextView
+                    android:id="@+id/tv_red_get_the_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/sp_15_text_size"
+                    tools:text="800.0000 AAT" />
+            </RelativeLayout>
+
+
+            <RelativeLayout style="@style/RedPacketCountListStyle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/red_uncollected_number"
+                    android:textColor="@color/text_red_light"
+                    android:textSize="@dimen/sp_15_text_size" />
+
+
+                <TextView
+                    android:id="@+id/tv_red_uncollected_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/sp_15_text_size"
+                    tools:text="1个" />
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/RedPacketCountListStyle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/red_unclaimed_amount"
+                    android:textColor="@color/text_red_light"
+                    android:textSize="@dimen/sp_15_text_size" />
+
+
+                <TextView
+                    android:id="@+id/tv_red_unclaimed_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/sp_15_text_size"
+                    tools:text="200.0000 AAT" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_receive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_expan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_expan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_get_the_details" />
+
+            <ImageView
+                android:id="@+id/iv_expan"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/icon_expan" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

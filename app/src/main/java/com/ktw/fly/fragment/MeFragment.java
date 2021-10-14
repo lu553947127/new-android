@@ -22,6 +22,7 @@ import com.ktw.fly.course.LocalCourseActivity;
 import com.ktw.fly.db.dao.FriendDao;
 import com.ktw.fly.helper.AvatarHelper;
 import com.ktw.fly.pay.new_ui.PaymentOrReceiptActivity;
+import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.FLYMainActivity;
 import com.ktw.fly.ui.base.EasyFragment;
 import com.ktw.fly.ui.circle.BusinessCircleActivity;
@@ -50,9 +51,24 @@ import com.ktw.fly.ui.message.ChatActivity;
 import com.ktw.fly.ui.other.QRcodeActivity;
 import com.ktw.fly.ui.tool.SingleImagePreviewActivity;
 import com.ktw.fly.ui.tool.WebViewActivity;
+import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.util.UiUtils;
+import com.ktw.fly.wallet.Apis;
+import com.ktw.fly.wallet.CoinActivity;
+import com.ktw.fly.wallet.WalletDetailActivity;
+import com.ktw.fly.wallet.WithdrawActivity;
+import com.ktw.fly.wallet.bean.CurrencyBean;
+import com.ktw.fly.wallet.bean.WalletListBean;
+import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
+import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
+import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
+import okhttp3.Call;
 
 public class MeFragment extends EasyFragment implements View.OnClickListener {
 
@@ -317,7 +333,7 @@ public class MeFragment extends EasyFragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), AboutActivity.class));
                 break;
             case R.id.rlt_read_envelope:
-                startActivity(new Intent(getContext(), RedPacketListActivity.class));
+                RedPacketListActivity.actionStart(getContext());
                 break;
         }
 
@@ -362,4 +378,6 @@ public class MeFragment extends EasyFragment implements View.OnClickListener {
             mPhoneNumTv.setText(phoneNumber);
         }
     }
+
+
 }

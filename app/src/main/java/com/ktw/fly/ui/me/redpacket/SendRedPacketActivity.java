@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
 
     //选择发送红包的资产类型ID
     private String capitalId;
+    private String capitalName;
     private EditText amountEdit;
     private TextView virtualCoinsNumberText;
     private boolean isGroupChat;
@@ -74,6 +76,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
     private String userId;
     //当前用户昵称
     private String nickName;
+    private LinearLayout redTypeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,9 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
         nickName = coreManager.getSelf().getNickName();
 
         isGroupChat = getIntent().getBooleanExtra(FLYAppConstant.EXTRA_IS_GROUP_CHAT, false);
-
+        //默认资产类型ID 和名称
+        this.capitalId = "2";
+        this.capitalName = "ASDT";
 
         if (isGroupChat) { //群组默认拼手气类型
             curRedPackerType = FLYAppConstant.LUCK_RED_PACKER;
@@ -96,6 +101,8 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
 
         initActionBar();
         initView();
+
+        getCapitalByUser();
     }
 
 
@@ -128,6 +135,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
 
         wordEdit = findViewById(R.id.et_word);
         greetingEdit = findViewById(R.id.et_greeting);
+        redTypeLayout = findViewById(R.id.ll_red_type);
 
         Button sendRedBtn = findViewById(R.id.btn_sendRed);
 
@@ -200,11 +208,12 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
             greeting = greetingEdit.getHint().toString().substring(4);
         }
 
+        String count = redPacketCountEdit.getText().toString();
 
         if (curRedPackerType == FLYAppConstant.LUCK_RED_PACKER) { //拼手气红包
-            redPackerCount = redPacketCountEdit.getText().toString();
+            redPackerCount = count;
         } else { //普通红包
-            redPackerCount = String.valueOf(1);
+            redPackerCount = TextUtils.isEmpty(count) ? String.valueOf(1) : count;
         }
 
         if (TextUtils.isEmpty(money)) {
@@ -220,7 +229,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
 //                sendRed(String.valueOf(curRedPackerType), finalMoney, finalRedPackerCount, finalGreeting, password);
 //            });
 
-            PaySecureHelper.inputPayPassword(this, getString(R.string.send_red_packet_amount), money, capital.capitalName, password -> {
+            PaySecureHelper.inputPayPassword(this, getString(R.string.send_red_packet_amount), money, capitalName, password -> {
 
                 RedPacketHelper.checkCapitalPassword(this, coreManager, userId, password,
                         error -> {
@@ -359,6 +368,8 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
         if (requestCode == REQUEST_CODE_CAPITAL && resultCode == REQUEST_CODE_CAPITAL && data != null) {  //选择资产返回的资产数据
             capital = data.getParcelableExtra("capital");
             capitalText.setText(capital.capitalName);
+
+            this.capitalName = capital.capitalName;
             this.capitalId = capital.capitalId;
             getCapitalByUser();
         }
@@ -411,7 +422,14 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
                     getResources().getString(R.string.red_alter_type),
                     getResources().getString(R.string.red_luck_packer));
 
-            numberLayout.setVisibility(View.GONE);
+            if (isGroupChat){
+                numberLayout.setVisibility(View.VISIBLE);
+                redTypeLayout.setVisibility(View.VISIBLE);
+            }else {
+                numberLayout.setVisibility(View.GONE);
+                redTypeLayout.setVisibility(View.GONE);
+            }
+
         } else {
             commonRedPackerStr = String.format(
                     getResources().getString(R.string.red_cur_type),

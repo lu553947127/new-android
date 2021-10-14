@@ -122,9 +122,11 @@ public class RedDetailsActivity extends BaseActivity {
         if (openRedpacket.redCount.status == 0) {
             red_resultmsg_tv.setText(getString(R.string.example_red_packet_remain, openRedpacket.redCount.receivedRedEnvelopeCount,
                     openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.receivedRedEnvelopeCapital, openRedpacket.redCapital.capitalCount));
-        } else {
+        } else if (openRedpacket.redCount.status == 1) {
             red_resultmsg_tv.setText(getString(R.string.example_red_packet_loot_all,
                     openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.time));
+        } else {
+            red_resultmsg_tv.setText(getString(R.string.red_back_expires));
         }
 
 

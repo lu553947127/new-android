@@ -2381,6 +2381,10 @@
     <string name="please_confirm_capital_password_hint">请确认资金密码</string>
     <string name="example_red_packet_remain">红包已领取%s/%s,共%s/%s</string>
     <string name="example_red_packet_loot_all">%s个红包,%s秒被抢光</string>
+    <string name="red_back_expires">红包已过期</string>
+    <string name="send_red_people">发出红包者</string>
+
+
 
 
     <string name="wallet">钱包</string>

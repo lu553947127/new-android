@@ -88,6 +88,7 @@ public class RushRedPacket implements Parcelable {
         @SerializedName("received_red_envelope_capital")
         public String receivedRedEnvelopeCapital;
 
+        // 1 红包已领完   2 红包已过期   0 红包未领完
         public int status;
 
 

@@ -1430,7 +1430,7 @@ public class ChatActivity extends BaseActivity implements
 
                     Bundle bundle = new Bundle();
                     Intent intent = new Intent(mContext, RedDetailsActivity.class);
-                    bundle.putParcelable("openRedpacket", result);
+                    bundle.putParcelable("openRedpacket", result.getData());
                     bundle.putInt("redAction", 0);
                     bundle.putBoolean("isGroup", isGrab);
                     bundle.putString("mToUserId", message.getToUserId());

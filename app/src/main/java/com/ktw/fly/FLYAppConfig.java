@@ -23,9 +23,9 @@ public class FLYAppConfig {
 
     public static final String apiKey = "a891a7a6-03af-475c-8ae1-7fb4b230e958";
 
-//    public static String HOST = "http://aachat.aachain.org";// Socket IM 服务器入口
-//    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
-    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
+//    public static String HOST = "http://aachat.aachain.org/";// Socket IM 服务器入口
+    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
+//    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
 
     public static String CONFIG_URL = HOST + "config";
     //客服列表
@@ -311,6 +311,10 @@ public class FLYAppConfig {
     public String SEND_RED_PACKET;//发送红包
     public String RUSH_RED_PACKET;//抢红包
     public String GAIN_RED_PACKET;//判断红包是否已经抢过
+
+    public String SEND_RED_PACKET_COUNT;//发出的红包汇总
+    public String SEND_RED_PACKET_GET_INFO;//发出的红包领取记录
+    public String RECEIVER_RED_PACKET_GET_INFO;//抢到的红包领取记录
     //==================================红包end==================================================
 
 
@@ -555,8 +559,7 @@ public class FLYAppConfig {
     }
 
     private static void initApiUrls(FLYAppConfig config) {
-//        String apiUrl = TextUtils.isEmpty(config.apiUrl) ? HOST : config.apiUrl;
-        String apiUrl = HOST;
+        String apiUrl = TextUtils.isEmpty(config.apiUrl) ? HOST : config.apiUrl;
         /* 登陆注册 */
         config.USER_REGISTER = apiUrl + "user/register/v1";// 注册
         config.USER_EMAIL_REGISTER = apiUrl + "user/registerMail";// 邮箱注册
@@ -877,6 +880,10 @@ public class FLYAppConfig {
         config.SEND_RED_PACKET = apiUrl + "capital/insertRedEnvelopes";//发送红包
         config.RUSH_RED_PACKET = apiUrl + "capital/rushRedPaper";//抢红包
         config.GAIN_RED_PACKET = apiUrl + "capital/selectRedEnvelopesInfoU";//判断当前红包是否已经抢过
+
+        config.SEND_RED_PACKET_COUNT = apiUrl + "capital/selectRedEnvelopesCountUser";//发送的红包汇总
+        config.SEND_RED_PACKET_GET_INFO = apiUrl + "capital/selectRedEnvelopesCountUserInfo";//发出的红包领取记录
+        config.RECEIVER_RED_PACKET_GET_INFO = apiUrl + "capital/selectRedEnvelopesInfoCountUser";//抢到的红包领取记录
         //===============================红包end===============================================================
     }
 

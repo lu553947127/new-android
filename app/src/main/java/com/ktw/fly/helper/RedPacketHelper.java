@@ -180,7 +180,7 @@ public class RedPacketHelper {
      * @param onSuccess
      */
     public static void rushRedPacket(Context ctx, Map<String, String> params,
-                                     Function<Throwable> onError, Function<RushRedPacket> onSuccess) {
+                                     Function<Throwable> onError, Function<ObjectResult<RushRedPacket>> onSuccess) {
 
         HttpUtils.post().url(CoreManager.requireConfig(ctx).RUSH_RED_PACKET)
                 .params(params)
@@ -193,7 +193,7 @@ public class RedPacketHelper {
                             Toast.makeText(ctx, result.getResultMsg(), Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        onSuccess.apply(result.getData());
+                        onSuccess.apply(result);
                     }
 
                     @Override

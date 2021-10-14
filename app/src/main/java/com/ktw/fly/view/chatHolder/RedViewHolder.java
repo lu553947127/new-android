@@ -17,6 +17,7 @@ import com.ktw.fly.bean.redpacket.EventRedReceived;
 import com.ktw.fly.bean.redpacket.OpenRedpacket;
 import com.ktw.fly.bean.redpacket.RedDialogBean;
 import com.ktw.fly.bean.redpacket.RedPacketResult;
+import com.ktw.fly.bean.redpacket.RushRedPacket;
 import com.ktw.fly.db.dao.ChatMessageDao;
 import com.ktw.fly.helper.RedPacketHelper;
 import com.ktw.fly.ui.base.CoreManager;
@@ -40,6 +41,7 @@ import de.greenrobot.event.EventBus;
 import okhttp3.Call;
 
 import static com.xuan.xuanhttplibrary.okhttp.result.Result.CODE_AUTH_RED_PACKET_GAIN;
+import static com.xuan.xuanhttplibrary.okhttp.result.Result.CODE_AUTH_RED_PACKET_PAST;
 
 class RedViewHolder extends AChatHolderInterface {
 
@@ -206,7 +208,6 @@ class RedViewHolder extends AChatHolderInterface {
                 },
                 result -> {
                     if (Result.checkSuccess(context, result, false)) {  //未抢过当前红包
-
                         RedDialogBean redDialogBean =
                                 new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
 
@@ -218,6 +219,8 @@ class RedViewHolder extends AChatHolderInterface {
                         mRedDialog.show();
 
                     } else if (result.getResultCode() == CODE_AUTH_RED_PACKET_GAIN) { //已抢过红包
+                        rushRedPacket(mdata, false);
+                    }else if (result.getResultCode() == CODE_AUTH_RED_PACKET_PAST){ //已过期红包
                         rushRedPacket(mdata, false);
                     }
                 });
@@ -244,6 +247,7 @@ class RedViewHolder extends AChatHolderInterface {
                 error -> {
                 },
                 result -> {
+                    RushRedPacket rushRedPacket =  result.getData();
                     if (isGrab) {  //第一次抢红包
                         mdata.setFileSize(2);
                         ChatMessageDao.getInstance().updateChatMessageReceiptStatus(userId, mToUserId, mdata.getPacketId());
@@ -252,16 +256,16 @@ class RedViewHolder extends AChatHolderInterface {
                         CoreManager.updateMyBalance();
 
                         if (isGounp) {
-                            EventBus.getDefault().post(new EventRedReceived(result));
+                            EventBus.getDefault().post(new EventRedReceived(rushRedPacket));
                         } else {
-                            if (!TextUtils.equals(userId, result.redUser.userId)) {
-                                EventBus.getDefault().post(new EventRedReceived(result));
+                            if (!TextUtils.equals(userId, rushRedPacket.redUser.userId)) {
+                                EventBus.getDefault().post(new EventRedReceived(rushRedPacket));
                             }
                         }
                     }
                     Bundle bundle = new Bundle();
                     Intent intent = new Intent(mContext, RedDetailsActivity.class);
-                    bundle.putParcelable("openRedpacket", result);
+                    bundle.putParcelable("openRedpacket", rushRedPacket);
                     bundle.putInt("redAction", 0);
                     bundle.putBoolean("isGroup", isGounp);
                     bundle.putString("mToUserId", mToUserId);

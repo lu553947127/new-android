@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+  android:layout_marginBottom="12dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dw_yuanjiao_whit_5"
+        android:paddingHorizontal="15dp"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send_red_people"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_16_text_size" />
+
+            <TextView
+                android:id="@+id/red_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_16_text_size"
+                tools:text="用户" />
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_receiver_sum"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_15_text_size" />
+
+
+            <TextView
+                android:id="@+id/red_receiver_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_15_text_size"
+                tools:text="20.0000 AAT" />
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/RedPacketCountListStyle">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_receiver_time"
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_15_text_size" />
+
+
+            <TextView
+                android:id="@+id/red_receiver_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/sp_15_text_size"
+                tools:text="2021-09-18 20:35:15" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
