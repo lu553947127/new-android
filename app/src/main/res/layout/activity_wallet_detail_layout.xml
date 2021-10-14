@@ -40,6 +40,17 @@
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/iv_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/dp15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_record"
+                android:tint="@color/text_black" />
+
         </RelativeLayout>
 
     </com.ktw.fly.view.MergerStatus>

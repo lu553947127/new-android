@@ -23,6 +23,7 @@ import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.util.SkinUtils;
 import com.ktw.fly.util.ToastUtil;
+import com.ktw.fly.wallet.adapter.WalletDetailRecordAdapter;
 import com.ktw.fly.wallet.adapter.WalletRecordAdapter;
 import com.ktw.fly.wallet.bean.CoinBean;
 import com.ktw.fly.wallet.bean.CurrencyBean;
@@ -30,6 +31,7 @@ import com.ktw.fly.wallet.bean.WalletListBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
 import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.callback.ListCallback;
@@ -46,6 +48,8 @@ import okhttp3.Call;
 
 public class WalletDetailActivity extends BaseActivity {
 
+    private int mPageNumber = 1;
+
     public static void actionStart(Context c, CurrencyBean currencyBean) {
         Intent intent = new Intent(c, WalletDetailActivity.class);
         intent.putExtra("data", currencyBean);
@@ -57,7 +61,7 @@ public class WalletDetailActivity extends BaseActivity {
     private TextView mCoinTv, mWithdrawTv, mPriceTv;
     private ImageView mHeaderIv;
     private CurrencyBean mBean;
-    private WalletRecordAdapter mAdapter;
+    private WalletDetailRecordAdapter mAdapter;
     private TextView tv1;
 
     @Override
@@ -94,6 +98,13 @@ public class WalletDetailActivity extends BaseActivity {
 
         findViewById(R.id.iv_go_back)
                 .setOnClickListener(v -> finish());
+
+        findViewById(R.id.iv_record)
+                .setOnClickListener(v -> {
+                    if (mBean != null) {
+                        RecordActivity.actionStart(this, mBean.getCurrencyName());
+                    }
+                });
 
         mCoinTv.setOnClickListener(v -> {
             if (mBean == null) {
@@ -142,18 +153,33 @@ public class WalletDetailActivity extends BaseActivity {
     }
 
     private void initListView() {
-        mRefreshLayout.setEnableLoadMore(false);
-        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            refreshLayout.finishRefresh();
-            requestData();
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull @NotNull RefreshLayout refreshLayout) {
+                refreshLayout.finishLoadMore();
+                mPageNumber++;
+                requestData();
+            }
+
+            @Override
+            public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh();
+                mPageNumber = 1;
+                requestData();
+            }
         });
-        mAdapter = new WalletRecordAdapter();
+        mAdapter = new WalletDetailRecordAdapter();
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> RecordDetailActivity.actionStart(WalletDetailActivity.this, mAdapter.getItem(position)));
     }
 
 
+    /**
+     * 获取首页币种信息
+     *
+     * @param type
+     */
     private void requestData(int type) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserSp.getInstance(this).getUserId(""));
@@ -198,18 +224,22 @@ public class WalletDetailActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * 获取资金流水
+     */
     private void requestData() {
         if (mBean == null) {
             return;
         }
         Map<String, String> params = new HashMap<>();
         params.put("userId", UserSp.getInstance(this).getUserId(""));
-        params.put("cionkey", mBean.getF01());
-        HttpUtils.post().url(Apis.COIN_WITHDRAW)
+        params.put("coinId", mBean.getF01());
+        params.put("pageSize", "20");
+        params.put("pageNumber", String.valueOf(mPageNumber));
+        HttpUtils.post().url(Apis.COIN_WITHDRAW_RECORD)
                 .params(params)
                 .build()
                 .execute(new ListCallback<CoinBean>(CoinBean.class) {
-
 
                     @Override
                     public void onResponse(ArrayResult<CoinBean> result) {
@@ -225,7 +255,16 @@ public class WalletDetailActivity extends BaseActivity {
                         if (data == null) {
                             return;
                         }
-                        mAdapter.setNewInstance(data);
+                        if (data.size() == 0) {
+                            mRefreshLayout.setEnableLoadMore(false);
+                        } else {
+                            mRefreshLayout.setEnableLoadMore(true);
+                        }
+                        if (mPageNumber == 1) {
+                            mAdapter.setNewInstance(data);
+                        } else {
+                            mAdapter.getData().addAll(data);
+                        }
                     }
 
                     @Override
