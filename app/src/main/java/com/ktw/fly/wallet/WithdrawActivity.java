@@ -31,10 +31,14 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.qrcode.Constant;
 import com.example.qrcode.ScannerActivity;
 import com.ktw.fly.FLYAppConfig;
+import com.ktw.fly.FLYAppConstant;
 import com.ktw.fly.R;
 import com.ktw.fly.bean.User;
+import com.ktw.fly.helper.RedPacketHelper;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.base.BaseActivity;
+import com.ktw.fly.ui.me.capital.CapitalPasswordActivity;
+import com.ktw.fly.ui.me.redpacket.SendRedPacketActivity;
 import com.ktw.fly.util.DisplayUtil;
 import com.ktw.fly.util.Md5Util;
 import com.ktw.fly.util.ToastUtil;
@@ -84,9 +88,10 @@ public class WithdrawActivity extends BaseActivity {
      */
     private int mBindType = -1;
 
-    public static void actionStart(Context context, List<CurrencyBean> data) {
+    public static void actionStart(Context context, List<CurrencyBean> data,String name) {
         Intent intent = new Intent(context, WithdrawActivity.class);
         intent.putExtra("data", (Serializable) data);
+        intent.putExtra("name", name);
         context.startActivity(intent);
     }
 
@@ -154,47 +159,68 @@ public class WithdrawActivity extends BaseActivity {
         mNumberEt.addTextChangedListener(new BaseTextWatcher());
 
         mConfirmTv.setOnClickListener(v -> {
-            if (mBindType == -1) {
-                getBindType();
-                return;
-            }
-            //提币
-            if (mBindType != 3) {
-                //没有双绑，直接发验证码
-                VerifyBottomDialog.newInstance(mBindType)
-                        .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
-                            @Override
-                            public void onVerifyCallBackClicked(String pwd, String code) {
-                                //开始提币
-                                verifyCode(mBindType, code, pwd);
-                            }
-
-                            @Override
-                            public void onSendMsgClicked(VerifyBottomDialog dialog) {
-                                //发送验证码
-                                sendCode(mBindType, dialog);
-                            }
-                        }).show(getSupportFragmentManager(), "Verify");
-            } else {
-                //双绑定 给出选择机会
-                VerifyCenterDialog.newInstance().setCallBack(type -> VerifyBottomDialog.newInstance(type)
-                        .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
-                            @Override
-                            public void onVerifyCallBackClicked(String pwd, String code) {
-                                //开始提币
-                                verifyCode(type, code, pwd);
-                            }
-
-                            @Override
-                            public void onSendMsgClicked(VerifyBottomDialog dialog) {
-                                //发送验证码
-                                sendCode(type, dialog);
-                            }
-                        }).show(getSupportFragmentManager(), "Verify"));
-
-            }
-
+            queryPwd();
         });
+    }
+
+    /**
+     * 查询是否设置资金密码
+     */
+    private void queryPwd() {
+        String userId = coreManager.getSelf().getUserId();
+        RedPacketHelper.detectionCapitalPassword(getApplication(), coreManager, userId,
+                error -> {
+                    Intent intent = new Intent(this, CapitalPasswordActivity.class);
+                    startActivity(intent);
+                },
+                success -> {
+                    verifyPwd();
+                });
+    }
+
+    /**
+     * 一设置资金密码
+     */
+    private void verifyPwd() {
+        if (mBindType == -1) {
+            getBindType();
+            return;
+        }
+        //提币
+        if (mBindType != 3) {
+            //没有双绑，直接发验证码
+            VerifyBottomDialog.newInstance(mBindType)
+                    .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
+                        @Override
+                        public void onVerifyCallBackClicked(String pwd, String code) {
+                            //开始提币
+                            verifyCode(mBindType, code, pwd);
+                        }
+
+                        @Override
+                        public void onSendMsgClicked(VerifyBottomDialog dialog) {
+                            //发送验证码
+                            sendCode(mBindType, dialog);
+                        }
+                    }).show(getSupportFragmentManager(), "Verify");
+        } else {
+            //双绑定 给出选择机会
+            VerifyCenterDialog.newInstance().setCallBack(type -> VerifyBottomDialog.newInstance(type)
+                    .setCallBack(new VerifyBottomDialog.VerifyCallBack() {
+                        @Override
+                        public void onVerifyCallBackClicked(String pwd, String code) {
+                            //开始提币
+                            verifyCode(type, code, pwd);
+                        }
+
+                        @Override
+                        public void onSendMsgClicked(VerifyBottomDialog dialog) {
+                            //发送验证码
+                            sendCode(type, dialog);
+                        }
+                    }).show(getSupportFragmentManager(), "Verify"));
+
+        }
     }
 
 
@@ -213,7 +239,18 @@ public class WithdrawActivity extends BaseActivity {
 
     private void initBundle() {
         mData = (List<CurrencyBean>) getIntent().getSerializableExtra("data");
-        item = mData.get(0);
+        if (TextUtils.isEmpty(getIntent().getStringExtra("name"))) {
+            item = mData.get(0);
+        } else {
+            String name = getIntent().getStringExtra("name");
+
+            for (int i = 0; i < mData.size(); i++) {
+                CurrencyBean currencyBean = mData.get(i);
+                if (currencyBean.getCurrencyName().equalsIgnoreCase(name)) {
+                    item = currencyBean;
+                }
+            }
+        }
         item.setSelect(true);
         initDataLayout(item);
     }

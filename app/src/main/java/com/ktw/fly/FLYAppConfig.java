@@ -24,8 +24,8 @@ public class FLYAppConfig {
     public static final String apiKey = "a891a7a6-03af-475c-8ae1-7fb4b230e958";
 
 //    public static String HOST = "http://aachat.aachain.org";// Socket IM 服务器入口
-    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
-//    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
+//    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
+    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
 
     public static String CONFIG_URL = HOST + "config";
     //客服列表
@@ -555,7 +555,8 @@ public class FLYAppConfig {
     }
 
     private static void initApiUrls(FLYAppConfig config) {
-        String apiUrl = TextUtils.isEmpty(config.apiUrl) ? HOST : config.apiUrl;
+//        String apiUrl = TextUtils.isEmpty(config.apiUrl) ? HOST : config.apiUrl;
+        String apiUrl = HOST;
         /* 登陆注册 */
         config.USER_REGISTER = apiUrl + "user/register/v1";// 注册
         config.USER_EMAIL_REGISTER = apiUrl + "user/registerMail";// 邮箱注册

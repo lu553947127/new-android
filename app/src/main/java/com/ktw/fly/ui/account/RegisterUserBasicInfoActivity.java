@@ -331,9 +331,7 @@ public class RegisterUserBasicInfoActivity extends BaseActivity implements View.
         params.put("provinceId", String.valueOf(mTempData.getProvinceId()));
         params.put("cityId", String.valueOf(mTempData.getCityId()));
         params.put("areaId", String.valueOf(mTempData.getAreaId()));
-
         params.put("isSmsRegister", String.valueOf(RegisterActivity.isSmsRegister));
-
         // 附加信息
         params.put("apiVersion", DeviceInfoUtil.getVersionCode(mContext) + "");
         params.put("model", DeviceInfoUtil.getModel());

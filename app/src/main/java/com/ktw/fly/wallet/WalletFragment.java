@@ -96,16 +96,16 @@ public class WalletFragment extends EasyFragment {
         initRv();
 
         mCoinTv.setOnClickListener(v -> {
-            if (mWalletAdapter.getData().size()==0) {
+            if (mWalletAdapter.getData().size() == 0) {
                 return;
             }
-            CoinActivity.actionStart(getActivity(),mWalletAdapter.getData());
+            CoinActivity.actionStart(getActivity(), mWalletAdapter.getData(),null);
         });
         mWithdrawTv.setOnClickListener(v -> {
-            if (mWalletAdapter.getData().size()==0) {
+            if (mWalletAdapter.getData().size() == 0) {
                 return;
             }
-            WithdrawActivity.actionStart(getActivity(),mWalletAdapter.getData());
+            WithdrawActivity.actionStart(getActivity(), mWalletAdapter.getData(), null);
         });
     }
 

@@ -83,9 +83,10 @@ public class CoinActivity extends BaseActivity {
 
     private CurrencyBean item;
 
-    public static void actionStart(Context context, List<CurrencyBean> data) {
+    public static void actionStart(Context context, List<CurrencyBean> data, String name) {
         Intent intent = new Intent(context, CoinActivity.class);
         intent.putExtra("data", (Serializable) data);
+        intent.putExtra("name", name);
         context.startActivity(intent);
     }
 
@@ -234,7 +235,18 @@ public class CoinActivity extends BaseActivity {
 
     private void initBundle() {
         mData = (List<CurrencyBean>) getIntent().getSerializableExtra("data");
-        item = mData.get(0);
+        if (TextUtils.isEmpty(getIntent().getStringExtra("name"))) {
+            item = mData.get(0);
+        } else {
+            String name = getIntent().getStringExtra("name");
+
+            for (int i = 0; i < mData.size(); i++) {
+                CurrencyBean currencyBean = mData.get(i);
+                if (currencyBean.getCurrencyName().equalsIgnoreCase(name)) {
+                    item = currencyBean;
+                }
+            }
+        }
         item.setSelect(true);
         initDataLayout(item);
         mUidTv.setText("UID:" + UserSp.getInstance(this).getUserId("").replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
@@ -246,8 +258,8 @@ public class CoinActivity extends BaseActivity {
         String s = mTip2Tv.getText().toString();
         String s1 = mTipTv.getText().toString();
 
-        mTip2Tv.setText(s.replace(s.substring(s.indexOf(":") + 1, s.indexOf(",")), item.getMinCoinNumber() +" "+ item.getCurrencyName()));
-        mTipTv.setText(s1.replace(s1.substring(s.indexOf(":") + 1, s1.indexOf(",")), item.getMinCoinNumber()+" " + item.getCurrencyName()));
+        mTip2Tv.setText(s.replace(s.substring(s.indexOf(":") + 1, s.indexOf(",")), item.getMinCoinNumber() + " " + item.getCurrencyName()));
+        mTipTv.setText(s1.replace(s1.substring(s.indexOf(":") + 1, s1.indexOf(",")), item.getMinCoinNumber() + " " + item.getCurrencyName()));
         mTitleTv.setText(mTitleTv.getText().toString().replace("USDT", item.getCurrencyName()));
 
         String s2 = mTip2Tv.getText().toString();
@@ -292,7 +304,7 @@ public class CoinActivity extends BaseActivity {
         mSelectCurrencyTv.setOnClickListener(v -> mMainLayout.openDrawer(mDrawLayout));
 
         mCopyTv.setOnClickListener(v -> {
-            if (mAddressTv.getText().length()==0) {
+            if (mAddressTv.getText().length() == 0) {
                 return;
             }
             //复制UID

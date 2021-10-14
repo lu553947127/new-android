@@ -211,9 +211,9 @@ public class WalletDetailActivity extends BaseActivity {
                             return;
                         }
                         if (type == 1) {
-                            CoinActivity.actionStart(WalletDetailActivity.this, list);
+                            CoinActivity.actionStart(WalletDetailActivity.this, list,mBean.getCurrencyName());
                         } else {
-                            WithdrawActivity.actionStart(WalletDetailActivity.this, list);
+                            WithdrawActivity.actionStart(WalletDetailActivity.this, list,mBean.getCurrencyName());
                         }
 
                     }
