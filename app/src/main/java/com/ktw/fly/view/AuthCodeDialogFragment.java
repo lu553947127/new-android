@@ -190,12 +190,7 @@ public class AuthCodeDialogFragment extends DialogFragment implements View.OnCli
      * 邮箱注册 请求图形验证码
      */
     private void requestImageCodeEmail(String key) {
-
-        if (sCoreManager.getConfig().registerUsername || !sCoreManager.getConfig().isOpenSMSCode) {
-            // 用户名注册或者没开启验证码，就不请求图形码，
-            return;
-        }
-
+        
         Map<String, String> params = new HashMap<>();
 
         params.put("imgKey", account + key);
