@@ -171,7 +171,7 @@ public class WalletDetailActivity extends BaseActivity {
         mAdapter = new WalletDetailRecordAdapter();
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener((adapter, view, position) -> RecordDetailActivity.actionStart(WalletDetailActivity.this, mAdapter.getItem(position)));
+//        mAdapter.setOnItemClickListener((adapter, view, position) -> RecordDetailActivity.actionStart(WalletDetailActivity.this, mAdapter.getItem(position)));
     }
 
 
@@ -232,7 +232,7 @@ public class WalletDetailActivity extends BaseActivity {
             return;
         }
         Map<String, String> params = new HashMap<>();
-        params.put("userId", UserSp.getInstance(this).getUserId(""));
+        params.put("userid", UserSp.getInstance(this).getUserId(""));
         params.put("coinId", mBean.getF01());
         params.put("pageSize", "20");
         params.put("pageNumber", String.valueOf(mPageNumber));

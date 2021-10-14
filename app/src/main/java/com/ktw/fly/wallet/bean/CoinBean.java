@@ -46,6 +46,7 @@ public class CoinBean implements Serializable {
     private String relateRecdId;
     private String appId;
     private long createTime;//	创建时间
+    private long createTimes;//	创建时间
     private long updateTime;//	更新时间
     private String userId;
     private String transferNo;//	订单号
@@ -235,6 +236,21 @@ public class CoinBean implements Serializable {
             return "";
         }
         return DateUtils.getDate(createTime, "yyyy-MM-dd HH:mm:ss");
+    }
+
+    public long getCreateTimes() {
+        return createTimes;
+    }
+
+    public void setCreateTimes(long createTimes) {
+        this.createTimes = createTimes;
+    }
+
+    public String getTimes() {
+        if (createTimes == 0) {
+            return "";
+        }
+        return DateUtils.getDate(createTimes, "yyyy-MM-dd HH:mm:ss");
     }
 
     public String getUpdateRealTime() {
