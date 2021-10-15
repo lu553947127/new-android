@@ -132,10 +132,10 @@ public class RedDetailsActivity extends BaseActivity {
             red_resultmsg_tv.setText(getString(R.string.example_red_packet_remain, openRedpacket.redCount.receivedRedEnvelopeCount,
                     openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.receivedRedEnvelopeCapital, openRedpacket.redCapital.capitalCount));
         } else if (openRedpacket.redCount.status == 1) {
-//            formatTimeS(Long.getLong(openRedpacket.redCount.time));
+            String time = cal(Integer.valueOf(openRedpacket.redCount.time));
 
             red_resultmsg_tv.setText(getString(R.string.example_red_packet_loot_all,
-                    openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.time));
+                    openRedpacket.redCount.redEnvelopeCount, time));
         } else {
             red_resultmsg_tv.setText(getString(R.string.red_back_expires));
         }
@@ -172,25 +172,38 @@ public class RedDetailsActivity extends BaseActivity {
     }
 
 
-    public String formatTimeS(long seconds) {
-        int temp = 0;
-        StringBuffer sb = new StringBuffer();
-        if (seconds > 3600) {
-            temp = (int) (seconds / 3600);
-            sb.append((seconds / 3600) < 10 ? "0" + temp + ":" : temp + ":");
-            temp = (int) (seconds % 3600 / 60);
-            changeSeconds(seconds, temp, sb);
+    public static String cal(int second) {
+        int h = 0;
+        int d = 0;
+        int s = 0;
+        int temp = second % 3600;
+        if (second > 3600) {
+            h = second / 3600;
+            if (temp != 0) {
+                if (temp > 60) {
+                    d = temp / 60;
+                    if (temp % 60 != 0) {
+                        s = temp % 60;
+                    }
+                } else {
+                    s = temp;
+                }
+            }
         } else {
-            temp = (int) (seconds % 3600 / 60);
-            changeSeconds(seconds, temp, sb);
+            d = second / 60;
+            if (second % 60 != 0) {
+                s = second % 60;
+            }
         }
-        return sb.toString();
-    }
-
-    private void changeSeconds(long seconds, int temp, StringBuffer sb) {
-        sb.append((temp < 10) ? "0" + temp + ":" : "" + temp + ":");
-        temp = (int) (seconds % 3600 % 60);
-        sb.append((temp < 10) ? "0" + temp : "" + temp);
+        if (h > 0) {
+            return h + "时" + d + "分" + s + "秒";
+        } else {
+            if (d > 0) {
+                return d + "分" + s + "秒";
+            } else {
+                return s + "秒";
+            }
+        }
     }
 
 

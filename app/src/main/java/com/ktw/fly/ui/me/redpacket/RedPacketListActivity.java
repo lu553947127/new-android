@@ -406,8 +406,8 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
                 baseViewHolder.setText(R.id.tv_red_get_the_number, item.received_red_envelope_count + " " + getResources().getString(R.string.individual));
                 baseViewHolder.setText(R.id.tv_red_get_the_amount, item.received_red_envelope_capital + " " + item.capital_type);
-                baseViewHolder.setText(R.id.tv_red_uncollected_number, item.unclaimed_red_envelope_capital + " " + getResources().getString(R.string.individual));
-                baseViewHolder.setText(R.id.tv_red_unclaimed_amount, item.unclaimed_red_envelope_count + " " + item.capital_type);
+                baseViewHolder.setText(R.id.tv_red_uncollected_number, item.unclaimed_red_envelope_count + " " + getResources().getString(R.string.individual));
+                baseViewHolder.setText(R.id.tv_red_unclaimed_amount, item.unclaimed_red_envelope_capital  + " " + item.capital_type);
             } else {
                 baseViewHolder.setGone(R.id.ll_luck, true);
                 baseViewHolder.setGone(R.id.ll_expan, true);

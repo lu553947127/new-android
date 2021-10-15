@@ -128,6 +128,7 @@ import com.ktw.fly.view.photopicker.PhotoPickerActivity;
 import com.ktw.fly.view.photopicker.SelectModel;
 import com.ktw.fly.view.photopicker.intent.PhotoPickerIntent;
 import com.ktw.fly.view.redDialog.RedDialog;
+import com.ktw.fly.view.redDialog.RedLootAllDialog;
 import com.ktw.fly.xmpp.ListenerManager;
 import com.ktw.fly.xmpp.listener.ChatMessageListener;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
@@ -271,6 +272,7 @@ public class ChatActivity extends BaseActivity implements
     private ChatMessage replayMessage;
 
     private RedDialog mRedDialog;
+    private RedLootAllDialog lootRedDialog;
     private boolean isUserSaveContentMethod = true;
 
     public static void start(Context ctx, Friend friend) {
@@ -1370,7 +1372,6 @@ public class ChatActivity extends BaseActivity implements
     private void gainRedPacket(Context context,ChatMessage message, String userId) {
 
         final RedPacketResult redPacket = new Gson().fromJson(message.getObjectId(), RedPacketResult.class);
-
         Map<String, String> params = new HashMap<>();
         params.put("redIdS", redPacket.redId);
         params.put("userId", userId);
@@ -1378,21 +1379,46 @@ public class ChatActivity extends BaseActivity implements
                 error -> {
                 },
                 result -> {
-//                    if (Result.checkSuccess(context, result, false)) {  //未抢过当前红包
-//
-//                        RedDialogBean redDialogBean =
-//                                new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
-//
-//                        mRedDialog = new RedDialog(mContext, redDialogBean,
-//                                () -> {
-//                                    rushRedPacket(message, true);
-//                                    mRedDialog.dismiss();
-//                                });
-//                        mRedDialog.show();
-//
-//                    } else if (result.getResultCode() == CODE_AUTH_RED_PACKET_GAIN) {
-//                        rushRedPacket(message, false);
-//                    }
+
+                    if ((result.redUser == 1 && result.redStatus == 2) ||//当前用户没抢过红包 并且红包未抢完
+                            (result.redUser == 1 && result.redStatus == 4)) { //当前用户没抢过红包 并且红包没过期
+
+                        RedDialogBean redDialogBean =
+                                new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
+
+                        mRedDialog = new RedDialog(mContext, redDialogBean,
+                                () -> {
+                                    rushRedPacket(message, true);
+                                    mRedDialog.dismiss();
+                                });
+                        mRedDialog.show();
+
+                    } else if (result.redUser == 1 && result.redStatus == 1) { //当前用户没抢过并且红包已抢光
+                        RedDialogBean redDialogBean =
+                                new RedDialogBean(redPacket.userId, redPacket.userName,
+                                        getString(R.string.red_packet_loot_all), redPacket.redId);
+                        lootRedDialog = new RedLootAllDialog(mContext, redDialogBean, () -> {
+                            rushRedPacket(message);
+                            lootRedDialog.dismiss();
+                        });
+                        lootRedDialog.show();
+
+                    } else if (result.redUser == 1 && result.redStatus == 3) { //当前用户没抢过并且红包已过期
+
+                        RedDialogBean redDialogBean =
+                                new RedDialogBean(redPacket.userId, redPacket.userName,
+                                        getString(R.string.red_packet_past), redPacket.redId);
+                        lootRedDialog = new RedLootAllDialog(mContext, redDialogBean, () -> {
+                            rushRedPacket(message);
+                            lootRedDialog.dismiss();
+                        });
+                        lootRedDialog.show();
+
+                    } else if (result.redUser == 0) {
+                        rushRedPacket(message, false);
+                    }
+
+
                 });
     }
 
@@ -1432,12 +1458,46 @@ public class ChatActivity extends BaseActivity implements
                     Intent intent = new Intent(mContext, RedDetailsActivity.class);
                     bundle.putParcelable("openRedpacket", result.getData());
                     bundle.putInt("redAction", 0);
-                    bundle.putBoolean("isGroup", isGrab);
+                    bundle.putBoolean("isGroup", false);
                     bundle.putString("mToUserId", message.getToUserId());
                     bundle.putSerializable("redPacket", redPacket);
+                    if ((userId.equals(message.getFromUserId()))) {
+                        bundle.putBoolean("null", true);
+                    }
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
 
+                });
+    }
+
+
+    public void rushRedPacket(final ChatMessage message) {
+        HashMap<String, String> params = new HashMap<String, String>();
+
+        final RedPacketResult redPacket = new Gson().fromJson(message.getObjectId(), RedPacketResult.class);
+
+        String userId = CoreManager.getSelf(mContext).getUserId();
+        String receiveName = CoreManager.getSelf(mContext).getNickName();
+        params.put("redId", redPacket.redId);
+        params.put("userId", userId);
+        params.put("receiveName", receiveName);
+        params.put("currencyId", redPacket.currencyId);
+        params.put("currencyName", redPacket.currencyName);
+        params.put("type", redPacket.type);
+        RedPacketHelper.rushRedPacket(mContext, params,
+                error -> {
+                },
+                result -> {
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext, RedDetailsActivity.class);
+                    bundle.putParcelable("openRedpacket", result.getData());
+                    bundle.putInt("redAction", 0);
+                    bundle.putBoolean("isGroup", false);
+                    bundle.putString("mToUserId", message.getToUserId());
+                    bundle.putSerializable("redPacket", redPacket);
+                    bundle.putBoolean("null", true);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
                 });
     }
 

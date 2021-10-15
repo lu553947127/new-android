@@ -236,12 +236,14 @@ class RedViewHolder extends AChatHolderInterface {
                     Intent intent = new Intent(mContext, RedDetailsActivity.class);
                     bundle.putParcelable("openRedpacket", rushRedPacket);
                     bundle.putInt("redAction", 0);
+                    if ((userId.equals(mdata.getFromUserId()))) {
+                        bundle.putBoolean("null", true);
+                    }
                     bundle.putBoolean("isGroup", isGounp);
                     bundle.putString("mToUserId", mToUserId);
                     bundle.putSerializable("redPacket", redPacket);
                     intent.putExtras(bundle);
                     mContext.startActivity(intent);
-
                 });
     }
 
@@ -267,7 +269,7 @@ class RedViewHolder extends AChatHolderInterface {
                     Intent intent = new Intent(mContext, RedDetailsActivity.class);
                     bundle.putParcelable("openRedpacket", result.getData());
                     bundle.putInt("redAction", 0);
-                    bundle.putBoolean("isGroup", true);
+                    bundle.putBoolean("isGroup", isGounp);
                     bundle.putString("mToUserId", message.getToUserId());
                     bundle.putSerializable("redPacket", redPacket);
                     bundle.putBoolean("null", true);
