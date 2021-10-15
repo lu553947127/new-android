@@ -42,6 +42,7 @@ import com.ktw.fly.ui.me.redpacket.SendRedPacketActivity;
 import com.ktw.fly.util.DisplayUtil;
 import com.ktw.fly.util.Md5Util;
 import com.ktw.fly.util.ToastUtil;
+import com.ktw.fly.util.secure.LoginPassword;
 import com.ktw.fly.wallet.adapter.SelectItemAdapter;
 import com.ktw.fly.wallet.bean.CoinBean;
 import com.ktw.fly.wallet.bean.CurrencyBean;
@@ -536,7 +537,7 @@ public class WithdrawActivity extends BaseActivity {
         params.put("userId", UserSp.getInstance(this).getUserId(""));
         params.put("type", type + "");
         params.put("code", code);
-        params.put("password", Md5Util.toMD5(pwd));
+        params.put("password", LoginPassword.encodeMd5(pwd));
         HttpUtils.post().url(Apis.VERIFY_CODE)
                 .params(params)
                 .build()

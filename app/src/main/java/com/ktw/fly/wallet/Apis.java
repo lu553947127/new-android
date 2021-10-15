@@ -5,6 +5,7 @@ import com.ktw.fly.FLYAppConfig;
 public interface Apis {
 
     String BASE_URL = "http://aachat-test-api.aachain.org/";//测试
+//    String BASE_URL = "http://aachat-payapi.aachain.org/";//正式
 //    String BASE_URL = "http://192.168.0.86:7977/";//本地
 //    String BASE_URL = "http://116.213.41.159:7977/";//测试
 

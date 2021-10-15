@@ -581,7 +581,8 @@ public class MessageFragment extends EasyFragment implements AuthStateListener {
                 break;
             case R.id.iv_title_right:
                 mMessagePopupWindow = new MessagePopupWindow(getActivity(), this, coreManager);
-                mMessagePopupWindow.getContentView().measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                mMessagePopupWindow.getContentView().measure(View.MeasureSpec.UNSPECIFIED,
+                        View.MeasureSpec.UNSPECIFIED);
                 mMessagePopupWindow.showAsDropDown(v,
                         -(mMessagePopupWindow.getContentView().getMeasuredWidth() - v.getWidth() / 2 - 40),
                         0);
