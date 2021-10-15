@@ -118,6 +118,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
                     @Override
                     public void onResponse(ObjectResult<RedBacketCount> result) {
+                        if (result==null||result.getData()==null) {
+                            return;
+                        }
                         if (Result.checkSuccess(getApplicationContext(), result)) {
                             sendRed(result);
                             initDataLayout(item);
@@ -244,6 +247,10 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
 
     private void sendRed(ObjectResult<RedBacketCount> result) {
+        if (result==null||result.getData()==null||result.getData().selectRedEnvelopesInfoCountUser.size()==0) {
+            return;
+        }
+
         item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
         item.select = true;
         mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
@@ -269,19 +276,19 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 redPacketAdapter.notifyItemChanged(position);
             }
         });
-
         redPacketAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setAdapter(redPacketAdapter);
-
         redPacketAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
     }
 
-
+    /**
+     * 没数据跳不到这里所以无法设置缺省页面
+     * @param result
+     */
     private void receiverRed(ObjectResult<RedBacketCount> result) {
         item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
         item.select = true;
         mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
-
         receiverRedItemAdapter = new ReceiverRedItemAdapter();
         receiverRedItemAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setLayoutManager(new LinearLayoutManager(this) {
@@ -335,6 +342,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
     }
 
     private void initDataLayout(RedBacketCount.CapitalList item) {
+        if (item==null) {
+            return;
+        }
         redAmountText.setText(item.capitalCount);
         redTypeText.setText(item.capitalType);
         capitalNameText.setText(item.capitalType);

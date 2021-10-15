@@ -82,6 +82,7 @@
         </RadioGroup>
 
         <androidx.core.widget.NestedScrollView
+            android:fillViewport="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none">
@@ -125,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="1908.0908"
+                        android:text="0.00"
                         android:textColor="@color/white"
                         android:textSize="25sp"
                         android:textStyle="bold" />
