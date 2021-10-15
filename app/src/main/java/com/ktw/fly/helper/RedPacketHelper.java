@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.ktw.fly.R;
+import com.ktw.fly.bean.RedPacketLoot;
 import com.ktw.fly.bean.redpacket.RedPacketResult;
 import com.ktw.fly.bean.redpacket.RushRedPacket;
 import com.ktw.fly.ui.base.CoreManager;
@@ -152,15 +153,19 @@ public class RedPacketHelper {
      * @param onSuccess
      */
     public static void gainRedPacket(Context ctx, Map<String, String> params,
-                                     Function<Throwable> onError, Function<ObjectResult<RedPacketResult>> onSuccess) {
+                                     Function<Throwable> onError, Function<RedPacketLoot> onSuccess) {
         HttpUtils.post().url(CoreManager.requireConfig(ctx).GAIN_RED_PACKET)
                 .params(params)
                 .build()
-                .execute(new BaseCallback<RedPacketResult>(RedPacketResult.class) {
+                .execute(new BaseCallback<RedPacketLoot>(RedPacketLoot.class) {
 
                     @Override
-                    public void onResponse(ObjectResult<RedPacketResult> result) {
-                        onSuccess.apply(result);
+                    public void onResponse(ObjectResult<RedPacketLoot> result) {
+                        if (Result.checkSuccess(ctx, result, false)) {
+                            onSuccess.apply(result.getData());
+                        } else {
+                            Toast.makeText(ctx, result.getResultMsg(), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override

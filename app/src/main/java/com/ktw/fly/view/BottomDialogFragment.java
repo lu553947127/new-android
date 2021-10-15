@@ -119,9 +119,9 @@ public class BottomDialogFragment extends BottomSheetDialogFragment implements V
      * @param password
      * @return
      */
-    public static BottomDialogFragment newInstance(CoreManager coreManager, int passwordType, int verificationType, String password) {
+    public static BottomDialogFragment newInstance(CoreManager coreManager, int passwordType, int verificationType, String account, String password) {
         sCoreManager = coreManager;
-        String account = coreManager.getSelf().getTelephone();
+
         Bundle bundle = new Bundle();
         bundle.putInt("verification_type", verificationType);
         bundle.putString("account", account);
@@ -179,6 +179,7 @@ public class BottomDialogFragment extends BottomSheetDialogFragment implements V
 
         mAuthCodeEdit.setHint(verificationType == LoginHelper.LOGIN_PHONE ? R.string.hint_input_phone_auth_code : R.string.hint_input_email_auth_code);
 
+        tvHintEmailCode.setText(verificationType == LoginHelper.LOGIN_PHONE ? R.string.hint_receive_msg_code : R.string.hint_receive_email_code);
 
         authCodeDialog = AuthCodeDialogFragment.newInstance(sCoreManager, passwordType, verificationType, account);
     }
@@ -370,7 +371,7 @@ public class BottomDialogFragment extends BottomSheetDialogFragment implements V
             // 验证码正确
             return true;
         } else {
-            Toast.makeText(getContext(), getString(R.string.please_input_auth_code), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.auth_code_error), Toast.LENGTH_SHORT).show();
             return false;
         }
     }

@@ -45,6 +45,7 @@
     <color name="purple">#ffc47cf2</color>
     <color name="wx_grey">#f6f6f6</color>
     <color name="send_circle">#f2f2f2</color>
+    <color name="red_backet_loot_text_color">#FEE7CE</color>
 
     <color name="action_text_color_enabled">#818585</color>
     <color name="action_text_color_normal">#cfcfcf</color>

@@ -12,12 +12,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
 
 import com.ktw.fly.FLYApplication;
 import com.ktw.fly.R;
+import com.ktw.fly.bean.AccountUser;
 import com.ktw.fly.bean.Friend;
 import com.ktw.fly.broadcast.MsgBroadcast;
 import com.ktw.fly.db.dao.ChatMessageDao;
@@ -64,6 +67,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private String mLoginUserId;
     private My_BroadcastReceiver mMyBroadcastReceiver = new My_BroadcastReceiver();
     private String language;
+    private LinearLayout bindLayout;
+    private RelativeLayout bindPhoneLayout;
+    private RelativeLayout bindEmailLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +91,43 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         intentFilter.addAction(com.ktw.fly.broadcast.OtherBroadcast.SEND_MULTI_NOTIFY);
         intentFilter.addAction(com.ktw.fly.broadcast.OtherBroadcast.NO_EXECUTABLE_INTENT);
         registerReceiver(mMyBroadcastReceiver, intentFilter);
+
+        bingType();
+    }
+
+
+    private void bingType() {
+        DialogHelper.showDefaulteMessageProgressDialog(mContext);
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", coreManager.getSelf().getUserId());
+        HttpUtils.get().url(coreManager.getConfig().USER_ACCOUNT_DATA)
+                .params(params)
+                .build(true, true)
+                .execute(new BaseCallback<AccountUser>(AccountUser.class) {
+                    @Override
+                    public void onResponse(ObjectResult<AccountUser> result) {
+                        DialogHelper.dismissProgressDialog();
+                        if (result.getResultCode() == 1 && result.getData() != null) {
+                            String phone = result.getData().phone;
+                            String mailbox = result.getData().mailbox;
+
+                            boolean phoneIsNull = TextUtils.isEmpty(phone);
+                            boolean mailboxIsMailbox = TextUtils.isEmpty(mailbox);
+                            if (!phoneIsNull && !mailboxIsMailbox) {
+                                bindLayout.setVisibility(View.GONE);
+                            } else if (!phoneIsNull) {
+                                bindPhoneLayout.setVisibility(View.GONE);
+                            } else if (!mailboxIsMailbox) {
+                                bindEmailLayout.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        DialogHelper.dismissProgressDialog();
+                    }
+                });
     }
 
     @Override
@@ -103,6 +146,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         privateTv = (TextView) findViewById(R.id.privacySetting_text);
         aboutTv = (TextView) findViewById(R.id.aboutUs_text);
         mExitBtn = (Button) findViewById(R.id.exit_btn);
+        bindLayout = findViewById(R.id.ll_bind);
+        bindPhoneLayout = findViewById(R.id.bing_phone_rl);
+        bindEmailLayout = findViewById(R.id.bing_email_rl);
+
 //        mExitBtn.setBackground(new ColorDrawable(MyApplication.getContext().getResources().getColor(R.color.redpacket_bg)));
         ViewCompat.setBackgroundTintList(mExitBtn, ColorStateList.valueOf(SkinUtils.getSkin(this).getAccentColor()));
         mExitBtn.setText(getString(R.string.setting_logout));
@@ -245,11 +292,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.bing_phone_rl:
                 //绑定手机号
-                BindAccountActivity.startActivity(mContext,0);
+                BindAccountActivity.startActivity(mContext, 0);
                 break;
             case R.id.bing_email_rl:
                 //绑定邮箱
-                BindAccountActivity.startActivity(mContext,1);
+                BindAccountActivity.startActivity(mContext, 1);
                 break;
         }
     }

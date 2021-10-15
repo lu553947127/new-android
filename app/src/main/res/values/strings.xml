@@ -2333,6 +2333,7 @@
     <string name="hint_input_email_auth_code">请输入邮箱验证码</string>
     <string name="hint_input_phone_auth_code">请输入手机验证码</string>
     <string name="hint_receive_email_code">若未收到邮件，请检查邮件垃圾箱</string>
+    <string name="hint_receive_msg_code">若未收到短信，请检查是否被拦截</string>
     <string name="graphics_auth_code">图形验证码</string>
     <string name="hint_input_graphics_auth_code">请输入图形验证码</string>
     <string name="tip_email_wrong">请输入正确的邮箱格式</string>
@@ -2392,8 +2393,10 @@
     <string name="example_red_packet_loot_all">%s个红包,%s秒被抢光</string>
     <string name="red_back_expires">红包已过期</string>
     <string name="send_red_people">发出红包者</string>
-
-
+    <string name="look_get_detail">查看领取详情</string>
+    <string name="red_packet_loot_all">手慢了，红包派完了</string>
+    <string name="red_packet_past">手慢了，红包已过期</string>
+    <string name="input_red_packet_number">请输入红包个数</string>
 
 
     <string name="wallet">钱包</string>

@@ -1,5 +1,6 @@
 package com.ktw.fly.view.chatHolder;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.ktw.fly.util.StringUtils;
 import com.ktw.fly.util.ToastUtil;
 import com.ktw.fly.view.NoDoubleClickListener;
 import com.ktw.fly.view.redDialog.RedDialog;
+import com.ktw.fly.view.redDialog.RedLootAllDialog;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
 import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.result.ObjectResult;
@@ -41,6 +43,7 @@ import de.greenrobot.event.EventBus;
 import okhttp3.Call;
 
 import static com.xuan.xuanhttplibrary.okhttp.result.Result.CODE_AUTH_RED_PACKET_GAIN;
+import static com.xuan.xuanhttplibrary.okhttp.result.Result.CODE_AUTH_RED_PACKET_LOOT_ALL;
 import static com.xuan.xuanhttplibrary.okhttp.result.Result.CODE_AUTH_RED_PACKET_PAST;
 
 class RedViewHolder extends AChatHolderInterface {
@@ -50,6 +53,7 @@ class RedViewHolder extends AChatHolderInterface {
 
     boolean isKeyRed;
     private RedDialog mRedDialog;
+    private RedLootAllDialog lootRedDialog;
 
     @Override
     public int itemLayoutId(boolean isMysend) {
@@ -63,6 +67,7 @@ class RedViewHolder extends AChatHolderInterface {
         mRootView = view.findViewById(R.id.chat_warp_view);
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void fillData(ChatMessage message) {
         String s = StringUtils.replaceSpecialChar(message.getContent());
@@ -70,12 +75,22 @@ class RedViewHolder extends AChatHolderInterface {
         isKeyRed = "1".equals(message.getFilePath());
 
         if (mdata.getFileSize() == 2) {// 已领取
-            mRootView.setAlpha(0.4f);
+            if (mdata.isMySend()) {
+                mRootView.setBackgroundResource(R.mipmap.red_backet_send_loot);
+            } else {
+                mRootView.setBackgroundResource(R.mipmap.red_backet_receive_loot);
+            }
             mTvType.setText(getString(isKeyRed ? R.string.red_common_packer : R.string.red_luck_packer));
+            mTvType.setTextColor(mContext.getColor(R.color.white));
             mTvContent.setText(charSequence);
         } else {
+            if (mdata.isMySend()) {
+                mRootView.setBackgroundResource(R.mipmap.red_backet_send);
+            } else {
+                mRootView.setBackgroundResource(R.mipmap.red_backet_receive);
+            }
             mTvType.setText(getString(isKeyRed ? R.string.red_common_packer : R.string.red_luck_packer));
-            mRootView.setAlpha(1f);
+            mTvType.setTextColor(mContext.getColor(R.color.red_backet_loot_text_color));
             mTvContent.setText(charSequence);
         }
 
@@ -98,78 +113,7 @@ class RedViewHolder extends AChatHolderInterface {
         clickRedpacket();
     }
 
-    /*
-    // 点击红包
-    public void clickRedpacket() {
-        if (selfGroupRole != null && MucRoomMember.disallowPublicAction(selfGroupRole)) {
-            ToastUtil.showToast(mContext, getString(R.string.tip_action_disallow_place_holder, getString(MucRoomMember.getRoleName(selfGroupRole))));
-            return;
-        }
-        final String token = CoreManager.requireSelfStatus(mContext).accessToken;
-        final String redId = mdata.getObjectId();
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("access_token", token);
-        params.put("id", redId);
-
-        HttpUtils.get().url(CoreManager.requireConfig(mContext).RENDPACKET_GET)
-                .params(params)
-                .build()
-                .execute(new BaseCallback<OpenRedpacket>(OpenRedpacket.class) {
-
-                    @Override
-                    public void onResponse(ObjectResult<OpenRedpacket> result) {
-                        if (result.getData() != null) {
-                            // 当resultCode==1时，表示可领取
-                            // 当resultCode==0时，表示红包已过期、红包已退回、红包已领完
-                            int resultCode = result.getResultCode();
-                            OpenRedpacket openRedpacket = result.getData();
-                            Bundle bundle = new Bundle();
-                            Intent intent = new Intent(mContext, RedDetailsAuldActivity.class);
-                            bundle.putSerializable("openRedpacket", openRedpacket);
-                            bundle.putInt("redAction", 0);
-                            if (!TextUtils.isEmpty(result.getResultMsg())) //resultMsg不为空表示红包已过期
-                            {
-                                bundle.putInt("timeOut", 1);
-                            } else {
-                                bundle.putInt("timeOut", 0);
-                            }
-
-                            bundle.putBoolean("isGroup", isGounp);
-                            bundle.putString("mToUserId", mToUserId);
-                            intent.putExtras(bundle);
-
-                            // 红包不可领取, 或者我发的单聊红包直接跳转
-                            if (resultCode != 1 || (!isGounp && isMysend)) {
-                                mContext.startActivity(intent);
-                            } else {
-                                // 在群里面我领取过的红包直接跳转
-                                if (isGounp && mdata.getFileSize() != 1) {
-                                    mContext.startActivity(intent);
-                                } else {
-                                    if (mdata.getFilePath().equals("3")) {
-                                        // 口令红包编辑输入框
-                                        changeBottomViewInputText(mdata.getContent());
-                                    } else {
-                                        RedDialogBean redDialogBean = new RedDialogBean(openRedpacket.getPacket().getUserId(), openRedpacket.getPacket().getUserName(),
-                                                openRedpacket.getPacket().getGreetings(), openRedpacket.getPacket().getId());
-                                        mRedDialog = new RedDialog(mContext, redDialogBean, () -> openRedPacket(token, redId));
-                                        mRedDialog.show();
-                                    }
-                                }
-                            }
-                        } else {
-                            Toast.makeText(mContext, result.getResultMsg(), Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e) {
-                    }
-                });
-    }
-   */
     // 点击红包
     public void clickRedpacket() {
         if (selfGroupRole != null && MucRoomMember.disallowPublicAction(selfGroupRole)) {
@@ -207,7 +151,10 @@ class RedViewHolder extends AChatHolderInterface {
                 error -> {
                 },
                 result -> {
-                    if (Result.checkSuccess(context, result, false)) {  //未抢过当前红包
+
+                    if ((result.redUser == 1 && result.redStatus == 2) ||//当前用户没抢过红包 并且红包未抢完
+                            (result.redUser == 1 && result.redStatus == 4)) { //当前用户没抢过红包 并且红包没过期
+
                         RedDialogBean redDialogBean =
                                 new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
 
@@ -218,10 +165,32 @@ class RedViewHolder extends AChatHolderInterface {
                                 });
                         mRedDialog.show();
 
-                    } else if (result.getResultCode() == CODE_AUTH_RED_PACKET_GAIN) { //已抢过红包
+                    } else if (result.redUser == 1 && result.redStatus == 1) { //当前用户没抢过并且红包已抢光
+
+                        RedDialogBean redDialogBean =
+                                new RedDialogBean(redPacket.userId, redPacket.userName,
+                                        getString(R.string.red_packet_loot_all), redPacket.redId);
+                        lootRedDialog = new RedLootAllDialog(mContext, redDialogBean, () -> {
+                            rushRedPacket(mdata);
+                            lootRedDialog.dismiss();
+                        });
+                        lootRedDialog.show();
+
+                    } else if (result.redUser == 1 && result.redStatus == 3) { //当前用户没抢过并且红包已过期
+
+                        RedDialogBean redDialogBean =
+                                new RedDialogBean(redPacket.userId, redPacket.userName,
+                                        getString(R.string.red_packet_past), redPacket.redId);
+                        lootRedDialog = new RedLootAllDialog(mContext, redDialogBean, () -> {
+                            rushRedPacket(mdata);
+                            lootRedDialog.dismiss();
+                        });
+                        lootRedDialog.show();
+
+                    } else if (result.redUser == 0) {
+
                         rushRedPacket(mdata, false);
-                    }else if (result.getResultCode() == CODE_AUTH_RED_PACKET_PAST){ //已过期红包
-                        rushRedPacket(mdata, false);
+
                     }
                 });
     }
@@ -247,7 +216,7 @@ class RedViewHolder extends AChatHolderInterface {
                 error -> {
                 },
                 result -> {
-                    RushRedPacket rushRedPacket =  result.getData();
+                    RushRedPacket rushRedPacket = result.getData();
                     if (isGrab) {  //第一次抢红包
                         mdata.setFileSize(2);
                         ChatMessageDao.getInstance().updateChatMessageReceiptStatus(userId, mToUserId, mdata.getPacketId());
@@ -276,6 +245,36 @@ class RedViewHolder extends AChatHolderInterface {
                 });
     }
 
+
+    public void rushRedPacket(final ChatMessage message) {
+        HashMap<String, String> params = new HashMap<String, String>();
+
+        final RedPacketResult redPacket = new Gson().fromJson(message.getObjectId(), RedPacketResult.class);
+
+        String userId = CoreManager.getSelf(mContext).getUserId();
+        String receiveName = CoreManager.getSelf(mContext).getNickName();
+        params.put("redId", redPacket.redId);
+        params.put("userId", userId);
+        params.put("receiveName", receiveName);
+        params.put("currencyId", redPacket.currencyId);
+        params.put("currencyName", redPacket.currencyName);
+        params.put("type", redPacket.type);
+        RedPacketHelper.rushRedPacket(mContext, params,
+                error -> {
+                },
+                result -> {
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(mContext, RedDetailsActivity.class);
+                    bundle.putParcelable("openRedpacket", result.getData());
+                    bundle.putInt("redAction", 0);
+                    bundle.putBoolean("isGroup", true);
+                    bundle.putString("mToUserId", message.getToUserId());
+                    bundle.putSerializable("redPacket", redPacket);
+                    bundle.putBoolean("null", true);
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
+                });
+    }
 
     // 打开红包
     public void openRedPacket(final String token, String redId) {

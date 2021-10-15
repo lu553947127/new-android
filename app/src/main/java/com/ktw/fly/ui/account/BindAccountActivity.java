@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.ktw.fly.R;
 import com.ktw.fly.bean.Code;
 import com.ktw.fly.helper.DialogHelper;
+import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.ui.base.CoreManager;
 import com.ktw.fly.ui.dialog.BindAccountAuthCodeDialog;
@@ -24,6 +25,7 @@ import com.ktw.fly.ui.dialog.BindAccountSuccessDialog;
 import com.ktw.fly.ui.tool.ButtonColorChange;
 import com.ktw.fly.util.Constants;
 import com.ktw.fly.util.PreferenceUtils;
+import com.ktw.fly.util.StringUtils;
 import com.ktw.fly.util.ToastUtil;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
 import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
@@ -83,6 +85,7 @@ public class BindAccountActivity extends BaseActivity implements View.OnClickLis
 
     private int mobilePrefix = 86;
     private BindAccountSuccessDialog bindSuccessDialog;
+    private EditText authCodeEdit;
 
     public static void startActivity(Context context, int bingType) {
         Intent intent = new Intent(context, BindAccountActivity.class);
@@ -108,7 +111,7 @@ public class BindAccountActivity extends BaseActivity implements View.OnClickLis
         LinearLayout llCode = findViewById(R.id.ll_code);
         TextView bingTypeText = findViewById(R.id.tv_bing_type);
         accountEdit = findViewById(R.id.et_account);
-        EditText authCodeEdit = findViewById(R.id.et_auth_code);
+        authCodeEdit = findViewById(R.id.et_auth_code);
         getCodeBtn = findViewById(R.id.btn_get_code);
         Button confirmBtn = findViewById(R.id.btn_confirm);
 
@@ -152,6 +155,12 @@ public class BindAccountActivity extends BaseActivity implements View.OnClickLis
                         return;
                     }
 
+
+                    if (!StringUtils.isMobileNumber(account) && mobilePrefix == 86) {
+                        Toast.makeText(this, getString(R.string.Input_11_phoneNumber), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     BindAccountAuthCodeDialog dialog = new BindAccountAuthCodeDialog(this);
                     dialog.setAccount(account);
                     dialog.setBindType(bindType);
@@ -176,10 +185,12 @@ public class BindAccountActivity extends BaseActivity implements View.OnClickLis
                 }
                 break;
             case R.id.btn_confirm:
-                if (bindType == 0) {
-                    bindPhone();
-                } else {
-                    bindEmail();
+                if (nextStep(bindType)){
+                    if (bindType == 0) {
+                        bindPhone();
+                    } else {
+                        bindEmail();
+                    }
                 }
                 break;
         }
@@ -259,6 +270,43 @@ public class BindAccountActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+
+    /**
+     * 验证验证码
+     */
+    private boolean nextStep(int bindType) {
+
+        String account = accountEdit.getText().toString();
+        String authCode = authCodeEdit.getText().toString();
+        if (bindType == 0) {
+            if (TextUtils.isEmpty(account)) {
+                Toast.makeText(this, getString(R.string.hint_input_phone_number), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            if (!StringUtils.isMobileNumber(account) && mobilePrefix == 86) {
+                Toast.makeText(this, getString(R.string.Input_11_phoneNumber), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        } else if (bindType == 1) {
+            if (TextUtils.isEmpty(account)) {
+                Toast.makeText(this, getString(R.string.hint_input_email), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        if (TextUtils.isEmpty(randcode)) {
+            Toast.makeText(this, getString(R.string.please_input_auth_code), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (authCode.equals(randcode)) {
+            // 验证码正确
+            return true;
+        } else {
+            Toast.makeText(this, getString(R.string.auth_code_error), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
     /**
      * 绑定邮箱
      */
@@ -294,6 +342,8 @@ public class BindAccountActivity extends BaseActivity implements View.OnClickLis
      * 绑定手机
      */
     private void bindPhone() {
+
+
         String userId = CoreManager.getSelf(this).getUserId();
         String account = accountEdit.getText().toString().trim();
         Map<String, String> params = new HashMap<>();

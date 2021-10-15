@@ -9,167 +9,169 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="30dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="30dp">
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp">
-
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/red_top"
-            android:paddingTop="20dp">
+            android:layout_height="150dp">
 
             <RelativeLayout
-                android:id="@+id/title_ly"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="120dp"
+                android:background="@drawable/red_top"
+                android:paddingTop="20dp">
 
-                <ImageView
-                    android:id="@+id/red_back_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:src="@mipmap/return_icon"
-                    android:tint="@color/white" />
+                <RelativeLayout
+                    android:id="@+id/title_ly"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/title_red_packet"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
+                    <ImageView
+                        android:id="@+id/red_back_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="15dp"
+                        android:src="@mipmap/return_icon"
+                        android:tint="@color/white" />
 
-                <TextView
-                    android:id="@+id/get_redlist_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:text="@string/red_packet_history"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:visibility="gone" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/title_red_packet"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/get_redlist_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/red_packet_history"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
-        </RelativeLayout>
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingBottom="10dp">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.ktw.fly.view.CircleImageView
-                android:id="@+id/red_head_iv"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/avatar_normal" />
-
-            <TextView
-                android:id="@+id/red_nickname_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/red_head_iv"
-                android:text="@string/someone_s_red_packet"
-                android:textColor="@color/black_2"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/red_words_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:text="@string/best_wishes"
-            android:textColor="@color/Grey_800"
-            android:textSize="14sp"
-            android:visibility="gone" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.ktw.fly.view.CircleImageView
+                    android:id="@+id/red_head_iv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/avatar_normal" />
+
+                <TextView
+                    android:id="@+id/red_nickname_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/red_head_iv"
+                    android:text="@string/someone_s_red_packet"
+                    android:textColor="@color/black_2"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/get_money_tv"
+                android:id="@+id/red_greeting_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="#C4A471"
-                android:textSize="55sp"
-                android:textStyle="bold"
-                tools:text="10.00" />
-
-            <TextView
-                android:id="@+id/get_money_bit_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="3dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toRightOf="@+id/get_money_tv"
-                android:textColor="#C4A471"
+                android:layout_marginTop="12dp"
+                tools:text="@string/best_wishes"
+                android:textColor="@color/text_red_hint"
                 android:textSize="14sp"
-                tools:text="元" />
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/get_money_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#C4A471"
+                    android:textSize="55sp"
+                    android:textStyle="bold"
+                    tools:text="10.00" />
+
+                <TextView
+                    android:id="@+id/get_money_bit_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toRightOf="@+id/get_money_tv"
+                    android:textColor="#C4A471"
+                    android:textSize="14sp"
+                    tools:text="元" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/reply_red_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="9dp"
+                android:text="@string/reply_red_thank"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/sp_13_text_size"
+                android:visibility="gone" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/reply_red_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="9dp"
-            android:text="@string/reply_red_thank"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/sp_13_text_size"
-            android:visibility="gone" />
-
     </LinearLayout>
 
-    </LinearLayout>
-
-    <View android:layout_width="match_parent"
+    <View
+        android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="#F2F2F2"/>
+        android:background="#F2F2F2" />
 
     <TextView
         android:id="@+id/red_resultmsg_tv"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:text="@string/example_red_packet_remain"
         android:textColor="@color/Grey_600"
         android:textSize="14sp"
-        android:visibility="visible"
-        android:background="@color/white"/>
+        android:visibility="visible" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/normal_bg"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/red_details_lsv"

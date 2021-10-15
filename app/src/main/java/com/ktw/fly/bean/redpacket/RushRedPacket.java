@@ -30,7 +30,9 @@ public class RushRedPacket implements Parcelable {
 
     public RedUser redUser;
 
-    public static class RedCapital implements Parcelable{
+    public ReceiveUser receiveUser;
+
+    public static class RedCapital implements Parcelable {
         public String capitalName;
 
         @SerializedName("capital_count")
@@ -74,7 +76,7 @@ public class RushRedPacket implements Parcelable {
         };
     }
 
-    public static class RedCount implements Parcelable{
+    public static class RedCount implements Parcelable {
         @SerializedName("unclaimed_red_envelope_capital")
         public String unclaimedRedEnvelopeCapital;
         @SerializedName("time")
@@ -134,7 +136,7 @@ public class RushRedPacket implements Parcelable {
         };
     }
 
-    public static class Red implements Parcelable{
+    public static class Red implements Parcelable {
         @SerializedName("receive_capital")
         public String receiveCapital;
         @SerializedName("red_envelopes_id")
@@ -201,12 +203,14 @@ public class RushRedPacket implements Parcelable {
         };
     }
 
-    public static class RedUser implements Parcelable{
+    public static class RedUser implements Parcelable {
         @SerializedName("user_id")
         public String userId;
         @SerializedName("user_name")
         public String userName;
         public String redId;
+        @SerializedName("red_envelope_name")
+        public String redEnvelopeName;
 
 
         @Override
@@ -219,6 +223,7 @@ public class RushRedPacket implements Parcelable {
             dest.writeString(this.userId);
             dest.writeString(this.userName);
             dest.writeString(this.redId);
+            dest.writeString(this.redEnvelopeName);
         }
 
         public RedUser() {
@@ -228,6 +233,7 @@ public class RushRedPacket implements Parcelable {
             this.userId = in.readString();
             this.userName = in.readString();
             this.redId = in.readString();
+            this.redEnvelopeName = in.readString();
         }
 
         public static final Creator<RedUser> CREATOR = new Creator<RedUser>() {
@@ -244,6 +250,49 @@ public class RushRedPacket implements Parcelable {
     }
 
 
+    public static class ReceiveUser implements Parcelable{
+        @SerializedName("currency_name")
+        public String currencyName;
+        @SerializedName("receive_capital")
+        public String receiveCapital;
+        @SerializedName("receive_name")
+        public String receiveName;
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.currencyName);
+            dest.writeString(this.receiveCapital);
+            dest.writeString(this.receiveName);
+        }
+
+        public ReceiveUser() {
+        }
+
+        protected ReceiveUser(Parcel in) {
+            this.currencyName = in.readString();
+            this.receiveCapital = in.readString();
+            this.receiveName = in.readString();
+        }
+
+        public static final Creator<ReceiveUser> CREATOR = new Creator<ReceiveUser>() {
+            @Override
+            public ReceiveUser createFromParcel(Parcel source) {
+                return new ReceiveUser(source);
+            }
+
+            @Override
+            public ReceiveUser[] newArray(int size) {
+                return new ReceiveUser[size];
+            }
+        };
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -255,6 +304,7 @@ public class RushRedPacket implements Parcelable {
         dest.writeParcelable(this.redCount, flags);
         dest.writeTypedList(this.redList);
         dest.writeParcelable(this.redUser, flags);
+        dest.writeParcelable(this.receiveUser, flags);
     }
 
     public RushRedPacket() {
@@ -265,6 +315,7 @@ public class RushRedPacket implements Parcelable {
         this.redCount = in.readParcelable(RedCount.class.getClassLoader());
         this.redList = in.createTypedArrayList(Red.CREATOR);
         this.redUser = in.readParcelable(RedUser.class.getClassLoader());
+        this.receiveUser = in.readParcelable(ReceiveUser.class.getClassLoader());
     }
 
     public static final Creator<RushRedPacket> CREATOR = new Creator<RushRedPacket>() {

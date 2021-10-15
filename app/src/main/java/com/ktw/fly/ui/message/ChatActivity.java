@@ -1378,21 +1378,21 @@ public class ChatActivity extends BaseActivity implements
                 error -> {
                 },
                 result -> {
-                    if (Result.checkSuccess(context, result, false)) {  //未抢过当前红包
-
-                        RedDialogBean redDialogBean =
-                                new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
-
-                        mRedDialog = new RedDialog(mContext, redDialogBean,
-                                () -> {
-                                    rushRedPacket(message, true);
-                                    mRedDialog.dismiss();
-                                });
-                        mRedDialog.show();
-
-                    } else if (result.getResultCode() == CODE_AUTH_RED_PACKET_GAIN) {
-                        rushRedPacket(message, false);
-                    }
+//                    if (Result.checkSuccess(context, result, false)) {  //未抢过当前红包
+//
+//                        RedDialogBean redDialogBean =
+//                                new RedDialogBean(redPacket.userId, redPacket.userName, redPacket.redEnvelopeName, redPacket.redId);
+//
+//                        mRedDialog = new RedDialog(mContext, redDialogBean,
+//                                () -> {
+//                                    rushRedPacket(message, true);
+//                                    mRedDialog.dismiss();
+//                                });
+//                        mRedDialog.show();
+//
+//                    } else if (result.getResultCode() == CODE_AUTH_RED_PACKET_GAIN) {
+//                        rushRedPacket(message, false);
+//                    }
                 });
     }
 

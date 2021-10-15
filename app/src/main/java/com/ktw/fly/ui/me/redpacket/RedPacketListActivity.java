@@ -349,14 +349,11 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 ButtonColorChange.changeDrawable(this, rbReceiveRed, R.drawable.red_packet_list_text_bg);
 
                 sendRedData();
-//                verificationType = LoginHelper.LOGIN_PHONE;
-
                 break;
             case R.id.rb_receive_red:
                 ButtonColorChange.colorChange(this, rbReceiveRed);
                 ButtonColorChange.changeDrawable(this, rbSendRed, R.drawable.red_packet_list_text_bg);
                 receiverData();
-//                verificationType = LoginHelper.LOGIN_EMAIL;
                 break;
         }
     }

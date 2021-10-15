@@ -50,10 +50,13 @@ public class CapitalPasswordActivity extends BaseActivity implements View.OnClic
 
     //0：手机 1 ：邮箱  默认 手机验证
     private int verificationType;
-    private BottomDialogFragment verificationCodeDialog;
 
 
     private EditText mPasswordEdit, mConfigPasswordEdit;
+
+
+    private String mailbox;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +74,15 @@ public class CapitalPasswordActivity extends BaseActivity implements View.OnClic
                 .params(params)
                 .build(true, true)
                 .execute(new BaseCallback<AccountUser>(AccountUser.class) {
+
+
                     @Override
                     public void onResponse(ObjectResult<AccountUser> result) {
                         if (result.getResultCode() == 1 && result.getData() != null) {
-                            boolean phoneIsNull = TextUtils.isEmpty(result.getData().phone);
-                            boolean mailboxIsMailbox = TextUtils.isEmpty(result.getData().mailbox);
+                            phone = result.getData().phone;
+                            mailbox = result.getData().mailbox;
+                            boolean phoneIsNull = TextUtils.isEmpty(phone);
+                            boolean mailboxIsMailbox = TextUtils.isEmpty(mailbox);
                             if (!phoneIsNull && !mailboxIsMailbox) {
                                 verificationType = LoginHelper.LOGIN_PHONE;
                                 radioGroup.setVisibility(View.VISIBLE);
@@ -129,10 +136,14 @@ public class CapitalPasswordActivity extends BaseActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.btn_set_password:
                 if (configPassword()) {
-                    if (verificationCodeDialog == null) {
-                        String password = mPasswordEdit.getText().toString().trim();
-                        verificationCodeDialog = BottomDialogFragment.newInstance(coreManager, 2,verificationType, password);
+                    BottomDialogFragment verificationCodeDialog;
+                    String password = mPasswordEdit.getText().toString().trim();
+                    if (verificationType ==LoginHelper.LOGIN_PHONE ){
+                        verificationCodeDialog = BottomDialogFragment.newInstance(coreManager, 2, verificationType,phone, password);
+                    }else {
+                        verificationCodeDialog = BottomDialogFragment.newInstance(coreManager, 2, verificationType,mailbox, password);
                     }
+
                     verificationCodeDialog.show(getSupportFragmentManager(), BottomDialogFragment.class.getSimpleName());
                 }
                 break;

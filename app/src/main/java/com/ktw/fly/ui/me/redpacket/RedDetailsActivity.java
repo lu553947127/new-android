@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -68,15 +69,13 @@ public class RedDetailsActivity extends BaseActivity {
 
     private RushRedPacket openRedpacket;
 
-    private int redAction;  // 标记是抢到红包还是查看了红包
-    private int timeOut;    // 标记红包是否已过时
-
-
-    private Friend mFriend; // 通过该mFriend，获取备注名、获取群成员表显示群内昵称
-    private String resultMsg, redMsg;
-    private Map<String, String> mGroupNickNameMap = new HashMap<>();
     private RedPacketResult redPacket;
     private TextView red_resultmsg_tv;
+
+    //红包是否已经抢完  true 抢完了
+    private boolean isNull;
+    private TextView red_greeting_tv;
+    private LinearLayout ll_money;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,8 +83,7 @@ public class RedDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_redpacket_details);
         Bundle bundle = getIntent().getExtras();
         openRedpacket = bundle.getParcelable("openRedpacket");
-        redAction = bundle.getInt("redAction");
-        timeOut = bundle.getInt("timeOut");
+        isNull = bundle.getBoolean("null", false);
         redPacket = (RedPacketResult) bundle.getSerializable("redPacket");
         initView();
     }
@@ -109,20 +107,33 @@ public class RedDetailsActivity extends BaseActivity {
         red_money_bit_tv = findViewById(R.id.get_money_bit_tv);
         red_details_lsv = findViewById(R.id.red_details_lsv);
         red_resultmsg_tv = findViewById(R.id.red_resultmsg_tv);
+        red_greeting_tv = findViewById(R.id.red_greeting_tv);
+        ll_money = findViewById(R.id.ll_money);
 
+
+        if (isNull) {
+            red_greeting_tv.setVisibility(View.VISIBLE);
+            ll_money.setVisibility(View.GONE);
+            red_greeting_tv.setText(openRedpacket.redUser.redEnvelopeName);
+        } else {
+            red_greeting_tv.setVisibility(View.GONE);
+            ll_money.setVisibility(View.VISIBLE);
+            red_money_tv.setText(formatMoney(openRedpacket.receiveUser.receiveCapital));
+            red_money_bit_tv.setText(openRedpacket.receiveUser.currencyName);
+        }
 
         AvatarHelper.getInstance().displayAvatar(redPacket.userName, redPacket.userId,
                 red_head_iv, true);
 
         red_nickname_tv.setText(getString(R.string.someone_s_red_packet, redPacket.userName));
 
-        red_money_tv.setText(formatMoney(openRedpacket.redCapital.capitalCount));
-        red_money_bit_tv.setText(openRedpacket.redCapital.capitalName);
 
         if (openRedpacket.redCount.status == 0) {
             red_resultmsg_tv.setText(getString(R.string.example_red_packet_remain, openRedpacket.redCount.receivedRedEnvelopeCount,
                     openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.receivedRedEnvelopeCapital, openRedpacket.redCapital.capitalCount));
         } else if (openRedpacket.redCount.status == 1) {
+//            formatTimeS(Long.getLong(openRedpacket.redCount.time));
+
             red_resultmsg_tv.setText(getString(R.string.example_red_packet_loot_all,
                     openRedpacket.redCount.redEnvelopeCount, openRedpacket.redCount.time));
         } else {
@@ -136,16 +147,6 @@ public class RedDetailsActivity extends BaseActivity {
             red_details_lsv.setAdapter(capitalAdapter);
         }
 
-//        mFriend = FriendDao.getInstance().getFriend(coreManager.getSelf().getUserId(), mToUserId);
-//        if (isGroup && mFriend != null) {// 群组红包 获取群内昵称 之后显示
-//            List<RoomMember> mRoomMemberList = RoomMemberDao.getInstance().getRoomMember(mFriend.getRoomId());
-//            if (mRoomMemberList != null && mRoomMemberList.size() > 0) {
-//                for (int i = 0; i < mRoomMemberList.size(); i++) {
-//                    RoomMember mRoomMember = mRoomMemberList.get(i);
-//                    mGroupNickNameMap.put(mRoomMember.getUserId(), mRoomMember.getUserName());
-//                }
-//            }
-//        }
     }
 
 
@@ -168,6 +169,28 @@ public class RedDetailsActivity extends BaseActivity {
             e.printStackTrace();
         }
         return "0.00";
+    }
+
+
+    public String formatTimeS(long seconds) {
+        int temp = 0;
+        StringBuffer sb = new StringBuffer();
+        if (seconds > 3600) {
+            temp = (int) (seconds / 3600);
+            sb.append((seconds / 3600) < 10 ? "0" + temp + ":" : temp + ":");
+            temp = (int) (seconds % 3600 / 60);
+            changeSeconds(seconds, temp, sb);
+        } else {
+            temp = (int) (seconds % 3600 / 60);
+            changeSeconds(seconds, temp, sb);
+        }
+        return sb.toString();
+    }
+
+    private void changeSeconds(long seconds, int temp, StringBuffer sb) {
+        sb.append((temp < 10) ? "0" + temp + ":" : "" + temp + ":");
+        temp = (int) (seconds % 3600 % 60);
+        sb.append((temp < 10) ? "0" + temp : "" + temp);
     }
 
 

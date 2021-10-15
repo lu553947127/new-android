@@ -211,6 +211,10 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
         String count = redPacketCountEdit.getText().toString();
 
         if (curRedPackerType == FLYAppConstant.LUCK_RED_PACKER) { //拼手气红包
+            if (TextUtils.isEmpty(count)||Integer.parseInt(count)<=0){
+                Toast.makeText(getApplicationContext(), getString(R.string.input_red_packet_number), Toast.LENGTH_SHORT).show();
+                return;
+            }
             redPackerCount = count;
         } else { //普通红包
             redPackerCount = TextUtils.isEmpty(count) ? String.valueOf(1) : count;
@@ -225,9 +229,6 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
             final String finalMoney = money;
             final String finalGreeting = greeting;
             final String finalRedPackerCount = redPackerCount;
-//            PaySecureHelper.inputPayPassword(this, getString(R.string.chat_redpacket), money, password -> {
-//                sendRed(String.valueOf(curRedPackerType), finalMoney, finalRedPackerCount, finalGreeting, password);
-//            });
 
             PaySecureHelper.inputPayPassword(this, getString(R.string.send_red_packet_amount), money, capitalName, password -> {
 
