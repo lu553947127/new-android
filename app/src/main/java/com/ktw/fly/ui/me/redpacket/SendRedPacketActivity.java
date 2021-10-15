@@ -443,5 +443,11 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
 
         curRedText.setText(commonRedPackerStr);
         alterRedText.setText(luckRedPackerStr);
+
+        if ( curRedPackerType == FLYAppConstant.COMMON_RED_PACKER){
+            virtualCoinsNumberText.setText(R.string.single_red_packer);
+        }else {
+            virtualCoinsNumberText.setText(R.string.red_number_of_issued_virtual_coins);
+        }
     }
 }
