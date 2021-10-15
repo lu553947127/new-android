@@ -21,6 +21,8 @@ public class RedBacketCount {
     public List<RedBackerList> selectRedEnvelopesInfoCountUserInfo;
     public List<CapitalList> selectRedEnvelopesInfoCountUser;
 
+
+
     public class RedBackerList {
 
         public String red_envelope_capital;//单个红包金额--普通红包才有这个字段
@@ -54,6 +56,8 @@ public class RedBacketCount {
         public String user_name;
 
         public String receive_time;
+
+        public List<SendRedPacketInfo> receiveList;
 
         public boolean extend;
     }

@@ -147,6 +147,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                             initDataLayout(item);
                         }
                     }
+
                     @Override
                     public void onError(Call call, Exception e) {
                         Toast.makeText(getApplicationContext(), R.string.net_exception, Toast.LENGTH_SHORT).show();
@@ -176,6 +177,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                                     return false;
                                 }
                             });
+                            rvReceive.setAdapter(receiverItemAdapter);
                             receiverItemAdapter.setNewInstance(result.getData());
                         }
                     }
@@ -267,6 +269,8 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 redPacketAdapter.notifyItemChanged(position);
             }
         });
+
+        redPacketAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setAdapter(redPacketAdapter);
 
         redPacketAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
@@ -279,16 +283,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
 
         receiverRedItemAdapter = new ReceiverRedItemAdapter();
-
-        redListView.setLayoutManager(new LinearLayoutManager(this) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
-
-        redListView.setAdapter(receiverRedItemAdapter);
-
+        receiverRedItemAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setLayoutManager(new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
@@ -436,7 +431,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         @Override
         protected void convert(@NotNull BaseViewHolder baseViewHolder, SendRedPacketInfo item) {
             baseViewHolder.setText(R.id.red_receiver, item.receive_name);
-            baseViewHolder.setText(R.id.red_receiver_sum, item.receive_capital);
+            baseViewHolder.setText(R.id.red_receiver_sum, item.receive_capital + " " + item.currency_name);
             baseViewHolder.setText(R.id.red_receiver_time, item.receive_time);
         }
     }

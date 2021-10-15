@@ -177,6 +177,9 @@ public class BottomDialogFragment extends BottomSheetDialogFragment implements V
 
         mAuthCodeEdit = view.findViewById(R.id.et_auth_code);
 
+        mAuthCodeEdit.setHint(verificationType == LoginHelper.LOGIN_PHONE ? R.string.hint_input_phone_auth_code : R.string.hint_input_email_auth_code);
+
+
         authCodeDialog = AuthCodeDialogFragment.newInstance(sCoreManager, passwordType, verificationType, account);
     }
 

@@ -238,6 +238,10 @@
         <activity
             android:name="com.ktw.fly.ui.account.FindPwdActivity"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.ktw.fly.ui.account.BindAccountActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.ktw.fly.ui.circle.range.AtSeeCircleActivity" />
         <activity android:name="com.ktw.fly.ui.circle.range.NewZanActivity" />
         <activity android:name="com.ktw.fly.ui.circle.range.SeeCircleActivity" />

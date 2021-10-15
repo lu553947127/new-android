@@ -90,7 +90,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
 
         isGroupChat = getIntent().getBooleanExtra(FLYAppConstant.EXTRA_IS_GROUP_CHAT, false);
         //默认资产类型ID 和名称
-        this.capitalId = "2";
+        this.capitalId = "19";
         this.capitalName = "ASDT";
 
         if (isGroupChat) { //群组默认拼手气类型

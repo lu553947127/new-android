@@ -276,10 +276,6 @@ public class RegisterActivity extends BaseActivity {
             // 可能是http回调到这里的，可能activity已经销毁，不再继续，
             return;
         }
-        if (coreManager.getConfig().registerUsername || !coreManager.getConfig().isOpenSMSCode) {
-            // 用户名注册或者没开启验证码，就不请求图形码，
-            return;
-        }
 
         if (TextUtils.isEmpty(mEmailEdit.getText().toString())) {
             ToastUtil.showToast(mContext, getString(R.string.tip_no_email_get_v_code));

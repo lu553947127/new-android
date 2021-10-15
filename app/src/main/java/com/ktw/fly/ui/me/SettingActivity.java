@@ -26,7 +26,7 @@ import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.account.AccountPasswordActivity;
-import com.ktw.fly.ui.account.ChangePasswordActivity;
+import com.ktw.fly.ui.account.BindAccountActivity;
 import com.ktw.fly.ui.account.LoginHistoryActivity;
 import com.ktw.fly.ui.backup.BackupHistoryActivity;
 import com.ktw.fly.ui.base.BaseActivity;
@@ -142,6 +142,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.privacy_settting_rl).setOnClickListener(this);
         findViewById(R.id.secure_setting_rl).setOnClickListener(this);
         findViewById(R.id.chat_face_rl).setOnClickListener(this);
+        findViewById(R.id.bing_phone_rl).setOnClickListener(this);
+        findViewById(R.id.bing_email_rl).setOnClickListener(this);
         if (coreManager.getConfig().thirdLogin) {
             findViewById(R.id.bind_account_rl).setOnClickListener(this);
         } else {
@@ -190,7 +192,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         // 清除所有聊天记录
                         delAllChatRecord();
 
-                        PreferenceUtils.putLong(FLYApplication.getContext(), Constants.CHAT_CLEAR_ALL_TIME, System.currentTimeMillis()/1000);
+                        PreferenceUtils.putLong(FLYApplication.getContext(), Constants.CHAT_CLEAR_ALL_TIME, System.currentTimeMillis() / 1000);
                     }
                 });
                 selectionFrame.show();
@@ -240,6 +242,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case R.id.chat_face_rl:
                 // 聊天表情
                 startActivity(new Intent(mContext, EmotPackageActivity.class));
+                break;
+            case R.id.bing_phone_rl:
+                //绑定手机号
+                BindAccountActivity.startActivity(mContext,0);
+                break;
+            case R.id.bing_email_rl:
+                //绑定邮箱
+                BindAccountActivity.startActivity(mContext,1);
                 break;
         }
     }

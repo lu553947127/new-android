@@ -2341,8 +2341,17 @@
     <string name="tip_email_verification_code_empty">邮箱或图形验证码不能为空</string>
     <string name="capital_password">资金密码</string>
     <string name="reset_capital_password">修改资金密码成功</string>
+    <string name="bind_phone_account">绑定手机号</string>
+    <string name="bind_email_account">绑定邮箱</string>
+    <string name="confirm_bind">确认绑定</string>
+    <string name="email_address">邮箱地址</string>
+    <string name="hint_input_email_address">请输入邮箱地址</string>
+    <string name="hint_input_bind_phone">请输入绑定手机</string>
+    <string name="bind_succeed">绑定成功</string>
+
 
     <!--  红包   -->
+    <string name="empty_red_hind">暂无红包记录</string>
     <string name="red_select_property">选择资产</string>
     <string name="red_number_of_issued_virtual_coins">总币量</string>
     <string name="red_available_balance">可用余额%s</string>

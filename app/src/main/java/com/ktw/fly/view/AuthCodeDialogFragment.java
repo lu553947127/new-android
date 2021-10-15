@@ -163,11 +163,6 @@ public class AuthCodeDialogFragment extends DialogFragment implements View.OnCli
      */
     private void requestImageCode(String key) {
 
-        if (sCoreManager.getConfig().registerUsername || !sCoreManager.getConfig().isOpenSMSCode) {
-            // 用户名注册或者没开启验证码，就不请求图形码，
-            return;
-        }
-
         Map<String, String> params = new HashMap<>();
 
         params.put("imgKey",mobilePrefix + account + key);
