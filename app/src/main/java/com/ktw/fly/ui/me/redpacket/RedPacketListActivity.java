@@ -270,8 +270,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 redPacketAdapter.notifyItemChanged(position);
             }
         });
-        redPacketAdapter.setEmptyView(R.layout.red_packet_empty);
+
         redListView.setAdapter(redPacketAdapter);
+        redPacketAdapter.setEmptyView(getEmptyDataView());
 
         if (result.getData().selectRedEnvelopesInfoCountUserInfo != null
                 && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
@@ -304,11 +305,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
             }
         });
 
-
-
-        receiverRedItemAdapter.setEmptyView(R.layout.red_packet_empty);
-
         redListView.setAdapter(receiverRedItemAdapter);
+
+        receiverRedItemAdapter.setEmptyView(getEmptyDataView());
 
         if (result.getData().selectRedEnvelopesInfoCountUserInfo != null &&
                 result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
@@ -324,6 +323,11 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
         item.select = true;
         mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
+    }
+
+    private View getEmptyDataView() {
+        View notDataView = getLayoutInflater().inflate(R.layout.red_packet_empty, redListView, false);
+        return notDataView;
     }
 
 
