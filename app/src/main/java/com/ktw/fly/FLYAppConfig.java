@@ -23,9 +23,9 @@ public class FLYAppConfig {
 
     public static final String apiKey = "a891a7a6-03af-475c-8ae1-7fb4b230e958";
 
-        public static String HOST = "http://aachat.aachain.org/";//正式 Socket IM 服务器入口
-//    public static String HOST = "http://116.213.41.159:8092/";//测试 Socket IM 服务器入口
-//    public static String HOST = "http://192.168.0.86:8092/";//本地 Socket IM 服务器入口
+    //    public static String HOST = "http://aachat.aachain.org/";// Socket IM 服务器入口
+    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
+//    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
 
     public static String CONFIG_URL = HOST + "config";
     //客服列表
@@ -873,8 +873,8 @@ public class FLYAppConfig {
         //获取单条信息
         config.GET_QUESTION_ITEM = apiUrl + "api/edit/get";
 
-        config.BIND_EMAIL = apiUrl + "user/bangDingMailbox";
-        config.BIND_PHONE = apiUrl + "user/bangDingPhone";
+        config.BIND_EMAIL =  apiUrl +"user/bangDingMailbox";
+        config.BIND_PHONE =  apiUrl +"user/bangDingPhone";
         //===============================红包start===============================================================
         config.GET_CAPITAL_TYPE = apiUrl + "capital/getCapitalType";//获取资产类型
         config.GET_CAPITAL_BY_USER = apiUrl + "capital/getCapitalByUser";//根据资金类型获取剩余金额

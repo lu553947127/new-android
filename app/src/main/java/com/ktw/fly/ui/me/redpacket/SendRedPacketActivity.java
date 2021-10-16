@@ -283,7 +283,7 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
                     message.setObjectId(redPacket.toJson()); // 红包数据
                     Intent intent = new Intent();
                     intent.putExtra(FLYAppConstant.EXTRA_CHAT_MESSAGE, message.toJsonString());
-                    setResult(ChatActivity.REQUEST_CODE_SEND_RED_PT, intent);
+                    setResult(ChatActivity.REQUEST_CODE_SEND_RED, intent);
                     finish();
                 });
     }

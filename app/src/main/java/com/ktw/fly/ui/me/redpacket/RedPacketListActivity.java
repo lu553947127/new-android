@@ -118,7 +118,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
                     @Override
                     public void onResponse(ObjectResult<RedBacketCount> result) {
-                        if (result==null||result.getData()==null) {
+                        if (result == null || result.getData() == null) {
                             return;
                         }
                         if (Result.checkSuccess(getApplicationContext(), result)) {
@@ -247,7 +247,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
 
     private void sendRed(ObjectResult<RedBacketCount> result) {
-        if (result==null||result.getData()==null||result.getData().selectRedEnvelopesInfoCountUser.size()==0) {
+        if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
             return;
         }
 
@@ -262,7 +262,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 return false;
             }
         });
-        redPacketAdapter.addChildClickViewIds();
+
         redPacketAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
@@ -278,11 +278,14 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         });
         redPacketAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setAdapter(redPacketAdapter);
-        redPacketAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
+        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
+            redPacketAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
+        }
     }
 
     /**
      * 没数据跳不到这里所以无法设置缺省页面
+     *
      * @param result
      */
     private void receiverRed(ObjectResult<RedBacketCount> result) {
@@ -290,7 +293,6 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         item.select = true;
         mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
         receiverRedItemAdapter = new ReceiverRedItemAdapter();
-        receiverRedItemAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setLayoutManager(new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
@@ -300,7 +302,11 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
         redListView.setAdapter(receiverRedItemAdapter);
 
-        receiverRedItemAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
+        receiverRedItemAdapter.setEmptyView(R.layout.red_packet_empty);
+
+        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
+            receiverRedItemAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
+        }
     }
 
 
@@ -342,7 +348,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
     }
 
     private void initDataLayout(RedBacketCount.CapitalList item) {
-        if (item==null) {
+        if (item == null) {
             return;
         }
         redAmountText.setText(item.capitalCount);
@@ -386,7 +392,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
     public class RedPaketItemAdapter extends BaseQuickAdapter<RedBacketCount.RedBackerList, BaseViewHolder> {
         public RedPaketItemAdapter() {
-            super(R.layout.item_red_packet_count);
+            super(R.layout.item_red_packet_count, null);
             addChildClickViewIds(R.id.ll_expan);
         }
 
@@ -417,7 +423,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 baseViewHolder.setText(R.id.tv_red_get_the_number, item.received_red_envelope_count + " " + getResources().getString(R.string.individual));
                 baseViewHolder.setText(R.id.tv_red_get_the_amount, item.received_red_envelope_capital + " " + item.capital_type);
                 baseViewHolder.setText(R.id.tv_red_uncollected_number, item.unclaimed_red_envelope_count + " " + getResources().getString(R.string.individual));
-                baseViewHolder.setText(R.id.tv_red_unclaimed_amount, item.unclaimed_red_envelope_capital  + " " + item.capital_type);
+                baseViewHolder.setText(R.id.tv_red_unclaimed_amount, item.unclaimed_red_envelope_capital + " " + item.capital_type);
             } else {
                 baseViewHolder.setGone(R.id.ll_luck, true);
                 baseViewHolder.setGone(R.id.ll_expan, true);
@@ -446,7 +452,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
     public class ReceiverRedItemAdapter extends BaseQuickAdapter<RedBacketCount.RedBackerList, BaseViewHolder> {
 
         public ReceiverRedItemAdapter() {
-            super(R.layout.item_red_packet_receiver);
+            super(R.layout.item_red_packet_receiver, null);
         }
 
         @Override
