@@ -248,7 +248,7 @@
                     <TextView
                         android:id="@+id/tvPhoneNumber"
                         style="@style/IMTbleLine_TextKey"
-                        android:text="@string/my_phone_number" />
+                        android:text="@string/login_account" />
 
                     <TextView
                         android:id="@+id/phone_tv"

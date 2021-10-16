@@ -1,5 +1,6 @@
 package com.ktw.fly.ui.me;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.ktw.fly.sp.UserSp;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -105,7 +107,7 @@ public class BasicInfoEditActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText(getString(R.string.base_info));
 
         TextView tvPhoneNumber = findViewById(R.id.tvPhoneNumber);
-        UsernameHelper.initTextView(tvPhoneNumber, coreManager.getConfig().registerUsername);
+//        UsernameHelper.initTextView(tvPhoneNumber, coreManager.getConfig().registerUsername);
 
         mAvatarImg = (ImageView) findViewById(R.id.avatar_img);
         mNameEdit = (EditText) findViewById(R.id.name_edit);
@@ -193,7 +195,7 @@ public class BasicInfoEditActivity extends BaseActivity implements View.OnClickL
         mTvDiyName.setText(mTempData.getDescription());
 
         TextView mPhoneTv = (TextView) findViewById(R.id.phone_tv);
-        String phoneNumber = coreManager.getSelf().getTelephoneNoAreaCode();
+        String phoneNumber = UserSp.getInstance(this).getValue("account", "");
         mPhoneTv.setText(phoneNumber);
 
         initAccount();
@@ -319,6 +321,7 @@ public class BasicInfoEditActivity extends BaseActivity implements View.OnClickL
         CameraUtil.pickImageSimple(this, REQUEST_CODE_PICK_CROP_PHOTO);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_CAPTURE_CROP_PHOTO) {// 拍照返回再去裁减

@@ -23,8 +23,8 @@ public class FLYAppConfig {
 
     public static final String apiKey = "a891a7a6-03af-475c-8ae1-7fb4b230e958";
 
-    //    public static String HOST = "http://aachat.aachain.org/";// Socket IM 服务器入口
-    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
+        public static String HOST = "http://aachat.aachain.org/";// Socket IM 服务器入口
+//    public static String HOST = "http://116.213.41.159:8092/";// Socket IM 服务器入口
 //    public static String HOST = "http://192.168.0.86:8092/";// Socket IM 服务器入口
 
     public static String CONFIG_URL = HOST + "config";

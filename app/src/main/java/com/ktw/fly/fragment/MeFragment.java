@@ -339,8 +339,7 @@ public class MeFragment extends EasyFragment implements View.OnClickListener {
 
         if (v.getId() == R.id.rlt_scan_qr_code) {
             FLYMainActivity.requestQrCodeScan(getActivity());
-        } else
-        if (v.getId() == R.id.rlt_discover) {//朋友圈
+        } else if (v.getId() == R.id.rlt_discover) {//朋友圈
             startActivity(new Intent(getContext(), LifeCircleActivity.class));
         } else if (v.getId() == R.id.rlt_tag) {//标签
             LabelActivityNewUI.start(requireContext());
@@ -374,7 +373,7 @@ public class MeFragment extends EasyFragment implements View.OnClickListener {
         }
 
         if (mPhoneNumTv != null) {
-            String phoneNumber = coreManager.getSelf().getTelephoneNoAreaCode();
+            String phoneNumber = UserSp.getInstance(getContext()).getValue("account", "");
             mPhoneNumTv.setText(phoneNumber);
         }
     }

@@ -26,6 +26,7 @@ import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.sp.UserSp;
 import com.ktw.fly.ui.FLYMainActivity;
 import com.ktw.fly.ui.base.BaseActivity;
+import com.ktw.fly.ui.base.CoreManager;
 import com.ktw.fly.ui.share.AuthorizationActivity;
 import com.ktw.fly.ui.share.ShareConstant;
 import com.ktw.fly.ui.share.ShareNearChatFriend;
@@ -222,9 +223,9 @@ public class DataDownloadActivity extends BaseActivity {
                         boolean updateSuccess = false;
                         if (result.getResultCode() == 1) {
                             User user = result.getData();
-                            if (TextUtils.isEmpty(user.getTelephone())) {
-                                user.setTelephone(coreManager.getSelf().getTelephone());
-                            }
+
+                            user.setTelephone(coreManager.getSelf().getTelephone());
+
                             updateSuccess = UserDao.getInstance().updateByUser(user);
                             // 设置登陆用户信息
                             if (updateSuccess) {

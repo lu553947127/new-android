@@ -247,13 +247,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
 
     private void sendRed(ObjectResult<RedBacketCount> result) {
-        if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
-            return;
-        }
 
-        item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
-        item.select = true;
-        mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
         redPacketAdapter = new RedPaketItemAdapter();
 
         redListView.setLayoutManager(new LinearLayoutManager(this) {
@@ -278,9 +272,20 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         });
         redPacketAdapter.setEmptyView(R.layout.red_packet_empty);
         redListView.setAdapter(redPacketAdapter);
-        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
+
+        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null
+                && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
             redPacketAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
         }
+
+
+        if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
+            return;
+        }
+
+        item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
+        item.select = true;
+        mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
     }
 
     /**
@@ -289,9 +294,8 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
      * @param result
      */
     private void receiverRed(ObjectResult<RedBacketCount> result) {
-        item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
-        item.select = true;
-        mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
+
+
         receiverRedItemAdapter = new ReceiverRedItemAdapter();
         redListView.setLayoutManager(new LinearLayoutManager(this) {
             @Override
@@ -300,13 +304,26 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
             }
         });
 
-        redListView.setAdapter(receiverRedItemAdapter);
+
 
         receiverRedItemAdapter.setEmptyView(R.layout.red_packet_empty);
 
-        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
+        redListView.setAdapter(receiverRedItemAdapter);
+
+        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null &&
+                result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
             receiverRedItemAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
         }
+
+
+
+        if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
+            return;
+        }
+
+        item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
+        item.select = true;
+        mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
     }
 
 

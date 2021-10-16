@@ -104,6 +104,7 @@ public class User implements Parcelable, Cloneable {
     // String类型以防万一服务器把用户支付密码密文给返回了，导致解析错误，
     private String payPassword; // 是否已经设置了支付密码，
 
+
     // 无参构造函数
     public User() {
     }
@@ -136,12 +137,14 @@ public class User implements Parcelable, Cloneable {
         offlineTime = in.readLong();
         msgBackGroundUrl = in.readString();
         account = in.readString();
+
         setAccountCount = in.readInt();
         myInviteCode = in.readString();
         balance = in.readDouble();
         offlineNoPushMsg = in.readInt();
         onlinestate = in.readInt();
         createTime = in.readInt();
+
     }
 
     public int getNotSeeHim() {
@@ -219,6 +222,7 @@ public class User implements Parcelable, Cloneable {
         equals &= StringUtils.strEquals(telephone, other.telephone);
         equals &= StringUtils.strEquals(password, other.password);
         equals &= StringUtils.strEquals(description, other.description);
+
         equals &= birthday == other.birthday;
         equals &= sex == other.sex;
         equals &= countryId == other.countryId;
@@ -482,6 +486,8 @@ public class User implements Parcelable, Cloneable {
         this.friends = friends;
     }
 
+
+
     /* 快捷方法 */
     public boolean isCompanyUser() {
         if (company != null && company.getId() > 0) {
@@ -637,6 +643,7 @@ public class User implements Parcelable, Cloneable {
         dest.writeString(telephone);
         dest.writeString(password);
         dest.writeString(description);
+
         dest.writeLong(birthday);
         dest.writeLong(showLastLoginTime);
         dest.writeInt(sex);

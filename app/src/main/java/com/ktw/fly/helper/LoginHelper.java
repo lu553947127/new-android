@@ -192,6 +192,10 @@ public class LoginHelper {
 
     public static boolean setLoginUser(Context context, CoreManager coreManager, String account,
                                        String password, ObjectResult<LoginRegisterResult> result) {
+
+        UserSp.getInstance(context).setValue("account",account);
+
+
         Log.d(TAG, "setLoginUser() called with: context = [" + context + "], telephone = [" + account + "], password = [" + password + "], result = [" + result + "]");
         if (result == null) {
             return false;
