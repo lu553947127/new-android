@@ -30,6 +30,7 @@ import com.ktw.fly.bean.RedBacketCount;
 import com.ktw.fly.bean.SendRedPacketInfo;
 import com.ktw.fly.bean.redpacket.RedPacketResult;
 import com.ktw.fly.helper.AvatarHelper;
+import com.ktw.fly.helper.DialogHelper;
 import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.ui.base.BaseActivity;
 import com.ktw.fly.ui.base.CoreManager;
@@ -47,6 +48,7 @@ import com.xuan.xuanhttplibrary.okhttp.result.Result;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +88,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
     private ReceiverRedItemAdapter receiverRedItemAdapter;
     private TextView capitalNameText;
 
+    private int listType;
+    private RedBacketCount redBacketCount;
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RedPacketListActivity.class);
         context.startActivity(intent);
@@ -104,11 +109,12 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
     }
 
     private void initData() {
-        sendRedData();
+        listType = 1;
+        sendRedData(listType);
     }
 
 
-    private void sendRedData() {
+    private void sendRedData(int listType) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", coreManager.getSelf().getUserId());
         HttpUtils.post().url(coreManager.getConfig().SEND_RED_PACKET_COUNT)
@@ -122,8 +128,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                             return;
                         }
                         if (Result.checkSuccess(getApplicationContext(), result)) {
+                            redBacketCount = result.getData();
                             sendRed(result);
-                            initDataLayout(item);
+                            initDataLayout(item, result.getData(), listType);
                         }
                     }
 
@@ -135,7 +142,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
     }
 
-    private void receiverData() {
+    private void receiverData(int listType) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", coreManager.getSelf().getUserId());
         HttpUtils.post().url(coreManager.getConfig().RECEIVER_RED_PACKET_GET_INFO)
@@ -146,8 +153,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                     @Override
                     public void onResponse(ObjectResult<RedBacketCount> result) {
                         if (Result.checkSuccess(getApplicationContext(), result)) {
+                            redBacketCount = result.getData();
                             receiverRed(result);
-                            initDataLayout(item);
+                            initDataLayout(item, result.getData(), listType);
                         }
                     }
 
@@ -274,12 +282,6 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         redListView.setAdapter(redPacketAdapter);
         redPacketAdapter.setEmptyView(getEmptyDataView());
 
-        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null
-                && result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
-            redPacketAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
-        }
-
-
         if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
             return;
         }
@@ -308,12 +310,6 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         redListView.setAdapter(receiverRedItemAdapter);
 
         receiverRedItemAdapter.setEmptyView(getEmptyDataView());
-
-        if (result.getData().selectRedEnvelopesInfoCountUserInfo != null &&
-                result.getData().selectRedEnvelopesInfoCountUserInfo.size() > 0) {
-            receiverRedItemAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUserInfo);
-        }
-
 
 
         if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
@@ -352,8 +348,10 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
                 }
                 item = mAdapter.getItem(position);
                 item.select = true;
-                initDataLayout(item);
+
                 mAdapter.notifyDataSetChanged();
+
+                initDataLayout(item, redBacketCount, listType);
             }
         });
     }
@@ -368,13 +366,41 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         });
     }
 
-    private void initDataLayout(RedBacketCount.CapitalList item) {
+    private void initDataLayout(RedBacketCount.CapitalList item, RedBacketCount result, int listType) {
         if (item == null) {
             return;
         }
         redAmountText.setText(item.capitalCount);
         redTypeText.setText(item.capitalType);
         capitalNameText.setText(item.capitalType);
+
+        if (result.selectRedEnvelopesInfoCountUserInfo == null || result.selectRedEnvelopesInfoCountUserInfo.size() <= 0) {
+            return;
+        }
+        DialogHelper.showDefaulteMessageProgressDialog(this);
+        try {
+            if (listType == 1) {   //发出的红包
+                List<RedBacketCount.RedBackerList> redBackerLists = new ArrayList<>();
+                for (int i = 0; i < result.selectRedEnvelopesInfoCountUserInfo.size(); i++) {
+                    if (result.selectRedEnvelopesInfoCountUserInfo.get(i).capital_type.equals(item.capitalType)) {
+                        redBackerLists.add(result.selectRedEnvelopesInfoCountUserInfo.get(i));
+                    }
+                }
+                redPacketAdapter.setNewInstance(redBackerLists);
+            } else {  //收到的红包
+                List<RedBacketCount.RedBackerList> redBackerLists = new ArrayList<>();
+                for (int i = 0; i < result.selectRedEnvelopesInfoCountUserInfo.size(); i++) {
+                    if (result.selectRedEnvelopesInfoCountUserInfo.get(i).currency_name.equals(item.capitalType)) {
+                        redBackerLists.add(result.selectRedEnvelopesInfoCountUserInfo.get(i));
+                    }
+                }
+                receiverRedItemAdapter.setNewInstance(redBackerLists);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DialogHelper.dismissProgressDialog();
+        }
     }
 
 
@@ -384,13 +410,14 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
             case R.id.rb_send_red:
                 ButtonColorChange.colorChange(this, rbSendRed);
                 ButtonColorChange.changeDrawable(this, rbReceiveRed, R.drawable.red_packet_list_text_bg);
-
-                sendRedData();
+                listType = 1;
+                sendRedData(listType);
                 break;
             case R.id.rb_receive_red:
                 ButtonColorChange.colorChange(this, rbReceiveRed);
                 ButtonColorChange.changeDrawable(this, rbSendRed, R.drawable.red_packet_list_text_bg);
-                receiverData();
+                listType = 2;
+                receiverData(listType);
                 break;
         }
     }
