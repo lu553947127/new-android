@@ -211,6 +211,7 @@
                         android:textSize="@dimen/sp_15_text_size" />
                 </LinearLayout>
 
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_list"
                     android:layout_width="match_parent"

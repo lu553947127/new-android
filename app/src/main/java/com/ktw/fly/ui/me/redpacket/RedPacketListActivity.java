@@ -3,7 +3,6 @@ package com.ktw.fly.ui.me.redpacket;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,16 +26,11 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.ktw.fly.R;
 import com.ktw.fly.bean.RedBacketCount;
 import com.ktw.fly.bean.SendRedPacketInfo;
-import com.ktw.fly.bean.redpacket.RedPacketResult;
 import com.ktw.fly.helper.AvatarHelper;
 import com.ktw.fly.helper.DialogHelper;
-import com.ktw.fly.helper.LoginHelper;
 import com.ktw.fly.ui.base.BaseActivity;
-import com.ktw.fly.ui.base.CoreManager;
 import com.ktw.fly.ui.tool.ButtonColorChange;
 import com.ktw.fly.util.SkinUtils;
-import com.ktw.fly.wallet.adapter.SelectItemAdapter;
-import com.ktw.fly.wallet.bean.CurrencyBean;
 import com.xuan.xuanhttplibrary.okhttp.HttpUtils;
 import com.xuan.xuanhttplibrary.okhttp.callback.BaseCallback;
 import com.xuan.xuanhttplibrary.okhttp.callback.ListCallback;
@@ -47,9 +40,7 @@ import com.xuan.xuanhttplibrary.okhttp.result.Result;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,19 +68,26 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
     private RecyclerView mListView;
     private CapitalItemAdapter mAdapter;
 
-    private RedBacketCount.CapitalList item;
     private RadioButton rbSendRed;
     private RadioButton rbReceiveRed;
     private TextView redAmountText;
     private TextView redTypeText;
 
     private RecyclerView redListView;
-    private RedPaketItemAdapter redPacketAdapter;
-    private ReceiverRedItemAdapter receiverRedItemAdapter;
+    private RedPaketItemAdapter sendRedAdapter;
+    private ReceiverRedItemAdapter receiverRedAdapter;
     private TextView capitalNameText;
 
     private int listType;
-    private RedBacketCount redBacketCount;
+
+    //发出红包列表
+    private Map<String, List<RedBacketCount.RedBackerList>> sendRedMap;
+    //接收红包列表
+    private Map<String, List<RedBacketCount.RedBackerList>> receiveRedMap;
+
+    //侧滑资产
+    private List<RedBacketCount.CapitalList> sendCapitalList;
+    private List<RedBacketCount.CapitalList> receiveCapitalList;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, RedPacketListActivity.class);
@@ -110,58 +108,88 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
 
     private void initData() {
         listType = 1;
-        sendRedData(listType);
+        sendRedMap = new HashMap<>();
+        receiveRedMap = new HashMap<>();
+        sendRedData();
     }
 
 
-    private void sendRedData(int listType) {
+    private void sendRedData() {
+        DialogHelper.showDefaulteMessageProgressDialog(this);
         Map<String, String> params = new HashMap<>();
         params.put("userId", coreManager.getSelf().getUserId());
         HttpUtils.post().url(coreManager.getConfig().SEND_RED_PACKET_COUNT)
                 .params(params)
                 .build()
                 .execute(new BaseCallback<RedBacketCount>(RedBacketCount.class) {
-
                     @Override
                     public void onResponse(ObjectResult<RedBacketCount> result) {
+                        receiverData();
                         if (result == null || result.getData() == null) {
                             return;
                         }
                         if (Result.checkSuccess(getApplicationContext(), result)) {
-                            redBacketCount = result.getData();
-                            sendRed(result);
-                            initDataLayout(item, result.getData(), listType);
+                            sendCapitalList = result.getData().selectRedEnvelopesInfoCountUser;
+                            List<RedBacketCount.RedBackerList> redList = result.getData().selectRedEnvelopesInfoCountUserInfo;
+                            if (redList == null && redList.size() <= 0) {
+                                return;
+                            }
+                            for (int x = 0; x < sendCapitalList.size(); x++) {
+                                List<RedBacketCount.RedBackerList> sendRedList = new ArrayList<>();
+                                for (int y = 0; y < redList.size(); y++) {
+                                    if (sendCapitalList.get(x).capitalType.equals(redList.get(y).capital_type)) {
+                                        sendRedList.add(redList.get(y));
+                                    }
+                                }
+                                sendRedMap.put(sendCapitalList.get(x).capitalType, sendRedList);
+                            }
+                            mAdapter.setNewInstance(sendCapitalList);
+
+                            initDataLayout(listType, 0);
                         }
                     }
 
                     @Override
                     public void onError(Call call, Exception e) {
                         Toast.makeText(getApplicationContext(), R.string.net_exception, Toast.LENGTH_SHORT).show();
+                        DialogHelper.dismissProgressDialog();
                     }
                 });
 
     }
 
-    private void receiverData(int listType) {
+    private void receiverData() {
         Map<String, String> params = new HashMap<>();
         params.put("userId", coreManager.getSelf().getUserId());
         HttpUtils.post().url(coreManager.getConfig().RECEIVER_RED_PACKET_GET_INFO)
                 .params(params)
                 .build()
                 .execute(new BaseCallback<RedBacketCount>(RedBacketCount.class) {
-
                     @Override
                     public void onResponse(ObjectResult<RedBacketCount> result) {
+                        DialogHelper.dismissProgressDialog();
                         if (Result.checkSuccess(getApplicationContext(), result)) {
-                            redBacketCount = result.getData();
-                            receiverRed(result);
-                            initDataLayout(item, result.getData(), listType);
+                            receiveCapitalList = result.getData().selectRedEnvelopesInfoCountUser;
+                            List<RedBacketCount.RedBackerList> redList = result.getData().selectRedEnvelopesInfoCountUserInfo;
+                            if (redList == null && redList.size() <= 0) {
+                                return;
+                            }
+                            for (int x = 0; x < receiveCapitalList.size(); x++) {
+                                List<RedBacketCount.RedBackerList> receiverRedList = new ArrayList<>();
+                                for (int y = 0; y < redList.size(); y++) {
+                                    if (receiveCapitalList.get(x).capitalType.equals(redList.get(y).currency_name)) {
+                                        receiverRedList.add(redList.get(y));
+                                    }
+                                }
+                                receiveRedMap.put(receiveCapitalList.get(x).capitalType, receiverRedList);
+                            }
                         }
                     }
 
                     @Override
                     public void onError(Call call, Exception e) {
                         Toast.makeText(getApplicationContext(), R.string.net_exception, Toast.LENGTH_SHORT).show();
+                        DialogHelper.dismissProgressDialog();
                     }
                 });
 
@@ -229,6 +257,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         redTypeText = findViewById(R.id.tv_type);
         redListView = findViewById(R.id.rv_list);
 
+
         capitalNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -251,79 +280,48 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         AvatarHelper.getInstance().displayAvatar(coreManager.getSelf().getUserId(), avatarImage);
 
         initRv();
+        sendRedListView();
     }
 
 
-    private void sendRed(ObjectResult<RedBacketCount> result) {
-
-        redPacketAdapter = new RedPaketItemAdapter();
-
+    private void sendRedListView() {
+        sendRedAdapter = new RedPaketItemAdapter();
         redListView.setLayoutManager(new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
-
-        redPacketAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+        sendRedAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-                RedBacketCount.RedBackerList redBackerItem = redPacketAdapter.getData().get(position);
-
-                if (!redPacketAdapter.getData().get(position).extend) {
-                    redPacketAdapter.getData().get(position).extend = true;
+                if (!sendRedAdapter.getData().get(position).extend) {
+                    sendRedAdapter.getData().get(position).extend = true;
                 } else {
-                    redPacketAdapter.getData().get(position).extend = false;
+                    sendRedAdapter.getData().get(position).extend = false;
                 }
-                redPacketAdapter.notifyItemChanged(position);
+                sendRedAdapter.notifyItemChanged(position);
             }
         });
-
-        redListView.setAdapter(redPacketAdapter);
-        redPacketAdapter.setEmptyView(getEmptyDataView());
-
-        if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
-            return;
-        }
-
-        item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
-        item.select = true;
-        mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
+        redListView.setAdapter(sendRedAdapter);
+        sendRedAdapter.setEmptyView(R.layout.red_packet_empty);
     }
 
     /**
      * 没数据跳不到这里所以无法设置缺省页面
      *
-     * @param result
+     * @param
      */
-    private void receiverRed(ObjectResult<RedBacketCount> result) {
-
-
-        receiverRedItemAdapter = new ReceiverRedItemAdapter();
+    private void receiverRedListView() {
+        receiverRedAdapter = new ReceiverRedItemAdapter();
         redListView.setLayoutManager(new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
-
-        redListView.setAdapter(receiverRedItemAdapter);
-
-        receiverRedItemAdapter.setEmptyView(getEmptyDataView());
-
-
-        if (result == null || result.getData() == null || result.getData().selectRedEnvelopesInfoCountUser.size() == 0) {
-            return;
-        }
-
-        item = result.getData().selectRedEnvelopesInfoCountUser.get(0);
-        item.select = true;
-        mAdapter.setNewInstance(result.getData().selectRedEnvelopesInfoCountUser);
-    }
-
-    private View getEmptyDataView() {
-        View notDataView = getLayoutInflater().inflate(R.layout.red_packet_empty, redListView, false);
-        return notDataView;
+        redListView.setAdapter(receiverRedAdapter);
+        receiverRedAdapter.setEmptyView(R.layout.red_packet_empty);
     }
 
 
@@ -343,15 +341,7 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
             @Override
             public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
                 mMainLayout.closeDrawer(mDrawLayout);
-                for (RedBacketCount.CapitalList data : mAdapter.getData()) {
-                    data.select = false;
-                }
-                item = mAdapter.getItem(position);
-                item.select = true;
-
-                mAdapter.notifyDataSetChanged();
-
-                initDataLayout(item, redBacketCount, listType);
+                initDataLayout(listType, position);
             }
         });
     }
@@ -366,7 +356,9 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         });
     }
 
-    private void initDataLayout(RedBacketCount.CapitalList item, RedBacketCount result, int listType) {
+    private void initDataLayout(int listType, int position) {
+
+        RedBacketCount.CapitalList item = mAdapter.getData().get(position);
         if (item == null) {
             return;
         }
@@ -374,32 +366,22 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
         redTypeText.setText(item.capitalType);
         capitalNameText.setText(item.capitalType);
 
-        if (result.selectRedEnvelopesInfoCountUserInfo == null || result.selectRedEnvelopesInfoCountUserInfo.size() <= 0) {
-            return;
+        for (RedBacketCount.CapitalList data : mAdapter.getData()) {
+            data.select = false;
         }
-        DialogHelper.showDefaulteMessageProgressDialog(this);
+        item = mAdapter.getItem(position);
+        item.select = true;
+        mAdapter.notifyDataSetChanged();
         try {
             if (listType == 1) {   //发出的红包
-                List<RedBacketCount.RedBackerList> redBackerLists = new ArrayList<>();
-                for (int i = 0; i < result.selectRedEnvelopesInfoCountUserInfo.size(); i++) {
-                    if (result.selectRedEnvelopesInfoCountUserInfo.get(i).capital_type.equals(item.capitalType)) {
-                        redBackerLists.add(result.selectRedEnvelopesInfoCountUserInfo.get(i));
-                    }
-                }
-                redPacketAdapter.setNewInstance(redBackerLists);
+                if (sendRedMap.size() <= 0) return;
+                sendRedAdapter.setNewInstance(sendRedMap.get(item.capitalType));
             } else {  //收到的红包
-                List<RedBacketCount.RedBackerList> redBackerLists = new ArrayList<>();
-                for (int i = 0; i < result.selectRedEnvelopesInfoCountUserInfo.size(); i++) {
-                    if (result.selectRedEnvelopesInfoCountUserInfo.get(i).currency_name.equals(item.capitalType)) {
-                        redBackerLists.add(result.selectRedEnvelopesInfoCountUserInfo.get(i));
-                    }
-                }
-                receiverRedItemAdapter.setNewInstance(redBackerLists);
+                if (receiveRedMap.size() <= 0) return;
+                receiverRedAdapter.setNewInstance(receiveRedMap.get(item.capitalType));
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            DialogHelper.dismissProgressDialog();
         }
     }
 
@@ -410,14 +392,18 @@ public class RedPacketListActivity extends BaseActivity implements RadioGroup.On
             case R.id.rb_send_red:
                 ButtonColorChange.colorChange(this, rbSendRed);
                 ButtonColorChange.changeDrawable(this, rbReceiveRed, R.drawable.red_packet_list_text_bg);
+                sendRedListView();
                 listType = 1;
-                sendRedData(listType);
+                mAdapter.setNewInstance(sendCapitalList);
+                initDataLayout(listType, 0);
                 break;
             case R.id.rb_receive_red:
                 ButtonColorChange.colorChange(this, rbReceiveRed);
                 ButtonColorChange.changeDrawable(this, rbSendRed, R.drawable.red_packet_list_text_bg);
+                receiverRedListView();
                 listType = 2;
-                receiverData(listType);
+                mAdapter.setNewInstance(receiveCapitalList);
+                initDataLayout(listType, 0);
                 break;
         }
     }
