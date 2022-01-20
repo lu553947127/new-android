@@ -8,7 +8,7 @@
         android:id="@+id/welcome_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_bg"
+        android:background="@drawable/bg_splash1"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop" />
 
@@ -16,11 +16,11 @@
         android:id="@+id/ivAd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_bg"
+        android:background="@drawable/bg_splash1"
         android:scaleType="centerCrop"
         android:visibility="gone" />
 
-    <com.ktw.fly.view.CustomVideoView
+    <com.ktw.bitbit.view.CustomVideoView
         android:id="@+id/videoAd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -51,7 +51,7 @@
         android:layout_height="match_parent"
         >
 
-        <com.ktw.fly.view.MyGridView
+        <com.ktw.bitbit.view.MyGridView
             android:id="@+id/gvEmot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.ktw.fly.ui.trill.JcvTrillVideo
+    <com.ktw.bitbit.ui.trill.JcvTrillVideo
         android:id="@+id/mp_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

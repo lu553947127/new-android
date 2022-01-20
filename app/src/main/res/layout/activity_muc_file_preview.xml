@@ -17,7 +17,7 @@
             android:gravity="center_horizontal"
             android:visibility="gone">
 
-            <com.ktw.fly.view.ZoomImageView
+            <com.ktw.bitbit.view.ZoomImageView
                 android:id="@+id/iv_type_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

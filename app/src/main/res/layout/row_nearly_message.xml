@@ -21,7 +21,7 @@
         android:src="@mipmap/start_delete"
         android:visibility="gone" />
 
-    <com.ktw.fly.view.HeadView
+    <com.ktw.bitbit.view.HeadView
         android:id="@+id/avatar_imgS"
         android:layout_width="50dp"
         android:layout_height="50dp"

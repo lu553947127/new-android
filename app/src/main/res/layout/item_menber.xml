@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:gravity="center">
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/avatar"
         android:layout_width="31dp"
         android:layout_height="31dp"

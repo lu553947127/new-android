@@ -130,7 +130,7 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.util.ExpandView
+    <com.ktw.bitbit.util.ExpandView
         android:id="@+id/expandView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -392,7 +392,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/me_title_size" />
 
-        <com.ktw.fly.view.SwitchButton
+        <com.ktw.bitbit.view.SwitchButton
             android:id="@+id/sb_top_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -426,7 +426,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/me_title_size" />
 
-        <com.ktw.fly.view.SwitchButton
+        <com.ktw.bitbit.view.SwitchButton
             android:id="@+id/sb_no_disturb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -462,7 +462,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/me_title_size" />
 
-        <com.ktw.fly.view.SwitchButton
+        <com.ktw.bitbit.view.SwitchButton
             android:id="@+id/sb_shield_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -594,7 +594,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/me_title_size" />
 
-            <com.ktw.fly.view.SwitchButton
+            <com.ktw.bitbit.view.SwitchButton
                 android:id="@+id/sb_banned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

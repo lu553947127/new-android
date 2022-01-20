@@ -28,7 +28,7 @@
 
     <!-- 给Theme设置backgroud,解决启动黑屏问题，不过这样的启动速度好像变得更慢了一些-->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-<!--        <item name="android:windowBackground">@drawable/splash_bg</item>-->
+<!--        <item name="android:windowBackground">@drawable/bg_splash1</item>-->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>

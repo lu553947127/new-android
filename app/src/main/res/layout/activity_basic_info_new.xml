@@ -27,7 +27,7 @@
                 android:padding="40dp"
                 android:visibility="gone">
 
-                <com.ktw.fly.view.CircleImageView
+                <com.ktw.bitbit.view.CircleImageView
                     android:id="@+id/civ_public_av"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -42,7 +42,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/one_level_title" />
 
-                <com.ktw.fly.view.FoldTextView
+                <com.ktw.bitbit.view.FoldTextView
                     android:id="@+id/tv_public_de"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

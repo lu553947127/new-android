@@ -13,7 +13,7 @@
         app:srlEnableAutoLoadMore="true"
         app:srlEnableLoadMore="true">
 
-        <com.ktw.fly.view.PullRefreshHeader
+        <com.ktw.bitbit.view.PullRefreshHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -25,12 +25,12 @@
             android:overScrollMode="never"
             tools:listitem="@android:layout/simple_list_item_2" />
 
-        <com.ktw.fly.view.PullRefreshFooter
+        <com.ktw.bitbit.view.PullRefreshFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <com.ktw.fly.view.MergerStatus
+    <com.ktw.bitbit.view.MergerStatus
         android:id="@+id/mergerStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_left_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 android:src="@mipmap/return_icon"
                 android:visibility="visible" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:textColor="@color/app_white"
                 android:textSize="@dimen/sp_18_text_size" />
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
 
         </RelativeLayout>
 
-    </com.ktw.fly.view.MergerStatus>
+    </com.ktw.bitbit.view.MergerStatus>
 
     <RelativeLayout
         android:id="@+id/rl_title"

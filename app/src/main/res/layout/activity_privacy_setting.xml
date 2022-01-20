@@ -248,7 +248,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/mSbVerify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/one_level_title" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sbAuthLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -307,7 +307,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sbPhoneSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sbNameSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -411,7 +411,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/mSbEncrypt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -442,7 +442,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/mSbzhendong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -474,7 +474,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/mSbInputState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -501,7 +501,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/one_level_title" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sb_google_map"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -528,7 +528,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/mSbSupport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -555,7 +555,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/group_title_size" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/mSbKeepLive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

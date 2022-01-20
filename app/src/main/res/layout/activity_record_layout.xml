@@ -6,7 +6,7 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.ktw.fly.view.MergerStatus
+    <com.ktw.bitbit.view.MergerStatus
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
 
         </RelativeLayout>
 
-    </com.ktw.fly.view.MergerStatus>
+    </com.ktw.bitbit.view.MergerStatus>
 
     <include
         android:layout_marginTop="15dp"

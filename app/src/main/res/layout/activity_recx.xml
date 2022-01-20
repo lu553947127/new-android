@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
-    <com.ktw.fly.ui.xrce.Xrecprogressbar
+    <com.ktw.bitbit.ui.xrce.Xrecprogressbar
         android:id="@+id/xpbar"
         android:layout_width="match_parent"
         android:layout_height="6dp"
@@ -36,7 +36,7 @@
             android:layout_marginTop="1dp"
             android:src="@drawable/ic_music_inco" />
 
-        <com.ktw.fly.ui.trill.MarqueTextView
+        <com.ktw.bitbit.ui.trill.MarqueTextView
             android:id="@+id/tv_bgname"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.ui.xrce.RecordButton
+    <com.ktw.bitbit.ui.xrce.RecordButton
         android:id="@+id/btn_rec"
         android:layout_width="140dp"
         android:layout_height="140dp"

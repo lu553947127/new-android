@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/avatar_img"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -40,7 +40,7 @@
                 tools:src="@drawable/welcome_bg"
                 tools:visibility="visible" />
 
-            <com.ktw.fly.view.MessageAvatar
+            <com.ktw.bitbit.view.MessageAvatar
                 android:id="@+id/avatar_group"
                 android:layout_width="60dp"
                 android:layout_height="60dp"

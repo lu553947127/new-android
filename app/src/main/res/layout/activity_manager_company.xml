@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp">
 
-        <com.ktw.fly.view.SkinImageView
+        <com.ktw.bitbit.view.SkinImageView
             android:id="@+id/iv_title_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:src="@mipmap/return_icon"
             android:tint="@color/black" />
 
-        <com.ktw.fly.view.SkinTextView
+        <com.ktw.bitbit.view.SkinTextView
             android:id="@+id/tv_title_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:textColor="@color/app_white"
             android:textSize="@dimen/title_center_text_size" />
 
-        <com.ktw.fly.view.SkinImageView
+        <com.ktw.bitbit.view.SkinImageView
             android:id="@+id/iv_title_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

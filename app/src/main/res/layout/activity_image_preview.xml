@@ -6,7 +6,7 @@
 
     <include layout="@layout/photopicker_toolbar"/>
 
-    <com.ktw.fly.view.photopicker.widget.ViewPagerFixed
+    <com.ktw.bitbit.view.photopicker.widget.ViewPagerFixed
         android:id="@+id/vp_photos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
 
-            <com.ktw.fly.view.MergerStatus
+            <com.ktw.bitbit.view.MergerStatus
                 android:id="@+id/tool_bar"
 
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
 
                 </RelativeLayout>
 
-            </com.ktw.fly.view.MergerStatus>
+            </com.ktw.bitbit.view.MergerStatus>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/info_rl"
@@ -139,7 +139,7 @@
                     style="@style/MeLayoutStyle"
                     android:visibility="visible">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -172,7 +172,7 @@
                         android:background="@drawable/me_chevron_right"
                         android:contentDescription="@string/app_name" />
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -193,7 +193,7 @@
                     style="@style/MeLayoutStyle"
                     android:visibility="gone">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -221,7 +221,7 @@
                     style="@style/MeLayoutStyle"
                     android:visibility="gone">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -248,7 +248,7 @@
                     style="@style/MeLayoutStyle"
                     android:visibility="gone">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -274,7 +274,7 @@
                     style="@style/MeLayoutStyle"
                     android:visibility="gone">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -310,7 +310,7 @@
                         style="@style/MeLayoutStyle"
                         android:visibility="gone">
 
-                        <com.ktw.fly.view.LightImageView
+                        <com.ktw.bitbit.view.LightImageView
                             android:layout_width="@dimen/dp20"
                             android:layout_height="@dimen/dp20"
                             android:layout_alignParentStart="true"
@@ -339,7 +339,7 @@
                     android:id="@+id/rlt_qr_code"
                     style="@style/MeLayoutStyle">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -366,7 +366,7 @@
                     android:id="@+id/rlt_safe_settings"
                     style="@style/MeLayoutStyle">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -394,7 +394,7 @@
                     android:visibility="gone"
                     style="@style/MeLayoutStyle">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -406,7 +406,7 @@
                         android:id="@+id/tv_customer_service"
                         style="@style/IMTbleLine_TextName"
                         android:layout_centerVertical="true"
-                        android:text="AAChat团队" />
+                        android:text="bitbit团队" />
 
                     <ImageView
                         style="@style/IMTbleLine_ArrowImg.Me"
@@ -422,7 +422,7 @@
                     android:visibility="gone"
                     style="@style/MeLayoutStyle">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -449,7 +449,7 @@
                     android:id="@+id/rlt_about_us"
                     style="@style/MeLayoutStyle">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -476,7 +476,7 @@
                     android:id="@+id/setting_rl"
                     style="@style/MeLayoutStyle">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"
@@ -504,7 +504,7 @@
                     style="@style/MeLayoutStyle"
                     android:layout_marginBottom="@dimen/dp10">
 
-                    <com.ktw.fly.view.LightImageView
+                    <com.ktw.bitbit.view.LightImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_alignParentStart="true"

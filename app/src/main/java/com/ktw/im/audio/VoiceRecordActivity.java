@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ktw.fly.R;
-import com.ktw.fly.audio.RecordStateListener;
-import com.ktw.fly.ui.base.BaseActivity;
+import com.ktw.bitbit.R;
+import com.ktw.bitbit.audio.RecordStateListener;
+import com.ktw.bitbit.ui.base.BaseActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;

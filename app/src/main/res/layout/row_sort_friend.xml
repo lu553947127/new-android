@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/avatar_img"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
@@ -51,7 +51,7 @@
                 android:src="@drawable/avatar_normal"
                 android:visibility="gone" />
 
-            <com.ktw.fly.view.HeadView
+            <com.ktw.bitbit.view.HeadView
                 android:id="@+id/avatar_imgS"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

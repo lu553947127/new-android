@@ -108,7 +108,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/view_call_trying_imageView_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"

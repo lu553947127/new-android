@@ -15,7 +15,7 @@
         android:paddingTop="9dp"
         android:paddingBottom="9dp">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/label_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"

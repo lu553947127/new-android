@@ -50,7 +50,7 @@
                 android:background="@color/white"
                 android:gravity="center_vertical">
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/password_edit"
                     style="@style/EditTextWithLeftIcon"
                     android:layout_width="0dp"

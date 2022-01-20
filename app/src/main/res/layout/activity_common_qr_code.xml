@@ -35,7 +35,7 @@
 
                 android:layout_height="60dp"
 
-                tools:src="@drawable/splash_bg"
+                tools:src="@drawable/avatar_normal"
                 tools:visibility="visible" />
 
 

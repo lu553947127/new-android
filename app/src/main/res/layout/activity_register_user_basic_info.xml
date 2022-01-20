@@ -1,4 +1,4 @@
-<com.ktw.fly.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ktw.bitbit.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -49,7 +49,7 @@
                             android:drawablePadding="5dp"
                             android:text="@string/label_name" />
 
-                        <com.ktw.fly.view.ClearEditText
+                        <com.ktw.bitbit.view.ClearEditText
                             android:id="@+id/name_edit"
                             style="@style/IMTbleLine_TextValue"
                             android:layout_toLeftOf="@+id/name_arrow_img"
@@ -149,4 +149,4 @@
 
     </ScrollView>
 
-</com.ktw.fly.view.MyLinearLayout>
+</com.ktw.bitbit.view.MyLinearLayout>

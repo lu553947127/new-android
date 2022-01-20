@@ -26,7 +26,7 @@
                     android:drawablePadding="5dp"
                     android:text="@string/company_names" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/company_edit"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_toLeftOf="@+id/name_arrow_img1"

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>-->
 
-    <com.ktw.fly.view.ZoomImageView
+    <com.ktw.bitbit.view.ZoomImageView
         android:id="@+id/iv_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -48,7 +48,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <com.ktw.fly.view.SkinColorView
+                        <com.ktw.bitbit.view.SkinColorView
                             android:id="@+id/view2"
                             android:layout_width="3dp"
                             android:layout_height="15dp"
@@ -116,7 +116,7 @@
                     android:layout_marginTop="20dp"
                     android:gravity="center_vertical">
 
-                    <com.ktw.fly.view.SkinColorView
+                    <com.ktw.bitbit.view.SkinColorView
                         android:id="@+id/view4"
                         android:layout_width="3dp"
                         android:layout_height="15dp"

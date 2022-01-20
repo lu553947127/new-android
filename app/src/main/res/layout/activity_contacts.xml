@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <com.ktw.fly.view.PullToRefreshSlideListView
+                        <com.ktw.bitbit.view.PullToRefreshSlideListView
                             android:id="@+id/pull_refresh_list"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -70,7 +70,7 @@
                             app:slideMode="right"
                             app:slideRightAction="reveal" />
 
-                        <com.ktw.fly.sortlist.SideBar
+                        <com.ktw.bitbit.sortlist.SideBar
                             android:id="@+id/sidebar"
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"

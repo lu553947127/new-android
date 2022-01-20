@@ -31,7 +31,7 @@
 
     </FrameLayout>
 
-    <com.ktw.fly.audio1.VoiceAnimView
+    <com.ktw.bitbit.audio1.VoiceAnimView
         android:id="@+id/chat_to_voice"
         android:layout_width="wrap_content"
         android:layout_height="35dp"

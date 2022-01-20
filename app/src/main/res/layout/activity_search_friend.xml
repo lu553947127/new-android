@@ -16,7 +16,7 @@
         android:paddingRight="8dp"
         android:paddingBottom="9dp">
 
-        <com.ktw.fly.view.SkinImageView
+        <com.ktw.bitbit.view.SkinImageView
             android:id="@+id/iv_title_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:src="@mipmap/return_icon"
             android:tint="@color/black" />
 
-        <com.ktw.fly.view.ClearEditText
+        <com.ktw.bitbit.view.ClearEditText
             android:id="@+id/search_edit"
             android:layout_width="match_parent"
             android:layout_height="35dp"

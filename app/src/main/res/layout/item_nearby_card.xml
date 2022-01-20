@@ -87,7 +87,7 @@
             android:layout_marginRight="0.01dip"
             android:layout_weight="2">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/iv_head"
                 android:layout_width="36.0dip"
                 android:layout_height="36.0dip"

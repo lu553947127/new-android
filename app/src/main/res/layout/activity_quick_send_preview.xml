@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ktw.fly.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ktw.bitbit.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".ui.message.QuickSendPreviewActivity">
 
-    <com.ktw.fly.view.MergerStatus
+    <com.ktw.bitbit.view.MergerStatus
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_color">
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 android:src="@mipmap/return_icon"
                 android:tint="@color/white" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:textColor="@color/app_white"
                 android:textSize="@dimen/title_center_text_size" />
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_right"
                 android:layout_width="@dimen/menu_item_size"
                 android:layout_height="@dimen/menu_item_size"
@@ -48,7 +48,7 @@
                 android:padding="14dp"
                 android:src="@mipmap/image_ic_doodle" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_right"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -65,12 +65,12 @@
 
         </RelativeLayout>
 
-    </com.ktw.fly.view.MergerStatus>
+    </com.ktw.bitbit.view.MergerStatus>
 
-    <com.ktw.fly.view.ZoomImageView
+    <com.ktw.bitbit.view.ZoomImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-</com.ktw.fly.view.MyLinearLayout>
+</com.ktw.bitbit.view.MyLinearLayout>

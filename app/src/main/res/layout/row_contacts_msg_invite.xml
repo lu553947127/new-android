@@ -46,7 +46,7 @@
             android:layout_marginLeft="9dp"
             android:layout_toRightOf="@+id/check_box">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/avatar_img"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

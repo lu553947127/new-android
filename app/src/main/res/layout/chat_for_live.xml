@@ -66,7 +66,7 @@
             android:orientation="horizontal"
             android:padding="@dimen/chat_item_padding">
 
-            <com.ktw.fly.view.HeadView
+            <com.ktw.bitbit.view.HeadView
                 android:id="@+id/chat_head_iv"
                 android:layout_width="@dimen/chat_head_size"
                 android:layout_height="@dimen/chat_head_size"

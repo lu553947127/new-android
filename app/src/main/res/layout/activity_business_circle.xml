@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:fitsSystemWindows="false">
 
-    <com.ktw.fly.view.ResizeLayout
+    <com.ktw.bitbit.view.ResizeLayout
         android:id="@+id/resize_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +21,7 @@
             app:srlEnableAutoLoadMore="true"
             app:srlEnableLoadMore="true">
 
-            <com.ktw.fly.view.PullRefreshHeader
+            <com.ktw.bitbit.view.PullRefreshHeader
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -33,21 +33,21 @@
                 android:overScrollMode="never"
                 tools:listitem="@android:layout/simple_list_item_2" />
 
-            <com.ktw.fly.view.PullRefreshFooter
+            <com.ktw.bitbit.view.PullRefreshFooter
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-        <com.ktw.fly.view.PMsgBottomView
+        <com.ktw.bitbit.view.PMsgBottomView
             android:id="@+id/bottom_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:visibility="gone" />
 
-    </com.ktw.fly.view.ResizeLayout>
+    </com.ktw.bitbit.view.ResizeLayout>
 
-    <com.ktw.fly.view.MergerStatus
+    <com.ktw.bitbit.view.MergerStatus
         android:id="@+id/mergerStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                 android:src="@mipmap/return_icon"
                 android:tint="@color/black" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_left"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -91,7 +91,7 @@
                 android:indeterminateOnly="true"
                 android:visibility="gone" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 android:src="@mipmap/ic_no_speaker"
                 android:visibility="gone" />
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_right"
                 android:layout_width="@dimen/menu_item_size"
                 android:layout_height="@dimen/menu_item_size"
@@ -122,7 +122,7 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/dp15" />
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_right_right"
                 android:layout_width="@dimen/menu_item_size"
                 android:layout_height="@dimen/menu_item_size"
@@ -132,7 +132,7 @@
                 android:src="@mipmap/search_icon"
                 android:visibility="gone" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
 
         </RelativeLayout>
 
-    </com.ktw.fly.view.MergerStatus>
+    </com.ktw.bitbit.view.MergerStatus>
 
     <RelativeLayout
         android:id="@+id/rl_title"

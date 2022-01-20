@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.ktw.fly.R;
+import com.ktw.bitbit.R;
 
 import java.io.IOException;
 

@@ -5,11 +5,11 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.ktw.fly.R;
-import com.ktw.fly.FLYReporter;
-import com.ktw.fly.helper.LoginHelper;
-import com.ktw.fly.util.AsyncUtils;
-import com.ktw.fly.util.ToastUtil;
+import com.ktw.bitbit.R;
+import com.ktw.bitbit.FLYReporter;
+import com.ktw.bitbit.helper.LoginHelper;
+import com.ktw.bitbit.util.AsyncUtils;
+import com.ktw.bitbit.util.ToastUtil;
 
 
 public class Result {

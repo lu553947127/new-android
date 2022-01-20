@@ -7,7 +7,7 @@
 
     <include layout="@layout/a_view_actionbar" />
 
-    <com.ktw.fly.view.ChatContentView
+    <com.ktw.bitbit.view.ChatContentView
         android:id="@+id/chat_content_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -26,13 +26,13 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp">
 
-                <com.ktw.fly.view.CircleImageView
+                <com.ktw.bitbit.view.CircleImageView
                     android:id="@+id/avatar"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:src="@drawable/avatar_normal" />
 
-                <com.ktw.fly.view.CircleImageView
+                <com.ktw.bitbit.view.CircleImageView
                     android:id="@+id/add_contacts"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
@@ -208,7 +208,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/one_level_title" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sb_read_fire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/one_level_title" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sb_top_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/one_level_title" />
 
-                <com.ktw.fly.view.SwitchButton
+                <com.ktw.bitbit.view.SwitchButton
                     android:id="@+id/sb_no_disturb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

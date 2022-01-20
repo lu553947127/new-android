@@ -23,7 +23,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="@dimen/dp20">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/avatar_iv"
                 android:layout_width="36dp"
                 android:layout_height="36dp"

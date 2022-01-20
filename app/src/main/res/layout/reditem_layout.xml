@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:paddingHorizontal="15dp">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/red_head_iv"
                 android:layout_width="48dip"
                 android:layout_height="48dip"
@@ -123,7 +123,7 @@
                             android:textSize="@dimen/sp_12_text_size" />
                     </LinearLayout>
 
-                    <com.ktw.fly.view.MarqueeTextView
+                    <com.ktw.bitbit.view.MarqueeTextView
                         android:id="@+id/reply_tv"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"

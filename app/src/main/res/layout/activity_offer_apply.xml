@@ -1,4 +1,4 @@
-<com.ktw.fly.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ktw.bitbit.view.MyLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/normal_bg"
@@ -32,7 +32,7 @@
                     android:drawablePadding="5dp"
                     android:text="开户行：" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/edt_bank_name"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_toRightOf="@+id/tv_bank_name"
@@ -57,7 +57,7 @@
                     android:drawablePadding="5dp"
                     android:text="银行卡号：" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/edt_bank_card_number"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_toRightOf="@+id/tv_bank_card_number"
@@ -83,7 +83,7 @@
                     android:drawablePadding="5dp"
                     android:text="姓名：" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/edt_user_name"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_toRightOf="@+id/tv_user_name"
@@ -108,7 +108,7 @@
                     android:drawablePadding="5dp"
                     android:text="提现金额：" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/etAmount"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_toRightOf="@+id/tvAmount"
@@ -137,7 +137,7 @@
                     android:drawablePadding="5dp"
                     android:text="描述：" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/etDesc"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_toRightOf="@+id/tvDesc"
@@ -164,7 +164,7 @@
                     android:drawablePadding="5dp"
                     android:text="验证码：" />
 
-                <com.ktw.fly.view.ClearEditText
+                <com.ktw.bitbit.view.ClearEditText
                     android:id="@+id/etVerifyCode"
                     style="@style/IMTbleLine_TextValue"
                     android:layout_width="wrap_content"
@@ -192,4 +192,4 @@
 
     </ScrollView>
 
-</com.ktw.fly.view.MyLinearLayout>
+</com.ktw.bitbit.view.MyLinearLayout>

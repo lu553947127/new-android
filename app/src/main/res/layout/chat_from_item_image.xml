@@ -13,7 +13,7 @@
         style="@style/ChattingUISystem"
         android:visibility="gone" />
 
-    <com.ktw.fly.view.HeadView
+    <com.ktw.bitbit.view.HeadView
         android:id="@+id/chat_head_iv"
         android:layout_width="@dimen/chat_head_size"
         android:layout_height="@dimen/chat_head_size"
@@ -51,7 +51,7 @@
             android:scaleType="centerCrop"
             app:chat_direction="true" />
 
-        <com.ktw.fly.view.XuanProgressPar
+        <com.ktw.bitbit.view.XuanProgressPar
             android:id="@+id/img_progress"
             android:layout_width="65dp"
             android:layout_height="65dp"

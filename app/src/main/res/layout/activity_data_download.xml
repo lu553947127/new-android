@@ -9,7 +9,7 @@
         android:id="@+id/top_view"
         layout="@layout/a_view_actionbar" />
 
-    <com.ktw.fly.view.DataLoadView
+    <com.ktw.bitbit.view.DataLoadView
         android:id="@+id/data_load_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

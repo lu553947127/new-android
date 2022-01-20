@@ -12,7 +12,7 @@
         style="@style/ChattingUISystem"
         android:visibility="gone" />
 
-    <com.ktw.fly.view.HeadView
+    <com.ktw.bitbit.view.HeadView
         android:id="@+id/chat_head_iv"
         android:layout_width="@dimen/chat_head_size"
         android:layout_height="@dimen/chat_head_size"
@@ -67,7 +67,7 @@
             android:layout_height="50dp"
             android:background="@color/audio_view" />
 
-        <com.ktw.fly.audio2.AudioView
+        <com.ktw.bitbit.audio2.AudioView
             android:id="@id/av_chat"
             android:layout_width="70dp"
             android:layout_height="wrap_content"

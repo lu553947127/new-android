@@ -51,7 +51,7 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.view.ChatFaceView xmlns:chatface="http://schemas.android.com/apk/res-auto"
+    <com.ktw.bitbit.view.ChatFaceView xmlns:chatface="http://schemas.android.com/apk/res-auto"
         android:id="@+id/chat_face_view"
         android:layout_width="wrap_content"
         android:layout_height="280dp"

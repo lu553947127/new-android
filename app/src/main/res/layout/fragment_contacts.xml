@@ -44,7 +44,7 @@
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="wrap_content">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/new_friend"
                 android:layout_width="@dimen/contacts_head_image_size"
                 android:layout_height="@dimen/contacts_head_image_size"
@@ -80,7 +80,7 @@
         style="@style/ContactsHead"
         android:visibility="gone">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/colleague_iv"
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="@dimen/contacts_head_image_size"
@@ -103,7 +103,7 @@
             android:layout_width="45dp"
             android:layout_height="@dimen/contacts_head_image_size">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/contacts"
                 android:layout_width="@dimen/contacts_head_image_size"
                 android:layout_height="@dimen/contacts_head_image_size"
@@ -140,7 +140,7 @@
         style="@style/ContactsHead"
         android:visibility="gone">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/notice_number"
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="@dimen/contacts_head_image_size"
@@ -157,7 +157,7 @@
         android:id="@+id/group_rl"
         style="@style/ContactsHead">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/group"
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="@dimen/contacts_head_image_size"
@@ -173,7 +173,7 @@
         android:id="@+id/black_rl"
         style="@style/ContactsHead">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/black_iv"
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="@dimen/contacts_head_image_size"
@@ -190,7 +190,7 @@
         android:id="@+id/device_rl"
         style="@style/ContactsHead">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/device_iv"
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="@dimen/contacts_head_image_size"
@@ -208,7 +208,7 @@
         style="@style/ContactsHead"
         android:visibility="gone">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/label"
             android:layout_width="@dimen/contacts_head_image_size"
             android:layout_height="@dimen/contacts_head_image_size"

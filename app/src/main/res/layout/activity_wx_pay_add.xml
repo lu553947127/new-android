@@ -43,7 +43,7 @@
                 android:textColor="@color/app_black"
                 android:textSize="20sp" />
 
-            <com.ktw.fly.view.EditTextWithSuffix
+            <com.ktw.bitbit.view.EditTextWithSuffix
                 android:id="@+id/select_money_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

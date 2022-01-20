@@ -199,7 +199,7 @@
         android:textColor="@color/text_red_light"
         android:textSize="@dimen/sp_12_text_size" />
 
-    <com.ktw.fly.ui.smarttab.SmartTabLayout
+    <com.ktw.bitbit.ui.smarttab.SmartTabLayout
         android:id="@+id/smarttablayout_redpacket"
         android:layout_width="match_parent"
         android:layout_height="40dp"

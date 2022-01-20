@@ -22,7 +22,7 @@ import com.fanjun.keeplive.config.NotificationUtils;
 import com.fanjun.keeplive.receiver.NotificationClickReceiver;
 import com.fanjun.keeplive.receiver.OnepxReceiver;
 import com.fanjun.keeplive.utils.ServiceUtils;
-import com.ktw.fly.R;
+import com.ktw.bitbit.R;
 
 public final class LocalService extends Service {
     private OnepxReceiver mOnepxReceiver;

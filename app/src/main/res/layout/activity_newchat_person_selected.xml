@@ -34,7 +34,7 @@
             android:textSize="30dp"
             android:visibility="gone" />
 
-        <com.ktw.fly.sortlist.SideBar
+        <com.ktw.bitbit.sortlist.SideBar
             android:id="@+id/sidebar"
             android:layout_width="20dp"
             android:layout_height="fill_parent"

@@ -13,8 +13,8 @@ import com.fanjun.keeplive.config.KeepLiveService;
 import com.fanjun.keeplive.service.JobHandlerService;
 import com.fanjun.keeplive.service.LocalService;
 import com.fanjun.keeplive.service.RemoteService;
-import com.ktw.fly.FLYApplication;
-import com.ktw.fly.R;
+import com.ktw.bitbit.FLYApplication;
+import com.ktw.bitbit.R;
 
 import java.util.List;
 

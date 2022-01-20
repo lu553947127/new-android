@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <com.ktw.fly.luo.camfilter.widget.LuoGLCameraView
+        <com.ktw.bitbit.luo.camfilter.widget.LuoGLCameraView
             android:id="@+id/glsurfaceview_camera"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -63,13 +63,13 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.view.cjt2325.cameralibrary.CaptureLayoutPictrue
+    <com.ktw.bitbit.view.cjt2325.cameralibrary.CaptureLayoutPictrue
         android:id="@+id/capture_layout_pictrue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
 
-    <com.ktw.fly.view.cjt2325.cameralibrary.FoucsView
+    <com.ktw.bitbit.view.cjt2325.cameralibrary.FoucsView
         android:id="@+id/fouce_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

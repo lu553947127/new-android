@@ -83,7 +83,7 @@
                     android:src="@drawable/ic_disc" />
             </RelativeLayout>
 
-            <com.ktw.fly.ui.trill.MarqueTextView
+            <com.ktw.bitbit.ui.trill.MarqueTextView
                 android:id="@+id/tv_bgname"
                 android:layout_width="36dp"
                 android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.ui.xrce.Xspeedbar
+    <com.ktw.bitbit.ui.xrce.Xspeedbar
         android:id="@+id/bar_change"
         android:layout_width="match_parent"
         android:layout_height="67dp"
@@ -267,7 +267,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp" />
 
-    <com.ktw.fly.ui.xrce.Xvolumebar
+    <com.ktw.bitbit.ui.xrce.Xvolumebar
         android:id="@+id/bar_volume"
         android:layout_width="match_parent"
         android:layout_height="67dp"
@@ -299,7 +299,7 @@
 
     </LinearLayout>
 
-    <com.ktw.fly.ui.xrce.Xpreprogressbar
+    <com.ktw.bitbit.ui.xrce.Xpreprogressbar
         android:id="@+id/xpb_pro"
         android:layout_width="match_parent"
         android:layout_height="1.5dp"

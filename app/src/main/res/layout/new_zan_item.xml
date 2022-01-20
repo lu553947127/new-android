@@ -7,7 +7,7 @@
     android:minHeight="100dp"
     android:orientation="horizontal">
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/fromimage"
         android:layout_width="50dp"
         android:layout_height="50dp"

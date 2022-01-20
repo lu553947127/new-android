@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" tools:ignore="MissingTranslation">
-    <string name="app_name">AAChat</string>
+    <string name="app_name">bitbit</string>
     <string name="data_exception">数据异常，请稍后重试</string>
     <string name="net_exception">网络异常，请稍后重试</string>
     <string name="please_wait">请稍等&#8230;</string>
@@ -595,7 +595,7 @@
     <string name="cancel_black_me">已取消了黑名单</string>
     <string name="pass">通过验证</string>
     <string name="answer">回话</string>
-    <string name="system_public_number">AAChat团队</string>
+    <string name="system_public_number">bitbit团队</string>
     <string name="alert_select_one">请至少选择一个好友或标签</string>
     <string name="permanent">永久</string>
     <string name="no_sync">不同步</string>
@@ -2293,19 +2293,19 @@
     public static final int OPERATE_UNFREEZE_ACCOUNT = 1107;//解冻账户
     public static final int OPERATE_UNSUBSCRIBE_ACCOUNT = 1108;//注销账户
     <string name="operate_freeze_title">冻结通讯号</string>
-    <string name="operate_freeze_content">遇到AAChat被盗或手机遗失，您可以申请冻结账号</string>
+    <string name="operate_freeze_content">遇到bitbit被盗或手机遗失，您可以申请冻结账号</string>
     <string name="operate_freeze_sub_content">防止不法分子盗取您的个人信息\n防止您账户资金受到损失\n防止不法分子使用您的身份信息进行非法行为</string>
     <string name="operate_freeze">开始冻结</string>
 
-    <string name="operate_unfreeze_title">解冻AAChat</string>
+    <string name="operate_unfreeze_title">解冻bitbit</string>
     <string name="operate_unfreeze_content">当您账号问题解决后，您可以申请解冻通讯号</string>
     <string name="operate_unfreeze_sub_content">检查您手机没有被植入病毒\n不要随便向外人泄露个人信息</string>
     <string name="operate_unfreeze">开始解冻</string>
 
-    <string name="operate_unsubscribe_title">注销AAChat</string>
-    <string name="operate_unsubscribe_content">申请注销AAChat</string>
+    <string name="operate_unsubscribe_title">注销bitbit</string>
+    <string name="operate_unsubscribe_content">申请注销bitbit</string>
     <string name="operate_unsubscribe">申请注销</string>
-    <string name="operate_unsubscribe_sub_content">为了您的通讯号已经资金安全，在您申请注销通讯号时，AAChat团队将对您的通讯号做以下验证\n
+    <string name="operate_unsubscribe_sub_content">为了您的通讯号已经资金安全，在您申请注销通讯号时，bitbit团队将对您的通讯号做以下验证\n
     \t①通讯号处于安全状态：在最近两周内，您未进行修改密码、更换手机等敏感操作，以及您账号没有被盗号的风险\n
     \t②支付财产结清：您已注销或从未开通账户，账户所有资金问题已经解决</string>
     <string name="question_feedback">意见反馈</string>

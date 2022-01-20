@@ -1,4 +1,4 @@
-<com.ktw.fly.view.SquareCenterFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ktw.bitbit.view.SquareCenterFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="70dp"
     android:layout_height="70dp">
 
@@ -41,4 +41,4 @@
 
     </FrameLayout>
 
-</com.ktw.fly.view.SquareCenterFrameLayout>
+</com.ktw.bitbit.view.SquareCenterFrameLayout>

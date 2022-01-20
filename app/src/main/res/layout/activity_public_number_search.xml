@@ -22,7 +22,7 @@
                 style="@style/IMTbleLine_TextKey"
                 android:text="@string/tip_search_public_number" />
 
-            <com.ktw.fly.view.ClearEditText
+            <com.ktw.bitbit.view.ClearEditText
                 android:id="@+id/keyword_edit"
                 style="@style/IMTbleLine_TextValue"
                 android:layout_toLeftOf="@+id/keyword_arrow_img"
@@ -71,7 +71,7 @@
                 android:id="@+id/min_age_text"
                 style="@style/IMTbleLine_TextKey" />
 
-            <com.ktw.fly.view.ClearEditText
+            <com.ktw.bitbit.view.ClearEditText
                 android:id="@+id/min_age_edit"
                 style="@style/IMTbleLine_TextValue"
                 android:layout_toLeftOf="@+id/min_age_arrow_img"
@@ -96,7 +96,7 @@
                 android:id="@+id/max_age_text"
                 style="@style/IMTbleLine_TextKey" />
 
-            <com.ktw.fly.view.ClearEditText
+            <com.ktw.bitbit.view.ClearEditText
                 android:id="@+id/max_age_edit"
                 style="@style/IMTbleLine_TextValue"
                 android:layout_toLeftOf="@+id/max_age_arrow_img"

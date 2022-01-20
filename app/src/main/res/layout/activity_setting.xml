@@ -109,7 +109,8 @@
             <RelativeLayout
                 android:id="@+id/change_password_rl"
                 style="@style/IMTble_No_Line"
-                android:layout_marginTop="9dp">
+                android:layout_marginTop="9dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/passwoedtv"
@@ -137,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:divider="@drawable/common_divider"
                 android:orientation="vertical"
-                android:showDividers="middle">
+                android:showDividers="middle"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/bing_phone_rl"

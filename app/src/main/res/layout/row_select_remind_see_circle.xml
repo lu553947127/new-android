@@ -16,7 +16,7 @@
         android:clickable="false"
         android:focusable="false" />
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/see_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"

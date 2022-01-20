@@ -36,7 +36,7 @@
             android:textSize="@dimen/sp_13_text_size"
             tools:text="@string/receipt_pay_single" />
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/pay_avatar_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -201,7 +201,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.ktw.fly.view.KeyboardxView
+    <com.ktw.bitbit.view.KeyboardxView
         android:id="@+id/transfer_keyboard"
         android:layout_width="match_parent"
         android:layout_height="210dp"

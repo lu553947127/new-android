@@ -150,7 +150,8 @@
 
             <RelativeLayout
                 android:id="@+id/rlt_account_capital"
-                style="@style/MeLayoutStyle">
+                style="@style/MeLayoutStyle"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="@dimen/dp20"

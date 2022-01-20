@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ktw.fly.view.MergerStatus
+    <com.ktw.bitbit.view.MergerStatus
         android:id="@+id/mergerStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <com.ktw.fly.view.SkinImageView
+            <com.ktw.bitbit.view.SkinImageView
                 android:id="@+id/iv_title_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
                 android:src="@mipmap/return_icon"
                 android:tint="@color/black" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:textColor="@color/app_white"
                 android:textSize="@dimen/sp_18_text_size" />
 
-            <com.ktw.fly.view.SkinTextView
+            <com.ktw.bitbit.view.SkinTextView
                 android:id="@+id/tv_title_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
 
         </RelativeLayout>
 
-    </com.ktw.fly.view.MergerStatus>
+    </com.ktw.bitbit.view.MergerStatus>
 
     <RelativeLayout
         android:id="@+id/rl_map_position"
@@ -90,7 +90,7 @@
             android:paddingTop="@dimen/dp15"
             android:paddingBottom="@dimen/dp15">
 
-            <com.ktw.fly.view.ClearEditText
+            <com.ktw.bitbit.view.ClearEditText
                 android:id="@+id/ce_map_position"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"

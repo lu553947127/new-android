@@ -17,7 +17,7 @@
         android:layout_height="0.1dp"
         android:background="@color/Grey_300" />
 
-    <com.ktw.fly.view.MyListView
+    <com.ktw.bitbit.view.MyListView
         android:id="@+id/head_lv"
         android:layout_width="match_parent"
         android:layout_height="0dp"

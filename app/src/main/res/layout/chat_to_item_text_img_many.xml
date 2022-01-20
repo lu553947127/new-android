@@ -12,7 +12,7 @@
         style="@style/ChattingUISystem"
         android:visibility="gone" />
 
-    <com.ktw.fly.view.HeadView
+    <com.ktw.bitbit.view.HeadView
         android:id="@+id/chat_head_iv"
         android:layout_width="@dimen/chat_head_size"
         android:layout_height="@dimen/chat_head_size"
@@ -82,7 +82,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/chat_text_size" />
 
-        <com.ktw.fly.view.MyListView
+        <com.ktw.bitbit.view.MyListView
             android:id="@+id/chat_item_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

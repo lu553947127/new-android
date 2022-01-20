@@ -48,7 +48,7 @@
 
         </RelativeLayout>
 
-        <com.ktw.fly.view.ControlFontSize
+        <com.ktw.bitbit.view.ControlFontSize
             android:id="@+id/control_font"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

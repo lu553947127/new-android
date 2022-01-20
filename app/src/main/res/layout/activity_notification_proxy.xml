@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
+    android:background="@drawable/bg_splash1"
     tools:context=".ui.notification.NotificationProxyActivity">
 </androidx.constraintlayout.widget.ConstraintLayout>

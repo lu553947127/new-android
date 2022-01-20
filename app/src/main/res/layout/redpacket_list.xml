@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ktw.fly.ui.smarttab.SmartTabLayout
+        <com.ktw.bitbit.ui.smarttab.SmartTabLayout
             android:id="@+id/smarttablayout_redlist"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -71,7 +71,7 @@
             app:stl_underlineColor="#ffffff"
             app:stl_underlineThickness="0dp">
 
-        </com.ktw.fly.ui.smarttab.SmartTabLayout>
+        </com.ktw.bitbit.ui.smarttab.SmartTabLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpagert_redlist"

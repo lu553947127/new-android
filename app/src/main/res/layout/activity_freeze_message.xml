@@ -59,7 +59,7 @@
             android:padding="8dp"
             android:visibility="visible">
 
-            <com.ktw.fly.view.ClearEditText
+            <com.ktw.bitbit.view.ClearEditText
                 android:id="@+id/image_edt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

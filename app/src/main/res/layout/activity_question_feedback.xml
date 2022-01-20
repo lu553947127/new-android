@@ -20,7 +20,7 @@
             android:drawablePadding="5dp"
             android:text="联系电话(必填)：" />
 
-        <com.ktw.fly.view.ClearEditText
+        <com.ktw.bitbit.view.ClearEditText
             android:id="@+id/edt_phone"
             style="@style/IMTbleLine_TextValue"
             android:layout_toRightOf="@+id/tv_phone"
@@ -60,7 +60,7 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.view.MyGridView
+    <com.ktw.bitbit.view.MyGridView
         android:id="@+id/gv_screenshot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -72,7 +72,7 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp" />
 
-    <com.ktw.fly.view.ClearEditText
+    <com.ktw.bitbit.view.ClearEditText
         android:id="@+id/edt_remark"
         android:layout_width="match_parent"
         android:layout_height="150dp"

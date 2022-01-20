@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="12dp">
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/avatar_iv"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -64,7 +64,7 @@
                 app:riv_corner_radius="9dp"
                 app:riv_mutate_background="true" />
 
-            <com.ktw.fly.audio1.VoiceAnimView
+            <com.ktw.bitbit.audio1.VoiceAnimView
                 android:id="@+id/content_va"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     android:layout_height="50dp"
                     android:background="@color/audio_view" />
 
-                <com.ktw.fly.audio2.AudioView
+                <com.ktw.bitbit.audio2.AudioView
                     android:id="@id/av_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

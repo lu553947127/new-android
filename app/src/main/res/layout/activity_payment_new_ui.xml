@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".pay.new_ui.PaymentOrReceiptActivity">
 
-    <com.ktw.fly.view.CustomScrollViewPager
+    <com.ktw.bitbit.view.CustomScrollViewPager
         android:id="@+id/muc_viewpagert_redpacket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
 
     </LinearLayout>
 
-    <com.ktw.fly.ui.smarttab.SmartTabLayout
+    <com.ktw.bitbit.ui.smarttab.SmartTabLayout
         android:id="@+id/muc_smarttablayout_redpacket"
         android:layout_width="match_parent"
         android:layout_height="40dp"

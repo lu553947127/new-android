@@ -112,7 +112,7 @@
                 android:layout_height="160dp"
                 tools:src="@drawable/ic_payment_code" />
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/rp_qr_code_avatar_iv"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

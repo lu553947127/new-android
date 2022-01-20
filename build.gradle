@@ -6,35 +6,32 @@ buildscript {
         target_version = 26
     }
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
         google()
         jcenter()
-        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath 'com.google.gms:google-services:4.2.0'
     }
-
 }
 
 allprojects {
     repositories {
-        maven {
-            url rootProject.file('repository')
-        }
         google()
         jcenter()
-
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
-        }
-
+        maven { url rootProject.file('repository')}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
         maven { url 'http://developer.huawei.com/repo/' }
-
         // 图片编辑库cc.aoeiuv020:imaging所在仓库, 同步到jcenter审核通过前需要这个仓库，
         maven { url 'https://dl.bintray.com/aoeiuv020/maven' }
-
         maven { url 'https://jitpack.io' }
     }
-
 }

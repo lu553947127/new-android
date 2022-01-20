@@ -50,7 +50,7 @@
             android:scaleType="centerInside"
             app:srcCompat="@mipmap/talk_btn_frame_large_free" />
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/call_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"

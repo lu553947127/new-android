@@ -7,7 +7,7 @@
     android:id="@+id/refresh_layout"
     android:layout_height="match_parent">
 
-    <com.ktw.fly.view.PullRefreshHeader
+    <com.ktw.bitbit.view.PullRefreshHeader
         app:layout_constraintTop_toBottomOf="@id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:background="#F7F7F7">
 
-            <com.ktw.fly.view.MergerStatus
+            <com.ktw.bitbit.view.MergerStatus
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                     android:textSize="@dimen/sp_18_text_size"
                     android:textStyle="bold" />
 
-            </com.ktw.fly.view.MergerStatus>
+            </com.ktw.bitbit.view.MergerStatus>
 
             <View
                 android:id="@+id/view_1"

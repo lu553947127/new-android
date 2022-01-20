@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ktw.fly.view.SquareCenterImageView
+    <com.ktw.bitbit.view.SquareCenterImageView
         android:id="@+id/muc_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

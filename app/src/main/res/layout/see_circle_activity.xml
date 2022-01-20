@@ -179,7 +179,7 @@
 
                 </RelativeLayout>
 
-                <com.ktw.fly.view.MyListView
+                <com.ktw.bitbit.view.MyListView
                     android:id="@+id/lv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
 
                 </RelativeLayout>
 
-                <com.ktw.fly.view.MyListView
+                <com.ktw.bitbit.view.MyListView
                     android:id="@+id/lv2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

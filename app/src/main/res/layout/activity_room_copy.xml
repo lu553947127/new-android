@@ -16,7 +16,7 @@
         android:paddingBottom="@dimen/dp10"
         android:paddingTop="@dimen/dp30">
 
-        <com.ktw.fly.view.HeadView
+        <com.ktw.bitbit.view.HeadView
             android:id="@+id/avatar_imgS"
             android:layout_width="60dp"
             android:layout_height="60dp"

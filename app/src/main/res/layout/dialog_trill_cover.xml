@@ -48,7 +48,7 @@
         android:paddingRight="15dp"
         android:paddingTop="9dp">
 
-        <com.ktw.fly.ui.xrce.Xcoverbar
+        <com.ktw.bitbit.ui.xrce.Xcoverbar
             android:id="@+id/xcover_bar"
             android:layout_width="match_parent"
             android:layout_height="60dp" />

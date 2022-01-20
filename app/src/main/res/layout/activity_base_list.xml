@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/normal_bg"
     android:orientation="vertical"
-    tools:context="com.ktw.fly.ui.base.BaseListActivity">
+    tools:context="com.ktw.bitbit.ui.base.BaseListActivity">
 
     <include layout="@layout/a_view_actionbar" />
 

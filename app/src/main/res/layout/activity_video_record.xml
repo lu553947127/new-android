@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp" />
 
-        <com.ktw.fly.video.CustomTabLayout
+        <com.ktw.bitbit.video.CustomTabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

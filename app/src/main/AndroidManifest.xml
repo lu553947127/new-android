@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ktw.fly">
+    package="com.ktw.bitbit">
     <!-- for Samsung -->
     <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
@@ -98,7 +98,7 @@
 
     <application
 
-        android:name="com.ktw.fly.FLYApplication"
+        android:name="com.ktw.bitbit.FLYApplication"
         android:allowBackup="true"
         android:fitsSystemWindows="true"
         android:icon="@mipmap/ic_app_logo"
@@ -110,37 +110,37 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:name, android:icon, android:roundIcon">
-        <activity android:name=".ui.me.AccountFreezeActivity" />
-        <activity android:name=".ui.me.FreezeMessageActivity" />
-        <activity android:name="com.ktw.fly.ui.me.DiscoverActivity" />
-        <activity android:name=".ui.me.ComplaintSuggestionsListActivity" />
-        <activity android:name=".ui.me.ComplaintAndSuggestionsSubmitActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.AccountFreezeActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.FreezeMessageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.DiscoverActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.ComplaintSuggestionsListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.ComplaintAndSuggestionsSubmitActivity" />
         <activity
-            android:name="com.ktw.fly.pay.new_ui.PaymentOrReceiptActivity"
+            android:name="com.ktw.bitbit.pay.new_ui.PaymentOrReceiptActivity"
             android:label="@string/title_activity_payment_new_ui"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.ktw.fly.ui.contacts.label.LabelActivityNewUI" />
-        <activity android:name="com.ktw.fly.ui.me.DescriptionActivity" />
-        <activity android:name="com.ktw.fly.ui.backup.ReceiveChatHistoryActivity" />
-        <activity android:name="com.ktw.fly.ui.circle.range.SelectCoverActivity" />
-        <activity android:name="com.ktw.fly.ui.search.SearchSingleTypeActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.label.LabelActivityNewUI" />
+        <activity android:name="com.ktw.bitbit.ui.me.DescriptionActivity" />
+        <activity android:name="com.ktw.bitbit.ui.backup.ReceiveChatHistoryActivity" />
+        <activity android:name="com.ktw.bitbit.ui.circle.range.SelectCoverActivity" />
+        <activity android:name="com.ktw.bitbit.ui.search.SearchSingleTypeActivity" />
         <activity
-            android:name="com.ktw.fly.ui.search.SearchAllActivity"
+            android:name="com.ktw.bitbit.ui.search.SearchAllActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name="com.ktw.fly.ui.other.LifeCircleSettingsActivity" />
+        <activity android:name="com.ktw.bitbit.ui.other.LifeCircleSettingsActivity" />
         <activity
-            android:name="com.ktw.fly.ui.backup.SendChatHistoryActivity"
+            android:name="com.ktw.bitbit.ui.backup.SendChatHistoryActivity"
             android:launchMode="singleInstance" />
-        <activity android:name="com.ktw.fly.ui.backup.SelectChatActivity" />
-        <activity android:name="com.ktw.fly.ui.backup.BackupHistoryActivity" />
+        <activity android:name="com.ktw.bitbit.ui.backup.SelectChatActivity" />
+        <activity android:name="com.ktw.bitbit.ui.backup.BackupHistoryActivity" />
         <activity
-            android:name="com.ktw.fly.ui.other.PrivacyAgreeActivity"
+            android:name="com.ktw.bitbit.ui.other.PrivacyAgreeActivity"
             android:launchMode="singleTop" />
-        <activity android:name="com.ktw.fly.ui.login.AuthLoginActivity" />
-        <activity android:name="com.ktw.fly.ui.login.H5LoginActivity" />
-        <activity android:name=".ui.me.AccountOperateActivity" />
+        <activity android:name="com.ktw.bitbit.ui.login.AuthLoginActivity" />
+        <activity android:name="com.ktw.bitbit.ui.login.H5LoginActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.AccountOperateActivity" />
         <activity
-            android:name="com.ktw.fly.ui.login.H5LoginProxyActivity"
+            android:name="com.ktw.bitbit.ui.login.H5LoginProxyActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -155,7 +155,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ktw.fly.ui.notification.NotificationProxyActivity"
+            android:name="com.ktw.bitbit.ui.notification.NotificationProxyActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -169,13 +169,13 @@
                     android:scheme="sk" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ktw.fly.ui.account.ChangePasswordActivity" />
-        <activity android:name="com.ktw.fly.ui.me.PrivacyWhitelistActivity" />
-        <activity android:name="com.ktw.fly.ui.groupchat.FaceToFaceGroup" />
-        <activity android:name="com.ktw.fly.ui.groupchat.RoomSearchResultActivity" />
-        <activity android:name="com.ktw.fly.ui.groupchat.RoomSearchActivity" /> <!-- 启动页面 -->
+        <activity android:name="com.ktw.bitbit.ui.account.ChangePasswordActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.PrivacyWhitelistActivity" />
+        <activity android:name="com.ktw.bitbit.ui.groupchat.FaceToFaceGroup" />
+        <activity android:name="com.ktw.bitbit.ui.groupchat.RoomSearchResultActivity" />
+        <activity android:name="com.ktw.bitbit.ui.groupchat.RoomSearchActivity" /> <!-- 启动页面 -->
         <activity
-            android:name="com.ktw.fly.ui.FLYSplashActivity"
+            android:name="com.ktw.bitbit.ui.FLYSplashActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:theme="@style/SplashTheme">
@@ -188,107 +188,107 @@
         <activity android:name="com.ktw.im.audio.VoiceRecordActivity" />
         <activity android:name="com.ktw.im.audio.VoiceRecordActivity2" /> <!-- Jitsi -->
         <activity
-            android:name="com.ktw.fly.call.JitsiTalk"
+            android:name="com.ktw.bitbit.call.JitsiTalk"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.ktw.fly.call.Jitsi_connecting_second"
+            android:name="com.ktw.bitbit.call.Jitsi_connecting_second"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.ktw.fly.call.Jitsi_pre"
+            android:name="com.ktw.bitbit.call.Jitsi_pre"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.ktw.fly.call.JitsiIncomingcall"
+            android:name="com.ktw.bitbit.call.JitsiIncomingcall"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.ktw.fly.call.JitsiInviteActivity"
+            android:name="com.ktw.bitbit.call.JitsiInviteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name="com.ktw.fly.course.CourseDateilsActivity" />
-        <activity android:name="com.ktw.fly.course.LocalCourseActivity" />
-        <activity android:name="com.ktw.fly.course.SelectFriendsActivity" />
-        <activity android:name="com.ktw.fly.course.SelectNewContactsActivity" />
-        <activity android:name="com.ktw.fly.course.SelectNewGroupActivity" />
+        <activity android:name="com.ktw.bitbit.course.CourseDateilsActivity" />
+        <activity android:name="com.ktw.bitbit.course.LocalCourseActivity" />
+        <activity android:name="com.ktw.bitbit.course.SelectFriendsActivity" />
+        <activity android:name="com.ktw.bitbit.course.SelectNewContactsActivity" />
+        <activity android:name="com.ktw.bitbit.course.SelectNewGroupActivity" />
         <activity
-            android:name="com.ktw.fly.ui.account.RegisterActivity"
+            android:name="com.ktw.bitbit.ui.account.RegisterActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.ktw.fly.ui.account.RegisterPasswordActivity"
+            android:name="com.ktw.bitbit.ui.account.RegisterPasswordActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.ktw.fly.ui.account.RegisterUserBasicInfoActivity"
+            android:name="com.ktw.bitbit.ui.account.RegisterUserBasicInfoActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.ktw.fly.ui.account.LoginActivity"
+            android:name="com.ktw.bitbit.ui.account.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.ktw.fly.ui.account.LoginHistoryActivity"
+            android:name="com.ktw.bitbit.ui.account.LoginHistoryActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.ktw.fly.ui.account.DataDownloadActivity" />
+        <activity android:name="com.ktw.bitbit.ui.account.DataDownloadActivity" />
         <activity
-            android:name="com.ktw.fly.ui.account.SelectPrefixActivity"
+            android:name="com.ktw.bitbit.ui.account.SelectPrefixActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.ktw.fly.ui.account.SwitchLoginActivity" />
+        <activity android:name="com.ktw.bitbit.ui.account.SwitchLoginActivity" />
         <activity
-            android:name="com.ktw.fly.ui.account.FindPwdActivity"
+            android:name="com.ktw.bitbit.ui.account.FindPwdActivity"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name="com.ktw.fly.ui.account.BindAccountActivity"
+            android:name="com.ktw.bitbit.ui.account.BindAccountActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.ktw.fly.ui.circle.range.AtSeeCircleActivity" />
-        <activity android:name="com.ktw.fly.ui.circle.range.NewZanActivity" />
-        <activity android:name="com.ktw.fly.ui.circle.range.SeeCircleActivity" />
+        <activity android:name="com.ktw.bitbit.ui.circle.range.AtSeeCircleActivity" />
+        <activity android:name="com.ktw.bitbit.ui.circle.range.NewZanActivity" />
+        <activity android:name="com.ktw.bitbit.ui.circle.range.SeeCircleActivity" />
         <activity
-            android:name="com.ktw.fly.ui.circle.range.SendShuoshuoActivity"
+            android:name="com.ktw.bitbit.ui.circle.range.SendShuoshuoActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity
-            android:name="com.ktw.fly.ui.circle.range.SendAudioActivity"
+            android:name="com.ktw.bitbit.ui.circle.range.SendAudioActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity
-            android:name="com.ktw.fly.ui.circle.range.SendVideoActivity"
+            android:name="com.ktw.bitbit.ui.circle.range.SendVideoActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity
-            android:name="com.ktw.fly.ui.circle.range.SendFileActivity"
+            android:name="com.ktw.bitbit.ui.circle.range.SendFileActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name="com.ktw.fly.ui.circle.BusinessCircleActivity" />
-        <activity android:name="com.ktw.fly.ui.circle.LongTextShowActivity" />
-        <activity android:name="com.ktw.fly.ui.company.AddEmployee" />
-        <activity android:name="com.ktw.fly.ui.company.ChangeEmployeeDepartment" />
-        <activity android:name="com.ktw.fly.ui.company.CreateCompany" />
-        <activity android:name="com.ktw.fly.ui.company.CreateDepartment" />
-        <activity android:name="com.ktw.fly.ui.company.CreateGroup" />
-        <activity android:name="com.ktw.fly.ui.company.ManagerCompany" />
-        <activity android:name="com.ktw.fly.ui.company.ModifyCompanyName" />
-        <activity android:name="com.ktw.fly.ui.company.ModifyDepartmentName" />
+        <activity android:name="com.ktw.bitbit.ui.circle.BusinessCircleActivity" />
+        <activity android:name="com.ktw.bitbit.ui.circle.LongTextShowActivity" />
+        <activity android:name="com.ktw.bitbit.ui.company.AddEmployee" />
+        <activity android:name="com.ktw.bitbit.ui.company.ChangeEmployeeDepartment" />
+        <activity android:name="com.ktw.bitbit.ui.company.CreateCompany" />
+        <activity android:name="com.ktw.bitbit.ui.company.CreateDepartment" />
+        <activity android:name="com.ktw.bitbit.ui.company.CreateGroup" />
+        <activity android:name="com.ktw.bitbit.ui.company.ManagerCompany" />
+        <activity android:name="com.ktw.bitbit.ui.company.ModifyCompanyName" />
+        <activity android:name="com.ktw.bitbit.ui.company.ModifyDepartmentName" />
         <activity
-            android:name="com.ktw.fly.ui.contacts.label.CreateLabelActivity"
+            android:name="com.ktw.bitbit.ui.contacts.label.CreateLabelActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.ktw.fly.ui.contacts.label.LabelActivity"
+            android:name="com.ktw.bitbit.ui.contacts.label.LabelActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.ktw.fly.ui.contacts.label.SelectLabelFriendActivity" />
-        <activity android:name="com.ktw.fly.ui.contacts.BlackActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.label.SelectLabelFriendActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.BlackActivity" />
         <activity
-            android:name="com.ktw.fly.ui.contacts.ContactInviteActivity"
+            android:name="com.ktw.bitbit.ui.contacts.ContactInviteActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.ktw.fly.ui.contacts.ContactsActivity" />
-        <activity android:name="com.ktw.fly.ui.contacts.ContactsMsgInviteActivity" />
-        <activity android:name="com.ktw.fly.ui.contacts.DeviceActivity" />
-        <activity android:name="com.ktw.fly.ui.contacts.NewFriendActivity" />
-        <activity android:name="com.ktw.fly.ui.contacts.PublishNumberActivity" />
-        <activity android:name="com.ktw.fly.ui.contacts.RoomActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.ContactsActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.ContactsMsgInviteActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.DeviceActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.NewFriendActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.PublishNumberActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.RoomActivity" />
         <activity
-            android:name="com.ktw.fly.ui.contacts.SearchFriendActivity"
+            android:name="com.ktw.bitbit.ui.contacts.SearchFriendActivity"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name="com.ktw.fly.ui.contacts.TalkHistoryActivity" />
-        <activity android:name="com.ktw.fly.ui.groupchat.SelectContactsActivity" /> <!-- 直播 -->
+        <activity android:name="com.ktw.bitbit.ui.contacts.TalkHistoryActivity" />
+        <activity android:name="com.ktw.bitbit.ui.groupchat.SelectContactsActivity" /> <!-- 直播 -->
         <!--        <activity android:name=".ui.live.CreateLiveActivity" />-->
         <!--        <activity android:name=".ui.live.LiveActivity" /> &lt;!&ndash; 抖音 &ndash;&gt;-->
         <!--        <activity-->
@@ -323,128 +323,128 @@
         <!--            android:screenOrientation="portrait"-->
         <!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
         <!--            android:windowSoftInputMode="adjustPan" />-->
-        <activity android:name="com.ktw.fly.ui.map.MapActivity" />
+        <activity android:name="com.ktw.bitbit.ui.map.MapActivity" />
         <activity
-            android:name="com.ktw.fly.ui.map.MapPickerActivity"
+            android:name="com.ktw.bitbit.ui.map.MapPickerActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" /> <!-- 红包 -->
-        <activity android:name="com.ktw.fly.ui.me.redpacket.MucSendRedPacketActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.MyConsumeRecord" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.QuXianActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.RedDetailsAuldActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.RedDetailsActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.RedListActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.SendRedPacketActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.WxPayAdd" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.WxPayBlance" />
-        <activity android:name="com.ktw.fly.ui.me.sendgroupmessage.ChatActivityForSendGroup" /> <!-- 收付款、转账 -->
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.MucSendRedPacketActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.MyConsumeRecord" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.QuXianActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.RedDetailsAuldActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.RedDetailsActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.RedListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.SendRedPacketActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.WxPayAdd" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.WxPayBlance" />
+        <activity android:name="com.ktw.bitbit.ui.me.sendgroupmessage.ChatActivityForSendGroup" /> <!-- 收付款、转账 -->
         <activity
-            android:name="com.ktw.fly.pay.sk.SKPayActivity"
+            android:name="com.ktw.bitbit.pay.sk.SKPayActivity"
             android:launchMode="singleTask" />
-        <activity android:name="com.ktw.fly.pay.TransferMoneyActivity" />
-        <activity android:name="com.ktw.fly.pay.TransferMoneyDetailActivity" />
-        <activity android:name="com.ktw.fly.pay.TransferRecordActivity" />
-        <activity android:name="com.ktw.fly.pay.PaymentActivity" />
-        <activity android:name="com.ktw.fly.pay.PaymentReceiptMoneyActivity" />
-        <activity android:name="com.ktw.fly.pay.ReceiptActivity" />
-        <activity android:name="com.ktw.fly.pay.ReceiptPayMoneyActivity" />
-        <activity android:name="com.ktw.fly.pay.ReceiptSetMoneyActivity" /> <!-- Me模块 -->
-        <activity android:name="com.ktw.fly.ui.me.AboutActivity" />
+        <activity android:name="com.ktw.bitbit.pay.TransferMoneyActivity" />
+        <activity android:name="com.ktw.bitbit.pay.TransferMoneyDetailActivity" />
+        <activity android:name="com.ktw.bitbit.pay.TransferRecordActivity" />
+        <activity android:name="com.ktw.bitbit.pay.PaymentActivity" />
+        <activity android:name="com.ktw.bitbit.pay.PaymentReceiptMoneyActivity" />
+        <activity android:name="com.ktw.bitbit.pay.ReceiptActivity" />
+        <activity android:name="com.ktw.bitbit.pay.ReceiptPayMoneyActivity" />
+        <activity android:name="com.ktw.bitbit.pay.ReceiptSetMoneyActivity" /> <!-- Me模块 -->
+        <activity android:name="com.ktw.bitbit.ui.me.AboutActivity" />
         <activity
-            android:name="com.ktw.fly.ui.me.BasicInfoEditActivity"
+            android:name="com.ktw.bitbit.ui.me.BasicInfoEditActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name="com.ktw.fly.ui.me.FontSizeActivity" />
-        <activity android:name="com.ktw.fly.ui.me.LocalVideoActivity" />
-        <activity android:name="com.ktw.fly.ui.me.MyCollection" />
-        <activity android:name="com.ktw.fly.ui.me.NearPersonActivity" />
-        <activity android:name="com.ktw.fly.ui.me.PrivacySettingActivity" />
-        <activity android:name="com.ktw.fly.ui.me.BandAccountActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.FontSizeActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.LocalVideoActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.MyCollection" />
+        <activity android:name="com.ktw.bitbit.ui.me.NearPersonActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.PrivacySettingActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.BandAccountActivity" />
         <activity
-            android:name="com.ktw.fly.ui.me.SelectFriendsActivity"
+            android:name="com.ktw.bitbit.ui.me.SelectFriendsActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity android:name="com.ktw.fly.ui.me.select.SelectLabelActivity" />
-        <activity android:name="com.ktw.fly.ui.me.SetAccountActivity" />
-        <activity android:name="com.ktw.fly.ui.me.SetConfigActivity" />
-        <activity android:name="com.ktw.fly.ui.me.SettingActivity" />
-        <activity android:name="com.ktw.fly.ui.me.SkinStore" />
-        <activity android:name="com.ktw.fly.ui.me.SwitchLanguage" /> <!-- 消息模块 -->
+        <activity android:name="com.ktw.bitbit.ui.me.select.SelectLabelActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.SetAccountActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.SetConfigActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.SettingActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.SkinStore" />
+        <activity android:name="com.ktw.bitbit.ui.me.SwitchLanguage" /> <!-- 消息模块 -->
         <activity
-            android:name="com.ktw.fly.ui.message.assistant.GroupAssistantAddKeywordActivity"
+            android:name="com.ktw.bitbit.ui.message.assistant.GroupAssistantAddKeywordActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.ktw.fly.ui.message.assistant.GroupAssistantDetailActivity" />
-        <activity android:name="com.ktw.fly.ui.message.assistant.SelectGroupAssistantActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.assistant.GroupAssistantDetailActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.assistant.SelectGroupAssistantActivity" />
         <activity
-            android:name="com.ktw.fly.ui.message.ChatActivity"
+            android:name="com.ktw.bitbit.ui.message.ChatActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name="com.ktw.fly.ui.message.ChatHistoryActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.ChatHistoryActivity" />
         <activity
-            android:name="com.ktw.fly.ui.message.ChatOverviewActivity"
+            android:name="com.ktw.bitbit.ui.message.ChatOverviewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Sliding" />
-        <activity android:name="com.ktw.fly.ui.message.single.PersonSettingActivity" />
-        <activity android:name="com.ktw.fly.ui.message.single.SelectSetTypeActivity" />
-        <activity android:name="com.ktw.fly.ui.message.single.SetChatBackActivity" />
-        <activity android:name="com.ktw.fly.ui.message.single.SetLabelActivity" />
-        <activity android:name="com.ktw.fly.ui.message.single.SetRemarkActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.single.PersonSettingActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.single.SelectSetTypeActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.single.SetChatBackActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.single.SetLabelActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.single.SetRemarkActivity" />
         <activity
-            android:name="com.ktw.fly.ui.message.MucChatActivity"
+            android:name="com.ktw.bitbit.ui.message.MucChatActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity android:name="com.ktw.fly.ui.message.multi.AddContactsActivity" />
-        <activity android:name="com.ktw.fly.ui.message.multi.GroupManager" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.AddContactsActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.GroupManager" />
         <activity
-            android:name="com.ktw.fly.ui.message.multi.GroupMoreFeaturesActivity"
+            android:name="com.ktw.bitbit.ui.message.multi.GroupMoreFeaturesActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name="com.ktw.fly.ui.message.multi.GroupTransferActivity" />
-        <activity android:name="com.ktw.fly.ui.message.multi.InviteVerifyActivity" />
-        <activity android:name="com.ktw.fly.ui.message.multi.NoticeListActivity" />
-        <activity android:name="com.ktw.fly.ui.message.multi.ProclamationActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.GroupTransferActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.InviteVerifyActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.NoticeListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.ProclamationActivity" />
         <activity
-            android:name="com.ktw.fly.ui.message.multi.RoomInfoActivity"
+            android:name="com.ktw.bitbit.ui.message.multi.RoomInfoActivity"
             android:launchMode="singleTop" />
-        <activity android:name="com.ktw.fly.ui.message.multi.RoomReadListActivity" />
-        <activity android:name="com.ktw.fly.ui.message.multi.SetManagerActivity" />
-        <activity android:name="com.ktw.fly.ui.message.ManagerEmojiActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.RoomReadListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.SetManagerActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.ManagerEmojiActivity" />
         <activity
-            android:name="com.ktw.fly.ui.message.MessageRemindActivity"
+            android:name="com.ktw.bitbit.ui.message.MessageRemindActivity"
             android:theme="@style/Anim_fade" />
-        <activity android:name="com.ktw.fly.ui.message.search.SearchChatHistoryActivity" />
-        <activity android:name="com.ktw.fly.ui.message.search.SearchDesignationContent" />
-        <activity android:name="com.ktw.fly.ui.message.search.SearchImageVideoContent" />
+        <activity android:name="com.ktw.bitbit.ui.message.search.SearchChatHistoryActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.search.SearchDesignationContent" />
+        <activity android:name="com.ktw.bitbit.ui.message.search.SearchImageVideoContent" />
         <activity
-            android:name="com.ktw.fly.ui.message.InstantMessageActivity"
+            android:name="com.ktw.bitbit.ui.message.InstantMessageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name="com.ktw.fly.ui.message.QuickSendPreviewActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.QuickSendPreviewActivity" />
         <activity
-            android:name="com.ktw.fly.ui.message.SelectNewContactsActivity"
+            android:name="com.ktw.bitbit.ui.message.SelectNewContactsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ktw.fly.ui.message.SelectNewGroupInstantActivity"
+            android:name="com.ktw.bitbit.ui.message.SelectNewGroupInstantActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" /> <!-- 群文件 -->
-        <activity android:name="com.ktw.fly.ui.mucfile.AddMucFileActivity" />
-        <activity android:name="com.ktw.fly.ui.mucfile.MucFileDetails" />
-        <activity android:name="com.ktw.fly.ui.mucfile.MucFileListActivity" />
-        <activity android:name="com.ktw.fly.ui.mucfile.MucFilePreviewActivity" /> <!-- 附近模块 -->
-        <activity android:name="com.ktw.fly.ui.nearby.UserSearchActivity" />
-        <activity android:name="com.ktw.fly.ui.nearby.UserListActivity" />
-        <activity android:name="com.ktw.fly.ui.nearby.UserListGatherActivity" />
-        <activity android:name="com.ktw.fly.ui.other.BasicInfoActivity" />
-        <activity android:name="com.ktw.fly.ui.other.QRcodeActivity" /> <!-- 分享模块 -->
+        <activity android:name="com.ktw.bitbit.ui.mucfile.AddMucFileActivity" />
+        <activity android:name="com.ktw.bitbit.ui.mucfile.MucFileDetails" />
+        <activity android:name="com.ktw.bitbit.ui.mucfile.MucFileListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.mucfile.MucFilePreviewActivity" /> <!-- 附近模块 -->
+        <activity android:name="com.ktw.bitbit.ui.nearby.UserSearchActivity" />
+        <activity android:name="com.ktw.bitbit.ui.nearby.UserListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.nearby.UserListGatherActivity" />
+        <activity android:name="com.ktw.bitbit.ui.other.BasicInfoActivity" />
+        <activity android:name="com.ktw.bitbit.ui.other.QRcodeActivity" /> <!-- 分享模块 -->
         <activity
-            android:name="com.ktw.fly.ui.share.ShareLoginActivity"
+            android:name="com.ktw.bitbit.ui.share.ShareLoginActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.ktw.fly.ui.share.AuthorizationActivity"
+            android:name="com.ktw.bitbit.ui.share.AuthorizationActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.ktw.fly.ui.share.ShareNearChatFriend"
+            android:name="com.ktw.bitbit.ui.share.ShareNearChatFriend"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
@@ -460,40 +460,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ktw.fly.ui.share.ShareLifeCircleActivity"
+            android:name="com.ktw.bitbit.ui.share.ShareLifeCircleActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.ktw.fly.ui.share.ShareNewFriend"
+            android:name="com.ktw.bitbit.ui.share.ShareNewFriend"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.ktw.fly.ui.share.ShareNewGroup"
+            android:name="com.ktw.bitbit.ui.share.ShareNewGroup"
             android:launchMode="singleTop" /> <!-- Tool Activity -->
         <activity
-            android:name="com.ktw.fly.ui.tool.MultiImagePreviewActivity"
+            android:name="com.ktw.bitbit.ui.tool.MultiImagePreviewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Sliding" />
         <activity
-            android:name="com.ktw.fly.ui.tool.SelectAreaActivity"
+            android:name="com.ktw.bitbit.ui.tool.SelectAreaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ktw.fly.ui.tool.SelectConstantActivity"
+            android:name="com.ktw.bitbit.ui.tool.SelectConstantActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ktw.fly.ui.tool.SelectConstantSectionActivity"
+            android:name="com.ktw.bitbit.ui.tool.SelectConstantSectionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ktw.fly.ui.tool.SingleImagePreviewActivity"
+            android:name="com.ktw.bitbit.ui.tool.SingleImagePreviewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Sliding" />
         <activity
-            android:name="com.ktw.fly.video.ChatVideoPreviewActivity"
+            android:name="com.ktw.bitbit.video.ChatVideoPreviewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ktw.fly.ui.tool.WebViewActivity"
+            android:name="com.ktw.bitbit.ui.tool.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ktw.fly.ui.FLYMainActivity"
+            android:name="com.ktw.bitbit.ui.FLYMainActivity"
             android:fitsSystemWindows="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
@@ -505,27 +505,27 @@
             android:theme="@style/IMTheme.DialogStyle"/>
         -->
         <activity
-            android:name="com.ktw.fly.ui.FLYUserCheckedActivity"
+            android:name="com.ktw.bitbit.ui.FLYUserCheckedActivity"
             android:theme="@style/IMTheme.DialogStyle" />
         <activity
-            android:name="com.ktw.fly.video.EasyCameraActivity"
+            android:name="com.ktw.bitbit.video.EasyCameraActivity"
             android:screenOrientation="portrait" /> <!-- android:screenOrientation="portrait" 强制竖屏 -->
         <!-- CameraWithFilterActivity -->
         <activity
-            android:name="com.ktw.fly.luo.activity.CameraWithFilterActivity"
+            android:name="com.ktw.bitbit.luo.activity.CameraWithFilterActivity"
             android:exported="true"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.ktw.fly.video.VideoRecorderActivity"
+            android:name="com.ktw.bitbit.video.VideoRecorderActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/RecxTheme" />
-        <activity android:name="com.ktw.fly.ui.other.AppQrCodeActivity" />
+        <activity android:name="com.ktw.bitbit.ui.other.AppQrCodeActivity" />
         <activity
-            android:name=".wxapi.WXPayEntryActivity"
+            android:name="com.ktw.bitbit.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.me.SecureSettingActivity" />
-        <activity android:name=".ui.me.AccountAndSafeActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.SecureSettingActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.AccountAndSafeActivity" />
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
@@ -546,7 +546,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ktw.fly.ui.me.redpacket.ChangePayPasswordActivity"
+            android:name="com.ktw.bitbit.ui.me.redpacket.ChangePayPasswordActivity"
             android:windowSoftInputMode="stateAlwaysVisible" /> <!-- 图片多选框架 -->
         <!--
                 <activity
@@ -558,11 +558,11 @@
                     android:theme="@style/PhotoPickerTheme"/>
         -->
         <activity
-            android:name="com.ktw.fly.view.photopicker.PhotoPickerActivity"
+            android:name="com.ktw.bitbit.view.photopicker.PhotoPickerActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/PhotoPickerTheme" />
         <activity
-            android:name="com.ktw.fly.view.photopicker.PhotoPreviewActivity"
+            android:name="com.ktw.bitbit.view.photopicker.PhotoPreviewActivity"
             android:theme="@style/PhotoPickerTheme" />
 
         <service
@@ -588,7 +588,7 @@
             </intent-filter>
         </service>
         <receiver
-            android:name="com.ktw.fly.broadcast.JPushReceiver"
+            android:name="com.ktw.bitbit.broadcast.JPushReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -603,13 +603,13 @@
         </receiver>
 
         <service
-            android:name="com.ktw.fly.xmpp.CoreService"
+            android:name="com.ktw.bitbit.xmpp.CoreService"
             android:enabled="true"
             android:exported="true" />
-        <service android:name="com.ktw.fly.call.JitsiFloatService" />
-        <service android:name="com.ktw.fly.call.RecordService" />
-        <service android:name="com.ktw.fly.view.window.WindowShowService" />
-        <service android:name="com.ktw.fly.FLYRestartService" />
+        <service android:name="com.ktw.bitbit.call.JitsiFloatService" />
+        <service android:name="com.ktw.bitbit.call.RecordService" />
+        <service android:name="com.ktw.bitbit.view.window.WindowShowService" />
+        <service android:name="com.ktw.bitbit.FLYRestartService" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -622,7 +622,7 @@
         </provider>
 
         <receiver
-            android:name="com.ktw.fly.FLYBroadcastReceiver"
+            android:name="com.ktw.bitbit.FLYBroadcastReceiver"
             android:process=":restart">
             <intent-filter>
                 <action android:name="${APP_ID}.action.broadcasttest.startActivity" />
@@ -682,7 +682,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.ktw.fly.xmpp.helloDemon.MiMessageReceiver"
+            android:name="com.ktw.bitbit.xmpp.helloDemon.MiMessageReceiver"
             android:exported="true">
 
             <!-- 这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名 -->
@@ -699,7 +699,7 @@
         <service
             android:name="com.xiaomi.mipush.sdk.MessageHandleService"
             android:enabled="true" />
-        <service android:name="com.ktw.fly.xmpp.helloDemon.FirebaseMessageService">
+        <service android:name="com.ktw.bitbit.xmpp.helloDemon.FirebaseMessageService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -716,7 +716,7 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- push应用定义消息receiver声明 -->
-        <receiver android:name="com.ktw.fly.xmpp.helloDemon.VivoPushMessageReceiver">
+        <receiver android:name="com.ktw.bitbit.xmpp.helloDemon.VivoPushMessageReceiver">
             <intent-filter>
 
                 <!-- 接收push消息 -->
@@ -731,7 +731,7 @@
             android:name="com.vivo.push.app_id"
             android:value="${VIVO_APP_ID}" /> <!-- OPPO 推送 -->
         <service
-            android:name="com.ktw.fly.xmpp.helloDemon.OppoPushMessageService"
+            android:name="com.ktw.bitbit.xmpp.helloDemon.OppoPushMessageService"
             android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
             <intent-filter>
                 <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
@@ -757,7 +757,7 @@
             android:authorities="${APP_ID}.hms.update.provider"
             android:exported="false"
             android:grantUriPermissions="true" /> <!-- 4.用来接收PUSH消息的receiver： -->
-        <receiver android:name="com.ktw.fly.xmpp.helloDemon.HuaweiPushRevicer">
+        <receiver android:name="com.ktw.bitbit.xmpp.helloDemon.HuaweiPushRevicer">
             <intent-filter>
 
                 <!-- 必须,用于接收TOKEN -->
@@ -779,18 +779,18 @@
         </receiver>
 
         <activity
-            android:name="com.ktw.fly.ui.life.LifeCircleActivity"
+            android:name="com.ktw.bitbit.ui.life.LifeCircleActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.ktw.fly.ui.nearby.PublicNumberSearchActivity" />
-        <activity android:name="com.ktw.fly.ui.nearby.PublicNumberListActivity" />
-        <activity android:name="com.ktw.fly.ui.circle.range.PraiseListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.nearby.PublicNumberSearchActivity" />
+        <activity android:name="com.ktw.bitbit.ui.nearby.PublicNumberListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.circle.range.PraiseListActivity" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/icon_notification" /> <!-- 魅族推送， -->
         <!-- 绑定进程保活 -->
         <service
-            android:name="com.ktw.fly.xmpp.helloDemon.MeizuForegroundService"
+            android:name="com.ktw.bitbit.xmpp.helloDemon.MeizuForegroundService"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
@@ -798,7 +798,7 @@
         </service>
 
         <receiver
-            android:name="com.ktw.fly.xmpp.helloDemon.MeizuPushMsgReceiver"
+            android:name="com.ktw.bitbit.xmpp.helloDemon.MeizuPushMsgReceiver"
             tools:ignore="ExportedReceiver">
             <intent-filter>
 
@@ -816,7 +816,7 @@
         </receiver>
 
         <activity
-            android:name="com.ktw.fly.ui.systemshare.ShareNearChatFriend"
+            android:name="com.ktw.bitbit.ui.systemshare.ShareNearChatFriend"
             android:label="@string/send_to_friend">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -826,10 +826,10 @@
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ktw.fly.ui.systemshare.ShareNewFriend" />
-        <activity android:name="com.ktw.fly.ui.systemshare.ShareNewGroup" />
+        <activity android:name="com.ktw.bitbit.ui.systemshare.ShareNewFriend" />
+        <activity android:name="com.ktw.bitbit.ui.systemshare.ShareNewGroup" />
         <activity
-            android:name="com.ktw.fly.ui.systemshare.ShareLifeCircleProxyActivity"
+            android:name="com.ktw.bitbit.ui.systemshare.ShareLifeCircleProxyActivity"
             android:label="@string/send_to_life_circle">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -839,10 +839,10 @@
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ktw.fly.ui.systemshare.ShareShuoshuoActivity" />
-        <activity android:name="com.ktw.fly.ui.systemshare.ShareVideoActivity" />
-        <activity android:name="com.ktw.fly.ui.systemshare.ShareFileActivity" />
-        <activity android:name="com.ktw.fly.ui.account.QuickLoginAuthority">
+        <activity android:name="com.ktw.bitbit.ui.systemshare.ShareShuoshuoActivity" />
+        <activity android:name="com.ktw.bitbit.ui.systemshare.ShareVideoActivity" />
+        <activity android:name="com.ktw.bitbit.ui.systemshare.ShareFileActivity" />
+        <activity android:name="com.ktw.bitbit.ui.account.QuickLoginAuthority">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -856,7 +856,7 @@
                     android:scheme="shikuimapp" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ktw.fly.ui.account.QuickPay">
+        <activity android:name="com.ktw.bitbit.ui.account.QuickPay">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -871,20 +871,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ktw.fly.ui.lock.DeviceLockActivity"
+            android:name="com.ktw.bitbit.ui.lock.DeviceLockActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name="com.ktw.fly.ui.me.DeviceMangerActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.DeviceMangerActivity" />
         <activity
-            android:name="com.ktw.fly.ui.lock.ChangeDeviceLockPasswordActivity"
+            android:name="com.ktw.bitbit.ui.lock.ChangeDeviceLockPasswordActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name="com.ktw.fly.ui.contacts.SendContactsActivity" />
-        <activity android:name="com.ktw.fly.ui.login.WebLoginActivity" />
-        <activity android:name="com.ktw.fly.ui.message.multi.RoomCopyActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.PaymentCenterActivity" />
-        <activity android:name="com.ktw.fly.ui.me.select.SelectRoomActivity" />
-        <activity android:name="com.ktw.fly.ui.me.select.SelectColleagueActivity" />
-        <activity android:name="com.ktw.fly.ui.me.redpacket.ResetPayPasswordActivity" />
+        <activity android:name="com.ktw.bitbit.ui.contacts.SendContactsActivity" />
+        <activity android:name="com.ktw.bitbit.ui.login.WebLoginActivity" />
+        <activity android:name="com.ktw.bitbit.ui.message.multi.RoomCopyActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.PaymentCenterActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.select.SelectRoomActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.select.SelectColleagueActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.ResetPayPasswordActivity" />
 
         <receiver android:name="com.fanjun.keeplive.receiver.NotificationClickReceiver" />
 
@@ -893,34 +893,34 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:theme="@style/onePixelActivity" />
-        <activity android:name="com.ktw.fly.ui.me.emot.EmotPackageActivity" />
-        <activity android:name="com.ktw.fly.ui.me.emot.NewEmotPackageActivity" />
-        <activity android:name="com.ktw.fly.ui.me.emot.MyEmotPackageActivity" />
-        <activity android:name="com.ktw.fly.ui.me.emot.AddSingleEmotPackageActivity" />
-        <activity android:name="com.ktw.fly.ui.me.emot.AddEmotPackageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.emot.EmotPackageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.emot.NewEmotPackageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.emot.MyEmotPackageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.emot.AddSingleEmotPackageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.emot.AddEmotPackageActivity" />
         <activity
-            android:name="com.ktw.fly.ui.me.emot.SingleEmotPreviewActivity"
+            android:name="com.ktw.bitbit.ui.me.emot.SingleEmotPreviewActivity"
             android:theme="@style/AppTheme_Sliding" />
-        <activity android:name="com.ktw.fly.ui.me.emot.EditSingleEmotPackageActivity" />
-        <activity android:name="com.ktw.fly.ui.me.OfferApplyActivity" />
-        <activity android:name="com.ktw.fly.ui.me.WithdrawalsRecordActivity" />
-        <activity android:name="com.ktw.fly.ui.tool.WebView2Activity" />
-        <activity android:name=".ui.me.question.ViewQuestionActivity" />
-        <activity android:name=".ui.me.question.ViewQuestionChildActivity" />
-        <activity android:name=".ui.me.question.ViewQuestionContentActivity" />
-        <activity android:name=".ui.me.question.QuestionFeedbackActivity" />
-        <activity android:name=".ui.me.ThirdServiceActivity" />
-        <activity android:name=".ui.me.redpacket.RedPacketListActivity" />
-        <activity android:name=".ui.me.redpacket.PropertyListActivity" />
-        <activity android:name=".ui.account.AccountPasswordActivity" />
-        <activity android:name=".ui.me.capital.CapitalPasswordActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.emot.EditSingleEmotPackageActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.OfferApplyActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.WithdrawalsRecordActivity" />
+        <activity android:name="com.ktw.bitbit.ui.tool.WebView2Activity" />
+        <activity android:name="com.ktw.bitbit.ui.me.question.ViewQuestionActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.question.ViewQuestionChildActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.question.ViewQuestionContentActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.question.QuestionFeedbackActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.ThirdServiceActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.RedPacketListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.redpacket.PropertyListActivity" />
+        <activity android:name="com.ktw.bitbit.ui.account.AccountPasswordActivity" />
+        <activity android:name="com.ktw.bitbit.ui.me.capital.CapitalPasswordActivity" />
 
-        <activity android:name=".wallet.CoinActivity" />
-        <activity android:name=".wallet.WithdrawActivity" />
-        <activity android:name=".wallet.CaptureActivity" />
-        <activity android:name=".wallet.RecordActivity" />
-        <activity android:name=".wallet.RecordDetailActivity" />
-        <activity android:name=".wallet.WalletDetailActivity" />
+        <activity android:name="com.ktw.bitbit.wallet.CoinActivity" />
+        <activity android:name="com.ktw.bitbit.wallet.WithdrawActivity" />
+        <activity android:name="com.ktw.bitbit.wallet.CaptureActivity" />
+        <activity android:name="com.ktw.bitbit.wallet.RecordActivity" />
+        <activity android:name="com.ktw.bitbit.wallet.RecordDetailActivity" />
+        <activity android:name="com.ktw.bitbit.wallet.WalletDetailActivity" />
 
         <service android:name="com.fanjun.keeplive.service.LocalService" />
         <service android:name="com.fanjun.keeplive.service.HideForegroundService" />
@@ -932,7 +932,7 @@
             android:process=":remote" />
 
         <provider
-            android:name="com.ktw.fly.util.GenericFileProvider"
+            android:name="com.ktw.bitbit.util.GenericFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

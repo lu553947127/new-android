@@ -29,7 +29,7 @@
                 app:riv_mutate_background="true"
                 app:riv_oval="false"
                 app:riv_tile_mode="clamp"
-                tools:src="@drawable/splash_bg" />
+                tools:src="@drawable/bg_splash1" />
 
             <TextView
                 android:id="@+id/islive"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/live_title">
 
-                    <com.ktw.fly.view.CircleImageView
+                    <com.ktw.bitbit.view.CircleImageView
                         android:id="@+id/live_avatar_img"
                         android:layout_width="23dp"
                         android:layout_height="23dp"

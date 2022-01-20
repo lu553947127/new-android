@@ -14,7 +14,7 @@
         android:paddingTop="14dp"
         android:paddingRight="@dimen/dp15">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/avatar_img"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -80,7 +80,7 @@
             android:gravity="right|center_vertical"
             android:orientation="horizontal">
 
-            <com.ktw.fly.view.CheckableImageView
+            <com.ktw.bitbit.view.CheckableImageView
                 android:id="@+id/ivReport"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp">
 
-                <com.ktw.fly.util.link.HttpTextView
+                <com.ktw.bitbit.util.link.HttpTextView
                     android:id="@+id/body_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                         android:gravity="start|bottom"
                         android:orientation="horizontal">
 
-                        <com.ktw.fly.view.CheckableImageView
+                        <com.ktw.bitbit.view.CheckableImageView
                             android:id="@+id/ivCollection"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
@@ -190,7 +190,7 @@
                         android:gravity="center|bottom"
                         android:orientation="horizontal">
 
-                        <com.ktw.fly.view.CheckableImageView
+                        <com.ktw.bitbit.view.CheckableImageView
                             android:id="@+id/ivComment"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
@@ -222,7 +222,7 @@
                         android:gravity="end|bottom"
                         android:orientation="horizontal">
 
-                        <com.ktw.fly.view.CheckableImageView
+                        <com.ktw.bitbit.view.CheckableImageView
                             android:id="@+id/ivThumb"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
@@ -292,7 +292,7 @@
                 android:background="@color/circle_add_item_bg"
                 android:visibility="visible" />
 
-            <com.ktw.fly.view.MyListView
+            <com.ktw.bitbit.view.MyListView
                 android:id="@+id/command_listView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

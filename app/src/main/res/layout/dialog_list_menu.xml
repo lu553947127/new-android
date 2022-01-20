@@ -4,13 +4,13 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.ktw.fly.view.MyListView
+    <com.ktw.bitbit.view.MyListView
         android:id="@+id/dialog_menu_lv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_public_menu_bg"
         android:divider="@color/chat_bottom_line"
         android:dividerHeight="0dp">
-    </com.ktw.fly.view.MyListView>
+    </com.ktw.bitbit.view.MyListView>
 
 </LinearLayout>

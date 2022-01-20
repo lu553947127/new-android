@@ -19,7 +19,7 @@
         android:paddingRight="15dp"
         android:paddingTop="9dp">
 
-        <com.ktw.fly.view.ClearEditText
+        <com.ktw.bitbit.view.ClearEditText
             android:id="@+id/search_edit"
             android:layout_width="match_parent"
             android:layout_height="35dp"

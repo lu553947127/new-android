@@ -129,14 +129,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <com.ktw.fly.view.ChatFaceView xmlns:chatface="http://schemas.android.com/apk/res-auto"
+        <com.ktw.bitbit.view.ChatFaceView xmlns:chatface="http://schemas.android.com/apk/res-auto"
             android:id="@+id/chat_face_view"
             android:layout_width="wrap_content"
             android:layout_height="280dp"
             android:visibility="gone"
             chatface:hasGif="true" />
 
-        <com.ktw.fly.ui.me.sendgroupmessage.ChatToolsForSendGroup
+        <com.ktw.bitbit.ui.me.sendgroupmessage.ChatToolsForSendGroup
             android:id="@+id/chat_tools_view"
             android:layout_width="wrap_content"
             android:layout_height="280dp"

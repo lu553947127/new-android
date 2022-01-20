@@ -85,7 +85,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="@dimen/dp5">
 
-            <com.ktw.fly.view.circularImageView.CircularImageVIew
+            <com.ktw.bitbit.view.circularImageView.CircularImageVIew
                 android:id="@+id/everyone_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

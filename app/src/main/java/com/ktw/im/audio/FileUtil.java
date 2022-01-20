@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import com.ktw.fly.FLYApplication;
-import com.ktw.fly.ui.base.CoreManager;
+import com.ktw.bitbit.FLYApplication;
+import com.ktw.bitbit.ui.base.CoreManager;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

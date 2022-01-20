@@ -24,7 +24,7 @@
             android:textColor="#333333"
             android:textSize="@dimen/sp_15_text_size" />
 
-        <com.ktw.fly.view.ClearEditText
+        <com.ktw.bitbit.view.ClearEditText
             android:id="@+id/department_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:textColor="#333333"
             android:textSize="@dimen/sp_15_text_size" />
 
-        <com.ktw.fly.view.ClearEditText
+        <com.ktw.bitbit.view.ClearEditText
             android:id="@+id/etDescribe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

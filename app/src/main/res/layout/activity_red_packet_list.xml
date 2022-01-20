@@ -100,7 +100,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:background="@drawable/red_packet_list_text_bg_checked">
 
-                    <com.ktw.fly.view.CircleImageView
+                    <com.ktw.bitbit.view.CircleImageView
                         android:id="@+id/iv_avatar"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -231,7 +231,7 @@
         android:gravity="end"
         android:orientation="vertical">
 
-        <com.ktw.fly.view.MergerStatus
+        <com.ktw.bitbit.view.MergerStatus
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/main_color">
@@ -251,7 +251,7 @@
 
             </RelativeLayout>
 
-        </com.ktw.fly.view.MergerStatus>
+        </com.ktw.bitbit.view.MergerStatus>
 
 
         <androidx.recyclerview.widget.RecyclerView

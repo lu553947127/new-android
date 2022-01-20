@@ -7,7 +7,7 @@
     android:clipChildren="true"
     android:clipToPadding="true">
 
-    <com.ktw.fly.view.MergerStatus
+    <com.ktw.bitbit.view.MergerStatus
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
         </RelativeLayout>
 
-    </com.ktw.fly.view.MergerStatus>
+    </com.ktw.bitbit.view.MergerStatus>
 
     <View
         android:id="@+id/view_1"
@@ -155,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view_1">
 
-        <com.ktw.fly.view.PullRefreshHeader
+        <com.ktw.bitbit.view.PullRefreshHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -164,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.ktw.fly.view.PullRefreshFooter
+        <com.ktw.bitbit.view.PullRefreshFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

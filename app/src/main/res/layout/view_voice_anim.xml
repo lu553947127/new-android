@@ -40,7 +40,7 @@
         android:layout_height="30dp"
         android:layout_toRightOf="@id/fl_left">
 
-        <com.ktw.fly.audio1.XSeekBar
+        <com.ktw.bitbit.audio1.XSeekBar
             android:id="@+id/voice_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

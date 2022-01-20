@@ -95,14 +95,14 @@
 
         </RelativeLayout>
 
-        <com.ktw.fly.view.HorizontalListView
+        <com.ktw.bitbit.view.HorizontalListView
             android:id="@+id/texiao"
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="60dp"
             android:background="#000000">
-        </com.ktw.fly.view.HorizontalListView>
+        </com.ktw.bitbit.view.HorizontalListView>
 
     </FrameLayout>
 

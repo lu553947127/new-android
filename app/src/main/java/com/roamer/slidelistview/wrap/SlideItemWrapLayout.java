@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.roamer.slidelistview.SlideListView.SlideAction;
-import com.ktw.fly.R;
+import com.ktw.bitbit.R;
 
 /**
  * wrap the listview item,It may have three directly sub view(front view ,left

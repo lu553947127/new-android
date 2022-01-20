@@ -309,7 +309,7 @@
         android:gravity="end"
         android:orientation="vertical">
 
-        <com.ktw.fly.view.MergerStatus
+        <com.ktw.bitbit.view.MergerStatus
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/main_color">
@@ -329,7 +329,7 @@
 
             </RelativeLayout>
 
-        </com.ktw.fly.view.MergerStatus>
+        </com.ktw.bitbit.view.MergerStatus>
 
 
         <androidx.recyclerview.widget.RecyclerView

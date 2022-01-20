@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_black">
 
-    <com.ktw.fly.view.ZoomImageView
+    <com.ktw.bitbit.view.ZoomImageView
         android:id="@+id/item_ov_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

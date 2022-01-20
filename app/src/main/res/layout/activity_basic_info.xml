@@ -22,7 +22,7 @@
             android:padding="40dp"
             android:visibility="gone">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/im_notice" />

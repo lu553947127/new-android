@@ -53,7 +53,7 @@
 
         </RelativeLayout>
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/red_head_iv"
             android:layout_width="80dp"
             android:layout_height="80dp"

@@ -56,7 +56,7 @@
         android:layout_below="@+id/llNotice"
         android:orientation="vertical">
 
-        <com.ktw.fly.view.ChatContentView
+        <com.ktw.bitbit.view.ChatContentView
             android:id="@+id/chat_content_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -65,7 +65,7 @@
             android:cacheColorHint="#EBEBEB"
             android:divider="#00000000" />
 
-        <com.ktw.fly.view.ChatBottomView
+        <com.ktw.bitbit.view.ChatBottomView
             android:id="@+id/chat_bottom_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,5 +110,19 @@
             tools:text="55条新消息" />
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="35dp"
+        android:src="@mipmap/icon_send"
+        app:borderWidth="0dp"
+        app:backgroundTint="@color/chat_background"
+        app:elevation="8dp"
+        app:pressedTranslationZ="16dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

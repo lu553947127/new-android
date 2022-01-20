@@ -3,13 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.ktw.fly.view.likeView.DotsView
+    <com.ktw.bitbit.view.likeView.DotsView
         android:id="@+id/vDotsView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center" />
 
-    <com.ktw.fly.view.likeView.CircleView
+    <com.ktw.bitbit.view.likeView.CircleView
         android:id="@+id/vCircle"
         android:layout_width="40dp"
         android:layout_height="40dp"

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 buildscript {
     ext {
-        appId = 'com.ftw.im.liaoxin' // app的包名，
+        appId = 'com.ktw.bitbit' // app的包名，
         channel = 'client' // bugly上显示的渠道名，
 
         buglyAppId = '358c15861c' // bugly配置的appId,
@@ -44,8 +44,8 @@ android {
 
     defaultConfig {
         applicationId appId
-        versionCode 103
-        versionName "1.1.3"
+        versionCode 111
+        versionName "1.1.1"
         minSdkVersion min_version
         targetSdkVersion target_version
 
@@ -354,6 +354,8 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
 
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+    implementation 'com.blankj:utilcode:1.23.6'
 }
 
 configurations {

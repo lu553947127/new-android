@@ -21,7 +21,7 @@
                 android:id="@+id/keyword_text"
                 style="@style/IMTbleLine_TextKey" />
 
-            <com.ktw.fly.view.ClearEditText
+            <com.ktw.bitbit.view.ClearEditText
                 android:id="@+id/keyword_edit"
                 style="@style/IMTbleLine_TextValue"
                 android:layout_toLeftOf="@+id/keyword_arrow_img"

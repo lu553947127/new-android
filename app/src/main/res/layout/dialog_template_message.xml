@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_set_password_dialog"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:drawableRight="@mipmap/icon_switch_template"
+        android:drawablePadding="5dp"
+        android:text="模版一"
+        android:textColor="@color/text_red"
+        android:textSize="@dimen/sp_17_text_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="🔥海浪必🔥"
+        android:textColor="@color/text_red_light"
+        android:textSize="@dimen/sp_15_text_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="🌸诚信收散浪花🌸"
+        android:textColor="@color/text_red_light"
+        android:textSize="@dimen/sp_15_text_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="求购数量："
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+        <EditText
+            android:id="@+id/et_number"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:hint="请输入购数量(1-10000，1的整数倍)"
+            android:paddingHorizontal="15dp"
+            android:textColor="@color/text_red"
+            android:inputType="number"
+            android:textColorHint="@color/text_red_hint"
+            android:textSize="@dimen/sp_15_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="求购单价："
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+        <EditText
+            android:id="@+id/et_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:hint="请输入购单价(0.1-100，0.1的整数倍)"
+            android:paddingHorizontal="15dp"
+            android:textColor="@color/text_red"
+            android:inputType="number"
+            android:textColorHint="@color/text_red_hint"
+            android:textSize="@dimen/sp_15_text_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_standard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="起收标准：1"
+            android:textColor="@color/text_red_light"
+            android:textSize="@dimen/sp_15_text_size" />
+
+        <EditText
+            android:id="@+id/et_standard"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:hint="请输入起收标准(1的整数倍)"
+            android:paddingHorizontal="15dp"
+            android:textColor="@color/text_red"
+            android:inputType="number"
+            android:textColorHint="@color/text_red_hint"
+            android:textSize="@dimen/sp_15_text_size"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="散花单价："
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_15_text_size" />
+
+            <EditText
+                android:id="@+id/et_two"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="请输入散花单价"
+                android:paddingHorizontal="15dp"
+                android:textColor="@color/text_red"
+                android:inputType="number"
+                android:textColorHint="@color/text_red_hint"
+                android:textSize="@dimen/sp_15_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="整花单价："
+                android:textColor="@color/text_red_light"
+                android:textSize="@dimen/sp_15_text_size" />
+
+            <EditText
+                android:id="@+id/et_two2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="请输入整花单价"
+                android:paddingHorizontal="15dp"
+                android:textColor="@color/text_red"
+                android:inputType="number"
+                android:textColorHint="@color/text_red_hint"
+                android:textSize="@dimen/sp_15_text_size" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="💥地球不灭😈海浪到老💥"
+        android:textColor="@color/text_red_light"
+        android:textSize="@dimen/sp_15_text_size" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bg_blue_round_20"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16_text_size"
+        android:text="发送" />
+
+</LinearLayout>

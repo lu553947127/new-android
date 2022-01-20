@@ -147,7 +147,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.ktw.fly.view.KeyboardxView
+    <com.ktw.bitbit.view.KeyboardxView
         android:id="@+id/transfer_keyboard"
         android:layout_width="match_parent"
         android:layout_height="210dp"

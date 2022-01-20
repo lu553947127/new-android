@@ -84,7 +84,7 @@
         android:textColor="@color/Grey_600"
         android:visibility="gone" />
 
-    <com.ktw.fly.view.PullToRefreshSlideListView
+    <com.ktw.bitbit.view.PullToRefreshSlideListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

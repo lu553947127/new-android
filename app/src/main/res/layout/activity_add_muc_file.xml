@@ -48,7 +48,7 @@
                     android:divider="@color/Grey_300"
                     android:dividerHeight="0px" />
 
-                <com.ktw.fly.view.DataLoadView
+                <com.ktw.bitbit.view.DataLoadView
                     android:id="@+id/load"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

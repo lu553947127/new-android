@@ -16,7 +16,7 @@
         app:srlEnableAutoLoadMore="false"
         app:srlEnableLoadMore="false">
 
-        <com.ktw.fly.view.PullRefreshHeader
+        <com.ktw.bitbit.view.PullRefreshHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -28,7 +28,7 @@
             android:overScrollMode="never"
             tools:listitem="@android:layout/simple_list_item_2" />
 
-        <com.ktw.fly.view.PullRefreshFooter
+        <com.ktw.bitbit.view.PullRefreshFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

@@ -13,7 +13,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="@dimen/dp5">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/set_manager_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"

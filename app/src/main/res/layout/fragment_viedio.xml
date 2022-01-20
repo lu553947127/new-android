@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ktw.fly.view.MyVideoView
+        <com.ktw.bitbit.view.MyVideoView
             android:id="@+id/video_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -61,13 +61,13 @@
 
     </RelativeLayout>
 
-    <com.ktw.fly.view.cjt2325.cameralibrary.CaptureLayout
+    <com.ktw.bitbit.view.cjt2325.cameralibrary.CaptureLayout
         android:id="@+id/capture_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
 
-    <com.ktw.fly.view.cjt2325.cameralibrary.FoucsView
+    <com.ktw.bitbit.view.cjt2325.cameralibrary.FoucsView
         android:id="@+id/fouce_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

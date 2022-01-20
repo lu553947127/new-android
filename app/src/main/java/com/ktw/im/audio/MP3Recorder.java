@@ -9,8 +9,8 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ktw.fly.audio.RecordStateListener;
-import com.ktw.fly.util.FileUtil;
+import com.ktw.bitbit.audio.RecordStateListener;
+import com.ktw.bitbit.util.FileUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;

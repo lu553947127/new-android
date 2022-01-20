@@ -6,7 +6,7 @@
     android:background="@android:color/transparent"
     android:paddingBottom="7dp">
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/content"
         android:layout_width="45dp"
         android:layout_height="45dp"

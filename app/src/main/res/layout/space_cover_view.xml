@@ -116,7 +116,7 @@
         android:paddingRight="10dp"
         android:visibility="gone">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/tip_avatar"
             android:layout_width="30dp"
             android:layout_height="30dp"

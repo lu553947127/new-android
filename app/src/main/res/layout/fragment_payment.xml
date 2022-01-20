@@ -93,12 +93,12 @@
             android:layout_gravity="center"
             android:background="@drawable/a_bg_for_payment_avatar_bg">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/civ_user"
                 android:layout_width="@dimen/dp70"
                 android:layout_height="@dimen/dp70"
                 android:layout_centerInParent="true"
-                android:src="@drawable/splash_bg"
+                android:src="@drawable/avatar_normal"
                 android:visibility="visible" />
 
         </RelativeLayout>

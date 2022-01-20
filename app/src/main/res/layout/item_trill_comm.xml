@@ -8,7 +8,7 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp">
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/iv_avater"
         android:layout_width="30dp"
         android:layout_height="30dp"

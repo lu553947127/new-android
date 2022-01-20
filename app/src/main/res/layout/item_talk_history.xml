@@ -11,7 +11,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/ava1"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -54,7 +54,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp">
 
-        <com.ktw.fly.view.CircleImageView
+        <com.ktw.bitbit.view.CircleImageView
             android:id="@+id/ava2"
             android:layout_width="40dp"
             android:layout_height="40dp"

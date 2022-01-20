@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:maxHeight="70dp"/>
-    <com.ktw.fly.view.MyGridView
+    <com.ktw.bitbit.view.MyGridView
         android:id="@+id/grid_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -23,7 +23,7 @@
             android:orientation="horizontal"
             android:padding="4dp">
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/avatar_iv"
                 android:layout_width="31dp"
                 android:layout_height="31dp"
@@ -94,7 +94,7 @@
 
         </LinearLayout>
 
-        <com.ktw.fly.ui.live.view.HorizontialListView
+        <com.ktw.bitbit.ui.live.view.HorizontialListView
             android:id="@+id/list"
             android:layout_width="0dp"
             android:layout_height="31dp"

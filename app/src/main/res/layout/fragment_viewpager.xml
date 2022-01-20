@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.ktw.fly.view.MergerStatus
+        <com.ktw.bitbit.view.MergerStatus
             android:id="@+id/mergerStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -59,7 +59,7 @@
 
             </RelativeLayout>
 
-        </com.ktw.fly.view.MergerStatus>
+        </com.ktw.bitbit.view.MergerStatus>
     </LinearLayout>
 
     <RelativeLayout

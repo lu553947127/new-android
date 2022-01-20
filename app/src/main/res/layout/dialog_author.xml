@@ -21,7 +21,7 @@
         android:layout_height="0.6dp"
         android:background="@color/Grey_300" />
 
-    <com.ktw.fly.view.CircleImageView
+    <com.ktw.bitbit.view.CircleImageView
         android:id="@+id/iv_author_icon"
         android:layout_width="@dimen/dp50"
         android:layout_height="@dimen/dp50"

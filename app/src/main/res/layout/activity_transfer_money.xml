@@ -68,7 +68,7 @@
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_13_text_size" />
 
-            <com.ktw.fly.view.CircleImageView
+            <com.ktw.bitbit.view.CircleImageView
                 android:id="@+id/tm_iv"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -215,7 +215,7 @@
 
     </LinearLayout>
 
-    <com.ktw.fly.view.KeyboardxView
+    <com.ktw.bitbit.view.KeyboardxView
         android:id="@+id/transfer_keyboard"
         android:layout_width="match_parent"
         android:layout_height="210dp"
